@@ -41,6 +41,7 @@
     "gruntplugin"
   ],
   "dependencies": {
-    "phantomas": "~0.9.0"
+    "phantomas": "~0.9.0",
+    "bluebird": "~0.11.5-0"
   }
 }
