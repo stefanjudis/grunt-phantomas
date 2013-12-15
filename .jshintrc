@@ -10,5 +10,9 @@
   "boss": true,
   "eqnull": true,
   "node": true,
-  "es5": true
+  "quotmark": "single",
+  "unused": true,
+  "trailing": true,
+  "maxparams": 3,
+  "maxdepth": 3
 }
