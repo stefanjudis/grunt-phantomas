@@ -1,1 +1,1 @@
-body{color:red;background-color:#000}
+*{-moz-box-sizing:border-box;box-sizing:border-box}body{background-color:#253f50;color:#d3d8dc;font-size:14px;font-family:sans-serif;font-weight:100;letter-spacing:1px}main{width:960px;margin:0 auto}.p--table{color:#fff;font-size:11.2px;margin:0 0 2em 0;border-top:1px solid #274354}.p--table--column{width:12.5%;text-align:center}.p--table--head{color:#d3d8dc;font-weight:100}.p--table--head th{padding:1em 0;border-bottom:1px solid #1a2d38;font-weight:100}.p--table--body .p--table--row:nth-child(2n+1){background-color:#274354}

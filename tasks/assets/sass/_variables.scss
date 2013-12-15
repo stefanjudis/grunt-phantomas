@@ -1,0 +1,56 @@
+/*
+ * grunt-phantomas
+ * https://github.com/stefanjudis/grunt-phantomas
+ *
+ * Copyright (c) 2013 stefan judis
+ * Licensed under the MIT license.
+ */
+
+/**
+ * Colors
+ */
+$c-blue     : #49a2dc;
+$c-blueDark : #253f50;
+
+$c-purple : #9b8eb4;
+
+$c-green : #45b5b3;
+
+$c-white : #fff;
+$c-black : #000;
+
+$c-gray       : #4d626d;
+$c-grayDark   : #274354;
+$c-grayDarker : adjust-lightness( $c-grayDark, -8 );
+$c-grayLight  : #d3d8dc;
+
+
+/**
+ * Font stuff
+ */
+$f-baseFamily    : sans-serif;
+$f-baseSize      : 14px;
+$f-baseWeight    : 100;
+$f-letterSpacing : 1px;
+
+/**
+ * Dimensions stuff ( widths / height )
+ */
+$d-baseWidth : 960px;
+
+
+
+/**
+ * Table config stuff
+ */
+
+$t-colorBody      : $c-white;
+$t-colorBorder    : $c-grayDarker;
+$t-colorHead      : $c-grayLight;
+$t-colorHighlight : $c-grayDark;
+
+$t-baseFontWeight : $f-baseWeight;
+$t-baseFontSize   : 0.8 * $f-baseSize;
+
+$t-numberOfColumns : 8;
+$t-columnWidth     : 100% / $t-numberOfColumns;

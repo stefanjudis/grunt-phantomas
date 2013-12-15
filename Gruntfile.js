@@ -9,6 +9,7 @@
 'use strict';
 
 module.exports = function( grunt ) {
+  var devIndexPath = './phantomas/';
 
   grunt.initConfig( {
     jshint: {
@@ -33,10 +34,26 @@ module.exports = function( grunt ) {
       /* https://github.com/gruntjs/grunt-contrib-compass */
       dist : {
         options: {
-          sassDir: 'tasks/assets/sass',
-          cssDir: 'tasks/public/styles',
-          environment: 'production'
+          sassDir     : 'tasks/assets/sass',
+          cssDir      : 'tasks/public/styles',
+          environment : 'production'
         }
+      }
+    },
+
+
+    copy : {
+      /* https://github.com/gruntjs/grunt-contrib-copy */
+      styles : {
+        files : [
+          {
+            cwd    : 'tasks/public/styles/',
+            expand : true,
+            src    : [ '**' ],
+            dest   : devIndexPath + 'public/styles/',
+            filter : 'isFile'
+          },
+        ]
       }
     },
 
@@ -59,6 +76,19 @@ module.exports = function( grunt ) {
     nodeunit : {
       /* https://github.com/gruntjs/grunt-contrib-nodeunit */
       tests : [ 'test/**/*Test.js' ],
+    },
+
+
+    watch : {
+      /* https://github.com/gruntjs/grunt-contrib-watch */
+      styles : {
+        files   : [ 'tasks/assets/sass/**/*.scss' ],
+        flatten : true,
+        options : {
+          spawn : false,
+        },
+        tasks   : [ 'compass', 'copy:styles' ]
+      }
     }
   } );
 
@@ -66,10 +96,12 @@ module.exports = function( grunt ) {
   grunt.loadTasks( 'tasks' );
 
   // These plugins provide necessary tasks.
-  grunt.loadNpmTasks( 'grunt-contrib-jshint' );
   grunt.loadNpmTasks( 'grunt-contrib-clean' );
-  grunt.loadNpmTasks( 'grunt-contrib-nodeunit' );
   grunt.loadNpmTasks( 'grunt-contrib-compass' );
+  grunt.loadNpmTasks( 'grunt-contrib-copy' );
+  grunt.loadNpmTasks( 'grunt-contrib-jshint' );
+  grunt.loadNpmTasks( 'grunt-contrib-nodeunit' );
+  grunt.loadNpmTasks( 'grunt-contrib-watch' );
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.

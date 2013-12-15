@@ -17,9 +17,9 @@ function deleteFolderRecursive ( path ) {
     files = fs.readdirSync( path );
     files.forEach( function( file ){
       var curPath = path + '/' + file;
-      if( fs.statSync( curPath ).isDirectory() ) { // recurse
+      if( fs.statSync( curPath ).isDirectory() ) {
           deleteFolderRecursive( curPath );
-      } else { // delete file
+      } else {
           fs.unlinkSync( curPath );
       }
     } );
