@@ -10,9 +10,9 @@
 
 module.exports = function( grunt ) {
 
-  // Project configuration.
   grunt.initConfig( {
     jshint: {
+      /* https://github.com/gruntjs/grunt-contrib-jshint */
       all: [
         'Gruntfile.js',
         'tasks/**/*.js',
@@ -23,13 +23,26 @@ module.exports = function( grunt ) {
       },
     },
 
-    // Before generating any new files, remove any previously-created files.
     clean : {
+      /* https://github.com/gruntjs/grunt-contrib-clean */
       tests : [ 'tmp' ],
     },
 
-    // Configuration to be run (and then tested).
+
+    compass : {
+      /* https://github.com/gruntjs/grunt-contrib-compass */
+      dist : {
+        options: {
+          sassDir: 'tasks/assets/sass',
+          cssDir: 'tasks/public/styles',
+          environment: 'production'
+        }
+      }
+    },
+
+
     phantomas : {
+      /* https://github.com/stefanjudis/grunt-phantomas */
       google : {
         options : {
           indexPath : './phantomas/',
@@ -42,8 +55,9 @@ module.exports = function( grunt ) {
       }
     },
 
-    // Unit tests.
+
     nodeunit : {
+      /* https://github.com/gruntjs/grunt-contrib-nodeunit */
       tests : [ 'test/**/*Test.js' ],
     }
   } );
@@ -55,6 +69,7 @@ module.exports = function( grunt ) {
   grunt.loadNpmTasks( 'grunt-contrib-jshint' );
   grunt.loadNpmTasks( 'grunt-contrib-clean' );
   grunt.loadNpmTasks( 'grunt-contrib-nodeunit' );
+  grunt.loadNpmTasks( 'grunt-contrib-compass' );
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
@@ -62,5 +77,7 @@ module.exports = function( grunt ) {
 
   // By default, lint and run all tests.
   grunt.registerTask( 'default', [ 'jshint', 'test' ] );
+
+  grunt.registerTask( 'build', [ 'compass', 'phantomas' ] );
 
 };

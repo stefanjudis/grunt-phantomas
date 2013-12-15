@@ -13,6 +13,10 @@ var fs      = Promise.promisifyAll( require( 'fs' ) );
 var path    = Promise.promisifyAll( require( 'path' ) );
 
 
+var ASSETS_PATH = path.resolve(
+                    __dirname, '../public/'
+                  );
+
 /**
  * Path to the Phantomas executable
  * @type {String}
@@ -25,7 +29,7 @@ var PHANTOMAS_PATH = path.resolve(
  * Path to index template
  * @type {String}
  */
-var TEMPLATE_PATH = path.resolve(
+var TEMPLATE_FILE = path.resolve(
                       __dirname,
                       '../tpl/index.tpl'
                     );
@@ -46,6 +50,50 @@ var Phantomas = function( grunt, options, done ) {
   this.options  = options;
   this.done     = done;
   this.dataPath = path.normalize( this.options.indexPath + 'data/' );
+};
+
+
+/**
+ * Copy all needed assets from 'tasks/public'
+ * to specified index path
+ *
+ * - phantomas.css
+ */
+Phantomas.prototype.copyAssets = function() {
+  this.grunt.log.subhead( 'PHANTOMAS ASSETS COPYING STARTED.' );
+
+  return new Promise( function( resolve ) {
+    if ( !fs.existsSync( this.options.indexPath + '/public' ) ) {
+    fs.mkdirSync( this.options.indexPath + '/public' );
+    }
+
+    this.copyStyles();
+
+    resolve();
+  }.bind( this ) );
+};
+
+
+/**
+ * Copy styles file and create need folders
+ */
+Phantomas.prototype.copyStyles = function() {
+  if ( !fs.existsSync( this.options.indexPath + '/public/styles' ) ) {
+    fs.mkdirSync( this.options.indexPath + '/public/styles' );
+  }
+
+  var styles = fs.readFileSync(
+    path.normalize( ASSETS_PATH + '/styles/phantomas.css' )
+  );
+
+  fs.writeFileSync(
+    path.normalize( this.options.indexPath + '/public/styles/phantomas.css' ),
+    styles
+  );
+
+  this.grunt.log.ok(
+    'Phantomas copied assets to \'' + this.options.indexPath + 'public/styles/phantomas.css\'.'
+  );
 };
 
 
@@ -109,7 +157,7 @@ Phantomas.prototype.createIndexHtml = function( files ) {
     this.grunt.file.write(
       this.options.indexPath + 'index.html',
       this.grunt.template.process(
-        this.grunt.file.read( TEMPLATE_PATH ),
+        this.grunt.file.read( TEMPLATE_FILE ),
         { data : {
           results : files
         } }
@@ -167,6 +215,9 @@ Phantomas.prototype.handleData = function( result ) {
       // write html file and produce
       // nice graphics
       .then( this.createIndexHtml )
+      // copy all asset files over to
+      // wished index path
+      .then( this.copyAssets )
       // yeah we're done
       .then( this.showSuccessMessage )
       // catch general bluebird error
@@ -177,7 +228,8 @@ Phantomas.prototype.handleData = function( result ) {
       .catch( function( e ) {
         console.log( ':/' );
         console.log( e );
-      } );
+      } )
+      .done();
 };
 
 

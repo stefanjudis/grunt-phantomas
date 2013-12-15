@@ -2,6 +2,7 @@
 <html>
 <head>
   <title></title>
+  <link rel="stylesheet" href="public/styles/phantomas.css" media="all">
 </head>
 <body>
 <h1>Oh yeah</h1>

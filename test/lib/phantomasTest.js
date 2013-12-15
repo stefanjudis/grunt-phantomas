@@ -15,7 +15,7 @@ function deleteFolderRecursive ( path ) {
   var files = [];
   if( fs.existsSync(path) ) {
     files = fs.readdirSync( path );
-    files.forEach( function( file, index ){
+    files.forEach( function( file ){
       var curPath = path + '/' + file;
       if( fs.statSync( curPath ).isDirectory() ) { // recurse
           deleteFolderRecursive( curPath );
@@ -25,7 +25,7 @@ function deleteFolderRecursive ( path ) {
     } );
     fs.rmdirSync( path );
   }
-};
+}
 
 exports.photoBox = {
   setUp : function( done ) {
@@ -44,7 +44,7 @@ exports.photoBox = {
       indexPath : TEMP_PATH
     };
     var done      = function() {};
-    var phantomas = new Phantomas( grunt, options, done )
+    var phantomas = new Phantomas( grunt, options, done );
 
     test.strictEqual( phantomas.grunt,    grunt );
     test.strictEqual( phantomas.options,  options );
