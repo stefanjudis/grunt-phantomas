@@ -23,3 +23,8 @@ main {
   width: $d-baseWidth;
   margin: 0 auto;
 }
+
+h1, h2, h3, h4, h5 {
+  color: $f-headlineColor;
+  text-align: center;
+}
