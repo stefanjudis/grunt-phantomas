@@ -1,3 +1,5 @@
+/* global window, document, d3 */
+
 /*
  * grunt-phantomas
  * https://github.com/stefanjudis/grunt-phantomas
@@ -26,10 +28,11 @@
       obj[ 'e' + type + fn ] = fn;
       obj[ type + fn ]       = function() {
         obj[ 'e' + type + fn ]( window.event );
-      }
+      };
       obj.attachEvent( 'on'+type, obj[ type + fn ] );
-    } else
+    } else {
       obj.addEventListener( type, fn, false );
+    }
   }
 
   /**
@@ -70,12 +73,84 @@
    * @param {String} metric    metric
    */
   function drawLineChart( data, metric ) {
+    // Helper functions on top of 8-)
+    function drawCircle( datum, index ) {
+      circleContainer.datum( datum )
+                    .append( 'circle' )
+                    .attr( 'class', 'lineChart--circle' )
+                    .attr( 'r', 0 )
+                    .attr(
+                      'cx',
+                      function( d ) {
+                        return x( d.date ) + detailWidth / 2;
+                      }
+                    )
+                    .attr(
+                      'cy',
+                      function( d ) {
+                        return y( d.value );
+                      }
+                    )
+                    .attr(
+                      'data-value',
+                      function( d ) {
+                        return d.value;
+                      }
+                    )
+                    .on( 'mouseenter', function() {
+                      d3.select( this )
+                        .attr(
+                          'class',
+                          'lineChart--circle lineChart--circle__highlighted'
+                        )
+                        .attr( 'r', 4 );
+                    } )
+                    .on( 'mouseout', function() {
+                      d3.select( this )
+                        .attr(
+                          'class',
+                          'lineChart--circle'
+                        )
+                        .attr( 'r', 3 );
+                    } )
+
+                    .transition()
+                    .delay( DURATION / 10 * index )
+                    .attr( 'r', 3 );
+    }
+
+    function drawCircles( data ) {
+      circleContainer = svg.append( 'g' );
+
+      data.forEach( function( datum, index ) {
+        drawCircle( datum, index );
+      } );
+    }
+
+    function tween( b, callback ) {
+      return function( a ) {
+        var i = (function interpolate() {
+          return function( t ) {
+            return a.map( function( datum, index ) {
+              return {
+                date  : datum.date,
+                value : datum.value + b[ index ].value * t
+              };
+            } );
+          };
+        })();
+
+        return function( t ) {
+          return callback( i ( t ) );
+        };
+      };
+    }
     // data manipulation first
     data = data.map( function( datum ) {
       return {
         date  : new Date( datum.timestamp ),
         value : datum.metrics[ metric ]
-      }
+      };
     } );
 
     // TODO code duplication check how you can avoid that
@@ -89,8 +164,6 @@
         },
 
         detailWidth  = 98,
-        detailHeight = 55,
-        detailMargin = 10,
 
         container   = d3.select( containerEl ),
         svg         = container.append( 'svg' )
@@ -173,78 +246,6 @@
           drawCircles( data );
         } );
 
-    // Helper functions!!!
-    function drawCircle( datum, index ) {
-      circleContainer.datum( datum )
-                    .append( 'circle' )
-                    .attr( 'class', 'lineChart--circle' )
-                    .attr( 'r', 0 )
-                    .attr(
-                      'cx',
-                      function( d ) {
-                        return x( d.date ) + detailWidth / 2;
-                      }
-                    )
-                    .attr(
-                      'cy',
-                      function( d ) {
-                        return y( d.value );
-                      }
-                    )
-                    .attr(
-                      'data-value',
-                      function( d ) {
-                        return d.value;
-                      }
-                    )
-                    .on( 'mouseenter', function( d ) {
-                      d3.select( this )
-                        .attr(
-                          'class',
-                          'lineChart--circle lineChart--circle__highlighted'
-                        )
-                        .attr( 'r', 4 );
-                    } )
-                    .on( 'mouseout', function( d ) {
-                      d3.select( this )
-                        .attr(
-                          'class',
-                          'lineChart--circle'
-                        )
-                        .attr( 'r', 3 );
-                    } )
-
-                    .transition()
-                    .delay( DURATION / 10 * index )
-                    .attr( 'r', 3 );
-    }
-
-    function drawCircles( data ) {
-      circleContainer = svg.append( 'g' );
-
-      data.forEach( function( datum, index ) {
-        drawCircle( datum, index );
-      } );
-    }
-
-    function tween( b, callback ) {
-      return function( a ) {
-        var i = (function interpolate() {
-          return function( t ) {
-            return a.map( function( datum, index ) {
-              return {
-                date  : datum.date,
-                value : datum.value + b[ index ].value * t
-              };
-            } );
-          };
-        })();
-
-        return function( t ) {
-          return callback( i ( t ) );
-        };
-      };
-    }
   }
 
   function appendDetailBoxForCircle( circle ) {
@@ -285,7 +286,7 @@
       }
     } );
 
-    addEvent( graphList, 'mouseout', function() {
+    addEvent( graphList, 'mouseout', function( event ) {
       if ( event.target.tagName === 'circle' ) {
         removeDetailBoxForCircle( event.target );
       }
