@@ -21,10 +21,12 @@ grunt.loadNpmTasks('grunt-phantomas');
 
 ## The "phantomas" task
 You're looking for a tool that gives you detailed metrics about your site? Great!!!
-This grunt plugin executes [phantomas](https://github.com/macbre/phantomas) for you and visualizes it in a generated `index.html` for you. It will keep track of history, so that you can set it up and check reports after every deployment of your site.
+This grunt plugin executes [phantomas](https://github.com/macbre/phantomas) for you and visualizes the returned metrics in a generated `index.html` for you. It will keep track of history, so that you can set it up and check reports after every deployment of your site.
 
 Examples of rendered output:
 - metrics for [http://gruntjs.com](http://gruntjs.com) -> [here](http://stefanjudis.github.io/grunt-phantomas/)
+
+*I'm still at early stage, but I think you can already work with it.* ;)
 
 ### Overview
 In your project's Gruntfile, add a section named `phantomas` to the data object passed into `grunt.initConfig()`.
@@ -114,4 +116,4 @@ grunt.initConfig( {
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+Please check release history at [Github](https://github.com/stefanjudis/grunt-photobox/releases). :)
