@@ -42,7 +42,11 @@
     "grunt": "~0.4.1"
   },
   "keywords": [
-    "gruntplugin"
+    "gruntplugin",
+    "phantomas",
+    "performance",
+    "metrics",
+    "phantomjs"
   ],
   "dependencies": {
     "bluebird": "~0.11.5-0",
