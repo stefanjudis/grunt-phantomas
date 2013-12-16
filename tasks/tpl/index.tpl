@@ -1,9 +1,16 @@
 <%
-  var metrics         = _.keys( results[ 0 ].metrics );
-  var groupedMetrics    = [];
+  var allMetrics      = _.keys( results[ 0 ].metrics );
+  var numericMetrics  = _.reduce( allMetrics, function( old, current ) {
+    if ( typeof results[ 0 ].metrics[ current ] === 'number' ) {
+      old.push( current );
+    }
+
+    return old;
+  }, [] );
+  var groupedMetrics  = [];
   var counter         = 0;
   var columnsPerTable = 7;
-  _.each( metrics, function( metric, index ) {
+  _.each( allMetrics, function( metric, index ) {
     if ( index !== 0 && index % columnsPerTable === 0 ) {
       ++counter;
     }
@@ -26,7 +33,7 @@
 <body>
   <main>
   <ul class="p--graphs">
-    <% _.each( metrics, function( metric ) { %>
+    <% _.each( numericMetrics, function( metric ) { %>
       <li id="graph--<%= metric %>" class="p--graphs--graph">
         <h3><%= metric %></h3>
     <% } );%>

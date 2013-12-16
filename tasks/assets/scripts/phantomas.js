@@ -252,7 +252,9 @@
     var firstMetric = data[ 0 ].metrics;
 
     for( var metric in firstMetric ) {
-      drawLineChart( data, metric );
+      if ( typeof data[ 0 ].metrics[ metric ] === 'number' ) {
+        drawLineChart( data, metric );
+      }
     }
   }
 
