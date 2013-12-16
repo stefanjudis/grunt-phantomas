@@ -25,63 +25,84 @@ grunt.loadNpmTasks('grunt-phantomas');
 In your project's Gruntfile, add a section named `phantomas` to the data object passed into `grunt.initConfig()`.
 
 ```js
-grunt.initConfig({
-  phantomas: {
-    options: {
-      // Task-specific options go here.
-    },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
-  },
-})
+grunt.initConfig( {
+  phantomas: {    	
+    gruntSite : {
+      options : {
+        indexPath : './phantomas/',
+        raw       : [],
+        url       : 'http://gruntjs.com/'
+      }
+    }
+  }
+} )
 ```
 
 ### Options
 
-#### options.separator
+#### options.indexPath
 Type: `String`
-Default value: `',  '`
+Default value: `./phantomas/`
 
-A string value that is used to do something with whatever.
+A string value that represents the relative path to the place where `phantomas` will render your metrics. Inside of this folder an `index.html`, a data folder and an assets folder will be created.
 
-#### options.punctuation
+#### options.raw
+Type: `Array`
+Default value: `[]`
+
+An array that represents raw commands that can be passed to `phantomas` executable. See usage examples later on.
+
+#### options.url
 Type: `String`
-Default value: `'.'`
+Default value: `http://gruntjs.com/`
 
-A string value that is used to do something else with whatever else.
+A string value that represents the url of the site, which will be analyzed by `phantomas`.
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+In this example, the default options are used to fetch metrics of `http://gruntjs.com` and render the visualized metrics at `./phantomas`.
 
 ```js
 grunt.initConfig({
-  phantomas: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
+  phantomas: {},
 })
 ```
 
 #### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+In this example, custom options are used to fetch metrice of `http://yoursite.com` and render the visualized metrics at `./yoursite/`.
 
 ```js
-grunt.initConfig({
-  phantomas: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
+grunt.initConfig( {
+  phantomas: {    	
+    yourSite : {
+      options : {
+        indexPath : './yoursite/',
+        raw       : [],
+        url       : 'http://yoursite.com/'
+      }
+    }
+  }
+} )
+```
+
+#### Raw phantomas options
+In this example, the raw option is used to set `phantomas` execution parameters. In this case all external script except the defined ones are blocked by `phantomas`, what can become really handy, when dealing with a lot of third party scripts that influence your site performance.
+```js
+grunt.initConfig( {
+  phantomas: {    	
+    yourSite : {
+      options : {
+        indexPath : './yoursite/',
+        raw       : [
+            '--no-externals',
+            '--allow-domain=cdn.yoursite.com.br,ajax.googleapis.com'
+        ],
+        url       : 'http://yoursite.com'
+      }
+    }
+  }
+} )
 ```
 
 ## Contributing
