@@ -159,6 +159,8 @@ Phantomas.prototype.createDataJson = function( result ) {
  * Create data directory in index path
  * if it doesn't exist yet
  *
+ * TODO -> put it together with 'createDataDirectory'
+ *
  * @return {Promise} Promise
  *
  * @tested
@@ -181,6 +183,33 @@ Phantomas.prototype.createDataDirectory = function() {
   }.bind( this ) );
 };
 
+
+/**
+ * Create index directory to make sure
+ * files are writable according to set
+ * indexPath
+ *
+ * TODO -> put it together with 'createDataDirectory'
+ *
+ * @return {Promise} Promise
+ */
+Phantomas.prototype.createIndexDirectory = function() {
+  return new Promise( function( resolve ) {
+    var exists = fs.existsSync( this.options.indexPath );
+
+    if ( exists ) {
+      resolve();
+    } else {
+      fs.mkdirSync(
+        path.normalize(
+          this.options.indexPath
+        )
+      );
+
+      resolve();
+    }
+  }.bind( this ) );
+}
 
 /**
  * Write final index.html file and
@@ -243,7 +272,8 @@ Phantomas.prototype.getPhantomasProcessArguments = function() {
 Phantomas.prototype.handleData = function( result ) {
   // check if data directory already exists
   // if not create it
-  this.createDataDirectory().bind( this )
+  this.createIndexDirectory().bind( this )
+      .then( this.createDataDirectory )
       // write new json file with metrics data
       .then( function() {
         this.createDataJson( result );
