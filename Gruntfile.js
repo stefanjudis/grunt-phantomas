@@ -74,14 +74,11 @@ module.exports = function( grunt ) {
 
     phantomas : {
       /* https://github.com/stefanjudis/grunt-phantomas */
-      google : {
+      gruntjs : {
         options : {
           indexPath : './phantomas/',
-          raw       : [
-            '--no-externals',
-            '--allow-domain=cdn.natue.com.br,ajax.googleapis.com,static.natue.com.br'
-          ],
-          url       : 'http://www.natue.com.br'
+          raw       : [],
+          url       : 'http://gruntjs.com/'
         }
       }
     },
