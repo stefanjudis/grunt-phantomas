@@ -32,7 +32,7 @@
 </head>
 <body>
   <main>
-  <ul class="p--graphs">
+  <ul id="p--graphs" class="p--graphs">
     <% _.each( numericMetrics, function( metric ) { %>
       <li id="graph--<%= metric %>" class="p--graphs--graph">
         <h3><%= metric %></h3>

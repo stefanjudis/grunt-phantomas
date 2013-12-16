@@ -6,8 +6,62 @@
  * Licensed under the MIT license.
  */
 ;( function( d3, window, document ) {
+  /**
+   * Helper functions
+   */
+
+
+  /**
+   * Attach eventlistener to given event
+   *
+   * THX to John Resig
+   * http://ejohn.org/projects/flexible-javascript-events/
+   *
+   * @param {Object}   obj  dom element
+   * @param {String}   type event type
+   * @param {Function} fn   event listener
+   */
+  function addEvent( obj, type, fn ) {
+    if ( obj.attachEvent ) {
+      obj[ 'e' + type + fn ] = fn;
+      obj[ type + fn ]       = function() {
+        obj[ 'e' + type + fn ]( window.event );
+      }
+      obj.attachEvent( 'on'+type, obj[ type + fn ] );
+    } else
+      obj.addEventListener( type, fn, false );
+  }
+
+  /**
+   * Get parent of dom element with
+   * given class
+   *
+   * @param  {Object} el        element
+   * @param  {String} className className
+   * @return {Object}           parent element with given class
+   */
+  function getParent( el, className ) {
+    var parent = null;
+    var p      = el.parentNode;
+
+    while ( p !== null ) {
+        var o = p;
+
+        if ( o.classList.contains( className ) ) {
+          parent = o;
+          break;
+        }
+
+        p = o.parentNode;
+    }
+    return parent; // returns an Array []
+  }
+
+  /**
+   * Config stuff
+   * @type {Number}
+   */
   var DURATION = 1500;
-  var DELAY    = 500;
 
   /**
    * draw the fancy line chart
@@ -29,7 +83,7 @@
         width       = containerEl.clientWidth,
         height      = width * 0.4,
         margin      = {
-          top    : 30,
+          top    : 20,
           right  : 10,
           left   : 10
         },
@@ -137,6 +191,12 @@
                         return y( d.value );
                       }
                     )
+                    .attr(
+                      'data-value',
+                      function( d ) {
+                        return d.value;
+                      }
+                    )
                     .on( 'mouseenter', function( d ) {
                       d3.select( this )
                         .attr(
@@ -144,10 +204,6 @@
                           'lineChart--circle lineChart--circle__highlighted'
                         )
                         .attr( 'r', 4 );
-
-                        d.active = true;
-
-                        showCircleDetail( d );
                     } )
                     .on( 'mouseout', function( d ) {
                       d3.select( this )
@@ -156,20 +212,8 @@
                           'lineChart--circle'
                         )
                         .attr( 'r', 3 );
-
-                      if ( d.active ) {
-                        hideCircleDetails();
-
-                        d.active = false;
-                      }
                     } )
-                    .on( 'click touch', function( d ) {
-                      if ( d.active ) {
-                        showCircleDetail( d );
-                      } else {
-                        hideCircleDetails();
-                      }
-                    } )
+
                     .transition()
                     .delay( DURATION / 10 * index )
                     .attr( 'r', 3 );
@@ -181,51 +225,6 @@
       data.forEach( function( datum, index ) {
         drawCircle( datum, index );
       } );
-    }
-
-    function hideCircleDetails() {
-      circleContainer.selectAll( '.lineChart--bubble' )
-                      .remove();
-    }
-
-    function showCircleDetail( data ) {
-      var details = circleContainer.append( 'g' )
-                        .attr( 'class', 'lineChart--bubble' )
-                        .attr(
-                          'transform',
-                          function() {
-                            var result = 'translate(';
-
-                            result += x( data.date );
-                            result += ', ';
-                            result += y( data.value ) - detailHeight - detailMargin;
-                            result += ')';
-
-                            return result;
-                          }
-                        );
-
-      details.append( 'path' )
-              .attr( 'd', 'M2.99990186,0 C1.34310181,0 0,1.34216977 0,2.99898218 L0,47.6680579 C0,49.32435 1.34136094,50.6670401 3.00074875,50.6670401 L44.4095996,50.6670401 C48.9775098,54.3898926 44.4672607,50.6057129 49,54.46875 C53.4190918,50.6962891 49.0050244,54.4362793 53.501875,50.6670401 L94.9943116,50.6670401 C96.6543075,50.6670401 98,49.3248703 98,47.6680579 L98,2.99898218 C98,1.34269006 96.651936,0 95.0000981,0 L2.99990186,0 Z M2.99990186,0' )
-              .attr( 'width', detailWidth )
-              .attr( 'height', detailHeight );
-
-      var text = details.append( 'text' )
-                        .attr( 'class', 'lineChart--bubble--text' );
-
-      text.append( 'tspan' )
-          .attr( 'class', 'lineChart--bubble--label' )
-          .attr( 'x', detailWidth / 2 )
-          .attr( 'y', detailHeight / 3 )
-          .attr( 'text-anchor', 'middle' )
-          .text( data.label );
-
-      text.append( 'tspan' )
-          .attr( 'class', 'lineChart--bubble--value' )
-          .attr( 'x', detailWidth / 2 )
-          .attr( 'y', detailHeight / 4 * 3 )
-          .attr( 'text-anchor', 'middle' )
-          .text( data.value );
     }
 
     function tween( b, callback ) {
@@ -248,6 +247,68 @@
     }
   }
 
+  function appendDetailBoxForCircle( circle ) {
+    var bBox          = circle.getBBox();
+    var detailBox     = document.createElement( 'div' );
+    var listContainer = getParent( circle, 'p--graphs--graph' );
+
+    detailBox.innerHTML = circle.dataset.value;
+    // radius need to be substracted
+    // TODO think of cleaner solution
+    detailBox.style.left = ( bBox.x - 36 ) + 'px';
+    detailBox.style.top = ( bBox.y + 10 ) + 'px';
+    detailBox.classList.add( 'p--graphs--detailBox' );
+
+    listContainer.appendChild( detailBox );
+  }
+
+
+  function removeDetailBoxForCircle( circle ) {
+    var listContainer = getParent( circle, 'p--graphs--graph' );
+
+    var detailBox = listContainer.querySelector( '.p--graphs--detailBox' );
+
+    listContainer.removeChild( detailBox );
+  }
+
+
+  /**
+   * Attach circle events on graph list
+   * -> event delegation for the win
+   */
+  function attachCircleEvents() {
+    var graphList = document.getElementById( 'p--graphs' );
+
+    addEvent( graphList, 'mouseover', function( event ) {
+      if ( event.target.tagName === 'circle' ) {
+        appendDetailBoxForCircle( event.target );
+      }
+    } );
+
+    addEvent( graphList, 'mouseout', function() {
+      if ( event.target.tagName === 'circle' ) {
+        removeDetailBoxForCircle( event.target );
+      }
+    } );
+  }
+
+
+  /**
+   * Attach events to document
+   */
+  function attachEventListeners() {
+    attachCircleEvents();
+  }
+
+
+  /**
+   * KICK OFF FOR GRAPH POWER
+   * *******************************
+   * Check all metrics if numeric values are
+   * included and initialize all graphs for it
+   *
+   * @param  {Array} data data
+   */
   function drawLineCharts( data ) {
     var firstMetric = data[ 0 ].metrics;
 
@@ -259,4 +320,7 @@
   }
 
   drawLineCharts( window.results );
+  attachEventListeners();
+
+
 } )( d3, window, document );

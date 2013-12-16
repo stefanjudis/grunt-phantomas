@@ -14,7 +14,40 @@
 
 }
 
+.p--graphs--detailBox {
+  position: absolute;
+  width: 80px;
+  padding: 0.5em;
+
+  background-color: rgba( $c-grayDarker, 0.9 );
+
+  color: $c-green;
+  text-align: center;
+
+  border-radius: $baseBorderRadius;
+
+  &:before {
+    position: absolute;
+
+    content: '';
+
+    width: 0;
+    heigth: 0;
+
+    top: 100%;
+    left: 50%;
+
+    margin-left: -6px;
+
+    border-left  : 6px solid transparent;
+    border-right : 6px solid transparent;
+    border-top   : 6px solid rgba( $c-grayDarker, 0.9 );
+  }
+}
+
 .p--graphs--graph {
+  position: relative;
+
   width: 100%;
   min-height: 300px;
 
@@ -44,6 +77,9 @@
   stroke-width: 2;
 }
 
+
+
+// TODO make that fit in conventions
 .lineChart--bubble--label {
   fill: none;
   // stroke: $c-blue;
