@@ -12,17 +12,6 @@ module.exports = function( grunt ) {
   var devIndexPath = './phantomas/';
 
   grunt.initConfig( {
-    jshint: {
-      /* https://github.com/gruntjs/grunt-contrib-jshint */
-      all: [
-        'Gruntfile.js',
-        'tasks/**/*.js',
-        '<%= nodeunit.tests %>',
-      ],
-      options : {
-        jshintrc : '.jshintrc',
-      },
-    },
 
     clean : {
       /* https://github.com/gruntjs/grunt-contrib-clean */
@@ -44,6 +33,17 @@ module.exports = function( grunt ) {
 
     copy : {
       /* https://github.com/gruntjs/grunt-contrib-copy */
+      scripts : {
+        files : [
+          {
+            cwd    : 'tasks/public/scripts/',
+            expand : true,
+            src    : [ '**' ],
+            dest   : devIndexPath + 'public/scripts/',
+            filter : 'isFile'
+          },
+        ]
+      },
       styles : {
         files : [
           {
@@ -55,6 +55,20 @@ module.exports = function( grunt ) {
           },
         ]
       }
+    },
+
+
+    jshint: {
+      /* https://github.com/gruntjs/grunt-contrib-jshint */
+      all: [
+        'Gruntfile.js',
+        'tasks/assets/**/*.js',
+        '!tasks/assets/scripts/d3.min.js',
+        '<%= nodeunit.tests %>',
+      ],
+      options : {
+        jshintrc : '.jshintrc',
+      },
     },
 
 
@@ -79,9 +93,30 @@ module.exports = function( grunt ) {
     },
 
 
+    uglify : {
+      /* https://github.com/gruntjs/grunt-contrib-uglify */
+      options : {
+        mangle : false
+      },
+      phantomas : {
+        files : {
+          'tasks/public/scripts/phantomas.min.js' : [ 'tasks/assets/scripts/phantomas.js' ]
+        }
+      }
+    },
+
+
     watch : {
       /* https://github.com/gruntjs/grunt-contrib-watch */
-      styles : {
+      js : {
+        files   : [ 'tasks/assets/scripts/**/*.js' ],
+        flatten : true,
+        options : {
+          spawn : false,
+        },
+        tasks   : [ 'uglify', 'copy:scripts' ]
+      },
+      sass : {
         files   : [ 'tasks/assets/sass/**/*.scss' ],
         flatten : true,
         options : {
@@ -101,6 +136,7 @@ module.exports = function( grunt ) {
   grunt.loadNpmTasks( 'grunt-contrib-copy' );
   grunt.loadNpmTasks( 'grunt-contrib-jshint' );
   grunt.loadNpmTasks( 'grunt-contrib-nodeunit' );
+  grunt.loadNpmTasks( 'grunt-contrib-uglify' );
   grunt.loadNpmTasks( 'grunt-contrib-watch' );
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
@@ -110,6 +146,7 @@ module.exports = function( grunt ) {
   // By default, lint and run all tests.
   grunt.registerTask( 'default', [ 'jshint', 'test' ] );
 
-  grunt.registerTask( 'build', [ 'compass', 'phantomas' ] );
+  // Set up development environment
+  grunt.registerTask( 'build', [ 'compass', 'uglify', 'phantomas' ] );
 
 };

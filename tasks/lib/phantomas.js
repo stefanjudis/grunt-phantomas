@@ -68,6 +68,7 @@ Phantomas.prototype.copyAssets = function() {
     }
 
     this.copyStyles();
+    this.copyScripts();
 
     resolve();
   }.bind( this ) );
@@ -75,7 +76,45 @@ Phantomas.prototype.copyAssets = function() {
 
 
 /**
- * Copy styles file and create need folders
+ * Copy script files and create needed folders
+ *
+ * - d3.min.js
+ */
+Phantomas.prototype.copyScripts = function() {
+  if ( !fs.existsSync( this.options.indexPath + '/public/scripts' ) ) {
+    fs.mkdirSync( this.options.indexPath + '/public/scripts' );
+  }
+
+  var d3 = fs.readFileSync(
+    path.normalize( ASSETS_PATH + '/scripts/d3.min.js' )
+  );
+
+  fs.writeFileSync(
+    path.normalize( this.options.indexPath + '/public/scripts/d3.min.js' ),
+    d3
+  );
+
+  this.grunt.log.ok(
+    'Phantomas copied asset to \'' + this.options.indexPath + 'public/scripts/d3.min.js\'.'
+  );
+
+  var phantomas = fs.readFileSync(
+    path.normalize( ASSETS_PATH + '/scripts/phantomas.min.js' )
+  );
+
+  fs.writeFileSync(
+    path.normalize( this.options.indexPath + '/public/scripts/phantomas.min.js' ),
+    phantomas
+  );
+
+  this.grunt.log.ok(
+    'Phantomas copied asset to \'' + this.options.indexPath + 'public/scripts/phantomas.min.js\'.'
+  );
+};
+
+
+/**
+ * Copy styles file and create needed folders
  */
 Phantomas.prototype.copyStyles = function() {
   if ( !fs.existsSync( this.options.indexPath + '/public/styles' ) ) {
@@ -92,7 +131,7 @@ Phantomas.prototype.copyStyles = function() {
   );
 
   this.grunt.log.ok(
-    'Phantomas copied assets to \'' + this.options.indexPath + 'public/styles/phantomas.css\'.'
+    'Phantomas copied asset to \'' + this.options.indexPath + 'public/styles/phantomas.css\'.'
   );
 };
 
@@ -301,8 +340,12 @@ Phantomas.prototype.readMetricsFiles = function() {
   return new Promise( function( resolve ) {
     fs.readdirAsync( this.dataPath ).bind( this )
       .then( function( files ) {
+        files = files.filter( function( file ) {
+          return file.match( /\.json/gi );
+        } );
+
         files = files.map( function( file ) {
-          return this.readMetricsFile( file );
+            return this.readMetricsFile( file );
         }, this );
 
         Promise.all( files ).bind( this )

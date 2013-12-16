@@ -1,0 +1,101 @@
+/*
+ * grunt-phantomas
+ * https://github.com/stefanjudis/grunt-phantomas
+ *
+ * Copyright (c) 2013 stefan judis
+ * Licensed under the MIT license.
+ */
+.p--graphs {
+  position: relative;
+
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+}
+
+.p--graphs--graph {
+  width: 45%;
+  min-height: 300px;
+
+  display: inline-block;
+
+  border-bottom: 1px solid $c-grayDarker;
+  margin: 0 2.5% 2.5em 2.5%;
+}
+
+.p--lineChart--area {
+  fill: $c-grayDarker;
+}
+
+.p--lineChart--areaLine {
+  fill   : none;
+  stroke : $c-green;
+  stroke-width: 2;
+}
+
+.lineChart--bubble--label {
+  fill: none;
+  // stroke: $c-blue;
+
+  // font-size: $f-sizeBubbleLabel;
+  font-style: italic;
+  // font-weight: $f-weight;
+}
+
+.lineChart--bubble--value {
+  fill: #fff;
+  stroke: #fff;
+
+  // font-size: $f-sizeBubbleValue;
+  // font-weight: $f-weight;
+}
+.lineChart--circle {
+  fill: $c-blue;
+  stroke: #fff;
+  stroke-width: 2;
+}
+
+.lineChart--circle__highlighted {
+  fill: $c-purple;
+  stroke: $c-white;
+}
+
+.lineChart--gradientBackgroundArea--top {
+  // stop-color   : $c-blue;
+  stop-opacity : 0.1;
+}
+
+.lineChart--gradientBackgroundArea--bottom {
+  // stop-color   : $c-blue;
+  stop-opacity : 0.6;
+}
+
+// d3.js doesn't let me BEM it. :(
+.lineChart--xAxisTicks, .lineChart--xAxis, .lineChart--yAxisTicks {
+  .domain {
+    display: none;
+  }
+}
+
+.lineChart--xAxis {
+  .tick {
+    line {
+      display: none;
+    }
+
+    text {
+      fill: $c-white;
+    }
+  }
+}
+
+.lineChart--xAxisTicks, .lineChart--yAxisTicks {
+  .tick {
+    line {
+      fill: none;
+      stroke: $c-gray;
+      stroke-width: 1;
+    }
+  }
+}

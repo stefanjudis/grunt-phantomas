@@ -25,6 +25,12 @@
 </head>
 <body>
   <main>
+  <ul class="p--graphs">
+    <% _.each( metrics, function( metric ) { %>
+      <li id="graph--<%= metric %>" class="p--graphs--graph">
+        <h3><%= metric %></h3>
+    <% } );%>
+  </ul>
   <% _.each( groupedMetrics, function( metrics ) { %>
     <table class="p--table">
       <thead class="p--table--head">
@@ -47,5 +53,7 @@
   <% } ); %>
 </main>
 <script>var results = <%= JSON.stringify( results ) %></script>
+<script src="public/scripts/d3.min.js"></script>
+<script src="public/scripts/phantomas.min.js"></script>
 </body>
 </html>
