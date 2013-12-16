@@ -72,7 +72,9 @@ In this example, the default options are used to fetch metrics of `http://gruntj
 
 ```js
 grunt.initConfig({
-  phantomas: {},
+  phantomas: {
+  	yourSite: {}
+  },
 })
 ```
 
