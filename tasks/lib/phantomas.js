@@ -209,7 +209,7 @@ Phantomas.prototype.createIndexDirectory = function() {
       resolve();
     }
   }.bind( this ) );
-}
+};
 
 /**
  * Write final index.html file and
