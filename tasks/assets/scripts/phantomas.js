@@ -160,6 +160,7 @@
         margin      = {
           top    : 20,
           right  : 10,
+          bottom : 10,
           left   : 10
         },
 
@@ -168,7 +169,7 @@
         container   = d3.select( containerEl ),
         svg         = container.append( 'svg' )
                                 .attr( 'width', width )
-                                .attr( 'height', height + margin.top ),
+                                .attr( 'height', height + margin.top + margin.bottom ),
 
         x          = d3.time.scale().range( [ 0, width - detailWidth ] ),
         xAxis      = d3.svg.axis().scale( x )
@@ -253,7 +254,7 @@
     var detailBox     = document.createElement( 'div' );
     var listContainer = getParent( circle, 'p--graphs--graph' );
 
-    detailBox.innerHTML = circle.dataset.value;
+    detailBox.innerHTML = circle.attributes.getNamedItem( 'data-value' ).value;
     // radius need to be substracted
     // TODO think of cleaner solution
     detailBox.style.left = ( bBox.x - 36 ) + 'px';
