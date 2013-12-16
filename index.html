@@ -1,0 +1,3493 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" href="public/styles/phantomas.css" media="all">
+</head>
+<body>
+  <main>
+  <ul id="p--graphs" class="p--graphs">
+    
+      <li id="graph--requests" class="p--graphs--graph">
+        <h3>requests</h3>
+    
+      <li id="graph--gzipRequests" class="p--graphs--graph">
+        <h3>gzipRequests</h3>
+    
+      <li id="graph--postRequests" class="p--graphs--graph">
+        <h3>postRequests</h3>
+    
+      <li id="graph--httpsRequests" class="p--graphs--graph">
+        <h3>httpsRequests</h3>
+    
+      <li id="graph--redirects" class="p--graphs--graph">
+        <h3>redirects</h3>
+    
+      <li id="graph--notFound" class="p--graphs--graph">
+        <h3>notFound</h3>
+    
+      <li id="graph--timeToFirstByte" class="p--graphs--graph">
+        <h3>timeToFirstByte</h3>
+    
+      <li id="graph--timeToLastByte" class="p--graphs--graph">
+        <h3>timeToLastByte</h3>
+    
+      <li id="graph--bodySize" class="p--graphs--graph">
+        <h3>bodySize</h3>
+    
+      <li id="graph--contentLength" class="p--graphs--graph">
+        <h3>contentLength</h3>
+    
+      <li id="graph--ajaxRequests" class="p--graphs--graph">
+        <h3>ajaxRequests</h3>
+    
+      <li id="graph--htmlCount" class="p--graphs--graph">
+        <h3>htmlCount</h3>
+    
+      <li id="graph--htmlSize" class="p--graphs--graph">
+        <h3>htmlSize</h3>
+    
+      <li id="graph--cssCount" class="p--graphs--graph">
+        <h3>cssCount</h3>
+    
+      <li id="graph--cssSize" class="p--graphs--graph">
+        <h3>cssSize</h3>
+    
+      <li id="graph--jsCount" class="p--graphs--graph">
+        <h3>jsCount</h3>
+    
+      <li id="graph--jsSize" class="p--graphs--graph">
+        <h3>jsSize</h3>
+    
+      <li id="graph--jsonCount" class="p--graphs--graph">
+        <h3>jsonCount</h3>
+    
+      <li id="graph--jsonSize" class="p--graphs--graph">
+        <h3>jsonSize</h3>
+    
+      <li id="graph--imageCount" class="p--graphs--graph">
+        <h3>imageCount</h3>
+    
+      <li id="graph--imageSize" class="p--graphs--graph">
+        <h3>imageSize</h3>
+    
+      <li id="graph--webfontCount" class="p--graphs--graph">
+        <h3>webfontCount</h3>
+    
+      <li id="graph--webfontSize" class="p--graphs--graph">
+        <h3>webfontSize</h3>
+    
+      <li id="graph--base64Count" class="p--graphs--graph">
+        <h3>base64Count</h3>
+    
+      <li id="graph--base64Size" class="p--graphs--graph">
+        <h3>base64Size</h3>
+    
+      <li id="graph--otherCount" class="p--graphs--graph">
+        <h3>otherCount</h3>
+    
+      <li id="graph--otherSize" class="p--graphs--graph">
+        <h3>otherSize</h3>
+    
+      <li id="graph--cacheHits" class="p--graphs--graph">
+        <h3>cacheHits</h3>
+    
+      <li id="graph--cacheMisses" class="p--graphs--graph">
+        <h3>cacheMisses</h3>
+    
+      <li id="graph--cachingNotSpecified" class="p--graphs--graph">
+        <h3>cachingNotSpecified</h3>
+    
+      <li id="graph--cachingTooShort" class="p--graphs--graph">
+        <h3>cachingTooShort</h3>
+    
+      <li id="graph--cachingDisabled" class="p--graphs--graph">
+        <h3>cachingDisabled</h3>
+    
+      <li id="graph--domains" class="p--graphs--graph">
+        <h3>domains</h3>
+    
+      <li id="graph--maxRequestsPerDomain" class="p--graphs--graph">
+        <h3>maxRequestsPerDomain</h3>
+    
+      <li id="graph--medianRequestsPerDomain" class="p--graphs--graph">
+        <h3>medianRequestsPerDomain</h3>
+    
+      <li id="graph--DOMqueries" class="p--graphs--graph">
+        <h3>DOMqueries</h3>
+    
+      <li id="graph--DOMqueriesById" class="p--graphs--graph">
+        <h3>DOMqueriesById</h3>
+    
+      <li id="graph--DOMqueriesByClassName" class="p--graphs--graph">
+        <h3>DOMqueriesByClassName</h3>
+    
+      <li id="graph--DOMqueriesByTagName" class="p--graphs--graph">
+        <h3>DOMqueriesByTagName</h3>
+    
+      <li id="graph--DOMqueriesByQuerySelectorAll" class="p--graphs--graph">
+        <h3>DOMqueriesByQuerySelectorAll</h3>
+    
+      <li id="graph--DOMinserts" class="p--graphs--graph">
+        <h3>DOMinserts</h3>
+    
+      <li id="graph--DOMqueriesDuplicated" class="p--graphs--graph">
+        <h3>DOMqueriesDuplicated</h3>
+    
+      <li id="graph--eventsBound" class="p--graphs--graph">
+        <h3>eventsBound</h3>
+    
+      <li id="graph--headersCount" class="p--graphs--graph">
+        <h3>headersCount</h3>
+    
+      <li id="graph--headersSentCount" class="p--graphs--graph">
+        <h3>headersSentCount</h3>
+    
+      <li id="graph--headersRecvCount" class="p--graphs--graph">
+        <h3>headersRecvCount</h3>
+    
+      <li id="graph--headersSize" class="p--graphs--graph">
+        <h3>headersSize</h3>
+    
+      <li id="graph--headersSentSize" class="p--graphs--graph">
+        <h3>headersSentSize</h3>
+    
+      <li id="graph--headersRecvSize" class="p--graphs--graph">
+        <h3>headersRecvSize</h3>
+    
+      <li id="graph--documentWriteCalls" class="p--graphs--graph">
+        <h3>documentWriteCalls</h3>
+    
+      <li id="graph--evalCalls" class="p--graphs--graph">
+        <h3>evalCalls</h3>
+    
+      <li id="graph--jQueryOnDOMReadyFunctions" class="p--graphs--graph">
+        <h3>jQueryOnDOMReadyFunctions</h3>
+    
+      <li id="graph--jQuerySizzleCalls" class="p--graphs--graph">
+        <h3>jQuerySizzleCalls</h3>
+    
+      <li id="graph--jsErrors" class="p--graphs--graph">
+        <h3>jsErrors</h3>
+    
+      <li id="graph--assetsNotGzipped" class="p--graphs--graph">
+        <h3>assetsNotGzipped</h3>
+    
+      <li id="graph--assetsWithQueryString" class="p--graphs--graph">
+        <h3>assetsWithQueryString</h3>
+    
+      <li id="graph--smallImages" class="p--graphs--graph">
+        <h3>smallImages</h3>
+    
+      <li id="graph--multipleRequests" class="p--graphs--graph">
+        <h3>multipleRequests</h3>
+    
+      <li id="graph--timeToFirstCss" class="p--graphs--graph">
+        <h3>timeToFirstCss</h3>
+    
+      <li id="graph--timeToFirstJs" class="p--graphs--graph">
+        <h3>timeToFirstJs</h3>
+    
+      <li id="graph--timeToFirstImage" class="p--graphs--graph">
+        <h3>timeToFirstImage</h3>
+    
+      <li id="graph--onDOMReadyTime" class="p--graphs--graph">
+        <h3>onDOMReadyTime</h3>
+    
+      <li id="graph--onDOMReadyTimeEnd" class="p--graphs--graph">
+        <h3>onDOMReadyTimeEnd</h3>
+    
+      <li id="graph--windowOnLoadTime" class="p--graphs--graph">
+        <h3>windowOnLoadTime</h3>
+    
+      <li id="graph--windowOnLoadTimeEnd" class="p--graphs--graph">
+        <h3>windowOnLoadTimeEnd</h3>
+    
+      <li id="graph--httpTrafficCompleted" class="p--graphs--graph">
+        <h3>httpTrafficCompleted</h3>
+    
+      <li id="graph--windowAlerts" class="p--graphs--graph">
+        <h3>windowAlerts</h3>
+    
+      <li id="graph--windowConfirms" class="p--graphs--graph">
+        <h3>windowConfirms</h3>
+    
+      <li id="graph--windowPrompts" class="p--graphs--graph">
+        <h3>windowPrompts</h3>
+    
+      <li id="graph--consoleMessages" class="p--graphs--graph">
+        <h3>consoleMessages</h3>
+    
+      <li id="graph--cookiesSent" class="p--graphs--graph">
+        <h3>cookiesSent</h3>
+    
+      <li id="graph--cookiesRecv" class="p--graphs--graph">
+        <h3>cookiesRecv</h3>
+    
+      <li id="graph--domainsWithCookies" class="p--graphs--graph">
+        <h3>domainsWithCookies</h3>
+    
+      <li id="graph--documentCookiesLength" class="p--graphs--graph">
+        <h3>documentCookiesLength</h3>
+    
+      <li id="graph--documentCookiesCount" class="p--graphs--graph">
+        <h3>documentCookiesCount</h3>
+    
+      <li id="graph--bodyHTMLSize" class="p--graphs--graph">
+        <h3>bodyHTMLSize</h3>
+    
+      <li id="graph--iframesCount" class="p--graphs--graph">
+        <h3>iframesCount</h3>
+    
+      <li id="graph--imagesWithoutDimensions" class="p--graphs--graph">
+        <h3>imagesWithoutDimensions</h3>
+    
+      <li id="graph--commentsSize" class="p--graphs--graph">
+        <h3>commentsSize</h3>
+    
+      <li id="graph--hiddenContentSize" class="p--graphs--graph">
+        <h3>hiddenContentSize</h3>
+    
+      <li id="graph--whiteSpacesSize" class="p--graphs--graph">
+        <h3>whiteSpacesSize</h3>
+    
+      <li id="graph--DOMelementsCount" class="p--graphs--graph">
+        <h3>DOMelementsCount</h3>
+    
+      <li id="graph--DOMelementMaxDepth" class="p--graphs--graph">
+        <h3>DOMelementMaxDepth</h3>
+    
+      <li id="graph--nodesWithInlineCSS" class="p--graphs--graph">
+        <h3>nodesWithInlineCSS</h3>
+    
+      <li id="graph--globalVariables" class="p--graphs--graph">
+        <h3>globalVariables</h3>
+    
+      <li id="graph--localStorageEntries" class="p--graphs--graph">
+        <h3>localStorageEntries</h3>
+    
+      <li id="graph--smallestResponse" class="p--graphs--graph">
+        <h3>smallestResponse</h3>
+    
+      <li id="graph--biggestResponse" class="p--graphs--graph">
+        <h3>biggestResponse</h3>
+    
+      <li id="graph--fastestResponse" class="p--graphs--graph">
+        <h3>fastestResponse</h3>
+    
+      <li id="graph--slowestResponse" class="p--graphs--graph">
+        <h3>slowestResponse</h3>
+    
+      <li id="graph--smallestLatency" class="p--graphs--graph">
+        <h3>smallestLatency</h3>
+    
+      <li id="graph--biggestLatency" class="p--graphs--graph">
+        <h3>biggestLatency</h3>
+    
+      <li id="graph--medianResponse" class="p--graphs--graph">
+        <h3>medianResponse</h3>
+    
+      <li id="graph--medianLatency" class="p--graphs--graph">
+        <h3>medianLatency</h3>
+    
+  </ul>
+  
+    <table class="p--table">
+      <thead class="p--table--head">
+        <th class="p--table--column">Date</th>
+        
+          <th class="p--table--column">requests</th>
+        
+          <th class="p--table--column">gzipRequests</th>
+        
+          <th class="p--table--column">postRequests</th>
+        
+          <th class="p--table--column">httpsRequests</th>
+        
+          <th class="p--table--column">redirects</th>
+        
+          <th class="p--table--column">notFound</th>
+        
+          <th class="p--table--column">timeToFirstByte</th>
+        
+      </thead>
+      <tbody class="p--table--body">
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:29.027Z</td>
+            
+              <td class="p--table--column">21</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1397</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:39.386Z</td>
+            
+              <td class="p--table--column">21</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">356</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:48.509Z</td>
+            
+              <td class="p--table--column">21</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">527</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:51:18.740Z</td>
+            
+              <td class="p--table--column">21</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1244</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:01.056Z</td>
+            
+              <td class="p--table--column">21</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">477</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:12.759Z</td>
+            
+              <td class="p--table--column">21</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">817</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:23.816Z</td>
+            
+              <td class="p--table--column">21</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1629</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:33.085Z</td>
+            
+              <td class="p--table--column">21</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">530</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:03:23.595Z</td>
+            
+              <td class="p--table--column">21</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1684</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:11:32.093Z</td>
+            
+              <td class="p--table--column">29</td>
+            
+              <td class="p--table--column">3</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">763</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:27:19.491Z</td>
+            
+              <td class="p--table--column">29</td>
+            
+              <td class="p--table--column">3</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">735</td>
+            
+          </tr>
+        
+      </tbody>
+    </table>
+  
+    <table class="p--table">
+      <thead class="p--table--head">
+        <th class="p--table--column">Date</th>
+        
+          <th class="p--table--column">timeToLastByte</th>
+        
+          <th class="p--table--column">bodySize</th>
+        
+          <th class="p--table--column">contentLength</th>
+        
+          <th class="p--table--column">ajaxRequests</th>
+        
+          <th class="p--table--column">htmlCount</th>
+        
+          <th class="p--table--column">htmlSize</th>
+        
+          <th class="p--table--column">cssCount</th>
+        
+      </thead>
+      <tbody class="p--table--body">
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:29.027Z</td>
+            
+              <td class="p--table--column">1404</td>
+            
+              <td class="p--table--column">80594</td>
+            
+              <td class="p--table--column">240268</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">4069</td>
+            
+              <td class="p--table--column">1</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:39.386Z</td>
+            
+              <td class="p--table--column">364</td>
+            
+              <td class="p--table--column">62524</td>
+            
+              <td class="p--table--column">240268</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">6965</td>
+            
+              <td class="p--table--column">1</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:48.509Z</td>
+            
+              <td class="p--table--column">534</td>
+            
+              <td class="p--table--column">82182</td>
+            
+              <td class="p--table--column">240268</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">8413</td>
+            
+              <td class="p--table--column">1</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:51:18.740Z</td>
+            
+              <td class="p--table--column">1377</td>
+            
+              <td class="p--table--column">53761</td>
+            
+              <td class="p--table--column">240268</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">1151</td>
+            
+              <td class="p--table--column">1</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:01.056Z</td>
+            
+              <td class="p--table--column">619</td>
+            
+              <td class="p--table--column">66054</td>
+            
+              <td class="p--table--column">240268</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">1151</td>
+            
+              <td class="p--table--column">1</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:12.759Z</td>
+            
+              <td class="p--table--column">824</td>
+            
+              <td class="p--table--column">39485</td>
+            
+              <td class="p--table--column">240268</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">1151</td>
+            
+              <td class="p--table--column">1</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:23.816Z</td>
+            
+              <td class="p--table--column">1638</td>
+            
+              <td class="p--table--column">59556</td>
+            
+              <td class="p--table--column">240268</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">6965</td>
+            
+              <td class="p--table--column">1</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:33.085Z</td>
+            
+              <td class="p--table--column">538</td>
+            
+              <td class="p--table--column">72101</td>
+            
+              <td class="p--table--column">240268</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">2599</td>
+            
+              <td class="p--table--column">1</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:03:23.595Z</td>
+            
+              <td class="p--table--column">1692</td>
+            
+              <td class="p--table--column">58062</td>
+            
+              <td class="p--table--column">240268</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">10132</td>
+            
+              <td class="p--table--column">1</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:11:32.093Z</td>
+            
+              <td class="p--table--column">772</td>
+            
+              <td class="p--table--column">84958</td>
+            
+              <td class="p--table--column">300525</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">1448</td>
+            
+              <td class="p--table--column">2</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:27:19.491Z</td>
+            
+              <td class="p--table--column">743</td>
+            
+              <td class="p--table--column">147578</td>
+            
+              <td class="p--table--column">279124</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">4047</td>
+            
+              <td class="p--table--column">2</td>
+            
+          </tr>
+        
+      </tbody>
+    </table>
+  
+    <table class="p--table">
+      <thead class="p--table--head">
+        <th class="p--table--column">Date</th>
+        
+          <th class="p--table--column">cssSize</th>
+        
+          <th class="p--table--column">jsCount</th>
+        
+          <th class="p--table--column">jsSize</th>
+        
+          <th class="p--table--column">jsonCount</th>
+        
+          <th class="p--table--column">jsonSize</th>
+        
+          <th class="p--table--column">imageCount</th>
+        
+          <th class="p--table--column">imageSize</th>
+        
+      </thead>
+      <tbody class="p--table--body">
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:29.027Z</td>
+            
+              <td class="p--table--column">6966</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">1155</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">18</td>
+            
+              <td class="p--table--column">68404</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:39.386Z</td>
+            
+              <td class="p--table--column">4070</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">1155</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">18</td>
+            
+              <td class="p--table--column">50334</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:48.509Z</td>
+            
+              <td class="p--table--column">5771</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">3777</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">18</td>
+            
+              <td class="p--table--column">64221</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:51:18.740Z</td>
+            
+              <td class="p--table--column">1152</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">3777</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">18</td>
+            
+              <td class="p--table--column">47681</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:01.056Z</td>
+            
+              <td class="p--table--column">8414</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">1155</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">18</td>
+            
+              <td class="p--table--column">55334</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:12.759Z</td>
+            
+              <td class="p--table--column">1152</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">3777</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">18</td>
+            
+              <td class="p--table--column">33405</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:23.816Z</td>
+            
+              <td class="p--table--column">5518</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">3777</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">18</td>
+            
+              <td class="p--table--column">43296</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:33.085Z</td>
+            
+              <td class="p--table--column">1152</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">1155</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">18</td>
+            
+              <td class="p--table--column">67195</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:03:23.595Z</td>
+            
+              <td class="p--table--column">2600</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">3777</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">18</td>
+            
+              <td class="p--table--column">41553</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:11:32.093Z</td>
+            
+              <td class="p--table--column">1630</td>
+            
+              <td class="p--table--column">5</td>
+            
+              <td class="p--table--column">30610</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">21</td>
+            
+              <td class="p--table--column">51270</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:27:19.491Z</td>
+            
+              <td class="p--table--column">5996</td>
+            
+              <td class="p--table--column">5</td>
+            
+              <td class="p--table--column">32072</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">21</td>
+            
+              <td class="p--table--column">105463</td>
+            
+          </tr>
+        
+      </tbody>
+    </table>
+  
+    <table class="p--table">
+      <thead class="p--table--head">
+        <th class="p--table--column">Date</th>
+        
+          <th class="p--table--column">webfontCount</th>
+        
+          <th class="p--table--column">webfontSize</th>
+        
+          <th class="p--table--column">base64Count</th>
+        
+          <th class="p--table--column">base64Size</th>
+        
+          <th class="p--table--column">otherCount</th>
+        
+          <th class="p--table--column">otherSize</th>
+        
+          <th class="p--table--column">cacheHits</th>
+        
+      </thead>
+      <tbody class="p--table--body">
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:29.027Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:39.386Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:48.509Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:51:18.740Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:01.056Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:12.759Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:23.816Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:33.085Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:03:23.595Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:11:32.093Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">3</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:27:19.491Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">3</td>
+            
+          </tr>
+        
+      </tbody>
+    </table>
+  
+    <table class="p--table">
+      <thead class="p--table--head">
+        <th class="p--table--column">Date</th>
+        
+          <th class="p--table--column">cacheMisses</th>
+        
+          <th class="p--table--column">cachingNotSpecified</th>
+        
+          <th class="p--table--column">cachingTooShort</th>
+        
+          <th class="p--table--column">cachingDisabled</th>
+        
+          <th class="p--table--column">domains</th>
+        
+          <th class="p--table--column">maxRequestsPerDomain</th>
+        
+          <th class="p--table--column">medianRequestsPerDomain</th>
+        
+      </thead>
+      <tbody class="p--table--body">
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:29.027Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">20</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">21</td>
+            
+              <td class="p--table--column">21</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:39.386Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">20</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">21</td>
+            
+              <td class="p--table--column">21</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:48.509Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">20</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">21</td>
+            
+              <td class="p--table--column">21</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:51:18.740Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">20</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">21</td>
+            
+              <td class="p--table--column">21</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:01.056Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">20</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">21</td>
+            
+              <td class="p--table--column">21</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:12.759Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">20</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">21</td>
+            
+              <td class="p--table--column">21</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:23.816Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">20</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">21</td>
+            
+              <td class="p--table--column">21</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:33.085Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">20</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">21</td>
+            
+              <td class="p--table--column">21</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:03:23.595Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">20</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">21</td>
+            
+              <td class="p--table--column">21</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:11:32.093Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">4</td>
+            
+              <td class="p--table--column">2</td>
+            
+              <td class="p--table--column">20</td>
+            
+              <td class="p--table--column">6</td>
+            
+              <td class="p--table--column">21</td>
+            
+              <td class="p--table--column">2</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:27:19.491Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">4</td>
+            
+              <td class="p--table--column">2</td>
+            
+              <td class="p--table--column">20</td>
+            
+              <td class="p--table--column">6</td>
+            
+              <td class="p--table--column">21</td>
+            
+              <td class="p--table--column">2</td>
+            
+          </tr>
+        
+      </tbody>
+    </table>
+  
+    <table class="p--table">
+      <thead class="p--table--head">
+        <th class="p--table--column">Date</th>
+        
+          <th class="p--table--column">DOMqueries</th>
+        
+          <th class="p--table--column">DOMqueriesById</th>
+        
+          <th class="p--table--column">DOMqueriesByClassName</th>
+        
+          <th class="p--table--column">DOMqueriesByTagName</th>
+        
+          <th class="p--table--column">DOMqueriesByQuerySelectorAll</th>
+        
+          <th class="p--table--column">DOMinserts</th>
+        
+          <th class="p--table--column">DOMqueriesDuplicated</th>
+        
+      </thead>
+      <tbody class="p--table--body">
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:29.027Z</td>
+            
+              <td class="p--table--column">2</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">2</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">2</td>
+            
+              <td class="p--table--column">1</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:39.386Z</td>
+            
+              <td class="p--table--column">2</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">2</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">2</td>
+            
+              <td class="p--table--column">1</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:48.509Z</td>
+            
+              <td class="p--table--column">2</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">2</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">2</td>
+            
+              <td class="p--table--column">1</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:51:18.740Z</td>
+            
+              <td class="p--table--column">2</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">2</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">2</td>
+            
+              <td class="p--table--column">1</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:01.056Z</td>
+            
+              <td class="p--table--column">2</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">2</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">2</td>
+            
+              <td class="p--table--column">1</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:12.759Z</td>
+            
+              <td class="p--table--column">2</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">2</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">2</td>
+            
+              <td class="p--table--column">1</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:23.816Z</td>
+            
+              <td class="p--table--column">2</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">2</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">2</td>
+            
+              <td class="p--table--column">1</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:33.085Z</td>
+            
+              <td class="p--table--column">2</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">2</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">2</td>
+            
+              <td class="p--table--column">1</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:03:23.595Z</td>
+            
+              <td class="p--table--column">2</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">2</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">2</td>
+            
+              <td class="p--table--column">1</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:11:32.093Z</td>
+            
+              <td class="p--table--column">7</td>
+            
+              <td class="p--table--column">4</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">3</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">4</td>
+            
+              <td class="p--table--column">2</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:27:19.491Z</td>
+            
+              <td class="p--table--column">7</td>
+            
+              <td class="p--table--column">4</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">3</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">4</td>
+            
+              <td class="p--table--column">2</td>
+            
+          </tr>
+        
+      </tbody>
+    </table>
+  
+    <table class="p--table">
+      <thead class="p--table--head">
+        <th class="p--table--column">Date</th>
+        
+          <th class="p--table--column">eventsBound</th>
+        
+          <th class="p--table--column">headersCount</th>
+        
+          <th class="p--table--column">headersSentCount</th>
+        
+          <th class="p--table--column">headersRecvCount</th>
+        
+          <th class="p--table--column">headersSize</th>
+        
+          <th class="p--table--column">headersSentSize</th>
+        
+          <th class="p--table--column">headersRecvSize</th>
+        
+      </thead>
+      <tbody class="p--table--body">
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:29.027Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">251</td>
+            
+              <td class="p--table--column">62</td>
+            
+              <td class="p--table--column">189</td>
+            
+              <td class="p--table--column">7744</td>
+            
+              <td class="p--table--column">2187</td>
+            
+              <td class="p--table--column">5557</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:39.386Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">251</td>
+            
+              <td class="p--table--column">62</td>
+            
+              <td class="p--table--column">189</td>
+            
+              <td class="p--table--column">7744</td>
+            
+              <td class="p--table--column">2187</td>
+            
+              <td class="p--table--column">5557</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:48.509Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">251</td>
+            
+              <td class="p--table--column">62</td>
+            
+              <td class="p--table--column">189</td>
+            
+              <td class="p--table--column">7744</td>
+            
+              <td class="p--table--column">2187</td>
+            
+              <td class="p--table--column">5557</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:51:18.740Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">251</td>
+            
+              <td class="p--table--column">62</td>
+            
+              <td class="p--table--column">189</td>
+            
+              <td class="p--table--column">7744</td>
+            
+              <td class="p--table--column">2187</td>
+            
+              <td class="p--table--column">5557</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:01.056Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">251</td>
+            
+              <td class="p--table--column">62</td>
+            
+              <td class="p--table--column">189</td>
+            
+              <td class="p--table--column">7744</td>
+            
+              <td class="p--table--column">2187</td>
+            
+              <td class="p--table--column">5557</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:12.759Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">251</td>
+            
+              <td class="p--table--column">62</td>
+            
+              <td class="p--table--column">189</td>
+            
+              <td class="p--table--column">7744</td>
+            
+              <td class="p--table--column">2187</td>
+            
+              <td class="p--table--column">5557</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:23.816Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">251</td>
+            
+              <td class="p--table--column">62</td>
+            
+              <td class="p--table--column">189</td>
+            
+              <td class="p--table--column">7744</td>
+            
+              <td class="p--table--column">2187</td>
+            
+              <td class="p--table--column">5557</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:33.085Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">251</td>
+            
+              <td class="p--table--column">62</td>
+            
+              <td class="p--table--column">189</td>
+            
+              <td class="p--table--column">7744</td>
+            
+              <td class="p--table--column">2187</td>
+            
+              <td class="p--table--column">5557</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:03:23.595Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">251</td>
+            
+              <td class="p--table--column">62</td>
+            
+              <td class="p--table--column">189</td>
+            
+              <td class="p--table--column">7744</td>
+            
+              <td class="p--table--column">2187</td>
+            
+              <td class="p--table--column">5557</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:11:32.093Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">379</td>
+            
+              <td class="p--table--column">86</td>
+            
+              <td class="p--table--column">293</td>
+            
+              <td class="p--table--column">12315</td>
+            
+              <td class="p--table--column">3018</td>
+            
+              <td class="p--table--column">9297</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:27:19.491Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">368</td>
+            
+              <td class="p--table--column">86</td>
+            
+              <td class="p--table--column">282</td>
+            
+              <td class="p--table--column">12454</td>
+            
+              <td class="p--table--column">3018</td>
+            
+              <td class="p--table--column">9436</td>
+            
+          </tr>
+        
+      </tbody>
+    </table>
+  
+    <table class="p--table">
+      <thead class="p--table--head">
+        <th class="p--table--column">Date</th>
+        
+          <th class="p--table--column">documentWriteCalls</th>
+        
+          <th class="p--table--column">evalCalls</th>
+        
+          <th class="p--table--column">jQueryVersion</th>
+        
+          <th class="p--table--column">jQueryOnDOMReadyFunctions</th>
+        
+          <th class="p--table--column">jQuerySizzleCalls</th>
+        
+          <th class="p--table--column">jsErrors</th>
+        
+          <th class="p--table--column">assetsNotGzipped</th>
+        
+      </thead>
+      <tbody class="p--table--body">
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:29.027Z</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column"></td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">3</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:39.386Z</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column"></td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">3</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:48.509Z</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column"></td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">3</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:51:18.740Z</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column"></td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">3</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:01.056Z</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column"></td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">3</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:12.759Z</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column"></td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">3</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:23.816Z</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column"></td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">3</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:33.085Z</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column"></td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">3</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:03:23.595Z</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column"></td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">3</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:11:32.093Z</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column"></td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">5</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:27:19.491Z</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column"></td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">5</td>
+            
+          </tr>
+        
+      </tbody>
+    </table>
+  
+    <table class="p--table">
+      <thead class="p--table--head">
+        <th class="p--table--column">Date</th>
+        
+          <th class="p--table--column">assetsWithQueryString</th>
+        
+          <th class="p--table--column">smallImages</th>
+        
+          <th class="p--table--column">multipleRequests</th>
+        
+          <th class="p--table--column">timeToFirstCss</th>
+        
+          <th class="p--table--column">timeToFirstJs</th>
+        
+          <th class="p--table--column">timeToFirstImage</th>
+        
+          <th class="p--table--column">onDOMReadyTime</th>
+        
+      </thead>
+      <tbody class="p--table--body">
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:29.027Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">3</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">2342</td>
+            
+              <td class="p--table--column">2265</td>
+            
+              <td class="p--table--column">2642</td>
+            
+              <td class="p--table--column">1287</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:39.386Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">9</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1791</td>
+            
+              <td class="p--table--column">634</td>
+            
+              <td class="p--table--column">2088</td>
+            
+              <td class="p--table--column">1525</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:48.509Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">3</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1571</td>
+            
+              <td class="p--table--column">810</td>
+            
+              <td class="p--table--column">1863</td>
+            
+              <td class="p--table--column">1134</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:51:18.740Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">9</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">2698</td>
+            
+              <td class="p--table--column">2061</td>
+            
+              <td class="p--table--column">3301</td>
+            
+              <td class="p--table--column">1997</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:01.056Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">8</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">2070</td>
+            
+              <td class="p--table--column">1453</td>
+            
+              <td class="p--table--column">2396</td>
+            
+              <td class="p--table--column">1863</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:12.759Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">15</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">2472</td>
+            
+              <td class="p--table--column">1635</td>
+            
+              <td class="p--table--column">2931</td>
+            
+              <td class="p--table--column">1997</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:23.816Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">11</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">2852</td>
+            
+              <td class="p--table--column">2028</td>
+            
+              <td class="p--table--column">3463</td>
+            
+              <td class="p--table--column">1308</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:33.085Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">11</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">2043</td>
+            
+              <td class="p--table--column">1074</td>
+            
+              <td class="p--table--column">2328</td>
+            
+              <td class="p--table--column">1812</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:03:23.595Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">12</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">3433</td>
+            
+              <td class="p--table--column">2382</td>
+            
+              <td class="p--table--column">4061</td>
+            
+              <td class="p--table--column">2199</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:11:32.093Z</td>
+            
+              <td class="p--table--column">4</td>
+            
+              <td class="p--table--column">14</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1318</td>
+            
+              <td class="p--table--column">1166</td>
+            
+              <td class="p--table--column">2188</td>
+            
+              <td class="p--table--column">1589</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:27:19.491Z</td>
+            
+              <td class="p--table--column">4</td>
+            
+              <td class="p--table--column">7</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">878</td>
+            
+              <td class="p--table--column">1173</td>
+            
+              <td class="p--table--column">2124</td>
+            
+              <td class="p--table--column">1574</td>
+            
+          </tr>
+        
+      </tbody>
+    </table>
+  
+    <table class="p--table">
+      <thead class="p--table--head">
+        <th class="p--table--column">Date</th>
+        
+          <th class="p--table--column">onDOMReadyTimeEnd</th>
+        
+          <th class="p--table--column">windowOnLoadTime</th>
+        
+          <th class="p--table--column">windowOnLoadTimeEnd</th>
+        
+          <th class="p--table--column">httpTrafficCompleted</th>
+        
+          <th class="p--table--column">windowAlerts</th>
+        
+          <th class="p--table--column">windowConfirms</th>
+        
+          <th class="p--table--column">windowPrompts</th>
+        
+      </thead>
+      <tbody class="p--table--body">
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:29.027Z</td>
+            
+              <td class="p--table--column">1288</td>
+            
+              <td class="p--table--column">2478</td>
+            
+              <td class="p--table--column">2484</td>
+            
+              <td class="p--table--column">3788</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:39.386Z</td>
+            
+              <td class="p--table--column">1526</td>
+            
+              <td class="p--table--column">3230</td>
+            
+              <td class="p--table--column">3237</td>
+            
+              <td class="p--table--column">3569</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:48.509Z</td>
+            
+              <td class="p--table--column">1135</td>
+            
+              <td class="p--table--column">2949</td>
+            
+              <td class="p--table--column">2951</td>
+            
+              <td class="p--table--column">3458</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:51:18.740Z</td>
+            
+              <td class="p--table--column">1998</td>
+            
+              <td class="p--table--column">3189</td>
+            
+              <td class="p--table--column">3195</td>
+            
+              <td class="p--table--column">4299</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:01.056Z</td>
+            
+              <td class="p--table--column">1864</td>
+            
+              <td class="p--table--column">3574</td>
+            
+              <td class="p--table--column">3576</td>
+            
+              <td class="p--table--column">3898</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:12.759Z</td>
+            
+              <td class="p--table--column">1999</td>
+            
+              <td class="p--table--column">3762</td>
+            
+              <td class="p--table--column">3763</td>
+            
+              <td class="p--table--column">4475</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:23.816Z</td>
+            
+              <td class="p--table--column">1310</td>
+            
+              <td class="p--table--column">3223</td>
+            
+              <td class="p--table--column">3224</td>
+            
+              <td class="p--table--column">4839</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:33.085Z</td>
+            
+              <td class="p--table--column">1813</td>
+            
+              <td class="p--table--column">4157</td>
+            
+              <td class="p--table--column">4159</td>
+            
+              <td class="p--table--column">4532</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:03:23.595Z</td>
+            
+              <td class="p--table--column">2200</td>
+            
+              <td class="p--table--column">4080</td>
+            
+              <td class="p--table--column">4084</td>
+            
+              <td class="p--table--column">5407</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:11:32.093Z</td>
+            
+              <td class="p--table--column">1590</td>
+            
+              <td class="p--table--column">2674</td>
+            
+              <td class="p--table--column">2676</td>
+            
+              <td class="p--table--column">3196</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:27:19.491Z</td>
+            
+              <td class="p--table--column">1575</td>
+            
+              <td class="p--table--column">3985</td>
+            
+              <td class="p--table--column">3986</td>
+            
+              <td class="p--table--column">4565</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+          </tr>
+        
+      </tbody>
+    </table>
+  
+    <table class="p--table">
+      <thead class="p--table--head">
+        <th class="p--table--column">Date</th>
+        
+          <th class="p--table--column">consoleMessages</th>
+        
+          <th class="p--table--column">cookiesSent</th>
+        
+          <th class="p--table--column">cookiesRecv</th>
+        
+          <th class="p--table--column">domainsWithCookies</th>
+        
+          <th class="p--table--column">documentCookiesLength</th>
+        
+          <th class="p--table--column">documentCookiesCount</th>
+        
+          <th class="p--table--column">bodyHTMLSize</th>
+        
+      </thead>
+      <tbody class="p--table--body">
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:29.027Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">9654</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:39.386Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">9654</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:48.509Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">9654</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:51:18.740Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">9654</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:01.056Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">9654</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:12.759Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">9654</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:23.816Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">9654</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:33.085Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">9654</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:03:23.595Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">9654</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:11:32.093Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">354</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">193</td>
+            
+              <td class="p--table--column">4</td>
+            
+              <td class="p--table--column">10809</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:27:19.491Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">755</td>
+            
+              <td class="p--table--column">1</td>
+            
+              <td class="p--table--column">193</td>
+            
+              <td class="p--table--column">4</td>
+            
+              <td class="p--table--column">10811</td>
+            
+          </tr>
+        
+      </tbody>
+    </table>
+  
+    <table class="p--table">
+      <thead class="p--table--head">
+        <th class="p--table--column">Date</th>
+        
+          <th class="p--table--column">iframesCount</th>
+        
+          <th class="p--table--column">imagesWithoutDimensions</th>
+        
+          <th class="p--table--column">commentsSize</th>
+        
+          <th class="p--table--column">hiddenContentSize</th>
+        
+          <th class="p--table--column">whiteSpacesSize</th>
+        
+          <th class="p--table--column">DOMelementsCount</th>
+        
+          <th class="p--table--column">DOMelementMaxDepth</th>
+        
+      </thead>
+      <tbody class="p--table--body">
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:29.027Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">16</td>
+            
+              <td class="p--table--column">53</td>
+            
+              <td class="p--table--column">61</td>
+            
+              <td class="p--table--column">4</td>
+            
+              <td class="p--table--column">192</td>
+            
+              <td class="p--table--column">10</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:39.386Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">16</td>
+            
+              <td class="p--table--column">53</td>
+            
+              <td class="p--table--column">61</td>
+            
+              <td class="p--table--column">4</td>
+            
+              <td class="p--table--column">192</td>
+            
+              <td class="p--table--column">10</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:48.509Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">16</td>
+            
+              <td class="p--table--column">53</td>
+            
+              <td class="p--table--column">61</td>
+            
+              <td class="p--table--column">4</td>
+            
+              <td class="p--table--column">192</td>
+            
+              <td class="p--table--column">10</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:51:18.740Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">16</td>
+            
+              <td class="p--table--column">53</td>
+            
+              <td class="p--table--column">61</td>
+            
+              <td class="p--table--column">4</td>
+            
+              <td class="p--table--column">192</td>
+            
+              <td class="p--table--column">10</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:01.056Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">16</td>
+            
+              <td class="p--table--column">53</td>
+            
+              <td class="p--table--column">61</td>
+            
+              <td class="p--table--column">4</td>
+            
+              <td class="p--table--column">192</td>
+            
+              <td class="p--table--column">10</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:12.759Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">16</td>
+            
+              <td class="p--table--column">53</td>
+            
+              <td class="p--table--column">61</td>
+            
+              <td class="p--table--column">4</td>
+            
+              <td class="p--table--column">192</td>
+            
+              <td class="p--table--column">10</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:23.816Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">16</td>
+            
+              <td class="p--table--column">53</td>
+            
+              <td class="p--table--column">61</td>
+            
+              <td class="p--table--column">4</td>
+            
+              <td class="p--table--column">192</td>
+            
+              <td class="p--table--column">10</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:33.085Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">16</td>
+            
+              <td class="p--table--column">53</td>
+            
+              <td class="p--table--column">61</td>
+            
+              <td class="p--table--column">4</td>
+            
+              <td class="p--table--column">192</td>
+            
+              <td class="p--table--column">10</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:03:23.595Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">16</td>
+            
+              <td class="p--table--column">53</td>
+            
+              <td class="p--table--column">61</td>
+            
+              <td class="p--table--column">4</td>
+            
+              <td class="p--table--column">192</td>
+            
+              <td class="p--table--column">10</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:11:32.093Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">16</td>
+            
+              <td class="p--table--column">53</td>
+            
+              <td class="p--table--column">61</td>
+            
+              <td class="p--table--column">4</td>
+            
+              <td class="p--table--column">197</td>
+            
+              <td class="p--table--column">10</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:27:19.491Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">16</td>
+            
+              <td class="p--table--column">53</td>
+            
+              <td class="p--table--column">61</td>
+            
+              <td class="p--table--column">4</td>
+            
+              <td class="p--table--column">198</td>
+            
+              <td class="p--table--column">10</td>
+            
+          </tr>
+        
+      </tbody>
+    </table>
+  
+    <table class="p--table">
+      <thead class="p--table--head">
+        <th class="p--table--column">Date</th>
+        
+          <th class="p--table--column">nodesWithInlineCSS</th>
+        
+          <th class="p--table--column">globalVariables</th>
+        
+          <th class="p--table--column">localStorageEntries</th>
+        
+          <th class="p--table--column">smallestResponse</th>
+        
+          <th class="p--table--column">biggestResponse</th>
+        
+          <th class="p--table--column">fastestResponse</th>
+        
+          <th class="p--table--column">slowestResponse</th>
+        
+      </thead>
+      <tbody class="p--table--body">
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:29.027Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">8</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1155</td>
+            
+              <td class="p--table--column">8629</td>
+            
+              <td class="p--table--column">280</td>
+            
+              <td class="p--table--column">1476</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:39.386Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">8</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1155</td>
+            
+              <td class="p--table--column">10325</td>
+            
+              <td class="p--table--column">277</td>
+            
+              <td class="p--table--column">1764</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:48.509Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">8</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1167</td>
+            
+              <td class="p--table--column">9850</td>
+            
+              <td class="p--table--column">272</td>
+            
+              <td class="p--table--column">1884</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:51:18.740Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">8</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1151</td>
+            
+              <td class="p--table--column">5792</td>
+            
+              <td class="p--table--column">589</td>
+            
+              <td class="p--table--column">1535</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:01.056Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">8</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1151</td>
+            
+              <td class="p--table--column">8629</td>
+            
+              <td class="p--table--column">309</td>
+            
+              <td class="p--table--column">2029</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:12.759Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">8</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1151</td>
+            
+              <td class="p--table--column">8629</td>
+            
+              <td class="p--table--column">441</td>
+            
+              <td class="p--table--column">2089</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:23.816Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">8</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1162</td>
+            
+              <td class="p--table--column">6965</td>
+            
+              <td class="p--table--column">396</td>
+            
+              <td class="p--table--column">1984</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:33.085Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">8</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1152</td>
+            
+              <td class="p--table--column">29652</td>
+            
+              <td class="p--table--column">272</td>
+            
+              <td class="p--table--column">2627</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:03:23.595Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">8</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">1162</td>
+            
+              <td class="p--table--column">10132</td>
+            
+              <td class="p--table--column">612</td>
+            
+              <td class="p--table--column">2103</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:11:32.093Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">57</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">35</td>
+            
+              <td class="p--table--column">21463</td>
+            
+              <td class="p--table--column">40</td>
+            
+              <td class="p--table--column">1601</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:27:19.491Z</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">57</td>
+            
+              <td class="p--table--column">0</td>
+            
+              <td class="p--table--column">35</td>
+            
+              <td class="p--table--column">29652</td>
+            
+              <td class="p--table--column">25</td>
+            
+              <td class="p--table--column">1943</td>
+            
+          </tr>
+        
+      </tbody>
+    </table>
+  
+    <table class="p--table">
+      <thead class="p--table--head">
+        <th class="p--table--column">Date</th>
+        
+          <th class="p--table--column">smallestLatency</th>
+        
+          <th class="p--table--column">biggestLatency</th>
+        
+          <th class="p--table--column">medianResponse</th>
+        
+          <th class="p--table--column">medianLatency</th>
+        
+      </thead>
+      <tbody class="p--table--body">
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:29.027Z</td>
+            
+              <td class="p--table--column">266</td>
+            
+              <td class="p--table--column">1475</td>
+            
+              <td class="p--table--column">987</td>
+            
+              <td class="p--table--column">957</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:39.386Z</td>
+            
+              <td class="p--table--column">258</td>
+            
+              <td class="p--table--column">1638</td>
+            
+              <td class="p--table--column">899</td>
+            
+              <td class="p--table--column">889</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:44:48.509Z</td>
+            
+              <td class="p--table--column">271</td>
+            
+              <td class="p--table--column">1883</td>
+            
+              <td class="p--table--column">969</td>
+            
+              <td class="p--table--column">922</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:51:18.740Z</td>
+            
+              <td class="p--table--column">588</td>
+            
+              <td class="p--table--column">1472</td>
+            
+              <td class="p--table--column">1089</td>
+            
+              <td class="p--table--column">1066</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:01.056Z</td>
+            
+              <td class="p--table--column">309</td>
+            
+              <td class="p--table--column">2029</td>
+            
+              <td class="p--table--column">1038</td>
+            
+              <td class="p--table--column">1002</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:12.759Z</td>
+            
+              <td class="p--table--column">440</td>
+            
+              <td class="p--table--column">2087</td>
+            
+              <td class="p--table--column">1241</td>
+            
+              <td class="p--table--column">1158</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:23.816Z</td>
+            
+              <td class="p--table--column">395</td>
+            
+              <td class="p--table--column">1983</td>
+            
+              <td class="p--table--column">1221</td>
+            
+              <td class="p--table--column">1001</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T19:52:33.085Z</td>
+            
+              <td class="p--table--column">272</td>
+            
+              <td class="p--table--column">2626</td>
+            
+              <td class="p--table--column">974</td>
+            
+              <td class="p--table--column">906</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:03:23.595Z</td>
+            
+              <td class="p--table--column">545</td>
+            
+              <td class="p--table--column">2003</td>
+            
+              <td class="p--table--column">1282</td>
+            
+              <td class="p--table--column">1259</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:11:32.093Z</td>
+            
+              <td class="p--table--column">39</td>
+            
+              <td class="p--table--column">1600</td>
+            
+              <td class="p--table--column">772</td>
+            
+              <td class="p--table--column">655</td>
+            
+          </tr>
+        
+          <tr class="p--table--row">
+            <td class="p--table--column__highlight">2013-12-16T20:27:19.491Z</td>
+            
+              <td class="p--table--column">24</td>
+            
+              <td class="p--table--column">1942</td>
+            
+              <td class="p--table--column">434</td>
+            
+              <td class="p--table--column">368</td>
+            
+          </tr>
+        
+      </tbody>
+    </table>
+  
+</main>
+<script>var results = [{"generator":"phantomas v0.10.1","url":"http://gruntjs.com/","metrics":{"requests":21,"gzipRequests":0,"postRequests":0,"httpsRequests":0,"redirects":0,"notFound":0,"timeToFirstByte":1397,"timeToLastByte":1404,"bodySize":80594,"contentLength":240268,"ajaxRequests":0,"htmlCount":1,"htmlSize":4069,"cssCount":1,"cssSize":6966,"jsCount":1,"jsSize":1155,"jsonCount":0,"jsonSize":0,"imageCount":18,"imageSize":68404,"webfontCount":0,"webfontSize":0,"base64Count":0,"base64Size":0,"otherCount":0,"otherSize":0,"cacheHits":0,"cacheMisses":0,"cachingNotSpecified":0,"cachingTooShort":0,"cachingDisabled":20,"domains":1,"maxRequestsPerDomain":21,"medianRequestsPerDomain":21,"DOMqueries":2,"DOMqueriesById":0,"DOMqueriesByClassName":0,"DOMqueriesByTagName":2,"DOMqueriesByQuerySelectorAll":0,"DOMinserts":2,"DOMqueriesDuplicated":1,"eventsBound":0,"headersCount":251,"headersSentCount":62,"headersRecvCount":189,"headersSize":7744,"headersSentSize":2187,"headersRecvSize":5557,"documentWriteCalls":1,"evalCalls":0,"jQueryVersion":"","jQueryOnDOMReadyFunctions":0,"jQuerySizzleCalls":0,"jsErrors":1,"assetsNotGzipped":3,"assetsWithQueryString":0,"smallImages":3,"multipleRequests":0,"timeToFirstCss":2342,"timeToFirstJs":2265,"timeToFirstImage":2642,"onDOMReadyTime":1287,"onDOMReadyTimeEnd":1288,"windowOnLoadTime":2478,"windowOnLoadTimeEnd":2484,"httpTrafficCompleted":3788,"windowAlerts":0,"windowConfirms":0,"windowPrompts":0,"consoleMessages":0,"cookiesSent":0,"cookiesRecv":0,"domainsWithCookies":0,"documentCookiesLength":0,"documentCookiesCount":1,"bodyHTMLSize":9654,"iframesCount":0,"imagesWithoutDimensions":16,"commentsSize":53,"hiddenContentSize":61,"whiteSpacesSize":4,"DOMelementsCount":192,"DOMelementMaxDepth":10,"nodesWithInlineCSS":0,"globalVariables":8,"localStorageEntries":0,"smallestResponse":1155,"biggestResponse":8629,"fastestResponse":280,"slowestResponse":1476,"smallestLatency":266,"biggestLatency":1475,"medianResponse":987,"medianLatency":957},"offenders":{"domains":["gruntjs.com: 21 request(s)"],"DOMqueries":["tag name \"script\": 2 queries"],"globalVariables":["Modernizr, _gaq, ados, d, html5, p, s, z"]},"asserts":false,"notices":["First js received in 2265 ms: <http://gruntjs.com/js/vendor/lib/modernizr.min.js>","First css received in 2342 ms: <http://gruntjs.com/css/main.css>","First image received in 2642 ms: <http://gruntjs.com/img/logo-handlebars.jpg>","Blocked requests: 4 (from fonts.googleapis.com, static.adzerk.net, www.google-analytics.com, c.jslogger.com)","JS errors (1):"," ReferenceError: Can't find variable: JSLogger","  unknown fn: undefined @ 28","","The smallest response (1.13 kB): <http://gruntjs.com/js/vendor/lib/modernizr.min.js>","The biggest response (8.43 kB): <http://gruntjs.com/img/logo-handlebars.jpg>","","The fastest response (280 ms): <http://gruntjs.com/img/logo-handlebars.jpg>","The slowest response (1476 ms): <http://gruntjs.com/img/logo-saucelabs.jpg>","","The smallest latency (266 ms): <http://gruntjs.com/css/main.css>","The biggest latency (1475 ms): <http://gruntjs.com/img/logo-saucelabs.jpg>","","Time spent on backend / frontend: 36% / 64%"],"timestamp":1387223069027},{"generator":"phantomas v0.10.1","url":"http://gruntjs.com/","metrics":{"requests":21,"gzipRequests":0,"postRequests":0,"httpsRequests":0,"redirects":0,"notFound":0,"timeToFirstByte":356,"timeToLastByte":364,"bodySize":62524,"contentLength":240268,"ajaxRequests":0,"htmlCount":1,"htmlSize":6965,"cssCount":1,"cssSize":4070,"jsCount":1,"jsSize":1155,"jsonCount":0,"jsonSize":0,"imageCount":18,"imageSize":50334,"webfontCount":0,"webfontSize":0,"base64Count":0,"base64Size":0,"otherCount":0,"otherSize":0,"cacheHits":0,"cacheMisses":0,"cachingNotSpecified":0,"cachingTooShort":0,"cachingDisabled":20,"domains":1,"maxRequestsPerDomain":21,"medianRequestsPerDomain":21,"DOMqueries":2,"DOMqueriesById":0,"DOMqueriesByClassName":0,"DOMqueriesByTagName":2,"DOMqueriesByQuerySelectorAll":0,"DOMinserts":2,"DOMqueriesDuplicated":1,"eventsBound":0,"headersCount":251,"headersSentCount":62,"headersRecvCount":189,"headersSize":7744,"headersSentSize":2187,"headersRecvSize":5557,"documentWriteCalls":1,"evalCalls":0,"jQueryVersion":"","jQueryOnDOMReadyFunctions":0,"jQuerySizzleCalls":0,"jsErrors":1,"assetsNotGzipped":3,"assetsWithQueryString":0,"smallImages":9,"multipleRequests":0,"timeToFirstCss":1791,"timeToFirstJs":634,"timeToFirstImage":2088,"onDOMReadyTime":1525,"onDOMReadyTimeEnd":1526,"windowOnLoadTime":3230,"windowOnLoadTimeEnd":3237,"httpTrafficCompleted":3569,"windowAlerts":0,"windowConfirms":0,"windowPrompts":0,"consoleMessages":0,"cookiesSent":0,"cookiesRecv":0,"domainsWithCookies":0,"documentCookiesLength":0,"documentCookiesCount":1,"bodyHTMLSize":9654,"iframesCount":0,"imagesWithoutDimensions":16,"commentsSize":53,"hiddenContentSize":61,"whiteSpacesSize":4,"DOMelementsCount":192,"DOMelementMaxDepth":10,"nodesWithInlineCSS":0,"globalVariables":8,"localStorageEntries":0,"smallestResponse":1155,"biggestResponse":10325,"fastestResponse":277,"slowestResponse":1764,"smallestLatency":258,"biggestLatency":1638,"medianResponse":899,"medianLatency":889},"offenders":{"domains":["gruntjs.com: 21 request(s)"],"DOMqueries":["tag name \"script\": 2 queries"],"globalVariables":["Modernizr, _gaq, ados, d, html5, p, s, z"]},"asserts":false,"notices":["First js received in 634 ms: <http://gruntjs.com/js/vendor/lib/modernizr.min.js>","First css received in 1791 ms: <http://gruntjs.com/css/main.css>","First image received in 2088 ms: <http://gruntjs.com/img/logo-less.jpg>","Blocked requests: 4 (from fonts.googleapis.com, static.adzerk.net, www.google-analytics.com, c.jslogger.com)","JS errors (1):"," ReferenceError: Can't find variable: JSLogger","  unknown fn: undefined @ 28","","The smallest response (1.13 kB): <http://gruntjs.com/js/vendor/lib/modernizr.min.js>","The biggest response (10.08 kB): <http://gruntjs.com/img/logo-bocoup.jpg>","","The fastest response (277 ms): <http://gruntjs.com/js/vendor/lib/modernizr.min.js>","The slowest response (1764 ms): <http://gruntjs.com/fonts/icomoon.svg>","","The smallest latency (258 ms): <http://gruntjs.com/img/grunt-logo.svg>","The biggest latency (1638 ms): <http://gruntjs.com/fonts/icomoon.svg>","","Time spent on backend / frontend: 10% / 90%"],"timestamp":1387223079386},{"generator":"phantomas v0.10.1","url":"http://gruntjs.com/","metrics":{"requests":21,"gzipRequests":0,"postRequests":0,"httpsRequests":0,"redirects":0,"notFound":0,"timeToFirstByte":527,"timeToLastByte":534,"bodySize":82182,"contentLength":240268,"ajaxRequests":0,"htmlCount":1,"htmlSize":8413,"cssCount":1,"cssSize":5771,"jsCount":1,"jsSize":3777,"jsonCount":0,"jsonSize":0,"imageCount":18,"imageSize":64221,"webfontCount":0,"webfontSize":0,"base64Count":0,"base64Size":0,"otherCount":0,"otherSize":0,"cacheHits":0,"cacheMisses":0,"cachingNotSpecified":0,"cachingTooShort":0,"cachingDisabled":20,"domains":1,"maxRequestsPerDomain":21,"medianRequestsPerDomain":21,"DOMqueries":2,"DOMqueriesById":0,"DOMqueriesByClassName":0,"DOMqueriesByTagName":2,"DOMqueriesByQuerySelectorAll":0,"DOMinserts":2,"DOMqueriesDuplicated":1,"eventsBound":0,"headersCount":251,"headersSentCount":62,"headersRecvCount":189,"headersSize":7744,"headersSentSize":2187,"headersRecvSize":5557,"documentWriteCalls":1,"evalCalls":0,"jQueryVersion":"","jQueryOnDOMReadyFunctions":0,"jQuerySizzleCalls":0,"jsErrors":1,"assetsNotGzipped":3,"assetsWithQueryString":0,"smallImages":3,"multipleRequests":0,"timeToFirstCss":1571,"timeToFirstJs":810,"timeToFirstImage":1863,"onDOMReadyTime":1134,"onDOMReadyTimeEnd":1135,"windowOnLoadTime":2949,"windowOnLoadTimeEnd":2951,"httpTrafficCompleted":3458,"windowAlerts":0,"windowConfirms":0,"windowPrompts":0,"consoleMessages":0,"cookiesSent":0,"cookiesRecv":0,"domainsWithCookies":0,"documentCookiesLength":0,"documentCookiesCount":1,"bodyHTMLSize":9654,"iframesCount":0,"imagesWithoutDimensions":16,"commentsSize":53,"hiddenContentSize":61,"whiteSpacesSize":4,"DOMelementsCount":192,"DOMelementMaxDepth":10,"nodesWithInlineCSS":0,"globalVariables":8,"localStorageEntries":0,"smallestResponse":1167,"biggestResponse":9850,"fastestResponse":272,"slowestResponse":1884,"smallestLatency":271,"biggestLatency":1883,"medianResponse":969,"medianLatency":922},"offenders":{"domains":["gruntjs.com: 21 request(s)"],"DOMqueries":["tag name \"script\": 2 queries"],"globalVariables":["Modernizr, _gaq, ados, d, html5, p, s, z"]},"asserts":false,"notices":["First js received in 810 ms: <http://gruntjs.com/js/vendor/lib/modernizr.min.js>","First css received in 1571 ms: <http://gruntjs.com/css/main.css>","First image received in 1863 ms: <http://gruntjs.com/img/logo-jade.jpg>","Blocked requests: 4 (from fonts.googleapis.com, static.adzerk.net, www.google-analytics.com, c.jslogger.com)","JS errors (1):"," ReferenceError: Can't find variable: JSLogger","  unknown fn: undefined @ 28","","The smallest response (1.14 kB): <http://gruntjs.com/img/logo-handlebars.jpg>","The biggest response (9.62 kB): <http://gruntjs.com/fonts/icomoon.svg>","","The fastest response (272 ms): <http://gruntjs.com/img/logo-jade.jpg>","The slowest response (1884 ms): <http://gruntjs.com/img/logo-bitovi.jpg>","","The smallest latency (271 ms): <http://gruntjs.com/img/logo-jade.jpg>","The biggest latency (1883 ms): <http://gruntjs.com/img/logo-bitovi.jpg>","","Time spent on backend / frontend: 15% / 85%"],"timestamp":1387223088509},{"generator":"phantomas v0.10.1","url":"http://gruntjs.com/","metrics":{"requests":21,"gzipRequests":0,"postRequests":0,"httpsRequests":0,"redirects":0,"notFound":0,"timeToFirstByte":1244,"timeToLastByte":1377,"bodySize":53761,"contentLength":240268,"ajaxRequests":0,"htmlCount":1,"htmlSize":1151,"cssCount":1,"cssSize":1152,"jsCount":1,"jsSize":3777,"jsonCount":0,"jsonSize":0,"imageCount":18,"imageSize":47681,"webfontCount":0,"webfontSize":0,"base64Count":0,"base64Size":0,"otherCount":0,"otherSize":0,"cacheHits":0,"cacheMisses":0,"cachingNotSpecified":0,"cachingTooShort":0,"cachingDisabled":20,"domains":1,"maxRequestsPerDomain":21,"medianRequestsPerDomain":21,"DOMqueries":2,"DOMqueriesById":0,"DOMqueriesByClassName":0,"DOMqueriesByTagName":2,"DOMqueriesByQuerySelectorAll":0,"DOMinserts":2,"DOMqueriesDuplicated":1,"eventsBound":0,"headersCount":251,"headersSentCount":62,"headersRecvCount":189,"headersSize":7744,"headersSentSize":2187,"headersRecvSize":5557,"documentWriteCalls":1,"evalCalls":0,"jQueryVersion":"","jQueryOnDOMReadyFunctions":0,"jQuerySizzleCalls":0,"jsErrors":1,"assetsNotGzipped":3,"assetsWithQueryString":0,"smallImages":9,"multipleRequests":0,"timeToFirstCss":2698,"timeToFirstJs":2061,"timeToFirstImage":3301,"onDOMReadyTime":1997,"onDOMReadyTimeEnd":1998,"windowOnLoadTime":3189,"windowOnLoadTimeEnd":3195,"httpTrafficCompleted":4299,"windowAlerts":0,"windowConfirms":0,"windowPrompts":0,"consoleMessages":0,"cookiesSent":0,"cookiesRecv":0,"domainsWithCookies":0,"documentCookiesLength":0,"documentCookiesCount":1,"bodyHTMLSize":9654,"iframesCount":0,"imagesWithoutDimensions":16,"commentsSize":53,"hiddenContentSize":61,"whiteSpacesSize":4,"DOMelementsCount":192,"DOMelementMaxDepth":10,"nodesWithInlineCSS":0,"globalVariables":8,"localStorageEntries":0,"smallestResponse":1151,"biggestResponse":5792,"fastestResponse":589,"slowestResponse":1535,"smallestLatency":588,"biggestLatency":1472,"medianResponse":1089,"medianLatency":1066},"offenders":{"domains":["gruntjs.com: 21 request(s)"],"DOMqueries":["tag name \"script\": 2 queries"],"globalVariables":["Modernizr, _gaq, ados, d, html5, p, s, z"]},"asserts":false,"notices":["First js received in 2061 ms: <http://gruntjs.com/js/vendor/lib/modernizr.min.js>","First css received in 2698 ms: <http://gruntjs.com/css/main.css>","First image received in 3301 ms: <http://gruntjs.com/img/logo-coffeescript.jpg>","Blocked requests: 4 (from fonts.googleapis.com, static.adzerk.net, www.google-analytics.com, c.jslogger.com)","JS errors (1):"," ReferenceError: Can't find variable: JSLogger","  unknown fn: undefined @ 28","","The smallest response (1.12 kB): <http://gruntjs.com/>","The biggest response (5.66 kB): <http://gruntjs.com/img/logo-less.jpg>","","The fastest response (589 ms): <http://gruntjs.com/img/logo-requirejs.jpg>","The slowest response (1535 ms): <http://gruntjs.com/fonts/icomoon.svg>","","The smallest latency (588 ms): <http://gruntjs.com/img/logo-requirejs.jpg>","The biggest latency (1472 ms): <http://gruntjs.com/img/logo-bitovi.jpg>","","Time spent on backend / frontend: 28% / 72%"],"timestamp":1387223478740},{"generator":"phantomas v0.10.1","url":"http://gruntjs.com/","metrics":{"requests":21,"gzipRequests":0,"postRequests":0,"httpsRequests":0,"redirects":0,"notFound":0,"timeToFirstByte":477,"timeToLastByte":619,"bodySize":66054,"contentLength":240268,"ajaxRequests":0,"htmlCount":1,"htmlSize":1151,"cssCount":1,"cssSize":8414,"jsCount":1,"jsSize":1155,"jsonCount":0,"jsonSize":0,"imageCount":18,"imageSize":55334,"webfontCount":0,"webfontSize":0,"base64Count":0,"base64Size":0,"otherCount":0,"otherSize":0,"cacheHits":0,"cacheMisses":0,"cachingNotSpecified":0,"cachingTooShort":0,"cachingDisabled":20,"domains":1,"maxRequestsPerDomain":21,"medianRequestsPerDomain":21,"DOMqueries":2,"DOMqueriesById":0,"DOMqueriesByClassName":0,"DOMqueriesByTagName":2,"DOMqueriesByQuerySelectorAll":0,"DOMinserts":2,"DOMqueriesDuplicated":1,"eventsBound":0,"headersCount":251,"headersSentCount":62,"headersRecvCount":189,"headersSize":7744,"headersSentSize":2187,"headersRecvSize":5557,"documentWriteCalls":1,"evalCalls":0,"jQueryVersion":"","jQueryOnDOMReadyFunctions":0,"jQuerySizzleCalls":0,"jsErrors":1,"assetsNotGzipped":3,"assetsWithQueryString":0,"smallImages":8,"multipleRequests":0,"timeToFirstCss":2070,"timeToFirstJs":1453,"timeToFirstImage":2396,"onDOMReadyTime":1863,"onDOMReadyTimeEnd":1864,"windowOnLoadTime":3574,"windowOnLoadTimeEnd":3576,"httpTrafficCompleted":3898,"windowAlerts":0,"windowConfirms":0,"windowPrompts":0,"consoleMessages":0,"cookiesSent":0,"cookiesRecv":0,"domainsWithCookies":0,"documentCookiesLength":0,"documentCookiesCount":1,"bodyHTMLSize":9654,"iframesCount":0,"imagesWithoutDimensions":16,"commentsSize":53,"hiddenContentSize":61,"whiteSpacesSize":4,"DOMelementsCount":192,"DOMelementMaxDepth":10,"nodesWithInlineCSS":0,"globalVariables":8,"localStorageEntries":0,"smallestResponse":1151,"biggestResponse":8629,"fastestResponse":309,"slowestResponse":2029,"smallestLatency":309,"biggestLatency":2029,"medianResponse":1038,"medianLatency":1002},"offenders":{"domains":["gruntjs.com: 21 request(s)"],"DOMqueries":["tag name \"script\": 2 queries"],"globalVariables":["Modernizr, _gaq, ados, d, html5, p, s, z"]},"asserts":false,"notices":["First js received in 1453 ms: <http://gruntjs.com/js/vendor/lib/modernizr.min.js>","First css received in 2070 ms: <http://gruntjs.com/css/main.css>","First image received in 2396 ms: <http://gruntjs.com/img/logo-handlebars.jpg>","Blocked requests: 4 (from fonts.googleapis.com, static.adzerk.net, www.google-analytics.com, c.jslogger.com)","JS errors (1):"," ReferenceError: Can't find variable: JSLogger","  unknown fn: undefined @ 28","","The smallest response (1.12 kB): <http://gruntjs.com/>","The biggest response (8.43 kB): <http://gruntjs.com/img/logo-handlebars.jpg>","","The fastest response (309 ms): <http://gruntjs.com/img/logo-handlebars.jpg>","The slowest response (2029 ms): <http://gruntjs.com/img/logo-bitovi.jpg>","","The smallest latency (309 ms): <http://gruntjs.com/img/logo-handlebars.jpg>","The biggest latency (2029 ms): <http://gruntjs.com/img/logo-bitovi.jpg>","","Time spent on backend / frontend: 12% / 88%"],"timestamp":1387223521056},{"generator":"phantomas v0.10.1","url":"http://gruntjs.com/","metrics":{"requests":21,"gzipRequests":0,"postRequests":0,"httpsRequests":0,"redirects":0,"notFound":0,"timeToFirstByte":817,"timeToLastByte":824,"bodySize":39485,"contentLength":240268,"ajaxRequests":0,"htmlCount":1,"htmlSize":1151,"cssCount":1,"cssSize":1152,"jsCount":1,"jsSize":3777,"jsonCount":0,"jsonSize":0,"imageCount":18,"imageSize":33405,"webfontCount":0,"webfontSize":0,"base64Count":0,"base64Size":0,"otherCount":0,"otherSize":0,"cacheHits":0,"cacheMisses":0,"cachingNotSpecified":0,"cachingTooShort":0,"cachingDisabled":20,"domains":1,"maxRequestsPerDomain":21,"medianRequestsPerDomain":21,"DOMqueries":2,"DOMqueriesById":0,"DOMqueriesByClassName":0,"DOMqueriesByTagName":2,"DOMqueriesByQuerySelectorAll":0,"DOMinserts":2,"DOMqueriesDuplicated":1,"eventsBound":0,"headersCount":251,"headersSentCount":62,"headersRecvCount":189,"headersSize":7744,"headersSentSize":2187,"headersRecvSize":5557,"documentWriteCalls":1,"evalCalls":0,"jQueryVersion":"","jQueryOnDOMReadyFunctions":0,"jQuerySizzleCalls":0,"jsErrors":1,"assetsNotGzipped":3,"assetsWithQueryString":0,"smallImages":15,"multipleRequests":0,"timeToFirstCss":2472,"timeToFirstJs":1635,"timeToFirstImage":2931,"onDOMReadyTime":1997,"onDOMReadyTimeEnd":1999,"windowOnLoadTime":3762,"windowOnLoadTimeEnd":3763,"httpTrafficCompleted":4475,"windowAlerts":0,"windowConfirms":0,"windowPrompts":0,"consoleMessages":0,"cookiesSent":0,"cookiesRecv":0,"domainsWithCookies":0,"documentCookiesLength":0,"documentCookiesCount":1,"bodyHTMLSize":9654,"iframesCount":0,"imagesWithoutDimensions":16,"commentsSize":53,"hiddenContentSize":61,"whiteSpacesSize":4,"DOMelementsCount":192,"DOMelementMaxDepth":10,"nodesWithInlineCSS":0,"globalVariables":8,"localStorageEntries":0,"smallestResponse":1151,"biggestResponse":8629,"fastestResponse":441,"slowestResponse":2089,"smallestLatency":440,"biggestLatency":2087,"medianResponse":1241,"medianLatency":1158},"offenders":{"domains":["gruntjs.com: 21 request(s)"],"DOMqueries":["tag name \"script\": 2 queries"],"globalVariables":["Modernizr, _gaq, ados, d, html5, p, s, z"]},"asserts":false,"notices":["First js received in 1635 ms: <http://gruntjs.com/js/vendor/lib/modernizr.min.js>","First css received in 2472 ms: <http://gruntjs.com/css/main.css>","First image received in 2931 ms: <http://gruntjs.com/img/logo-jade.jpg>","Blocked requests: 4 (from fonts.googleapis.com, static.adzerk.net, www.google-analytics.com, c.jslogger.com)","JS errors (1):"," ReferenceError: Can't find variable: JSLogger","  unknown fn: undefined @ 28","","The smallest response (1.12 kB): <http://gruntjs.com/>","The biggest response (8.43 kB): <http://gruntjs.com/img/logo-handlebars.jpg>","","The fastest response (441 ms): <http://gruntjs.com/img/logo-jade.jpg>","The slowest response (2089 ms): <http://gruntjs.com/img/logo-modernizr.jpg>","","The smallest latency (440 ms): <http://gruntjs.com/img/logo-jade.jpg>","The biggest latency (2087 ms): <http://gruntjs.com/img/logo-modernizr.jpg>","","Time spent on backend / frontend: 18% / 82%"],"timestamp":1387223532759},{"generator":"phantomas v0.10.1","url":"http://gruntjs.com/","metrics":{"requests":21,"gzipRequests":0,"postRequests":0,"httpsRequests":0,"redirects":0,"notFound":0,"timeToFirstByte":1629,"timeToLastByte":1638,"bodySize":59556,"contentLength":240268,"ajaxRequests":0,"htmlCount":1,"htmlSize":6965,"cssCount":1,"cssSize":5518,"jsCount":1,"jsSize":3777,"jsonCount":0,"jsonSize":0,"imageCount":18,"imageSize":43296,"webfontCount":0,"webfontSize":0,"base64Count":0,"base64Size":0,"otherCount":0,"otherSize":0,"cacheHits":0,"cacheMisses":0,"cachingNotSpecified":0,"cachingTooShort":0,"cachingDisabled":20,"domains":1,"maxRequestsPerDomain":21,"medianRequestsPerDomain":21,"DOMqueries":2,"DOMqueriesById":0,"DOMqueriesByClassName":0,"DOMqueriesByTagName":2,"DOMqueriesByQuerySelectorAll":0,"DOMinserts":2,"DOMqueriesDuplicated":1,"eventsBound":0,"headersCount":251,"headersSentCount":62,"headersRecvCount":189,"headersSize":7744,"headersSentSize":2187,"headersRecvSize":5557,"documentWriteCalls":1,"evalCalls":0,"jQueryVersion":"","jQueryOnDOMReadyFunctions":0,"jQuerySizzleCalls":0,"jsErrors":1,"assetsNotGzipped":3,"assetsWithQueryString":0,"smallImages":11,"multipleRequests":0,"timeToFirstCss":2852,"timeToFirstJs":2028,"timeToFirstImage":3463,"onDOMReadyTime":1308,"onDOMReadyTimeEnd":1310,"windowOnLoadTime":3223,"windowOnLoadTimeEnd":3224,"httpTrafficCompleted":4839,"windowAlerts":0,"windowConfirms":0,"windowPrompts":0,"consoleMessages":0,"cookiesSent":0,"cookiesRecv":0,"domainsWithCookies":0,"documentCookiesLength":0,"documentCookiesCount":1,"bodyHTMLSize":9654,"iframesCount":0,"imagesWithoutDimensions":16,"commentsSize":53,"hiddenContentSize":61,"whiteSpacesSize":4,"DOMelementsCount":192,"DOMelementMaxDepth":10,"nodesWithInlineCSS":0,"globalVariables":8,"localStorageEntries":0,"smallestResponse":1162,"biggestResponse":6965,"fastestResponse":396,"slowestResponse":1984,"smallestLatency":395,"biggestLatency":1983,"medianResponse":1221,"medianLatency":1001},"offenders":{"domains":["gruntjs.com: 21 request(s)"],"DOMqueries":["tag name \"script\": 2 queries"],"globalVariables":["Modernizr, _gaq, ados, d, html5, p, s, z"]},"asserts":false,"notices":["First js received in 2028 ms: <http://gruntjs.com/js/vendor/lib/modernizr.min.js>","First css received in 2852 ms: <http://gruntjs.com/css/main.css>","First image received in 3463 ms: <http://gruntjs.com/img/logo-less.jpg>","Blocked requests: 4 (from fonts.googleapis.com, static.adzerk.net, www.google-analytics.com, c.jslogger.com)","JS errors (1):"," ReferenceError: Can't find variable: JSLogger","  unknown fn: undefined @ 28","","The smallest response (1.13 kB): <http://gruntjs.com/img/grunt-logo.svg>","The biggest response (6.80 kB): <http://gruntjs.com/>","","The fastest response (396 ms): <http://gruntjs.com/js/vendor/lib/modernizr.min.js>","The slowest response (1984 ms): <http://gruntjs.com/img/logo-bitovi.jpg>","","The smallest latency (395 ms): <http://gruntjs.com/js/vendor/lib/modernizr.min.js>","The biggest latency (1983 ms): <http://gruntjs.com/img/logo-bitovi.jpg>","","Time spent on backend / frontend: 34% / 66%"],"timestamp":1387223543816},{"generator":"phantomas v0.10.1","url":"http://gruntjs.com/","metrics":{"requests":21,"gzipRequests":0,"postRequests":0,"httpsRequests":0,"redirects":0,"notFound":0,"timeToFirstByte":530,"timeToLastByte":538,"bodySize":72101,"contentLength":240268,"ajaxRequests":0,"htmlCount":1,"htmlSize":2599,"cssCount":1,"cssSize":1152,"jsCount":1,"jsSize":1155,"jsonCount":0,"jsonSize":0,"imageCount":18,"imageSize":67195,"webfontCount":0,"webfontSize":0,"base64Count":0,"base64Size":0,"otherCount":0,"otherSize":0,"cacheHits":0,"cacheMisses":0,"cachingNotSpecified":0,"cachingTooShort":0,"cachingDisabled":20,"domains":1,"maxRequestsPerDomain":21,"medianRequestsPerDomain":21,"DOMqueries":2,"DOMqueriesById":0,"DOMqueriesByClassName":0,"DOMqueriesByTagName":2,"DOMqueriesByQuerySelectorAll":0,"DOMinserts":2,"DOMqueriesDuplicated":1,"eventsBound":0,"headersCount":251,"headersSentCount":62,"headersRecvCount":189,"headersSize":7744,"headersSentSize":2187,"headersRecvSize":5557,"documentWriteCalls":1,"evalCalls":0,"jQueryVersion":"","jQueryOnDOMReadyFunctions":0,"jQuerySizzleCalls":0,"jsErrors":1,"assetsNotGzipped":3,"assetsWithQueryString":0,"smallImages":11,"multipleRequests":0,"timeToFirstCss":2043,"timeToFirstJs":1074,"timeToFirstImage":2328,"onDOMReadyTime":1812,"onDOMReadyTimeEnd":1813,"windowOnLoadTime":4157,"windowOnLoadTimeEnd":4159,"httpTrafficCompleted":4532,"windowAlerts":0,"windowConfirms":0,"windowPrompts":0,"consoleMessages":0,"cookiesSent":0,"cookiesRecv":0,"domainsWithCookies":0,"documentCookiesLength":0,"documentCookiesCount":1,"bodyHTMLSize":9654,"iframesCount":0,"imagesWithoutDimensions":16,"commentsSize":53,"hiddenContentSize":61,"whiteSpacesSize":4,"DOMelementsCount":192,"DOMelementMaxDepth":10,"nodesWithInlineCSS":0,"globalVariables":8,"localStorageEntries":0,"smallestResponse":1152,"biggestResponse":29652,"fastestResponse":272,"slowestResponse":2627,"smallestLatency":272,"biggestLatency":2626,"medianResponse":974,"medianLatency":906},"offenders":{"domains":["gruntjs.com: 21 request(s)"],"DOMqueries":["tag name \"script\": 2 queries"],"globalVariables":["Modernizr, _gaq, ados, d, html5, p, s, z"]},"asserts":false,"notices":["First js received in 1074 ms: <http://gruntjs.com/js/vendor/lib/modernizr.min.js>","First css received in 2043 ms: <http://gruntjs.com/css/main.css>","First image received in 2328 ms: <http://gruntjs.com/img/grunt-logo.svg>","Blocked requests: 4 (from fonts.googleapis.com, static.adzerk.net, www.google-analytics.com, c.jslogger.com)","JS errors (1):"," ReferenceError: Can't find variable: JSLogger","  unknown fn: undefined @ 28","","The smallest response (1.13 kB): <http://gruntjs.com/css/main.css>","The biggest response (28.96 kB): <http://gruntjs.com/img/grunt-logo.svg>","","The fastest response (272 ms): <http://gruntjs.com/img/grunt-logo.svg>","The slowest response (2627 ms): <http://gruntjs.com/img/logo-fg.jpg>","","The smallest latency (272 ms): <http://gruntjs.com/img/grunt-logo.svg>","The biggest latency (2626 ms): <http://gruntjs.com/img/logo-fg.jpg>","","Time spent on backend / frontend: 11% / 89%"],"timestamp":1387223553085},{"generator":"phantomas v0.10.1","url":"http://gruntjs.com/","metrics":{"requests":21,"gzipRequests":0,"postRequests":0,"httpsRequests":0,"redirects":0,"notFound":0,"timeToFirstByte":1684,"timeToLastByte":1692,"bodySize":58062,"contentLength":240268,"ajaxRequests":0,"htmlCount":1,"htmlSize":10132,"cssCount":1,"cssSize":2600,"jsCount":1,"jsSize":3777,"jsonCount":0,"jsonSize":0,"imageCount":18,"imageSize":41553,"webfontCount":0,"webfontSize":0,"base64Count":0,"base64Size":0,"otherCount":0,"otherSize":0,"cacheHits":0,"cacheMisses":0,"cachingNotSpecified":0,"cachingTooShort":0,"cachingDisabled":20,"domains":1,"maxRequestsPerDomain":21,"medianRequestsPerDomain":21,"DOMqueries":2,"DOMqueriesById":0,"DOMqueriesByClassName":0,"DOMqueriesByTagName":2,"DOMqueriesByQuerySelectorAll":0,"DOMinserts":2,"DOMqueriesDuplicated":1,"eventsBound":0,"headersCount":251,"headersSentCount":62,"headersRecvCount":189,"headersSize":7744,"headersSentSize":2187,"headersRecvSize":5557,"documentWriteCalls":1,"evalCalls":0,"jQueryVersion":"","jQueryOnDOMReadyFunctions":0,"jQuerySizzleCalls":0,"jsErrors":1,"assetsNotGzipped":3,"assetsWithQueryString":0,"smallImages":12,"multipleRequests":0,"timeToFirstCss":3433,"timeToFirstJs":2382,"timeToFirstImage":4061,"onDOMReadyTime":2199,"onDOMReadyTimeEnd":2200,"windowOnLoadTime":4080,"windowOnLoadTimeEnd":4084,"httpTrafficCompleted":5407,"windowAlerts":0,"windowConfirms":0,"windowPrompts":0,"consoleMessages":0,"cookiesSent":0,"cookiesRecv":0,"domainsWithCookies":0,"documentCookiesLength":0,"documentCookiesCount":1,"bodyHTMLSize":9654,"iframesCount":0,"imagesWithoutDimensions":16,"commentsSize":53,"hiddenContentSize":61,"whiteSpacesSize":4,"DOMelementsCount":192,"DOMelementMaxDepth":10,"nodesWithInlineCSS":0,"globalVariables":8,"localStorageEntries":0,"smallestResponse":1162,"biggestResponse":10132,"fastestResponse":612,"slowestResponse":2103,"smallestLatency":545,"biggestLatency":2003,"medianResponse":1282,"medianLatency":1259},"offenders":{"domains":["gruntjs.com: 21 request(s)"],"DOMqueries":["tag name \"script\": 2 queries"],"globalVariables":["Modernizr, _gaq, ados, d, html5, p, s, z"]},"asserts":false,"notices":["First js received in 2382 ms: <http://gruntjs.com/js/vendor/lib/modernizr.min.js>","First css received in 3433 ms: <http://gruntjs.com/css/main.css>","First image received in 4061 ms: <http://gruntjs.com/img/logo-less.jpg>","Blocked requests: 4 (from fonts.googleapis.com, static.adzerk.net, www.google-analytics.com, c.jslogger.com)","JS errors (1):"," ReferenceError: Can't find variable: JSLogger","  unknown fn: undefined @ 28","","The smallest response (1.13 kB): <http://gruntjs.com/img/grunt-logo.svg>","The biggest response (9.89 kB): <http://gruntjs.com/>","","The fastest response (612 ms): <http://gruntjs.com/img/logo-less.jpg>","The slowest response (2103 ms): <http://gruntjs.com/fonts/icomoon.svg>","","The smallest latency (545 ms): <http://gruntjs.com/img/grunt-logo.svg>","The biggest latency (2003 ms): <http://gruntjs.com/img/logo-saucelabs.jpg>","","Time spent on backend / frontend: 29% / 71%"],"timestamp":1387224203595},{"generator":"phantomas v0.10.1","url":"http://gruntjs.com/","metrics":{"requests":29,"gzipRequests":3,"postRequests":0,"httpsRequests":0,"redirects":0,"notFound":0,"timeToFirstByte":763,"timeToLastByte":772,"bodySize":84958,"contentLength":300525,"ajaxRequests":0,"htmlCount":1,"htmlSize":1448,"cssCount":2,"cssSize":1630,"jsCount":5,"jsSize":30610,"jsonCount":0,"jsonSize":0,"imageCount":21,"imageSize":51270,"webfontCount":0,"webfontSize":0,"base64Count":0,"base64Size":0,"otherCount":0,"otherSize":0,"cacheHits":3,"cacheMisses":0,"cachingNotSpecified":4,"cachingTooShort":2,"cachingDisabled":20,"domains":6,"maxRequestsPerDomain":21,"medianRequestsPerDomain":2,"DOMqueries":7,"DOMqueriesById":4,"DOMqueriesByClassName":0,"DOMqueriesByTagName":3,"DOMqueriesByQuerySelectorAll":0,"DOMinserts":4,"DOMqueriesDuplicated":2,"eventsBound":0,"headersCount":379,"headersSentCount":86,"headersRecvCount":293,"headersSize":12315,"headersSentSize":3018,"headersRecvSize":9297,"documentWriteCalls":1,"evalCalls":0,"jQueryVersion":"","jQueryOnDOMReadyFunctions":0,"jQuerySizzleCalls":0,"jsErrors":0,"assetsNotGzipped":5,"assetsWithQueryString":4,"smallImages":14,"multipleRequests":0,"timeToFirstCss":1318,"timeToFirstJs":1166,"timeToFirstImage":2188,"onDOMReadyTime":1589,"onDOMReadyTimeEnd":1590,"windowOnLoadTime":2674,"windowOnLoadTimeEnd":2676,"httpTrafficCompleted":3196,"windowAlerts":0,"windowConfirms":0,"windowPrompts":0,"consoleMessages":0,"cookiesSent":0,"cookiesRecv":354,"domainsWithCookies":1,"documentCookiesLength":193,"documentCookiesCount":4,"bodyHTMLSize":10809,"iframesCount":0,"imagesWithoutDimensions":16,"commentsSize":53,"hiddenContentSize":61,"whiteSpacesSize":4,"DOMelementsCount":197,"DOMelementMaxDepth":10,"nodesWithInlineCSS":0,"globalVariables":57,"localStorageEntries":0,"smallestResponse":35,"biggestResponse":21463,"fastestResponse":40,"slowestResponse":1601,"smallestLatency":39,"biggestLatency":1600,"medianResponse":772,"medianLatency":655},"offenders":{"domains":["gruntjs.com: 21 request(s)","static.adzerk.net: 2 request(s)","engine.adzerk.net: 2 request(s)","www.google-analytics.com: 2 request(s)","fonts.googleapis.com: 1 request(s)","c.jslogger.com: 1 request(s)"],"DOMqueries":["id \"#azk48893\": 4 queries","tag name \"script\": 3 queries"],"globalVariables":["JSLogger, Modernizr, _gaq, _gat, ados, adosResults, adosRun, ados_addInlinePlacement, ados_addPlacement, ados_addPlacementObject, ados_add_placement, ados_async_load, ados_execPassback, ados_findPassback, ados_frameLoaded, ados_load, ados_loadDiv, ados_loadFIframe, ados_loadInline, ados_loadPassback, ados_loadResults, ados_log, ados_passback, ados_passbackFilled, ados_passbackWritePixel, ados_passback_next, ados_passback_receiveMessage, ados_refresh, ados_setDomain, ados_setKeywordCookie, ados_setKeywords, ados_setNoTrack, ados_setWriteResults, ados_timeoutExpired, ados_writePixel, azHtmlLoad, azInitExtension, azLoad, azRegisterExtension, azScriptExtensionLoad, azScriptInlineLoad, azScriptSRCLoad, azk48893_html_98712, azk48893_html_command_99083, azk48893_pixel_15527, azk48893_pixel_command_48405, cssLinkLoad, cssLoad, d, gaGlobal, html5, jslogger, p, s, z, zItems, zshow"]},"asserts":false,"notices":["First js received in 1166 ms: <http://gruntjs.com/js/vendor/lib/modernizr.min.js>","First css received in 1318 ms: <http://fonts.googleapis.com/css?family=Lato:400,700>","First image received in 2188 ms: <http://gruntjs.com/img/logo-coffeescript.jpg>","The smallest response (0.03 kB): <http://www.google-analytics.com/__utm.gif?utmwv=5.4.6&utms=1&utmn=218188213&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=1920x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=289659782&utmr=-&utmp=%2F&utmht=1387224690314&utmac=UA-34623937-1&utmcc=__utma%3D221136078.2095998486.1387224690.1387224690.1387224690.1%3B%2B__utmz%3D221136078.1387224690.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~>","The biggest response (20.96 kB): <http://static.adzerk.net/ados.js>","","The fastest response (40 ms): <http://www.google-analytics.com/__utm.gif?utmwv=5.4.6&utms=1&utmn=218188213&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=1920x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=289659782&utmr=-&utmp=%2F&utmht=1387224690314&utmac=UA-34623937-1&utmcc=__utma%3D221136078.2095998486.1387224690.1387224690.1387224690.1%3B%2B__utmz%3D221136078.1387224690.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~>","The slowest response (1601 ms): <http://gruntjs.com/img/logo-bitovi.jpg>","","The smallest latency (39 ms): <http://www.google-analytics.com/__utm.gif?utmwv=5.4.6&utms=1&utmn=218188213&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=1920x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=289659782&utmr=-&utmp=%2F&utmht=1387224690314&utmac=UA-34623937-1&utmcc=__utma%3D221136078.2095998486.1387224690.1387224690.1387224690.1%3B%2B__utmz%3D221136078.1387224690.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~>","The biggest latency (1600 ms): <http://gruntjs.com/img/logo-bitovi.jpg>","","Time spent on backend / frontend: 22% / 78%"],"timestamp":1387224692093},{"generator":"phantomas v0.10.1","url":"http://gruntjs.com/","metrics":{"requests":29,"gzipRequests":3,"postRequests":0,"httpsRequests":0,"redirects":0,"notFound":0,"timeToFirstByte":735,"timeToLastByte":743,"bodySize":147578,"contentLength":279124,"ajaxRequests":0,"htmlCount":1,"htmlSize":4047,"cssCount":2,"cssSize":5996,"jsCount":5,"jsSize":32072,"jsonCount":0,"jsonSize":0,"imageCount":21,"imageSize":105463,"webfontCount":0,"webfontSize":0,"base64Count":0,"base64Size":0,"otherCount":0,"otherSize":0,"cacheHits":3,"cacheMisses":0,"cachingNotSpecified":4,"cachingTooShort":2,"cachingDisabled":20,"domains":6,"maxRequestsPerDomain":21,"medianRequestsPerDomain":2,"DOMqueries":7,"DOMqueriesById":4,"DOMqueriesByClassName":0,"DOMqueriesByTagName":3,"DOMqueriesByQuerySelectorAll":0,"DOMinserts":4,"DOMqueriesDuplicated":2,"eventsBound":0,"headersCount":368,"headersSentCount":86,"headersRecvCount":282,"headersSize":12454,"headersSentSize":3018,"headersRecvSize":9436,"documentWriteCalls":1,"evalCalls":0,"jQueryVersion":"","jQueryOnDOMReadyFunctions":0,"jQuerySizzleCalls":0,"jsErrors":0,"assetsNotGzipped":5,"assetsWithQueryString":4,"smallImages":7,"multipleRequests":0,"timeToFirstCss":878,"timeToFirstJs":1173,"timeToFirstImage":2124,"onDOMReadyTime":1574,"onDOMReadyTimeEnd":1575,"windowOnLoadTime":3985,"windowOnLoadTimeEnd":3986,"httpTrafficCompleted":4565,"windowAlerts":0,"windowConfirms":0,"windowPrompts":0,"consoleMessages":0,"cookiesSent":0,"cookiesRecv":755,"domainsWithCookies":1,"documentCookiesLength":193,"documentCookiesCount":4,"bodyHTMLSize":10811,"iframesCount":0,"imagesWithoutDimensions":16,"commentsSize":53,"hiddenContentSize":61,"whiteSpacesSize":4,"DOMelementsCount":198,"DOMelementMaxDepth":10,"nodesWithInlineCSS":0,"globalVariables":57,"localStorageEntries":0,"smallestResponse":35,"biggestResponse":29652,"fastestResponse":25,"slowestResponse":1943,"smallestLatency":24,"biggestLatency":1942,"medianResponse":434,"medianLatency":368},"offenders":{"domains":["gruntjs.com: 21 request(s)","static.adzerk.net: 2 request(s)","www.google-analytics.com: 2 request(s)","engine.adzerk.net: 2 request(s)","fonts.googleapis.com: 1 request(s)","c.jslogger.com: 1 request(s)"],"DOMqueries":["id \"#azk48893\": 4 queries","tag name \"script\": 3 queries"],"globalVariables":["JSLogger, Modernizr, _gaq, _gat, ados, adosResults, adosRun, ados_addInlinePlacement, ados_addPlacement, ados_addPlacementObject, ados_add_placement, ados_async_load, ados_execPassback, ados_findPassback, ados_frameLoaded, ados_load, ados_loadDiv, ados_loadFIframe, ados_loadInline, ados_loadPassback, ados_loadResults, ados_log, ados_passback, ados_passbackFilled, ados_passbackWritePixel, ados_passback_next, ados_passback_receiveMessage, ados_refresh, ados_setDomain, ados_setKeywordCookie, ados_setKeywords, ados_setNoTrack, ados_setWriteResults, ados_timeoutExpired, ados_writePixel, azHtmlLoad, azInitExtension, azLoad, azRegisterExtension, azScriptExtensionLoad, azScriptInlineLoad, azScriptSRCLoad, azk48893_html_15266, azk48893_html_command_48032, azk48893_pixel_24903, azk48893_pixel_command_10729, cssLinkLoad, cssLoad, d, gaGlobal, html5, jslogger, p, s, z, zItems, zshow"]},"asserts":false,"notices":["First css received in 878 ms: <http://fonts.googleapis.com/css?family=Lato:400,700>","First js received in 1173 ms: <http://gruntjs.com/js/vendor/lib/modernizr.min.js>","First image received in 2124 ms: <http://gruntjs.com/img/grunt-logo.svg>","The smallest response (0.03 kB): <http://www.google-analytics.com/__utm.gif?utmwv=5.4.6&utms=1&utmn=1897510605&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=1920x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=938583253&utmr=-&utmp=%2F&utmht=1387225635993&utmac=UA-34623937-1&utmcc=__utma%3D221136078.1220097155.1387225636.1387225636.1387225636.1%3B%2B__utmz%3D221136078.1387225636.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~>","The biggest response (28.96 kB): <http://gruntjs.com/img/grunt-logo.svg>","","The fastest response (25 ms): <http://www.google-analytics.com/__utm.gif?utmwv=5.4.6&utms=1&utmn=1897510605&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=1920x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=938583253&utmr=-&utmp=%2F&utmht=1387225635993&utmac=UA-34623937-1&utmcc=__utma%3D221136078.1220097155.1387225636.1387225636.1387225636.1%3B%2B__utmz%3D221136078.1387225636.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~>","The slowest response (1943 ms): <http://static.adzerk.net/Advertisers/da1fd68679ed4117923b2beb3642c1b6.jpg>","","The smallest latency (24 ms): <http://www.google-analytics.com/__utm.gif?utmwv=5.4.6&utms=1&utmn=1897510605&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=1920x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=938583253&utmr=-&utmp=%2F&utmht=1387225635993&utmac=UA-34623937-1&utmcc=__utma%3D221136078.1220097155.1387225636.1387225636.1387225636.1%3B%2B__utmz%3D221136078.1387225636.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~>","The biggest latency (1942 ms): <http://static.adzerk.net/Advertisers/da1fd68679ed4117923b2beb3642c1b6.jpg>","","Time spent on backend / frontend: 16% / 84%"],"timestamp":1387225639491}]</script>
+<script src="public/scripts/d3.min.js"></script>
+<script src="public/scripts/phantomas.min.js"></script>
+</body>
+</html>
