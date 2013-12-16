@@ -14,7 +14,11 @@ module.exports = function( grunt ) {
     'Get metrics of your site and compare them.',
     function() {
       var done      = this.async();
-      var options   = this.options( {} );
+      var options   = this.options( {
+        indexPath : './phantomas/',
+        raw       : [],
+        url       : 'http://gruntjs.com/'
+      } );
       var Phantomas = require(
                         './lib/phantomas'
                       );
