@@ -7,6 +7,8 @@
  */
 
 .p--table {
+  width: 100%;
+
   color: $t-colorBody;
   font-size: $t-baseFontSize;
 
@@ -19,6 +21,12 @@
   width: $t-columnWidth;
   text-align: center;
 
+}
+
+.p--table--column__highlight {
+  @extend .p--table--column;
+
+  color: $t-colorDate;
 }
 
 .p--table--head {

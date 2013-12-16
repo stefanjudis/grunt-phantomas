@@ -42,7 +42,7 @@
       <tbody class="p--table--body">
         <% _.each( results, function( result ) { %>
           <tr class="p--table--row">
-            <td class="p--table--column"><%= ( new Date( result.timestamp ) ).toISOString() %></td>
+            <td class="p--table--column__highlight"><%= ( new Date( result.timestamp ) ).toISOString() %></td>
             <% _.each( metrics, function( metric ) { %>
               <td class="p--table--column"><%= result.metrics[ metric ] %></td>
             <% } ); %>

@@ -37,8 +37,7 @@ $f-headlineColor : $c-purple;
 /**
  * Dimensions stuff ( widths / height )
  */
-$d-baseWidth : 960px;
-
+$d-baseWidth    : 100%;
 
 
 /**
@@ -47,7 +46,8 @@ $d-baseWidth : 960px;
 
 $t-colorBody      : $c-white;
 $t-colorBorder    : $c-grayDarker;
-$t-colorHead      : $c-grayLight;
+$t-colorDate      : $c-green;
+$t-colorHead      : $c-green;
 $t-colorHighlight : $c-grayDark;
 
 $t-baseFontWeight : $f-baseWeight;
@@ -55,3 +55,10 @@ $t-baseFontSize   : 0.8 * $f-baseSize;
 
 $t-numberOfColumns : 8;
 $t-columnWidth     : 100% / $t-numberOfColumns;
+
+
+/**
+ * Breakpoints
+ */
+$b-medium: 700px;
+$b-big : 1000px;
