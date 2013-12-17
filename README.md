@@ -118,7 +118,7 @@ grunt.initConfig( {
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-Please check release history at [Github](https://github.com/stefanjudis/grunt-photobox/releases). :)
+Please check release history at [Github](https://github.com/stefanjudis/grunt-phantomas/releases). :)
 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/stefanjudis/grunt-phantomas/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
