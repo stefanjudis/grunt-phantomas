@@ -15,9 +15,10 @@ module.exports = function( grunt ) {
     function() {
       var done      = this.async();
       var options   = this.options( {
-        indexPath : './phantomas/',
-        raw       : [],
-        url       : 'http://gruntjs.com/'
+        indexPath    : './phantomas/',
+        numberOfRuns : 5,
+        raw          : [],
+        url          : 'http://gruntjs.com/'
       } );
       var Phantomas = require(
                         './lib/phantomas'

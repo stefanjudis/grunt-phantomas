@@ -32,13 +32,19 @@ $f-baseFamily    : sans-serif;
 $f-baseSize      : 14px;
 $f-baseWeight    : 100;
 $f-letterSpacing : 1px;
-$f-headlineColor : $c-purple;
+$f-headlineColor : $c-green;
+
 
 /**
  * Dimensions stuff ( widths / height )
  */
 $d-baseWidth    : 100%;
 
+
+/**
+ * Z-index
+ */
+$z-header: 5;
 
 /**
  * Table config stuff
@@ -65,6 +71,13 @@ $b-big : 1000px;
 
 
 /**
+ * Header style
+ */
+$header-bg-color       : $c-grayDarker;
+$header-headline-color : $c-green;
+
+/**
  * Stuff that fits nowhere else
  */
 $baseBorderRadius : 3px;
+

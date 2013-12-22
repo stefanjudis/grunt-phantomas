@@ -6,7 +6,10 @@
  * Licensed under the MIT license.
  */
 
+@import "compass/css3";
 @import "variables";
 @import "components/base";
+@import "components/header";
+@import "components/footer";
 @import "components/graphs";
 @import "components/table";

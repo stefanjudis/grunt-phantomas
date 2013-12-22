@@ -53,6 +53,12 @@ Default value: `./phantomas/`
 
 A string value that represents the relative path to the place where `phantomas` will render your metrics. Inside of this folder an `index.html`, a data folder and an assets folder will be created.
 
+#### options.numberOfRuns
+Type: 'Number'
+Default value: `5`
+
+A numeric value that represents the number of times the `phantomas` executable will be started. The more times it runs the more reliable metrics become.
+
 #### options.raw
 Type: `Array`
 Default value: `[]`
@@ -86,9 +92,10 @@ grunt.initConfig( {
   phantomas: {    	
     yourSite : {
       options : {
-        indexPath : './yoursite/',
-        raw       : [],
-        url       : 'http://yoursite.com/'
+        indexPath    : './yoursite/',
+        raw          : [],
+        url          : 'http://yoursite.com/',
+        numberOfRuns : 10
       }
     }
   }

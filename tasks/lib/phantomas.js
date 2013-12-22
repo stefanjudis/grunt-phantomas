@@ -21,8 +21,11 @@ var ASSETS_PATH = path.resolve(
  * Path to the Phantomas executable
  * @type {String}
  */
+var PHANTOMAS_EXEC =  process.platform === 'win32' ?
+                        '../../node_modules/.bin/phantomas.cmd' :
+                        '../../node_modules/.bin/phantomas';
 var PHANTOMAS_PATH = path.resolve(
-                        __dirname, '../../node_modules/.bin/phantomas'
+                        __dirname, PHANTOMAS_EXEC
                       );
 
 /**
@@ -50,6 +53,7 @@ var Phantomas = function( grunt, options, done ) {
   this.options  = options;
   this.done     = done;
   this.dataPath = path.normalize( this.options.indexPath + 'data/' );
+  this.util     = Promise.promisifyAll( this.grunt.util );
 };
 
 
@@ -148,7 +152,7 @@ Phantomas.prototype.createDataJson = function( result ) {
   return new Promise( function( resolve ) {
     fs.writeFileAsync(
       this.dataPath + ( +new Date() ) + '.json',
-      result
+      JSON.stringify( result )
     )
       .then( resolve );
   }.bind( this ) );
@@ -192,6 +196,8 @@ Phantomas.prototype.createDataDirectory = function() {
  * TODO -> put it together with 'createDataDirectory'
  *
  * @return {Promise} Promise
+ *
+ * @tested
  */
 Phantomas.prototype.createIndexDirectory = function() {
   return new Promise( function( resolve ) {
@@ -218,7 +224,7 @@ Phantomas.prototype.createIndexDirectory = function() {
  * @param  {Array}   files content of all metric files
  * @return {Promise}       Promise
  */
-Phantomas.prototype.createIndexHtml = function( files ) {
+Phantomas.prototype.createIndexHtml = function( results ) {
   return new Promise( function( resolve ) {
     this.grunt.log.subhead( 'PHANTOMAS index.html WRITING STARTED.' );
 
@@ -227,7 +233,8 @@ Phantomas.prototype.createIndexHtml = function( files ) {
       this.grunt.template.process(
         this.grunt.file.read( TEMPLATE_FILE ),
         { data : {
-          results : files
+          results : results,
+          url     : this.options.url
         } }
       )
     );
@@ -260,26 +267,147 @@ Phantomas.prototype.getPhantomasProcessArguments = function() {
 };
 
 
+
 /**
- * Handle the result of the given phantomas
- * process call and work with it
+ * Exectue phantomas a given number of times
+ * ( set in options )
  *
- * - write json to disk to keep track of progress
- * - create index html
- *
- * @param  {String} result result
+ * @return {Promise} Promise that gets resolved when all
+ *                           executions succeeded
  */
-Phantomas.prototype.handleData = function( result ) {
-  // check if data directory already exists
-  // if not create it
+Phantomas.prototype.executePhantomas = function() {
+  var runs = [];
+
+  return new Promise( function( resolve, reject ) {
+    this.grunt.log.verbose.writeln(
+      'Executing phantoms ( ' + this.options.numberOfRuns + ' times ) with following parameters:\n' +
+      this.getPhantomasProcessArguments().join( ' ' )
+    );
+
+    for ( var i = 0; i < this.options.numberOfRuns; ++i ) {
+      runs.push(
+        this.util.spawnAsync( {
+          cmd  : PHANTOMAS_PATH,
+          args : this.getPhantomasProcessArguments()
+        } ).then ( function( result ) {
+          this.grunt.log.ok( 'Phantomas executation successful.');
+
+          var result = JSON.parse( result[ 0 ].stdout );
+
+          return result.metrics;
+        }.bind( this ) )
+      );
+    }
+
+    Promise.all( runs )
+          .then( resolve )
+          .catch( function( e ) {
+            console.log( e );
+          } );
+  }.bind( this ) );
+};
+
+
+/**
+ * Format the results of phantomas execution
+ * and calculate statist data
+ *
+ * @param  {Array} metrics metrics
+ * @return {Object}        formated metrics
+ *
+ * @tested
+ */
+Phantomas.prototype.formResult = function( metrics ) {
+  return new Promise( function( resolve ) {
+    var entries = {},
+        entry,
+        metric;
+
+    // prepare entries
+    for( metric in metrics[ 0 ] ) {
+      if ( metric !== 'jQueryVersion' ) {
+        entries[metric] = {
+          values  : [],
+          sum     : 0,
+          min     : 0,
+          max     : 0,
+          median  : undefined,
+          average : undefined
+        };
+      }
+    }
+
+    // process all runs
+    metrics.forEach( function( data ) {
+      var metric;
+      for ( metric in data ) {
+        if ( metric !== 'jQueryVersion' ) {
+          entries[ metric ].values.push( data[ metric ] );
+        }
+      }
+    } );
+
+    // calculate stats
+    for ( metric in entries ) {
+            entry = entries[ metric ];
+
+      if ( typeof entry.values[ 0 ] === 'string' ) {
+              // don't sort metric with string value
+      } else {
+        entry.values = entry.values
+                        .filter( function( element ) {
+                          return element !== null;
+                        } )
+                        .sort( function ( a, b ) {
+                          return a - b;
+                        } );
+      }
+
+      if ( entry.values.length === 0 ) {
+        continue;
+      }
+
+      entry.min = entry.values.slice( 0, 1 ).pop();
+      entry.max = entry.values.slice( -1 ).pop();
+
+      if ( typeof entry.values[ 0 ] === 'string' ) {
+        continue;
+      }
+
+      for ( var i = 0, len = entry.values.length++; i<len; i++ ) {
+        entry.sum += entry.values[ i ];
+      }
+
+      entry.average = + ( len && ( entry.sum / len ).toFixed( 2 ) );
+      entry.median = + ( ( (len % 2 === 0) ?
+                      ( ( entry.values[ len >> 1 ] + entry.values[ len >> 1 + 1 ] ) / 2 ) :
+                      entry.values[ len >> 1 ] ).toFixed( 2 ) );
+    }
+
+    resolve( entries );
+  } );
+};
+
+/**
+ * General function to start the whole thingy
+ */
+Phantomas.prototype.kickOff = function() {
+  this.grunt.log.subhead( 'PHANTOMAS SYSTEM CALL STARTED' );
+
   this.createIndexDirectory().bind( this )
+      // create data directory to prevent
+      // fileIO errors
       .then( this.createDataDirectory )
+      // execute the phantomas process
+      // multiple runs according to
+      // configuration
+      .then( this.executePhantomas )
+      // format result and calculate
+      // max / min / median / average / ...
+      .then( this.formResult )
       // write new json file with metrics data
-      .then( function() {
-        this.createDataJson( result );
-      } )
-      // write a new index.html with all data json
-      // files injected
+      .then( this.createDataJson )
+      // read all created json metrics
       .then( this.readMetricsFiles )
       // write html file and produce
       // nice graphics
@@ -287,7 +415,7 @@ Phantomas.prototype.handleData = function( result ) {
       // copy all asset files over to
       // wished index path
       .then( this.copyAssets )
-      // yeah we're done
+      // yeah we're done :)
       .then( this.showSuccessMessage )
       // catch general bluebird error
       .catch( Promise.RejectionError, function ( e ) {
@@ -299,32 +427,6 @@ Phantomas.prototype.handleData = function( result ) {
         console.log( e );
       } )
       .done();
-};
-
-
-/**
- * General function to start the whole thingy
- */
-Phantomas.prototype.kickOff = function() {
-  this.grunt.log.subhead( 'PHANTOMAS SYSTEM CALL STARTED' );
-
-  this.grunt.log.verbose.writeln(
-    'Executing phantoms with following parameters:\n' +
-    this.getPhantomasProcessArguments().join( ' ' )
-  );
-
-  this.grunt.util.spawn( {
-    cmd  : PHANTOMAS_PATH,
-    args : this.getPhantomasProcessArguments()
-  }, function( error, result ) {
-    if ( error ) {
-      this.grunt.fatal( error );
-    }
-
-    this.grunt.log.ok( 'Phantomas executation successful.');
-
-    this.handleData( result );
-  }.bind( this ) );
 };
 
 

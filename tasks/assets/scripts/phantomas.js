@@ -72,7 +72,7 @@
    * @param {Array}  data      data
    * @param {String} metric    metric
    */
-  function drawLineChart( data, metric ) {
+  function drawLineChart( data, metric, type ) {
     // Helper functions on top of 8-)
     function drawCircle( datum, index ) {
       circleContainer.datum( datum )
@@ -88,13 +88,37 @@
                     .attr(
                       'cy',
                       function( d ) {
-                        return y( d.value );
+                        return y( d.value[ type ] );
                       }
                     )
                     .attr(
-                      'data-value',
+                      'data-average',
                       function( d ) {
-                        return d.value;
+                        return d.value.average;
+                      }
+                    )
+                    .attr(
+                      'data-max',
+                      function( d ) {
+                        return d.value.max;
+                      }
+                    )
+                    .attr(
+                      'data-median',
+                      function( d ) {
+                        return d.value.median;
+                      }
+                    )
+                    .attr(
+                      'data-min',
+                      function( d ) {
+                        return d.value.min;
+                      }
+                    )
+                    .attr(
+                      'data-sum',
+                      function( d ) {
+                        return d.value.sum;
                       }
                     )
                     .on( 'mouseenter', function() {
@@ -129,16 +153,17 @@
 
     function tween( b, callback ) {
       return function( a ) {
-        var i = (function interpolate() {
+        var i = ( function interpolate() {
           return function( t ) {
             return a.map( function( datum, index ) {
-              return {
-                date  : datum.date,
-                value : datum.value + b[ index ].value * t
-              };
+              var returnObject = datum;
+
+              returnObject.value[ type ] = b[ index ].value[ type ] * t;
+
+              return returnObject;
             } );
           };
-        })();
+        } )();
 
         return function( t ) {
           return callback( i ( t ) );
@@ -149,9 +174,10 @@
     data = data.map( function( datum ) {
       return {
         date  : new Date( datum.timestamp ),
-        value : datum.metrics[ metric ]
+        value : datum[ metric ]
       };
     } );
+
 
     // TODO code duplication check how you can avoid that
     var containerEl = document.getElementById( 'graph--' + metric ),
@@ -167,7 +193,7 @@
         detailWidth  = 98,
 
         container   = d3.select( containerEl ),
-        svg         = container.append( 'svg' )
+        svg         = container.select( 'svg' )
                                 .attr( 'width', width )
                                 .attr( 'height', height + margin.top + margin.bottom ),
 
@@ -190,17 +216,23 @@
                       .interpolate( 'linear' )
                       .x( function( d )  { return x( d.date ) + detailWidth / 2; } )
                       .y0( height )
-                      .y1( function( d ) { return y( d.value ); } ),
+                      .y1( function( d ) { return y( d.value[ type ] ); } ),
 
         line = d3.svg.line()
                   .interpolate( 'linear' )
                   .x( function( d ) { return x( d.date ) + detailWidth / 2; } )
-                  .y( function( d ) { return y( d.value ); } ),
+                  .y( function( d ) { return y( d.value[ type ] ); } ),
 
         startData = data.map( function( datum ) {
                       return {
                         date  : datum.date,
-                        value : 0
+                        value : {
+                          average : 0,
+                          min     : 0,
+                          median  : 0,
+                          max     : 0,
+                          sum     : 0
+                        }
                       };
                     } ),
 
@@ -209,7 +241,14 @@
     // Compute the minimum and maximum date, and the maximum price.
     x.domain( [ data[ 0 ].date, data[ data.length - 1 ].date ] );
     // hacky hacky hacky :(
-    y.domain( [ 0, d3.max( data, function( d ) { return d.value; } ) + 700 ] );
+    y.domain( [
+      0,
+      d3.max( data, function( d ) { return d.value[ type ]; } ) + 700
+    ] );
+
+    if ( !svg.empty() ) {
+      svg.selectAll( 'g, path' ).remove();
+    }
 
     svg.append( 'g' )
         .attr( 'class', 'lineChart--xAxisTicks' )
@@ -234,7 +273,7 @@
         .duration( DURATION )
         .attrTween( 'd', tween( data, area ) );
 
-    // Add the line path.
+    // // Add the line path.
     svg.append( 'path' )
         .datum( startData )
         .attr( 'class', 'p--lineChart--areaLine' )
@@ -254,11 +293,24 @@
     var detailBox     = document.createElement( 'div' );
     var listContainer = getParent( circle, 'p--graphs--graph' );
 
-    detailBox.innerHTML = circle.attributes.getNamedItem( 'data-value' ).value;
+    detailBox.innerHTML =
+      '<dl>' +
+        '<dt>Average:</dt>' +
+        '<dd>' + circle.attributes.getNamedItem( 'data-average' ).value + '</dd>' +
+        '<dt>Max:</dt>' +
+        '<dd>' + circle.attributes.getNamedItem( 'data-max' ).value + '</dd>' +
+        '<dt>Median:</dt>' +
+        '<dd>' + circle.attributes.getNamedItem( 'data-median' ).value + '</dd>' +
+        '<dt>Min:</dt>' +
+        '<dd>' + circle.attributes.getNamedItem( 'data-min' ).value + '</dd>' +
+        '<dt>Sum:</dt>' +
+        '<dd>' + circle.attributes.getNamedItem( 'data-sum' ).value + '</dd>' +
+      '</dl>';
+
     // radius need to be substracted
     // TODO think of cleaner solution
-    detailBox.style.left = ( bBox.x - 36 ) + 'px';
-    detailBox.style.top = ( bBox.y + 10 ) + 'px';
+    detailBox.style.left = ( bBox.x - 71 ) + 'px';
+    detailBox.style.top = ( bBox.y - 75 ) + 'px';
     detailBox.classList.add( 'p--graphs--detailBox' );
 
     listContainer.appendChild( detailBox );
@@ -296,9 +348,23 @@
 
 
   /**
+   * Attach event to select box to rerender
+   * graphs depending on chosen tyoe
+   */
+  function attachMetricChangeEvent() {
+    var switcher = document.getElementById( 'p--switcher' );
+
+    addEvent( switcher, 'change', function( event ) {
+      drawLineCharts( window.results, event.target.value );
+    } );
+  }
+
+
+  /**
    * Attach events to document
    */
   function attachEventListeners() {
+    attachMetricChangeEvent();
     attachCircleEvents();
   }
 
@@ -309,14 +375,20 @@
    * Check all metrics if numeric values are
    * included and initialize all graphs for it
    *
-   * @param  {Array} data data
+   * @param  {Array}            data data
+   * @param  {String|undefined} type type of displayed data
    */
-  function drawLineCharts( data ) {
-    var firstMetric = data[ 0 ].metrics;
+  function drawLineCharts( data, type ) {
+    var firstMetric = data[ 0 ];
+
+    type = type || 'median'
 
     for( var metric in firstMetric ) {
-      if ( typeof data[ 0 ].metrics[ metric ] === 'number' ) {
-        drawLineChart( data, metric );
+      if (
+        typeof firstMetric[ metric ].median === 'number' &&
+        metric !== 'timestamp'
+      ) {
+        drawLineChart( data, metric, type );
       }
     }
   }

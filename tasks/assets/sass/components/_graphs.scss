@@ -16,7 +16,7 @@
 
 .p--graphs--detailBox {
   position: absolute;
-  width: 80px;
+  width: 150px;
   padding: 0.5em;
 
   background-color: rgba( $c-grayDarker, 0.9 );
@@ -43,13 +43,35 @@
     border-right : 6px solid transparent;
     border-top   : 6px solid rgba( $c-grayDarker, 0.9 );
   }
+
+  dl {
+    margin: 0;
+    padding: 0;
+  }
+
+  dt, dd {
+    display: inline-block;
+    width: calc( 50% );
+
+    margin: 0;
+    padding: 0;
+  }
+
+  dt {
+    text-align: left;
+  }
+
+  dd {
+    text-align: right;
+  }
+
 }
 
 .p--graphs--graph {
   position: relative;
 
   width: 100%;
-  min-height: 300px;
+  min-height: 250px;
 
   display: inline-block;
 

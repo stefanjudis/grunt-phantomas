@@ -61,7 +61,9 @@ exports.photoBox = {
     };
     var done        = function() {};
     var phantomas   = new Phantomas( grunt, options, done );
-    var fileContent = '{"test":"test"}';
+    var fileContent = {
+      test : 'test'
+    };
 
     fs.mkdirSync( './tmp' );
     fs.mkdirSync( './tmp/data' );
@@ -73,7 +75,7 @@ exports.photoBox = {
 
         test.strictEqual(
           fs.readFileSync( './tmp/data/' + files[ 0 ], 'utf8' ),
-          fileContent
+          '{"test":"test"}'
         );
 
         test.done();
@@ -112,6 +114,88 @@ exports.photoBox = {
           test.done();
         } );
     }
+  },
+
+
+  createIndexDirectory : {
+    directoryDoesNotExist : function( test ) {
+      var options     = {
+        indexPath : TEMP_PATH
+      };
+      var done        = function() {};
+      var phantomas   = new Phantomas( grunt, options, done );
+
+      deleteFolderRecursive( TEMP_PATH );
+
+      phantomas.createIndexDirectory()
+        .then( function() {
+          test.strictEqual( fs.existsSync( TEMP_PATH ), true );
+          test.done();
+        } );
+    },
+    directoryExists : function( test ) {
+      var options     = {
+        indexPath : TEMP_PATH
+      };
+      var done        = function() {};
+      var phantomas   = new Phantomas( grunt, options, done );
+
+      phantomas.createIndexDirectory()
+        .then( function() {
+          test.strictEqual( fs.existsSync( TEMP_PATH ), true );
+          test.done();
+        } );
+    }
+  },
+
+
+  formResult : function( test) {
+    var options     = {
+        url : 'http://test.com'
+      };
+    var done        = function() {};
+    var phantomas   = new Phantomas( grunt, options, done );
+    var metrics     = [
+      {
+        metricA       : 10,
+        metricB       : 40,
+        jQueryVersion : '1.9.1'
+      },
+      {
+        metricA       : 20,
+        metricB       : 50,
+        jQueryVersion : '1.9.1'
+      },
+      {
+        metricA       : 30,
+        metricB       : 60,
+        jQueryVersion : '1.9.1'
+      }
+
+    ];
+
+    phantomas.formResult( metrics )
+      .then( function( result ) {
+        console.log( typeof result );
+        test.strictEqual( typeof result, 'object' );
+
+        test.strictEqual( typeof result.metricA, 'object' );
+        test.strictEqual(  result.metricA.sum, 60 );
+        test.strictEqual(  result.metricA.min, 10 );
+        test.strictEqual(  result.metricA.max, 30 );
+        test.strictEqual(  result.metricA.median, 20 );
+        test.strictEqual(  result.metricA.average, 20 );
+
+        test.strictEqual( typeof result.metricB, 'object' );
+        test.strictEqual(  result.metricB.sum, 150 );
+        test.strictEqual(  result.metricB.min, 40 );
+        test.strictEqual(  result.metricB.max, 60 );
+        test.strictEqual(  result.metricB.median, 50 );
+        test.strictEqual(  result.metricB.average, 50 );
+
+        test.strictEqual( typeof result.jQueryVersion, 'undefined' );
+        test.done();
+      } );
   },
 
 

@@ -1,0 +1,42 @@
+/*
+ * grunt-phantomas
+ * https://github.com/stefanjudis/grunt-phantomas
+ *
+ * Copyright (c) 2013 stefan judis
+ * Licensed under the MIT license.
+ */
+
+.p--header {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  z-index: $z-header;
+
+  width: 100%;
+  height: 4em;
+
+  padding: 1em;
+
+  background-color: $header-bg-color;
+
+  @include box-shadow( 0 1px 0.125em $c-black);
+  @include translateZ( 0 );
+
+  h2 {
+    display: inline;
+    color: $header-headline-color;
+  }
+}
+
+.p--header--span {
+  font-size: $f-baseSize * 1.5;
+}
+
+
+.p--switcher {
+  float: right;
+
+  margin: 0;
+  padding: 0;
+}
