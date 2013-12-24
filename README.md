@@ -1,6 +1,6 @@
 # grunt-phantomas
 
-[![Build Status](https://travis-ci.org/stefanjudis/grunt-phantomas.png?branch=master)](https://travis-ci.org/stefanjudis/grunt-phantomas) [![NPM version](https://badge.fury.io/js/grunt-phantomas.png)](http://badge.fury.io/js/grunt-phantomas) [![Dependency Status](https://gemnasium.com/stefanjudis/grunt-phantomas.png)](https://gemnasium.com/stefanjudis/grunt-phantomas) [![Code Climate](https://codeclimate.com/github/stefanjudis/grunt-phantomas.png)](https://codeclimate.com/github/stefanjudis/grunt-phantomas) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+[![Build Status](https://travis-ci.org/stefanjudis/grunt-phantomas.png?branch=master)](https://travis-ci.org/stefanjudis/grunt-phantomas) [![NPM version](https://badge.fury.io/js/grunt-phantomas.png)](http://badge.fury.io/js/grunt-phantomas) [![Dependency Status](https://gemnasium.com/stefanjudis/grunt-phantomas.png)](https://gemnasium.com/stefanjudis/grunt-phantomas) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 > Grunt plugin for phantomas
 
@@ -33,7 +33,7 @@ In your project's Gruntfile, add a section named `phantomas` to the data object 
 
 ```js
 grunt.initConfig( {
-  phantomas: {    	
+  phantomas: {
     gruntSite : {
       options : {
         indexPath : './phantomas/',
@@ -89,7 +89,7 @@ In this example, custom options are used to fetch metrice of `http://yoursite.co
 
 ```js
 grunt.initConfig( {
-  phantomas: {    	
+  phantomas: {
     yourSite : {
       options : {
         indexPath    : './yoursite/',
@@ -106,7 +106,7 @@ grunt.initConfig( {
 In this example, the raw option is used to set `phantomas` execution parameters. In this case all external script except the defined ones are blocked by `phantomas`, what can become really handy, when dealing with a lot of third party scripts that influence your site performance.
 ```js
 grunt.initConfig( {
-  phantomas: {    	
+  phantomas: {
     yourSite : {
       options : {
         indexPath : './yoursite/',
