@@ -381,7 +381,7 @@
   function drawLineCharts( data, type ) {
     var firstMetric = data[ 0 ];
 
-    type = type || 'median'
+    type = type || 'median';
 
     for( var metric in firstMetric ) {
       if (
