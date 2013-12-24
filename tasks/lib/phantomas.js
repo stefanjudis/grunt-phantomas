@@ -278,7 +278,7 @@ Phantomas.prototype.getPhantomasProcessArguments = function() {
 Phantomas.prototype.executePhantomas = function() {
   var runs = [];
 
-  return new Promise( function( resolve, reject ) {
+  return new Promise( function( resolve ) {
     this.grunt.log.verbose.writeln(
       'Executing phantoms ( ' + this.options.numberOfRuns + ' times ) with following parameters:\n' +
       this.getPhantomasProcessArguments().join( ' ' )
@@ -292,7 +292,7 @@ Phantomas.prototype.executePhantomas = function() {
         } ).then ( function( result ) {
           this.grunt.log.ok( 'Phantomas executation successful.');
 
-          var result = JSON.parse( result[ 0 ].stdout );
+          result = JSON.parse( result[ 0 ].stdout );
 
           return result.metrics;
         }.bind( this ) )
