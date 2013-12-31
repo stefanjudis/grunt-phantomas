@@ -50,6 +50,6 @@
   ],
   "dependencies": {
     "bluebird": "~0.11.5-0",
-    "phantomas": "~0.10.1"
+    "phantomas": "~0.11.0"
   }
 }
