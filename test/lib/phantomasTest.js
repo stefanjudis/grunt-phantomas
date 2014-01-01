@@ -176,7 +176,6 @@ exports.photoBox = {
 
     phantomas.formResult( metrics )
       .then( function( result ) {
-        console.log( typeof result );
         test.strictEqual( typeof result, 'object' );
 
         test.strictEqual( typeof result.metricA, 'object' );
@@ -196,28 +195,6 @@ exports.photoBox = {
         test.strictEqual( typeof result.jQueryVersion, 'undefined' );
         test.done();
       } );
-  },
-
-
-  getPhantomasProcessArguments : function( test ) {
-    var options     = {
-        url : 'http://test.com',
-        raw : [ '--test1', '--test2' ]
-      };
-    var done        = function() {};
-    var phantomas   = new Phantomas( grunt, options, done );
-
-    var processArguments = phantomas.getPhantomasProcessArguments();
-
-    test.strictEqual( processArguments.length, 6 );
-    test.strictEqual( processArguments[ 0 ], '--url' );
-    test.strictEqual( processArguments[ 1 ], 'http://test.com' );
-    test.strictEqual( processArguments[ 2 ], '--format' );
-    test.strictEqual( processArguments[ 3 ], 'json' );
-    test.strictEqual( processArguments[ 4 ], '--test1' );
-    test.strictEqual( processArguments[ 5 ], '--test2' );
-
-    test.done();
   },
 
 

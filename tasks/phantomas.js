@@ -17,7 +17,7 @@ module.exports = function( grunt ) {
       var options   = this.options( {
         indexPath    : './phantomas/',
         numberOfRuns : 5,
-        raw          : [],
+        options      : {},
         url          : 'http://gruntjs.com/'
       } );
       var Phantomas = require(

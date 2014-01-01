@@ -12,21 +12,10 @@ var Promise = require( 'bluebird' );
 var fs      = Promise.promisifyAll( require( 'fs' ) );
 var path    = Promise.promisifyAll( require( 'path' ) );
 
-
 var ASSETS_PATH = path.resolve(
                     __dirname, '../public/'
                   );
 
-/**
- * Path to the Phantomas executable
- * @type {String}
- */
-var PHANTOMAS_EXEC =  process.platform === 'win32' ?
-                        '../../node_modules/.bin/phantomas.cmd' :
-                        '../../node_modules/.bin/phantomas';
-var PHANTOMAS_PATH = path.resolve(
-                        __dirname, PHANTOMAS_EXEC
-                      );
 
 /**
  * Path to index template
@@ -49,11 +38,11 @@ var TEMPLATE_FILE = path.resolve(
  * @tested
  */
 var Phantomas = function( grunt, options, done ) {
-  this.grunt    = grunt;
-  this.options  = options;
-  this.done     = done;
-  this.dataPath = path.normalize( this.options.indexPath + 'data/' );
-  this.util     = Promise.promisifyAll( this.grunt.util );
+  this.dataPath  = path.normalize(  options.indexPath + 'data/' );
+  this.done      = done;
+  this.grunt     = grunt;
+  this.options   = options;
+  this.phantomas = Promise.promisify( require( 'phantomas' ) );
 };
 
 
@@ -251,24 +240,6 @@ Phantomas.prototype.createIndexHtml = function( results ) {
 
 
 /**
- * Simple getter to build up command line
- * options for process spawn and to have it
- * on a clear place
- *
- * @tested
- */
-Phantomas.prototype.getPhantomasProcessArguments = function() {
-  return [
-    '--url',
-    this.options.url,
-    '--format',
-    'json'
-  ].concat( this.options.raw );
-};
-
-
-
-/**
  * Exectue phantomas a given number of times
  * ( set in options )
  *
@@ -281,18 +252,16 @@ Phantomas.prototype.executePhantomas = function() {
   return new Promise( function( resolve ) {
     this.grunt.log.verbose.writeln(
       'Executing phantoms ( ' + this.options.numberOfRuns + ' times ) with following parameters:\n' +
-      this.getPhantomasProcessArguments().join( ' ' )
+      JSON.stringify( this.options.options )
     );
 
     for ( var i = 0; i < this.options.numberOfRuns; ++i ) {
       runs.push(
-        this.util.spawnAsync( {
-          cmd  : PHANTOMAS_PATH,
-          args : this.getPhantomasProcessArguments()
-        } ).then ( function( result ) {
+        this.phantomas(
+          this.options.url,
+          this.options.options
+        ).then( function( result ) {
           this.grunt.log.ok( 'Phantomas execution successful.');
-
-          result = JSON.parse( result[ 0 ].stdout );
 
           return result.metrics;
         }.bind( this ) )
@@ -310,7 +279,7 @@ Phantomas.prototype.executePhantomas = function() {
 
 /**
  * Format the results of phantomas execution
- * and calculate statist data
+ * and calculate statistic data
  *
  * @param  {Array} metrics metrics
  * @return {Object}        formated metrics
