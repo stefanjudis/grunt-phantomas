@@ -290,7 +290,7 @@ Phantomas.prototype.executePhantomas = function() {
           cmd  : PHANTOMAS_PATH,
           args : this.getPhantomasProcessArguments()
         } ).then ( function( result ) {
-          this.grunt.log.ok( 'Phantomas executation successful.');
+          this.grunt.log.ok( 'Phantomas execution successful.');
 
           result = JSON.parse( result[ 0 ].stdout );
 
