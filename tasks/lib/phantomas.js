@@ -212,6 +212,8 @@ Phantomas.prototype.createIndexDirectory = function() {
  *
  * @param  {Array}   files content of all metric files
  * @return {Promise}       Promise
+ *
+ * @tested
  */
 Phantomas.prototype.createIndexHtml = function( results ) {
   return new Promise( function( resolve ) {

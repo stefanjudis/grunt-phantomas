@@ -149,6 +149,37 @@ exports.photoBox = {
   },
 
 
+  createIndexHtml : function( test ) {
+    var options     = {
+      indexPath : TEMP_PATH
+    };
+    var done        = function() {};
+    var phantomas   = new Phantomas( grunt, options, done );
+    var results     = [
+      { test : 'test1', timestamp : 123456 },
+      { test : 'test2', timestamp : 234567 },
+      { test : 'test3', timestamp : 345678 }
+    ];
+
+    phantomas.createIndexHtml( results )
+      .then( function() {
+        var html = fs.readFileSync( TEMP_PATH + 'index.html', 'utf8' );
+
+        test.strictEqual( fs.existsSync( TEMP_PATH + 'index.html' ), true );
+        test.strictEqual(
+          html.match( JSON.stringify( results ) ) instanceof Array,
+          true
+        );
+        test.strictEqual(
+          html.match( JSON.stringify( results ) ).length,
+          1
+        );
+
+        test.done();
+      } );
+  },
+
+
   formResult : function( test) {
     var options     = {
         url : 'http://test.com'
