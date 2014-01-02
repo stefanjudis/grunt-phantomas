@@ -436,6 +436,8 @@ Phantomas.prototype.readMetricsFile = function( file ) {
  * included in data folder
  *
  * @return {Promise} Promise
+ *
+ * @tested
  */
 Phantomas.prototype.readMetricsFiles = function() {
   return new Promise( function( resolve ) {

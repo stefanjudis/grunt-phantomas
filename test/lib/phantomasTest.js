@@ -237,12 +237,41 @@ exports.photoBox = {
       phantomas.readMetricsFile( '123456.json' )
         .then( function( data ) {
           test.strictEqual( typeof data,    'object' );
-          test.strictEqual( data.test,      'test' );
-          test.strictEqual( data.timestamp, 123456 );
+          test.strictEqual( data.test,      'test'   );
+          test.strictEqual( data.timestamp, 123456   );
 
           test.done();
         } );
     }
+  },
+
+
+  readMetricsFiles : function( test ) {
+      var options      = {
+        indexPath : TEMP_PATH
+      };
+      var done         = function() {};
+      var phantomas    = new Phantomas( grunt, options, done );
+      var fileContent1 = '{ "test": "test1" }';
+      var fileContent2 = '{ "test": "test2" }';
+
+      fs.mkdirSync( './tmp/data' );
+
+      fs.writeFileSync( './tmp/data/123456.json', fileContent1 );
+      fs.writeFileSync( './tmp/data/234567.json', fileContent2 );
+
+      phantomas.readMetricsFiles()
+        .then( function( results ) {
+          test.strictEqual( results.length,         2 );
+          test.strictEqual( typeof results[ 0 ],    'object' );
+          test.strictEqual( results[ 0 ].test,      'test1'  );
+          test.strictEqual( results[ 0 ].timestamp, 123456   );
+          test.strictEqual( typeof results[ 1 ],    'object' );
+          test.strictEqual( results[ 1 ].test,      'test2'  );
+          test.strictEqual( results[ 1 ].timestamp, 234567   );
+
+          test.done();
+        } )
   },
 
 
