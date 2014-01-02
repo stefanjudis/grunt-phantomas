@@ -37,7 +37,7 @@ grunt.initConfig( {
     gruntSite : {
       options : {
         indexPath : './phantomas/',
-        raw       : [],
+        options   : {},
         url       : 'http://gruntjs.com/'
       }
     }
@@ -59,11 +59,11 @@ Default value: `5`
 
 A numeric value that represents the number of times the `phantomas` executable will be started. The more times it runs the more reliable metrics become.
 
-#### options.raw
-Type: `Array`
-Default value: `[]`
+#### options.options
+Type: `Object`
+Default value: `{}`
 
-An array that represents raw commands that can be passed to `phantomas` executable. See usage examples later on.
+An array that represents possible options for `phantomas` executable. For more information please check [the official api documentation](https://github.com/macbre/phantomas/wiki/npm-module) and [list of possible parameters](https://github.com/macbre/phantomas). See usage examples later on.
 
 #### options.url
 Type: `String`
@@ -93,7 +93,6 @@ grunt.initConfig( {
     yourSite : {
       options : {
         indexPath    : './yoursite/',
-        raw          : [],
         url          : 'http://yoursite.com/',
         numberOfRuns : 10
       }
@@ -102,17 +101,17 @@ grunt.initConfig( {
 } )
 ```
 
-#### Raw phantomas options
-In this example, the raw option is used to set `phantomas` execution parameters. In this case all external script except the defined ones are blocked by `phantomas`, what can become really handy, when dealing with a lot of third party scripts that influence your site performance.
+#### Phantomas options
+In this example, the phantomas option is used to set `phantomas` execution parameters. In this case all external script except the defined ones are blocked by `phantomas`, what can become really handy, when dealing with a lot of third party scripts that influence your site performance.
 ```js
 grunt.initConfig( {
   phantomas: {
     yourSite : {
       options : {
         indexPath : './yoursite/',
-        raw       : [
-            '--no-externals',
-            '--allow-domain=cdn.yoursite.com.br,ajax.googleapis.com'
+        options   : [
+          'no-externals' : true,
+          'allow-domain' : 'cdn.yoursite.com.br,ajax.googleapis.com'
         ],
         url       : 'http://yoursite.com'
       }
