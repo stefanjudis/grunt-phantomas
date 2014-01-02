@@ -149,6 +149,37 @@ exports.photoBox = {
   },
 
 
+  createIndexHtml : function( test ) {
+    var options     = {
+      indexPath : TEMP_PATH
+    };
+    var done        = function() {};
+    var phantomas   = new Phantomas( grunt, options, done );
+    var results     = [
+      { test : 'test1', timestamp : 123456 },
+      { test : 'test2', timestamp : 234567 },
+      { test : 'test3', timestamp : 345678 }
+    ];
+
+    phantomas.createIndexHtml( results )
+      .then( function() {
+        var html = fs.readFileSync( TEMP_PATH + 'index.html', 'utf8' );
+
+        test.strictEqual( fs.existsSync( TEMP_PATH + 'index.html' ), true );
+        test.strictEqual(
+          html.match( JSON.stringify( results ) ) instanceof Array,
+          true
+        );
+        test.strictEqual(
+          html.match( JSON.stringify( results ) ).length,
+          1
+        );
+
+        test.done();
+      } );
+  },
+
+
   formResult : function( test) {
     var options     = {
         url : 'http://test.com'
@@ -176,48 +207,25 @@ exports.photoBox = {
 
     phantomas.formResult( metrics )
       .then( function( result ) {
-        console.log( typeof result );
         test.strictEqual( typeof result, 'object' );
 
         test.strictEqual( typeof result.metricA, 'object' );
-        test.strictEqual(  result.metricA.sum, 60 );
-        test.strictEqual(  result.metricA.min, 10 );
-        test.strictEqual(  result.metricA.max, 30 );
-        test.strictEqual(  result.metricA.median, 20 );
+        test.strictEqual(  result.metricA.sum,     60 );
+        test.strictEqual(  result.metricA.min,     10 );
+        test.strictEqual(  result.metricA.max,     30 );
+        test.strictEqual(  result.metricA.median,  20 );
         test.strictEqual(  result.metricA.average, 20 );
 
         test.strictEqual( typeof result.metricB, 'object' );
-        test.strictEqual(  result.metricB.sum, 150 );
-        test.strictEqual(  result.metricB.min, 40 );
-        test.strictEqual(  result.metricB.max, 60 );
-        test.strictEqual(  result.metricB.median, 50 );
+        test.strictEqual(  result.metricB.sum,     150 );
+        test.strictEqual(  result.metricB.min,     40 );
+        test.strictEqual(  result.metricB.max,     60 );
+        test.strictEqual(  result.metricB.median,  50 );
         test.strictEqual(  result.metricB.average, 50 );
 
         test.strictEqual( typeof result.jQueryVersion, 'undefined' );
         test.done();
       } );
-  },
-
-
-  getPhantomasProcessArguments : function( test ) {
-    var options     = {
-        url : 'http://test.com',
-        raw : [ '--test1', '--test2' ]
-      };
-    var done        = function() {};
-    var phantomas   = new Phantomas( grunt, options, done );
-
-    var processArguments = phantomas.getPhantomasProcessArguments();
-
-    test.strictEqual( processArguments.length, 6 );
-    test.strictEqual( processArguments[ 0 ], '--url' );
-    test.strictEqual( processArguments[ 1 ], 'http://test.com' );
-    test.strictEqual( processArguments[ 2 ], '--format' );
-    test.strictEqual( processArguments[ 3 ], 'json' );
-    test.strictEqual( processArguments[ 4 ], '--test1' );
-    test.strictEqual( processArguments[ 5 ], '--test2' );
-
-    test.done();
   },
 
 
@@ -260,12 +268,41 @@ exports.photoBox = {
       phantomas.readMetricsFile( '123456.json' )
         .then( function( data ) {
           test.strictEqual( typeof data,    'object' );
-          test.strictEqual( data.test,      'test' );
-          test.strictEqual( data.timestamp, 123456 );
+          test.strictEqual( data.test,      'test'   );
+          test.strictEqual( data.timestamp, 123456   );
 
           test.done();
         } );
     }
+  },
+
+
+  readMetricsFiles : function( test ) {
+      var options      = {
+        indexPath : TEMP_PATH
+      };
+      var done         = function() {};
+      var phantomas    = new Phantomas( grunt, options, done );
+      var fileContent1 = '{ "test": "test1" }';
+      var fileContent2 = '{ "test": "test2" }';
+
+      fs.mkdirSync( './tmp/data' );
+
+      fs.writeFileSync( './tmp/data/123456.json', fileContent1 );
+      fs.writeFileSync( './tmp/data/234567.json', fileContent2 );
+
+      phantomas.readMetricsFiles()
+        .then( function( results ) {
+          test.strictEqual( results.length,         2 );
+          test.strictEqual( typeof results[ 0 ],    'object' );
+          test.strictEqual( results[ 0 ].test,      'test1' );
+          test.strictEqual( results[ 0 ].timestamp, 123456 );
+          test.strictEqual( typeof results[ 1 ],    'object' );
+          test.strictEqual( results[ 1 ].test,      'test2' );
+          test.strictEqual( results[ 1 ].timestamp, 234567 );
+
+          test.done();
+        } )
   },
 
 

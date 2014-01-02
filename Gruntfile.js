@@ -78,8 +78,8 @@ module.exports = function( grunt ) {
         options : {
           indexPath    : './phantomas/',
           numberOfRuns : 10,
-          raw          : [],
-          url          : 'http://gruntjs.com/'
+          options      : {},
+          url          : 'http://gruntjs.com'
         }
       }
     },
