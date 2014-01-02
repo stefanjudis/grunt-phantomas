@@ -262,7 +262,7 @@ exports.photoBox = {
 
       phantomas.readMetricsFiles()
         .then( function( results ) {
-          test.strictEqual( results.length,         2 );
+          test.strictEqual( results.length,         2        );
           test.strictEqual( typeof results[ 0 ],    'object' );
           test.strictEqual( results[ 0 ].test,      'test1'  );
           test.strictEqual( results[ 0 ].timestamp, 123456   );
