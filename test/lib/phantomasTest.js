@@ -179,17 +179,17 @@ exports.photoBox = {
         test.strictEqual( typeof result, 'object' );
 
         test.strictEqual( typeof result.metricA, 'object' );
-        test.strictEqual(  result.metricA.sum, 60 );
-        test.strictEqual(  result.metricA.min, 10 );
-        test.strictEqual(  result.metricA.max, 30 );
-        test.strictEqual(  result.metricA.median, 20 );
+        test.strictEqual(  result.metricA.sum,     60 );
+        test.strictEqual(  result.metricA.min,     10 );
+        test.strictEqual(  result.metricA.max,     30 );
+        test.strictEqual(  result.metricA.median,  20 );
         test.strictEqual(  result.metricA.average, 20 );
 
         test.strictEqual( typeof result.metricB, 'object' );
-        test.strictEqual(  result.metricB.sum, 150 );
-        test.strictEqual(  result.metricB.min, 40 );
-        test.strictEqual(  result.metricB.max, 60 );
-        test.strictEqual(  result.metricB.median, 50 );
+        test.strictEqual(  result.metricB.sum,     150 );
+        test.strictEqual(  result.metricB.min,     40 );
+        test.strictEqual(  result.metricB.max,     60 );
+        test.strictEqual(  result.metricB.median,  50 );
         test.strictEqual(  result.metricB.average, 50 );
 
         test.strictEqual( typeof result.jQueryVersion, 'undefined' );
@@ -262,13 +262,13 @@ exports.photoBox = {
 
       phantomas.readMetricsFiles()
         .then( function( results ) {
-          test.strictEqual( results.length,         2        );
+          test.strictEqual( results.length,         2 );
           test.strictEqual( typeof results[ 0 ],    'object' );
-          test.strictEqual( results[ 0 ].test,      'test1'  );
-          test.strictEqual( results[ 0 ].timestamp, 123456   );
+          test.strictEqual( results[ 0 ].test,      'test1' );
+          test.strictEqual( results[ 0 ].timestamp, 123456 );
           test.strictEqual( typeof results[ 1 ],    'object' );
-          test.strictEqual( results[ 1 ].test,      'test2'  );
-          test.strictEqual( results[ 1 ].timestamp, 234567   );
+          test.strictEqual( results[ 1 ].test,      'test2' );
+          test.strictEqual( results[ 1 ].timestamp, 234567 );
 
           test.done();
         } )
