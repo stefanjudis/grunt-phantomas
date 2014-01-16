@@ -270,7 +270,7 @@ Phantomas.prototype.executePhantomas = function() {
       );
     }
 
-    Promise.all( runs )
+    Promise.settle( runs )
           .then( resolve )
           .catch( function( e ) {
             console.log( e );
@@ -295,7 +295,7 @@ Phantomas.prototype.formResult = function( metrics ) {
         metric;
 
     // prepare entries
-    for( metric in metrics[ 0 ] ) {
+    for( metric in metrics[ 0 ].value() ) {
       if ( metric !== 'jQueryVersion' ) {
         entries[metric] = {
           values  : [],
@@ -309,11 +309,15 @@ Phantomas.prototype.formResult = function( metrics ) {
     }
 
     // process all runs
-    metrics.forEach( function( data ) {
-      var metric;
-      for ( metric in data ) {
-        if ( metric !== 'jQueryVersion' ) {
-          entries[ metric ].values.push( data[ metric ] );
+    metrics.forEach( function( promise ) {
+      var promiseValue = promise.value(),
+          metric;
+
+      if ( promise.isFulfilled() ) {
+        for ( metric in promiseValue ) {
+          if ( metric !== 'jQueryVersion' ) {
+            entries[ metric ].values.push( promiseValue[ metric ] );
+          }
         }
       }
     } );
