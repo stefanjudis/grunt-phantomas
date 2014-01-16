@@ -80,8 +80,8 @@ In this example, the default options are used to fetch metrics of `http://gruntj
 grunt.initConfig({
   phantomas: {
   	yourSite: {}
-  },
-})
+  }
+});
 ```
 
 #### Custom Options
@@ -98,7 +98,7 @@ grunt.initConfig( {
       }
     }
   }
-} )
+} );
 ```
 
 #### Phantomas options
@@ -117,7 +117,7 @@ grunt.initConfig( {
       }
     }
   }
-} )
+} );
 ```
 
 ## Contributing
