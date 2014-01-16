@@ -109,10 +109,10 @@ grunt.initConfig( {
     yourSite : {
       options : {
         indexPath : './yoursite/',
-        options   : [
+        options   : {
           'no-externals' : true,
           'allow-domain' : 'cdn.yoursite.com.br,ajax.googleapis.com'
-        ],
+        },
         url       : 'http://yoursite.com'
       }
     }
