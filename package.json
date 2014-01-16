@@ -49,7 +49,7 @@
     "phantomjs"
   ],
   "dependencies": {
-    "bluebird": "~0.11.5-0",
+    "bluebird": "~1.0.0",
     "phantomas": "~0.11.0"
   }
 }
