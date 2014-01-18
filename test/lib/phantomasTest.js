@@ -27,14 +27,16 @@ function deleteFolderRecursive ( path ) {
   }
 }
 
-exports.photoBox = {
+exports.phantomas = {
   setUp : function( done ) {
     // setup here if necessary
+    fs.mkdirSync( TEMP_PATH );
+
     done();
   },
 
   tearDown: function ( callback ) {
-    deleteFolderRecursive( TEMP_PATH + 'data' );
+    deleteFolderRecursive( TEMP_PATH );
 
     callback();
   },
@@ -55,31 +57,57 @@ exports.photoBox = {
   },
 
 
-  createDataJson : function( test ) {
-    var options     = {
-      indexPath : TEMP_PATH
-    };
-    var done        = function() {};
-    var phantomas   = new Phantomas( grunt, options, done );
-    var fileContent = {
-      test : 'test'
-    };
+  createDataJson : {
+    invalidData : function( test ) {
+      var options     = {
+        indexPath : TEMP_PATH
+      };
+      var done        = function() {};
+      var phantomas   = new Phantomas( grunt, options, done );
+      var fileContent = {
+        test : 'test'
+      };
 
-    fs.mkdirSync( './tmp' );
-    fs.mkdirSync( './tmp/data' );
+      fs.mkdirSync( TEMP_PATH + 'data' );
 
-    phantomas.createDataJson( fileContent )
-      .then( function() {
-        var files = fs.readdirSync( 'tmp/data/' );
-        test.strictEqual( files.length, 1 );
+      phantomas.createDataJson( fileContent )
+        .catch( function( e ) {
+          test.strictEqual( e, 'No run was successful.' );
 
-        test.strictEqual(
-          fs.readFileSync( './tmp/data/' + files[ 0 ], 'utf8' ),
-          '{"test":"test"}'
-        );
+          test.done();
 
-        test.done();
-      } );
+          deleteFolderRecursive( TEMP_PATH + 'data' );
+        } );
+    },
+    validData : function( test ) {
+      var options     = {
+        indexPath : TEMP_PATH
+      };
+      var done        = function() {};
+      var phantomas   = new Phantomas( grunt, options, done );
+      var fileContent = {
+        requests : {
+          values : [ 1, 2, 3, 4 ]
+        }
+      };
+
+      fs.mkdirSync( TEMP_PATH + 'data' );
+
+      phantomas.createDataJson( fileContent )
+        .then( function() {
+          var files = fs.readdirSync( 'tmp/data/' );
+          test.strictEqual( files.length, 1 );
+
+          test.strictEqual(
+            fs.readFileSync( './tmp/data/' + files[ 0 ], 'utf8' ),
+            '{"requests":{"values":[1,2,3,4]}}'
+          );
+
+          test.done();
+
+          deleteFolderRecursive( TEMP_PATH + 'data' );
+        } );
+    }
   },
 
 
@@ -90,8 +118,6 @@ exports.photoBox = {
       };
       var done        = function() {};
       var phantomas   = new Phantomas( grunt, options, done );
-
-      deleteFolderRecursive( TEMP_PATH + 'data' );
 
       phantomas.createDataDirectory()
         .then( function() {
@@ -188,21 +214,47 @@ exports.photoBox = {
     var phantomas   = new Phantomas( grunt, options, done );
     var metrics     = [
       {
-        metricA       : 10,
-        metricB       : 40,
-        jQueryVersion : '1.9.1'
+        isFulfilled : function() {
+          return true;
+        },
+        value       : function() {
+          return {
+            metrics : {
+              metricA       : 10,
+              metricB       : 40,
+              jQueryVersion : '1.9.1'
+            }
+          };
+        }
       },
       {
-        metricA       : 20,
-        metricB       : 50,
-        jQueryVersion : '1.9.1'
+        isFulfilled : function() {
+          return true;
+        },
+        value       : function() {
+          return {
+            metrics : {
+              metricA       : 20,
+              metricB       : 50,
+              jQueryVersion : '1.9.1'
+            }
+          };
+        }
       },
       {
-        metricA       : 30,
-        metricB       : 60,
-        jQueryVersion : '1.9.1'
+        isFulfilled   : function() {
+          return true;
+        },
+        value       : function() {
+          return {
+            metrics : {
+              metricA       : 30,
+              metricB       : 60,
+              jQueryVersion : '1.9.1'
+            }
+          };
+        }
       }
-
     ];
 
     phantomas.formResult( metrics )
@@ -302,7 +354,7 @@ exports.photoBox = {
           test.strictEqual( results[ 1 ].timestamp, 234567 );
 
           test.done();
-        } )
+        } );
   },
 
 

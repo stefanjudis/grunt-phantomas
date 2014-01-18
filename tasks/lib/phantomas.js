@@ -138,12 +138,18 @@ Phantomas.prototype.copyStyles = function() {
  * @tested
  */
 Phantomas.prototype.createDataJson = function( result ) {
-  return new Promise( function( resolve ) {
-    fs.writeFileAsync(
-      this.dataPath + ( +new Date() ) + '.json',
-      JSON.stringify( result )
-    )
-      .then( resolve );
+  return new Promise( function( resolve, reject ) {
+    if (
+      typeof result.requests !== 'undefined' &&
+      result.requests.values.length
+    ) {
+      fs.writeFileAsync(
+        this.dataPath + ( +new Date() ) + '.json',
+        JSON.stringify( result )
+      ).then( resolve );
+    } else {
+      reject( 'No run was successful.' );
+    }
   }.bind( this ) );
 };
 
@@ -262,15 +268,11 @@ Phantomas.prototype.executePhantomas = function() {
         this.phantomas(
           this.options.url,
           this.options.options
-        ).then( function( result ) {
-          this.grunt.log.ok( 'Phantomas execution successful.');
-
-          return result.metrics;
-        }.bind( this ) )
+        )
       );
     }
 
-    Promise.all( runs )
+    Promise.settle( runs )
           .then( resolve )
           .catch( function( e ) {
             console.log( e );
@@ -288,43 +290,58 @@ Phantomas.prototype.executePhantomas = function() {
  *
  * @tested
  */
-Phantomas.prototype.formResult = function( metrics ) {
+Phantomas.prototype.formResult = function( results ) {
+  this.grunt.log.ok( this.options.numberOfRuns + ' Phantomas execution(s) done -> checking results:' );
   return new Promise( function( resolve ) {
-    var entries = {},
+    var entries                = {},
+        foundFullfilledPromise = false,
         entry,
         metric;
 
     // prepare entries
-    for( metric in metrics[ 0 ] ) {
-      if ( metric !== 'jQueryVersion' ) {
-        entries[metric] = {
-          values  : [],
-          sum     : 0,
-          min     : 0,
-          max     : 0,
-          median  : undefined,
-          average : undefined
-        };
+    for ( var i = 0; i < results.length && !foundFullfilledPromise; i++ ) {
+      if ( results[ i ].isFulfilled() ) {
+        for ( metric in results[ i ].value().metrics ) {
+          if ( typeof results[ i ].value().metrics[ metric ] !== 'string' ) {
+            entries[ metric ] = {
+              values  : [],
+              sum     : 0,
+              min     : 0,
+              max     : 0,
+              median  : undefined,
+              average : undefined
+            };
+          }
+
+          foundFullfilledPromise = true;
+        }
       }
     }
 
     // process all runs
-    metrics.forEach( function( data ) {
-      var metric;
-      for ( metric in data ) {
-        if ( metric !== 'jQueryVersion' ) {
-          entries[ metric ].values.push( data[ metric ] );
+    results.forEach( function( promise ) {
+      if ( promise.isFulfilled() ) {
+        this.grunt.log.ok( 'Phantomas execution successful.' )
+        var promiseValue = promise.value().metrics,
+            metric;
+
+        for ( metric in promiseValue ) {
+          if ( typeof promiseValue[ metric ] !== 'string' ) {
+            entries[ metric ].values.push( promiseValue[ metric ] );
+          }
         }
+      } else {
+        this.grunt.log.error(
+          'Phantomas execution not successful -> ' + promise.error()
+        );
       }
-    } );
+    }.bind( this ) );
 
     // calculate stats
     for ( metric in entries ) {
             entry = entries[ metric ];
 
-      if ( typeof entry.values[ 0 ] === 'string' ) {
-              // don't sort metric with string value
-      } else {
+      if ( typeof entry.values[ 0 ] !== 'string' ) {
         entry.values = entry.values
                         .filter( function( element ) {
                           return element !== null;
@@ -356,7 +373,7 @@ Phantomas.prototype.formResult = function( metrics ) {
     }
 
     resolve( entries );
-  } );
+  }.bind( this ) );
 };
 
 /**
@@ -394,9 +411,9 @@ Phantomas.prototype.kickOff = function() {
       } )
       // catch unknown error
       .catch( function( e ) {
-        console.log( ':/' );
-        console.log( e );
-      } )
+        this.grunt.log.error( 'SOMETHING WENT WRONG...' );
+        this.grunt.log.error( e );
+      }.bind( this ) )
       .done();
 };
 
