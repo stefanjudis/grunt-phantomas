@@ -15,31 +15,33 @@ a {
   position: relative;
   text-decoration: none;
 
-  &:before {
-    content: attr(data-url);
-    position: absolute;
-
-    color: $c-green;
-
-    text-overflow: clip;
-    white-space: nowrap;
-    text-align: left;
-    text-shadow: 0 1px 1px #000;
-
-    width: 0;
-    height: 105%;
-
-    left: 0;
-    top: 0;
-
-    overflow: hidden;
-
-    @include transition( width 0.5s ease-in );
-  }
-
-  &:hover, &:active, a:focus {
+  &.fancy {
     &:before {
-      width: 100%;
+      content: attr(data-url);
+      position: absolute;
+
+      color: $c-green;
+
+      text-overflow: clip;
+      white-space: nowrap;
+      text-align: left;
+      text-shadow: 0 1px 1px #000;
+
+      width: 0;
+      height: 105%;
+
+      left: 0;
+      top: 0;
+
+      overflow: hidden;
+
+      @include transition( width 0.5s ease-in );
+    }
+
+    &:hover, &:active, a:focus {
+      &:before {
+        width: 100%;
+      }
     }
   }
 }

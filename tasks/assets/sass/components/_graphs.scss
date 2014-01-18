@@ -14,12 +14,123 @@
 
 }
 
+.p--graphs--description, .p--graphs--experimental, .p--graphs--warning {
+  width      : calc( 80% - 7em );
+  max-height : 10em;
+  position : absolute;
+
+  top   : 0;
+  right : 7em;
+
+  padding : 1em 1em;
+
+  overflow : hidden;
+
+  color : $c-green;
+
+  background-color : $c-grayDarker-transparent;
+
+  @include transition(
+    width   0.5s ease-in,
+    padding 0.5s ease-in
+  );
+
+  &[hidden] {
+    display : block;
+
+    width : 0;
+
+    padding : 1em 0;
+  }
+}
+
+.p--graphs--descriptionBtn, .p--graphs--experimentalBtn, .p--graphs--warningBtn {
+  position : absolute;
+  top   : 0;
+
+  width  : $description-width;
+  height : 0;
+
+  padding : $description-height 0 0 0;
+
+
+  overflow : hidden;
+
+  cursor : default;
+
+  &:before {
+    position : absolute;
+
+    content : '?';
+
+    color : $c-white;
+
+    top    : 0;
+    right  : 0;
+    bottom : 0;
+    left   : 0;
+
+    text-align  : center;
+    line-height : $description-height;
+  }
+}
+
+.p--graphs--descriptionBtn {
+  right : 0;
+
+  background-color : rgba( $c-green, 0.1 );
+
+  &.active {
+    cursor : pointer;
+
+    background-color : $c-green;
+  }
+
+  &:before {
+    content : '?';
+  }
+}
+
+.p--graphs--warningBtn {
+  right : 2em;
+
+  background-color : rgba( $c-purple, 0.1 );
+
+  &.active {
+    cursor : pointer;
+
+    background-color : $c-purple;
+  }
+
+  &:before {
+    content : '!';
+  }
+}
+
+.p--graphs--experimentalBtn {
+  right : 4em;
+
+  background-color : rgba( $c-white, 0.1 );
+
+  &.active {
+    cursor : pointer;
+
+    background-color : $c-white;
+  }
+
+  &:before {
+    content : '❤';
+
+    color : $c-green;
+  }
+}
+
 .p--graphs--detailBox {
   position: absolute;
   width: 150px;
   padding: 0.5em;
 
-  background-color: rgba( $c-grayDarker, 0.9 );
+  background-color : $c-grayDarker-transparent;
 
   color: $c-green;
   text-align: center;
@@ -41,7 +152,7 @@
 
     border-left  : 6px solid transparent;
     border-right : 6px solid transparent;
-    border-top   : 6px solid rgba( $c-grayDarker, 0.9 );
+    border-top   : 6px solid $c-grayDarker-transparent;
   }
 
   dl {
