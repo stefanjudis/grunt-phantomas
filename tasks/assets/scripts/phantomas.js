@@ -348,6 +348,69 @@
 
 
   /**
+   * Attach hover event to body and listen
+   * for description button hovers
+   * to show description
+   */
+  function attachDescriptionEvents () {
+    var body = document.querySelector( 'body' );
+
+    addEvent( body, 'mouseover', function( event ) {
+      if (
+        event.target.tagName === 'A' &&
+        event.target.classList.contains( 'active' ) &&
+        (
+          event.target.classList.contains( 'p--graphs--descriptionBtn' ) ||
+          event.target.classList.contains( 'p--graphs--warningBtn' ) ||
+          event.target.classList.contains( 'p--graphs--experimentalBtn' )
+        )
+      ) {
+        var target = document.getElementById(
+                        event.target.href.split( '#' )[ 1 ]
+                      );
+
+        target.removeAttribute( 'hidden' );
+
+        event.preventDefault();
+      }
+    } );
+
+    addEvent( body, 'mouseout', function( event ) {
+      if (
+        event.target.tagName === 'A' &&
+        event.target.classList.contains( 'active' ) &&
+        (
+          event.target.classList.contains( 'p--graphs--descriptionBtn' ) ||
+          event.target.classList.contains( 'p--graphs--warningBtn' ) ||
+          event.target.classList.contains( 'p--graphs--experimentalBtn' )
+        )
+      ) {
+        var target = document.getElementById(
+                        event.target.href.split( '#' )[ 1 ]
+                      );
+
+        target.setAttribute( 'hidden', 'hidden' );
+
+        event.preventDefault();
+      }
+    } );
+
+    addEvent( body, 'click', function( event ) {
+      if (
+        event.target.tagName === 'A' &&
+        (
+          event.target.classList.contains( 'p--graphs--descriptionBtn' ) ||
+          event.target.classList.contains( 'p--graphs--warningBtn' ) ||
+          event.target.classList.contains( 'p--graphs--experimentalBtn' )
+        )
+      ) {
+        event.preventDefault();
+      }
+    } )
+  }
+
+
+  /**
    * Attach event to select box to rerender
    * graphs depending on chosen tyoe
    */
@@ -364,8 +427,9 @@
    * Attach events to document
    */
   function attachEventListeners() {
-    attachMetricChangeEvent();
     attachCircleEvents();
+    attachDescriptionEvents();
+    attachMetricChangeEvent();
   }
 
 

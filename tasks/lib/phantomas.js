@@ -11,6 +11,7 @@
 var Promise = require( 'bluebird' );
 var fs      = Promise.promisifyAll( require( 'fs' ) );
 var path    = Promise.promisifyAll( require( 'path' ) );
+var meta    = require( '../config/metricsMeta' );
 
 var ASSETS_PATH = path.resolve(
                     __dirname, '../public/'
@@ -41,6 +42,7 @@ var Phantomas = function( grunt, options, done ) {
   this.dataPath  = path.normalize(  options.indexPath + 'data/' );
   this.done      = done;
   this.grunt     = grunt;
+  this.meta      = meta;
   this.options   = options;
   this.phantomas = Promise.promisify( require( 'phantomas' ) );
 };
@@ -230,6 +232,7 @@ Phantomas.prototype.createIndexHtml = function( results ) {
       this.grunt.template.process(
         this.grunt.file.read( TEMPLATE_FILE ),
         { data : {
+          meta    : this.meta,
           results : results,
           url     : this.options.url
         } }

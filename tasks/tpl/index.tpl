@@ -1,5 +1,5 @@
 <%
-  var allMetrics      = _.keys( results[ 0 ] );
+  var allMetrics      = _.keys( results[ results.length - 1 ] );
   var numericMetrics  = _.reduce( allMetrics, function( old, current ) {
     if ( typeof results[ 0 ][ current ].median === 'number' ) {
       old.push( current );
@@ -7,6 +7,7 @@
 
     return old;
   }, [] );
+
   var groupedMetrics  = [];
   var counter         = 0;
   var columnsPerTable = 7;
@@ -32,7 +33,7 @@
   </head>
   <body>
     <header class="p--header">
-      <span class="p--header--span">Frontend stats for <a href="<%= url %>" data-url="<%= url %>" target="_blank"><%= url %></a></span>
+      <span class="p--header--span">Frontend stats for <a class="fancy" href="<%= url %>" data-url="<%= url %>" target="_blank"><%= url %></a></span>
       <select id="p--switcher" class="p--switcher">
         <option value="average">Average</option>
         <option value="min">Min</option>
@@ -47,6 +48,12 @@
         <% _.each( numericMetrics, function( metric ) { %>
           <li id="graph--<%= metric %>" class="p--graphs--graph">
             <h3><%= metric %></h3>
+            <a class="p--graphs--experimentalBtn <%= ( meta[ metric ] && meta[ metric ].experimental ) ? 'active' : '' %>" href="#experimental-<%= metric %>">Show experimental</a>
+            <div id="experimental-<%= metric %>" class="p--graphs--experimental" hidden>Be careful this feature is marked as experimental.</div>
+            <a class="p--graphs--descriptionBtn <%= ( meta[ metric ] && meta[ metric ].description ) ? 'active' : '' %>" href="#description-<%= metric %>">Show description</a>
+            <div id="description-<%= metric %>" class="p--graphs--description" hidden><%= meta[ metric ].description %></div>
+            <a class="p--graphs--warningBtn <%= ( meta[ metric ] && !meta[ metric ].reliable ) ? 'active' : '' %>" href="#warning-<%= metric %>">Show warning</a>
+            <div id="warning-<%= metric %>" class="p--graphs--warning" hidden>Unfortunately this metrics is not reliable. For more information please check documentation of phantomas.</div>
             <svg></svg>
         <% } );%>
       </ul>

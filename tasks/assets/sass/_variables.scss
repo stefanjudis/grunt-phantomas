@@ -19,10 +19,11 @@ $c-green : #45b5b3;
 $c-white : #fff;
 $c-black : #000;
 
-$c-gray       : #4d626d;
-$c-grayDark   : #274354;
-$c-grayDarker : adjust-lightness( $c-grayDark, -8 );
-$c-grayLight  : #d3d8dc;
+$c-gray                   : #4d626d;
+$c-grayDark               : #274354;
+$c-grayDarker             : adjust-lightness( $c-grayDark, -8 );
+$c-grayDarker-transparent : rgba( $c-grayDarker, 0.9 );
+$c-grayLight              : #d3d8dc;
 
 
 /**
@@ -45,6 +46,12 @@ $d-baseWidth    : 100%;
  * Z-index
  */
 $z-header: 5;
+
+/**
+ * Configs for _graphs.scss
+ */
+$description-height : 1.5em;
+$description-width  : 1.5em;
 
 /**
  * Table config stuff
@@ -80,4 +87,3 @@ $header-headline-color : $c-green;
  * Stuff that fits nowhere else
  */
 $baseBorderRadius : 3px;
-
