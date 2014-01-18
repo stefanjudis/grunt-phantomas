@@ -410,7 +410,7 @@
       ) {
         event.preventDefault();
       }
-    } )
+    } );
   }
 
 

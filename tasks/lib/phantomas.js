@@ -324,7 +324,8 @@ Phantomas.prototype.formResult = function( results ) {
     // process all runs
     results.forEach( function( promise ) {
       if ( promise.isFulfilled() ) {
-        this.grunt.log.ok( 'Phantomas execution successful.' )
+        this.grunt.log.ok( 'Phantomas execution successful.' );
+
         var promiseValue = promise.value().metrics,
             metric;
 
@@ -340,18 +341,35 @@ Phantomas.prototype.formResult = function( results ) {
       }
     }.bind( this ) );
 
+    /**
+     * Avoiding deep nesting for 'calculate stats'
+     *
+     * @param  {Number}  element element
+     * @return {Boolean}
+     */
+    function filterEntryValues( element ) {
+      return element !== null;
+    }
+
+    /**
+     * Avoiding deep nesting for 'calculate stats'
+     *
+     * @param  {Number} a value A
+     * @param  {Number} b value B
+     * @return {Number}   sorting value
+     */
+    function sortEntryValues ( a, b ) {
+      return a - b;
+    }
+
     // calculate stats
     for ( metric in entries ) {
             entry = entries[ metric ];
 
       if ( typeof entry.values[ 0 ] !== 'string' ) {
         entry.values = entry.values
-                        .filter( function( element ) {
-                          return element !== null;
-                        } )
-                        .sort( function ( a, b ) {
-                          return a - b;
-                        } );
+                        .filter( filterEntryValues )
+                        .sort( sortEntryValues );
       }
 
       if ( entry.values.length === 0 ) {
@@ -365,8 +383,8 @@ Phantomas.prototype.formResult = function( results ) {
         continue;
       }
 
-      for ( var i = 0, len = entry.values.length++; i<len; i++ ) {
-        entry.sum += entry.values[ i ];
+      for ( var j = 0, len = entry.values.length++; j<len; j++ ) {
+        entry.sum += entry.values[ j ];
       }
 
       entry.average = + ( len && ( entry.sum / len ).toFixed( 2 ) );
