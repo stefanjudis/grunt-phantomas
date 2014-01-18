@@ -27,7 +27,7 @@ function deleteFolderRecursive ( path ) {
   }
 }
 
-exports.phantoms = {
+exports.phantomas = {
   setUp : function( done ) {
     // setup here if necessary
     fs.mkdirSync( TEMP_PATH );
