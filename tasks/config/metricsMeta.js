@@ -452,7 +452,7 @@ module.exports = {
   },
   documentCookiesCount : {
     reliable    : true,
-    description : ''
+    description : 'Number of cookies in document.cookie'
   },
   bodyHTMLSize : {
     reliable    : true,

@@ -1,5 +1,6 @@
 <%
   var allMetrics      = _.keys( results[ results.length - 1 ] );
+
   var numericMetrics  = _.reduce( allMetrics, function( old, current ) {
     if ( typeof results[ 0 ][ current ].median === 'number' ) {
       old.push( current );
@@ -71,7 +72,7 @@
               <tr class="p--table--row">
                 <td class="p--table--column__highlight"><%= ( new Date( result.timestamp ) ).toISOString() %></td>
                 <% _.each( metrics, function( metric ) { %>
-                  <td class="p--table--column"><%= ( result[ metric ].median !== undefined ) ? result[ metric ].median : result[ metric ] %></td>
+                  <td class="p--table--column"><%= ( result[ metric ] && result[ metric ].median !== undefined ) ? result[ metric ].median : result[ metric ] %></td>
                 <% } ); %>
               </tr>
             <% } ) %>

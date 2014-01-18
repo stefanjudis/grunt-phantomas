@@ -171,12 +171,16 @@
       };
     }
     // data manipulation first
-    data = data.map( function( datum ) {
-      return {
-        date  : new Date( datum.timestamp ),
-        value : datum[ metric ]
-      };
-    } );
+    data = data.reduce( function( newData, datum ) {
+      if ( datum[ metric ] ) {
+        newData.push( {
+          date  : new Date( datum.timestamp ),
+          value : datum[ metric ]
+        } );
+      }
+
+      return newData;
+    }, [] );
 
 
     // TODO code duplication check how you can avoid that
@@ -243,7 +247,7 @@
     // hacky hacky hacky :(
     y.domain( [
       0,
-      d3.max( data, function( d ) { return d.value[ type ]; } ) + 700
+      d3.max( data, function( d ) { return d.value ? d.value[ type ] : 0; } ) + 700
     ] );
 
     if ( !svg.empty() ) {
@@ -443,13 +447,14 @@
    * @param  {String|undefined} type type of displayed data
    */
   function drawLineCharts( data, type ) {
-    var firstMetric = data[ 0 ];
+    var lastMetric = data[ data.length - 1 ];
 
     type = type || 'median';
 
-    for( var metric in firstMetric ) {
+    for( var metric in lastMetric ) {
       if (
-        typeof firstMetric[ metric ].median === 'number' &&
+        lastMetric[ metric ] &&
+        typeof lastMetric[ metric ].median === 'number' &&
         metric !== 'timestamp'
       ) {
         drawLineChart( data, metric, type );
