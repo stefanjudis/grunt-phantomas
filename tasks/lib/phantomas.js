@@ -459,6 +459,10 @@ Phantomas.prototype.readMetricsFile = function( file ) {
         } catch( e ) {
           // if it's not valid json
           // let's fail
+          this.grunt.log.error(
+            'Sorry - ' + this.dataPath + file + ' is malformed'
+          );
+
           reject( e );
         }
         // set internal timestamp to work with it
@@ -466,7 +470,7 @@ Phantomas.prototype.readMetricsFile = function( file ) {
         data.timestamp = +file.replace( /\.json/gi, '' );
 
         resolve( data );
-      } );
+      }.bind( this ) );
   }.bind( this ) );
 };
 
