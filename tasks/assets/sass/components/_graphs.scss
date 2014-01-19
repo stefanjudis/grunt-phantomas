@@ -223,30 +223,31 @@
 }
 
 .lineChart--bubble--value {
-  fill: #fff;
-  stroke: #fff;
+  fill   : #fff;
+  stroke : #fff;
 
   // font-size: $f-sizeBubbleValue;
   // font-weight: $f-weight;
 }
 .lineChart--circle {
-  fill: $c-blue;
-  stroke: #fff;
-  stroke-width: 2;
+  fill : $c-blue;
+
+  stroke       : #fff;
+  stroke-width : 2;
+
+  cursor : pointer;
 }
 
 .lineChart--circle__highlighted {
-  fill: $c-purple;
-  stroke: $c-white;
+  fill   : $c-purple;
+  stroke : $c-white;
 }
 
 .lineChart--gradientBackgroundArea--top {
-  // stop-color   : $c-blue;
   stop-opacity : 0.1;
 }
 
 .lineChart--gradientBackgroundArea--bottom {
-  // stop-color   : $c-blue;
   stop-opacity : 0.6;
 }
 
