@@ -401,7 +401,7 @@ Phantomas.prototype.formResult = function( results ) {
  * General function to start the whole thingy
  */
 Phantomas.prototype.kickOff = function() {
-  this.grunt.log.subhead( 'PHANTOMAS SYSTEM CALL STARTED' );
+  this.grunt.log.subhead( 'PHANTOMAS EXECUTION(S) STARTED' );
 
   this.createIndexDirectory().bind( this )
       // create data directory to prevent
