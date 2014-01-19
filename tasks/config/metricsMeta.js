@@ -29,6 +29,10 @@ module.exports = {
     reliable    : true,
     description : 'Number of HTTP redirects (either 301 or 302)'
   },
+  redirectsTime : {
+    reliable    : true,
+    description : 'Time it took to send and receive redirects'
+  },
   notFound : {
     reliable    : true,
     description : 'Number of HTTP 404 responses'
@@ -40,6 +44,14 @@ module.exports = {
   timeToLastByte : {
     reliable    : true,
     description : 'Time it took to receive the last byte of the first response (that was not a redirect)'
+  },
+  timeBackend : {
+    reliable    : true,
+    description : 'Time to the first byte compared to the total loading time (in %)'
+  },
+  timeFrontend : {
+    reliable    : true,
+    description : 'Time to window on load compared to the total loading time (in %)'
   },
   bodySize : {
     reliable    : false,
