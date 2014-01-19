@@ -54,7 +54,7 @@
             <a class="p--graphs--descriptionBtn <%= ( meta[ metric ] && meta[ metric ].description ) ? 'active' : '' %>" href="#description-<%= metric %>">Show description</a>
             <div id="description-<%= metric %>" class="p--graphs--description" hidden><%= meta[ metric ].description %></div>
             <a class="p--graphs--warningBtn <%= ( meta[ metric ] && !meta[ metric ].reliable ) ? 'active' : '' %>" href="#warning-<%= metric %>">Show warning</a>
-            <div id="warning-<%= metric %>" class="p--graphs--warning" hidden>Unfortunately this metrics is not reliable. For more information please check documentation of phantomas.</div>
+            <div id="warning-<%= metric %>" class="p--graphs--warning" hidden>Unfortunately this metric is not reliable. For more information please check documentation of phantomas.</div>
             <svg></svg>
         <% } );%>
       </ul>
