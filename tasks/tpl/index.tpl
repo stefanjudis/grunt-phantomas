@@ -2,7 +2,7 @@
   var allMetrics      = _.keys( results[ results.length - 1 ] );
 
   var numericMetrics  = _.reduce( allMetrics, function( old, current ) {
-    if ( typeof results[ 0 ][ current ].median === 'number' ) {
+    if ( typeof results[ results.length - 1 ][ current ].median === 'number' ) {
       old.push( current );
     }
 
@@ -52,7 +52,7 @@
             <a class="p--graphs--experimentalBtn <%= ( meta[ metric ] && meta[ metric ].experimental ) ? 'active' : '' %>" href="#experimental-<%= metric %>">Show experimental</a>
             <div id="experimental-<%= metric %>" class="p--graphs--experimental" hidden>Be careful this feature is marked as experimental.</div>
             <a class="p--graphs--descriptionBtn <%= ( meta[ metric ] && meta[ metric ].description ) ? 'active' : '' %>" href="#description-<%= metric %>">Show description</a>
-            <div id="description-<%= metric %>" class="p--graphs--description" hidden><%= meta[ metric ].description %></div>
+            <div id="description-<%= metric %>" class="p--graphs--description" hidden><%= ( meta[ metric ] && meta[ metric ].description ) ? meta[ metric ].description : '' %></div>
             <a class="p--graphs--warningBtn <%= ( meta[ metric ] && !meta[ metric ].reliable ) ? 'active' : '' %>" href="#warning-<%= metric %>">Show warning</a>
             <div id="warning-<%= metric %>" class="p--graphs--warning" hidden>Unfortunately this metric is not reliable. For more information please check documentation of phantomas.</div>
             <svg></svg>
