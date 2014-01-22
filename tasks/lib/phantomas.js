@@ -226,7 +226,7 @@ Phantomas.prototype.createIndexDirectory = function() {
  */
 Phantomas.prototype.createIndexHtml = function( results ) {
   return new Promise( function( resolve ) {
-    this.grunt.log.subhead( 'WRITING INDEX STARTED.' );
+    this.grunt.log.subhead( 'PHANTOMAS index.html WRITING STARTED.' );
 
     var templateResults = [];
 
