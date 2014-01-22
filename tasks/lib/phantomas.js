@@ -9,7 +9,7 @@
 'use strict';
 
 var Promise = require( 'bluebird' );
-var fs      = Promise.promisifyAll( require( 'fs' ) );
+var fs      = Promise.promisifyAll( require( 'node-fs' ) );
 var path    = Promise.promisifyAll( require( 'path' ) );
 var meta    = require( '../config/metricsMeta' );
 
@@ -199,14 +199,15 @@ Phantomas.prototype.createDataDirectory = function() {
 Phantomas.prototype.createIndexDirectory = function() {
   return new Promise( function( resolve ) {
     var exists = fs.existsSync( this.options.indexPath );
-
     if ( exists ) {
       resolve();
     } else {
       fs.mkdirSync(
         path.normalize(
           this.options.indexPath
-        )
+        ),
+        '0777',
+        true
       );
 
       resolve();
