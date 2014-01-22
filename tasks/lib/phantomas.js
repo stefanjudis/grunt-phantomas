@@ -226,7 +226,17 @@ Phantomas.prototype.createIndexDirectory = function() {
  */
 Phantomas.prototype.createIndexHtml = function( results ) {
   return new Promise( function( resolve ) {
-    this.grunt.log.subhead( 'PHANTOMAS index.html WRITING STARTED.' );
+    this.grunt.log.subhead( 'WRITING INDEX STARTED.' );
+
+    var templateResults = [];
+
+    // check if all files were valid
+    // json and inform
+    results.forEach( function( result ) {
+      if ( result.isFulfilled() ) {
+        templateResults.push( result.value() );
+      }
+    }.bind( this ) )
 
     this.grunt.file.write(
       this.options.indexPath + 'index.html',
@@ -234,7 +244,7 @@ Phantomas.prototype.createIndexHtml = function( results ) {
         this.grunt.file.read( TEMPLATE_FILE ),
         { data : {
           meta    : this.meta,
-          results : results,
+          results : templateResults,
           url     : this.options.url
         } }
       )
@@ -486,6 +496,8 @@ Phantomas.prototype.readMetricsFile = function( file ) {
  */
 Phantomas.prototype.readMetricsFiles = function() {
   return new Promise( function( resolve ) {
+    this.grunt.log.subhead( 'CHECKING ALL WRITTEN FILES FOR VALID JSON.' );
+
     fs.readdirAsync( this.dataPath ).bind( this )
       .then( function( files ) {
         files = files.filter( function( file ) {
@@ -496,8 +508,11 @@ Phantomas.prototype.readMetricsFiles = function() {
             return this.readMetricsFile( file );
         }, this );
 
-        Promise.all( files ).bind( this )
-          .then( resolve );
+        Promise.settle( files ).bind( this )
+          .then( resolve )
+          .catch( function( e ) {
+            console.log( e );
+          } );
       } );
   }.bind( this ) );
 };
