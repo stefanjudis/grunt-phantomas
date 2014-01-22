@@ -50,6 +50,7 @@
   ],
   "dependencies": {
     "bluebird": "~1.0.0",
-    "phantomas": "~0.12.0"
+    "phantomas": "~0.12.0",
+    "node-fs": "~0.1.7"
   }
 }

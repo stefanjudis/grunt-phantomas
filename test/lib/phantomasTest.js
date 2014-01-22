@@ -146,7 +146,9 @@ exports.phantomas = {
   createIndexDirectory : {
     directoryDoesNotExist : function( test ) {
       var options     = {
-        indexPath : TEMP_PATH
+        // check if recursive folder
+        // creation works
+        indexPath : TEMP_PATH + 'tmp/'
       };
       var done        = function() {};
       var phantomas   = new Phantomas( grunt, options, done );
@@ -156,12 +158,15 @@ exports.phantomas = {
       phantomas.createIndexDirectory()
         .then( function() {
           test.strictEqual( fs.existsSync( TEMP_PATH ), true );
+          test.strictEqual( fs.existsSync( TEMP_PATH + 'tmp/' ), true );
           test.done();
         } );
     },
     directoryExists : function( test ) {
       var options     = {
-        indexPath : TEMP_PATH
+        // check if recursive folder
+        // creation works
+        indexPath : TEMP_PATH + 'tmp/'
       };
       var done        = function() {};
       var phantomas   = new Phantomas( grunt, options, done );
@@ -169,6 +174,7 @@ exports.phantomas = {
       phantomas.createIndexDirectory()
         .then( function() {
           test.strictEqual( fs.existsSync( TEMP_PATH ), true );
+          test.strictEqual( fs.existsSync( TEMP_PATH + 'tmp/' ), true );
           test.done();
         } );
     }
