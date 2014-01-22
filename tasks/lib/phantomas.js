@@ -316,7 +316,10 @@ Phantomas.prototype.formResult = function( results ) {
     for ( var i = 0; i < results.length && !foundFullfilledPromise; i++ ) {
       if ( results[ i ].isFulfilled() ) {
         for ( metric in results[ i ].value().metrics ) {
-          if ( typeof results[ i ].value().metrics[ metric ] !== 'string' ) {
+          if (
+            typeof results[ i ].value().metrics[ metric ] !== 'string' &&
+            typeof results[ i ].value().metrics[ metric ] !== 'undefined'
+          ) {
             entries[ metric ] = {
               values  : [],
               sum     : 0,
@@ -341,7 +344,10 @@ Phantomas.prototype.formResult = function( results ) {
             metric;
 
         for ( metric in promiseValue ) {
-          if ( typeof promiseValue[ metric ] !== 'string' ) {
+          if (
+            typeof promiseValue[ metric ] !== 'string' &&
+            typeof entries[ metric ] !== 'undefined'
+          ) {
             entries[ metric ].values.push( promiseValue[ metric ] );
           }
         }
@@ -445,6 +451,7 @@ Phantomas.prototype.kickOff = function() {
       .catch( function( e ) {
         this.grunt.log.error( 'SOMETHING WENT WRONG...' );
         this.grunt.log.error( e );
+        this.grunt.log.error( e.stack );
       }.bind( this ) )
       .done();
 };
