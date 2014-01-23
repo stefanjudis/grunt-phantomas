@@ -12,7 +12,7 @@ var Promise   = require( 'bluebird' );
 var fs        = Promise.promisifyAll( require( 'node-fs' ) );
 var path      = Promise.promisifyAll( require( 'path' ) );
 var meta      = require( '../config/metricsMeta' );
-var phantomas = require( 'phantomas' )
+var phantomas = require( 'phantomas' );
 
 var ASSETS_PATH = path.resolve(
                     __dirname, '../public/'
@@ -248,7 +248,7 @@ Phantomas.prototype.createIndexHtml = function( results ) {
       if ( result.isFulfilled() ) {
         templateResults.push( result.value() );
       }
-    }.bind( this ) )
+    }.bind( this ) );
 
     this.grunt.file.write(
       this.options.indexPath + 'index.html',
