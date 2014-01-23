@@ -147,15 +147,20 @@ Phantomas.prototype.copyStyles = function() {
  * @tested
  */
 Phantomas.prototype.createDataJson = function( result ) {
+  this.grunt.log.subhead( 'WRITING RESULT JSON FILE.' );
+
   return new Promise( function( resolve, reject ) {
     if (
       typeof result.requests !== 'undefined' &&
       result.requests.values.length
     ) {
+
       fs.writeFileAsync(
         this.dataPath + ( +new Date() ) + '.json',
         JSON.stringify( result )
       ).then( resolve );
+
+      this.grunt.log.ok( 'JSON file written.' );
     } else {
       reject( 'No run was successful.' );
     }
@@ -459,7 +464,10 @@ Phantomas.prototype.kickOff = function() {
       .catch( function( e ) {
         this.grunt.log.error( 'SOMETHING WENT WRONG...' );
         this.grunt.log.error( e );
-        this.grunt.log.error( e.stack );
+
+        if ( e.stack ) {
+          this.grunt.log.error( e.stack );
+        }
       }.bind( this ) )
       .done();
 };
@@ -494,6 +502,8 @@ Phantomas.prototype.readMetricsFile = function( file ) {
         // set internal timestamp to work with it
         // on frontend side later on
         data.timestamp = +file.replace( /\.json/gi, '' );
+
+        this.grunt.log.ok( '\'' + file + '\' looks good!' );
 
         resolve( data );
       }.bind( this ) );
