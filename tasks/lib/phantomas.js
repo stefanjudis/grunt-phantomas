@@ -8,10 +8,11 @@
 
 'use strict';
 
-var Promise = require( 'bluebird' );
-var fs      = Promise.promisifyAll( require( 'node-fs' ) );
-var path    = Promise.promisifyAll( require( 'path' ) );
-var meta    = require( '../config/metricsMeta' );
+var Promise   = require( 'bluebird' );
+var fs        = Promise.promisifyAll( require( 'node-fs' ) );
+var path      = Promise.promisifyAll( require( 'path' ) );
+var meta      = require( '../config/metricsMeta' );
+var phantomas = require( 'phantomas' )
 
 var ASSETS_PATH = path.resolve(
                     __dirname, '../public/'
@@ -44,7 +45,13 @@ var Phantomas = function( grunt, options, done ) {
   this.grunt     = grunt;
   this.meta      = meta;
   this.options   = options;
-  this.phantomas = Promise.promisify( require( 'phantomas' ) );
+  this.phantomas = Promise.promisify( phantomas );
+
+  // quit if the phantomas version is too old
+  if ( /(0\.12\.0|0\.11\..*|0\.10\..*)/.test( phantomas.version ) ) {
+    this.grunt.log.error( 'YOUR PHANTOMAS VERSION IS OUTDATED.' );
+    this.grunt.fail.fatal( 'PLEASE UPDATE TO AT LEAST 0.12.1.' );
+  }
 };
 
 
@@ -315,10 +322,11 @@ Phantomas.prototype.formResult = function( results ) {
     // prepare entries
     for ( var i = 0; i < results.length && !foundFullfilledPromise; i++ ) {
       if ( results[ i ].isFulfilled() ) {
-        for ( metric in results[ i ].value().metrics ) {
+        // grep the first entries for the json result
+        for ( metric in results[ i ].value()[ 0 ].metrics ) {
           if (
-            typeof results[ i ].value().metrics[ metric ] !== 'string' &&
-            typeof results[ i ].value().metrics[ metric ] !== 'undefined'
+            typeof results[ i ].value()[ 0 ].metrics[ metric ] !== 'string' &&
+            typeof results[ i ].value()[ 0 ].metrics[ metric ] !== 'undefined'
           ) {
             entries[ metric ] = {
               values  : [],
@@ -338,9 +346,9 @@ Phantomas.prototype.formResult = function( results ) {
     // process all runs
     results.forEach( function( promise ) {
       if ( promise.isFulfilled() ) {
-        this.grunt.log.ok( 'Phantomas execution successful.' );
+        this.grunt.log.ok( 'Phantomas execution done.' );
 
-        var promiseValue = promise.value().metrics,
+        var promiseValue = promise.value()[ 0 ].metrics,
             metric;
 
         for ( metric in promiseValue ) {
@@ -418,7 +426,7 @@ Phantomas.prototype.formResult = function( results ) {
  * General function to start the whole thingy
  */
 Phantomas.prototype.kickOff = function() {
-  this.grunt.log.subhead( 'PHANTOMAS EXECUTION(S) STARTED' );
+  this.grunt.log.subhead( 'PHANTOMAS EXECUTION(S) STARTED.' );
 
   this.createIndexDirectory().bind( this )
       // create data directory to prevent

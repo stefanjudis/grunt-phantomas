@@ -251,13 +251,13 @@ exports.phantomas = {
           return true;
         },
         value       : function() {
-          return {
+          return [ {
             metrics : {
               metricA       : 10,
               metricB       : 40,
               jQueryVersion : '1.9.1'
             }
-          };
+          } ];
         }
       },
       {
@@ -265,13 +265,13 @@ exports.phantomas = {
           return true;
         },
         value       : function() {
-          return {
+          return [ {
             metrics : {
               metricA       : 20,
               metricB       : 50,
               jQueryVersion : '1.9.1'
             }
-          };
+          } ];
         }
       },
       {
@@ -279,13 +279,13 @@ exports.phantomas = {
           return true;
         },
         value       : function() {
-          return {
+          return [ {
             metrics : {
               metricA       : 30,
               metricB       : 60,
               jQueryVersion : '1.9.1'
             }
-          };
+          } ];
         }
       }
     ];
