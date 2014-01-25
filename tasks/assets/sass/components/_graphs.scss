@@ -186,7 +186,9 @@
 
   display: inline-block;
 
-  border-bottom: 1px solid $c-grayDarker;
+  border-bottom: 1px solid $c-green;
+  box-shadow : 0  1px 0 $c-grayDarker;
+
   margin: 0 2.5% 2.5em 2.5%;
 
   @media screen and ( min-width: $b-medium ) {

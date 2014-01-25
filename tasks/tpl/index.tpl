@@ -8,23 +8,7 @@
 
     return old;
   }, [] );
-
-  var groupedMetrics  = [];
-  var counter         = 0;
-  var columnsPerTable = 7;
-  _.each( allMetrics, function( metric, index ) {
-    if ( index !== 0 && index % columnsPerTable === 0 ) {
-      ++counter;
-    }
-
-    if ( groupedMetrics[ counter ] === undefined ) {
-      groupedMetrics[ counter ] = [];
-    }
-
-    groupedMetrics[ counter ].push( metric );
-  } );
 %>
-
 
 <!DOCTYPE html>
 <html>
@@ -56,29 +40,24 @@
             <a class="p--graphs--warningBtn <%= ( meta[ metric ] && !meta[ metric ].reliable ) ? 'active' : '' %>" href="#warning-<%= metric %>">Show warning</a>
             <div id="warning-<%= metric %>" class="p--graphs--warning" hidden>Unfortunately this metric is not reliable. For more information please check documentation of phantomas.</div>
             <svg></svg>
+            <table class="p--table">
+              <thead class="p--table--head">
+                <th class="p--table--column">Date</th>
+                <th class="p--table--column"><%= metric %></th>
+              </thead>
+              <tbody class="p--table--body">
+                <% _.each( results, function( result ) { %>
+                  <% if ( result[ metric ] && result[ metric ].median !== undefined ) { %>
+                    <tr class="p--table--row">
+                        <td class="p--table--column__highlight"><%= ( new Date( result.timestamp ) ).toISOString() %></td>
+                        <td class="p--table--column"><%= result[ metric ].median %></td>
+                    </tr>
+                  <% } %>
+                <% } ) %>
+              </tbody>
+            </table>
         <% } );%>
       </ul>
-      <h2>Tables of wisdom ( median values )</h2>
-      <% _.each( groupedMetrics, function( metrics ) { %>
-        <table class="p--table">
-          <thead class="p--table--head">
-            <th class="p--table--column">Date</th>
-            <% _.each( metrics, function( key ) { %>
-              <th class="p--table--column"><%= key %></th>
-            <% } ); %>
-          </thead>
-          <tbody class="p--table--body">
-            <% _.each( results, function( result ) { %>
-              <tr class="p--table--row">
-                <td class="p--table--column__highlight"><%= ( new Date( result.timestamp ) ).toISOString() %></td>
-                <% _.each( metrics, function( metric ) { %>
-                  <td class="p--table--column"><%= ( result[ metric ] && result[ metric ].median !== undefined ) ? result[ metric ].median : result[ metric ] %></td>
-                <% } ); %>
-              </tr>
-            <% } ) %>
-          </tbody>
-        </table>
-      <% } ); %>
     </main>
     <footer class="p--footer">
       Made with &#x2764; and <a href="https://github.com/macbre/phantomas" target="_blank">Phantomas</a>
