@@ -1,6 +1,6 @@
 # grunt-phantomas
 
-[![Build Status](https://travis-ci.org/stefanjudis/grunt-phantomas.png?branch=master)](https://travis-ci.org/stefanjudis/grunt-phantomas) [![NPM version](https://badge.fury.io/js/grunt-phantomas.png)](http://badge.fury.io/js/grunt-phantomas) [![Dependency Status](https://gemnasium.com/stefanjudis/grunt-phantomas.png)](https://gemnasium.com/stefanjudis/grunt-phantomas) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+[![Build Status](http://b.adge.me/travis/stefanjudis/grunt-phantomas.svg)](https://travis-ci.org/stefanjudis/grunt-phantomas) [![NPM version](http://b.adge.me/npm/v/grunt-phantomas.svg)](http://badge.fury.io/js/grunt-phantomas) [![Dependency Status](http://b.adge.me/gemnasium/stefanjudis/grunt-phantomas.svg)](https://gemnasium.com/stefanjudis/grunt-phantomas) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 > Grunt plugin for phantomas
 
