@@ -64,6 +64,7 @@ module.exports = function( grunt ) {
         'Gruntfile.js',
         'tasks/assets/**/*.js',
         '!tasks/assets/scripts/d3.min.js',
+        'tasks/lib/**/*.js',
         '<%= nodeunit.tests %>',
       ],
       options : {
@@ -74,12 +75,13 @@ module.exports = function( grunt ) {
 
     phantomas : {
       /* https://github.com/stefanjudis/grunt-phantomas */
-      gruntjs : {
+      grunt : {
         options : {
-          indexPath    : './phantomas/',
-          numberOfRuns : 10,
-          options      : {},
-          url          : 'http://gruntjs.com'
+          indexPath : './phantomas/',
+          options   : {
+            'timeout' : 30
+          },
+          url       : 'http://gruntjs.com/'
         }
       }
     },

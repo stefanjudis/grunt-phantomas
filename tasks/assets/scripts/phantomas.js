@@ -289,7 +289,6 @@
         .each( 'end', function() {
           drawCircles( data );
         } );
-
   }
 
   function appendDetailBoxForCircle( circle ) {
@@ -335,15 +334,15 @@
    * -> event delegation for the win
    */
   function attachCircleEvents() {
-    var graphList = document.getElementById( 'p--graphs' );
+    var mainContainer = document.getElementsByTagName( 'main' )[ 0 ];
 
-    addEvent( graphList, 'mouseover', function( event ) {
+    addEvent( mainContainer, 'mouseover', function( event ) {
       if ( event.target.tagName === 'circle' ) {
         appendDetailBoxForCircle( event.target );
       }
     } );
 
-    addEvent( graphList, 'mouseout', function( event ) {
+    addEvent( mainContainer, 'mouseout', function( event ) {
       if ( event.target.tagName === 'circle' ) {
         removeDetailBoxForCircle( event.target );
       }
@@ -455,7 +454,8 @@
       if (
         lastMetric[ metric ] &&
         typeof lastMetric[ metric ].median === 'number' &&
-        metric !== 'timestamp'
+        metric !== 'timestamp' &&
+        document.getElementById( 'graph--' + metric )
       ) {
         drawLineChart( data, metric, type );
       }

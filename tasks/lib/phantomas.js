@@ -13,6 +13,7 @@ var fs        = Promise.promisifyAll( require( 'node-fs' ) );
 var path      = Promise.promisifyAll( require( 'path' ) );
 var meta      = require( '../config/metricsMeta' );
 var phantomas = require( 'phantomas' );
+var _         = require('lodash');
 
 var ASSETS_PATH = path.resolve(
                     __dirname, '../public/'
@@ -242,8 +243,7 @@ Phantomas.prototype.createIndexHtml = function( results ) {
 
     var templateResults = [];
 
-    // check if all files were valid
-    // json and inform
+    // check if all files were valid json
     results.forEach( function( result ) {
       if ( result.isFulfilled() ) {
         templateResults.push( result.value() );
@@ -255,6 +255,7 @@ Phantomas.prototype.createIndexHtml = function( results ) {
       this.grunt.template.process(
         this.grunt.file.read( TEMPLATE_FILE ),
         { data : {
+          group   : this.options.group,
           meta    : this.meta,
           results : templateResults,
           url     : this.options.url
@@ -266,7 +267,7 @@ Phantomas.prototype.createIndexHtml = function( results ) {
       'Phantomas created new \'index.html\' at \'' + this.options.indexPath + '\'.'
     );
 
-    resolve();
+    resolve( templateResults );
 
   }.bind( this ) );
 };
@@ -451,8 +452,13 @@ Phantomas.prototype.kickOff = function() {
       // write html file and produce
       // nice graphics
       .then( this.createIndexHtml )
+      // check displayed options and
+      // inform which one are not displayed
+      // in the result index
+      .then( this.notifyAboutNotDisplayedMetrics )
       // copy all asset files over to
       // wished index path
+      //
       .then( this.copyAssets )
       // yeah we're done :)
       .then( this.showSuccessMessage )
@@ -471,6 +477,27 @@ Phantomas.prototype.kickOff = function() {
       }.bind( this ) )
       .done();
 };
+
+
+Phantomas.prototype.notifyAboutNotDisplayedMetrics = function( results ) {
+  return new Promise( function( resolve ) {
+    this.grunt.log.subhead( 'CHECKING FOR NOT DISPLAYED METRICS.' );
+
+    var resultKeys          = _.keys( results[ 0 ] );
+    var displayedMetricKeys = _.flatten( _.values( this.options.group ) );
+
+    displayedMetricKeys.push( 'timestamp' );
+
+    var notDisplayedMetrics = _.difference( resultKeys, displayedMetricKeys );
+
+    this.grunt.log.ok(
+      'You are currently not displaying the following metrics:\n' +
+      notDisplayedMetrics.join( ', ' )
+    );
+
+    resolve();
+  }.bind( this ) );
+}
 
 
 /**
