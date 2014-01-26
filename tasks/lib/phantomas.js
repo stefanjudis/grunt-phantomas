@@ -504,7 +504,7 @@ Phantomas.prototype.notifyAboutNotDisplayedMetrics = function( results ) {
 
     resolve();
   }.bind( this ) );
-}
+};
 
 
 /**
