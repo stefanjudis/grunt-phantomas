@@ -479,6 +479,13 @@ Phantomas.prototype.kickOff = function() {
 };
 
 
+/**
+ * Notify about not displayed metrics during
+ * the build process
+ *
+ * @param  {Object} results results
+ * @return {Promise}        Promise
+ */
 Phantomas.prototype.notifyAboutNotDisplayedMetrics = function( results ) {
   return new Promise( function( resolve ) {
     this.grunt.log.subhead( 'CHECKING FOR NOT DISPLAYED METRICS.' );
