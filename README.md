@@ -71,6 +71,165 @@ Default value: `http://gruntjs.com/`
 
 A string value that represents the url of the site, which will be analyzed by `phantomas`.
 
+#### options.group
+Type: `Object`
+Default value:
+```
+{
+  'REQUESTS' : [
+    'requests',
+    'gzipRequests',
+    'postRequests',
+    'httpsRequests',
+    'notFound',
+    'multipleRequests',
+    'maxRequestsPerDomain',
+    'domains',
+    'medianRequestsPerDomain',
+    'redirects',
+    'redirectsTime',
+    'smallestResponse',
+    'biggestResponse',
+    'smallestLatency',
+    'biggestLatency',
+    'medianResponse',
+    'medianLatency',
+    'assetsNotGzipped',
+    'assetsWithQueryString',
+    'smallImages'
+  ],
+  'TIMINGS' : [
+    'timeToFirstByte',
+    'timeToLastByte',
+    'timeToFirstCss',
+    'timeToFirstJs',
+    'timeToFirstImage',
+    'fastestResponse',
+    'slowestResponse',
+    'onDOMReadyTime',
+    'onDOMReadyTimeEnd',
+    'windowOnLoadTime',
+    'windowOnLoadTimeEnd',
+    'httpTrafficCompleted',
+    'timeBackend',
+    'timeFrontend'
+  ],
+  'HTML' : [
+    'bodyHTMLSize',
+    'iframesCount',
+    'imagesWithoutDimensions',
+    'commentsSize',
+    'hiddenContentSize',
+    'whiteSpacesSize',
+    'DOMelementsCount',
+    'DOMelementMaxDepth',
+    'nodesWithInlineCSS',
+    'foo'
+  ],
+  'JAVASCRIPT' : [
+    'eventsBound',
+    'documentWriteCalls',
+    'evalCalls',
+    'jsErrors',
+    'consoleMessages',
+    'windowAlerts',
+    'windowConfirms',
+    'windowPrompts',
+    'globalVariables',
+    'localStorageEntries',
+    'ajaxRequests'
+  ],
+  'DOM' : [
+    'DOMqueries',
+    'DOMqueriesById',
+    'DOMqueriesByClassName',
+    'DOMqueriesByTagName',
+    'DOMqueriesByQuerySelectorAll',
+    'DOMinserts',
+    'DOMqueriesDuplicated'
+  ],
+  'HEADERS' : [
+    'headersCount',
+    'headersSentCount',
+    'headersRecvCount',
+    'headersSize',
+    'headersSentSize',
+    'headersRecvSize'
+  ],
+  'CASHING' : [
+    'cacheHits',
+    'cacheMisses',
+    'cachePasses',
+    'cachingNotSpecified',
+    'cachingTooShort',
+    'cachingDisabled'
+  ],
+  'COOKIES' : [
+    'cookiesSent',
+    'cookiesRecv',
+    'domainsWithCookies',
+    'documentCookiesLength',
+    'documentCookiesCount'
+  ],
+  'COUNTS & SIZES' : [
+    'contentLength',
+    'bodySize',
+    'htmlSize',
+    'htmlCount',
+    'cssSize',
+    'cssCount',
+    'jsSize',
+    'jsCount',
+    'jsonSize',
+    'jsonCount',
+    'imageSize',
+    'imageCount',
+    'webfontSize',
+    'webfontCount',
+    'base64Size',
+    'base64Count',
+    'otherCount',
+    'otherSize'
+  ],
+  'JQUERY' : [
+    'jQueryOnDOMReadyFunctions',
+    'jQuerySizzleCalls'
+  ]
+}
+```
+An object that represents the metrics grouping rendered inside of the generated `index.html`. You can set up your grouping by just passing another object to this option.
+
+Example:
+
+```
+phantomas : {
+  /* https://github.com/stefanjudis/grunt-phantomas */
+  grunt : {
+    options : {
+      indexPath : './phantomas/',
+      options   : {
+        'timeout' : 30
+      },
+      url       : 'http://gruntjs.com/',
+      group     : {
+        'foo' : [ 'cookiesSent' ]
+      }
+    }
+  }
+}
+```
+This configuration will lead to a rather empty looking rendered `index.html`. :)
+Additionally you will be informed, which metrics you missed during the build process.
+
+Output for example:
+
+```
+CHECKING FOR NOT DISPLAYED METRICS.
+>> You are currently not displaying the following metrics:
+>> requests, gzipRequests, postRequests, httpsRequests, notFound, timeToFirstByte, timeToLastByte, bodySize, contentLength, ajaxRequests, htmlCount, htmlSize, cssCount, cssSize, jsCount, jsSize, jsonCount, jsonSize, imageCount, imageSize, webfontCount, webfontSize, base64Count, base64Size, otherCount, otherSize, cacheHits, cacheMisses, cachePasses, cachingNotSpecified, cachingTooShort, cachingDisabled, consoleMessages, domains, maxRequestsPerDomain, medianRequestsPerDomain, DOMqueries, DOMqueriesById, DOMqueriesByClassName, DOMqueriesByTagName, DOMqueriesByQuerySelectorAll, DOMinserts, DOMqueriesDuplicated, eventsBound, headersCount, headersSentCount, headersRecvCount, headersSize, headersSentSize, headersRecvSize, documentWriteCalls, evalCalls, jQueryOnDOMReadyFunctions, jQuerySizzleCalls, jsErrors, redirects, redirectsTime, assetsNotGzipped, assetsWithQueryString, smallImages, multipleRequests, timeToFirstCss, timeToFirstJs, timeToFirstImage, onDOMReadyTime, onDOMReadyTimeEnd, windowOnLoadTime, windowOnLoadTimeEnd, timeBackend, timeFrontend, httpTrafficCompleted, windowAlerts, windowConfirms, windowPrompts, cookiesRecv, domainsWithCookies, documentCookiesLength, documentCookiesCount, bodyHTMLSize, iframesCount, imagesWithoutDimensions, commentsSize, hiddenContentSize, whiteSpacesSize, DOMelementsCount, DOMelementMaxDepth, nodesWithInlineCSS, globalVariables, localStorageEntries, smallestResponse, biggestResponse, fastestResponse, slowestResponse, smallestLatency, biggestLatency, medianResponse, medianLatency
+```
+
+
 ### Usage Examples
 
 #### Default Options
@@ -85,7 +244,7 @@ grunt.initConfig({
 ```
 
 #### Custom Options
-In this example, custom options are used to fetch metrice of `http://yoursite.com` and render the visualized metrics at `./yoursite/`.
+In this example, custom options are used to fetch metrics of `http://yoursite.com` and render the visualized metrics at `./yoursite/`.
 
 ```js
 grunt.initConfig( {
@@ -103,6 +262,7 @@ grunt.initConfig( {
 
 #### Phantomas options
 In this example, the phantomas option is used to set `phantomas` execution parameters. In this case all external script except the defined ones are blocked by `phantomas`, what can become really handy, when dealing with a lot of third party scripts that influence your site performance.
+Additionally phantomas will wait 30 seconds for all resources to be loaded until it quits with the timeout status code 252.
 ```js
 grunt.initConfig( {
   phantomas: {
@@ -110,8 +270,10 @@ grunt.initConfig( {
       options : {
         indexPath : './yoursite/',
         options   : {
+          'allow-domain' : 'cdn.yoursite.com.br,ajax.googleapis.com',
           'no-externals' : true,
-          'allow-domain' : 'cdn.yoursite.com.br,ajax.googleapis.com'
+          'timeout'      : 30
+
         },
         url       : 'http://yoursite.com'
       }
