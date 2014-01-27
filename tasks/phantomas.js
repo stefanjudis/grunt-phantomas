@@ -100,7 +100,7 @@ module.exports = function( grunt ) {
             'headersSentSize',
             'headersRecvSize'
           ],
-          'CASHING' : [
+          'CACHING' : [
             'cacheHits',
             'cacheMisses',
             'cachePasses',
