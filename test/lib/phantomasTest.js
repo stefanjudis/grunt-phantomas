@@ -100,7 +100,11 @@ exports.phantomas = {
 
           test.strictEqual(
             fs.readFileSync( './tmp/data/' + files[ 0 ], 'utf8' ),
-            '{"requests":{"values":[1,2,3,4]}}'
+            JSON.stringify( {
+              requests : {
+                values : [ 1, 2, 3, 4 ]
+              }
+            }, null, 2 )
           );
 
           test.done();
