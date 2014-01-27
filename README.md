@@ -156,7 +156,7 @@ Default value:
     'headersSentSize',
     'headersRecvSize'
   ],
-  'CASHING' : [
+  'CACHING' : [
     'cacheHits',
     'cacheMisses',
     'cachePasses',
