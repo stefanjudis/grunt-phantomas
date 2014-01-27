@@ -59,7 +59,7 @@
     <script>var results = [
 <%= results.map( function ( result ) {
   return '/* ' + ( new Date( result.timestamp ) ) + ' | ' + result.timestamp + '.json */\n' + JSON.stringify( result, null, 2 ) ;
-}).join(',\n') %>
+} ).join( ',\n' ) %>
 ];</script>
     <script src="public/scripts/d3.min.js"></script>
     <script src="public/scripts/phantomas.min.js"></script>
