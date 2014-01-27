@@ -56,7 +56,11 @@
     <footer class="p--footer">
       Made with &#x2764; and <a href="https://github.com/macbre/phantomas" target="_blank">Phantomas</a>
     </footer>
-    <script>var results = <%= JSON.stringify( results ) %></script>
+    <script>var results = [
+<%= results.map( function ( result ) {
+  return '/* ' + ( new Date( result.timestamp ) ) + ' | ' + result.timestamp + '.json */\n' + JSON.stringify( result, null, 2 ) ;
+} ).join( ',\n' ) %>
+];</script>
     <script src="public/scripts/d3.min.js"></script>
     <script src="public/scripts/phantomas.min.js"></script>
   </body>
