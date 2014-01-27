@@ -158,7 +158,7 @@ Phantomas.prototype.createDataJson = function( result ) {
 
       fs.writeFileAsync(
         this.dataPath + ( +new Date() ) + '.json',
-        JSON.stringify( result )
+        JSON.stringify( result, null, 2 )
       ).then( resolve );
 
       this.grunt.log.ok( 'JSON file written.' );
