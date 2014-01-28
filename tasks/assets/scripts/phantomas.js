@@ -190,7 +190,7 @@
         margin      = {
           top    : 20,
           right  : 10,
-          bottom : 10,
+          bottom : 60,
           left   : 10
         },
 
@@ -261,8 +261,11 @@
 
     svg.append( 'g' )
         .attr( 'class', 'lineChart--xAxis' )
-        .attr( 'transform', 'translate(' + detailWidth / 2 + ',' + ( height + 7 ) + ')' )
-        .call( xAxis );
+        .attr( 'transform', 'translate(' + detailWidth / 2 + ',' + ( height + 5 ) + ')' )
+        .call( xAxis )
+        .selectAll( 'text' )
+        .attr( 'transform', 'rotate(45)' )
+        .style( 'text-anchor', 'start' );
 
     svg.append( 'g' )
       .attr( 'class', 'lineChart--yAxisTicks' )
