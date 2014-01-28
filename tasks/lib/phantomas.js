@@ -14,6 +14,7 @@ var path      = Promise.promisifyAll( require( 'path' ) );
 var meta      = require( '../config/metricsMeta' );
 var phantomas = require( 'phantomas' );
 var _         = require('lodash');
+var minify    = require( 'html-minifier' ).minify;
 
 var ASSETS_PATH = path.resolve(
                     __dirname, '../public/'
@@ -265,6 +266,21 @@ Phantomas.prototype.createIndexHtml = function( results ) {
 
     this.grunt.log.ok(
       'Phantomas created new \'index.html\' at \'' + this.options.indexPath + '\'.'
+    );
+
+    this.grunt.file.write(
+      this.options.indexPath + 'index.html',
+      minify(
+        this.grunt.file.read( this.options.indexPath + 'index.html' ),
+        {
+          removeComments     : true,
+          collapseWhitespace : true
+        }
+      )
+    );
+
+    this.grunt.log.ok(
+      'Phantomas made \'index.html\' at \'' + this.options.indexPath + '\' nice and small.'
     );
 
     resolve( templateResults );
