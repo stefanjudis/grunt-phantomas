@@ -490,6 +490,7 @@ Phantomas.prototype.kickOff = function() {
         if ( e.stack ) {
           this.grunt.log.error( e.stack );
         }
+        this.grunt.event.emit('phantomasFailure', e);
       }.bind( this ) )
       .done();
 };
