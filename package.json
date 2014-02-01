@@ -1,7 +1,7 @@
 {
   "name": "grunt-phantomas",
   "description": "Grunt plugin for phantomas",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "homepage": "https://github.com/stefanjudis/grunt-phantomas",
   "author": {
     "name": "stefan judis",
