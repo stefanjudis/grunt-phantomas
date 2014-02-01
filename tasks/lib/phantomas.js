@@ -16,6 +16,11 @@ var phantomas = require( 'phantomas' );
 var _         = require('lodash');
 var minify    = require( 'html-minifier' ).minify;
 
+
+/**
+ * Path to generated asset files
+ * @type {String}
+ */
 var ASSETS_PATH = path.resolve(
                     __dirname, '../public/'
                   );
@@ -68,7 +73,7 @@ Phantomas.prototype.copyAssets = function() {
 
   return new Promise( function( resolve ) {
     if ( !fs.existsSync( this.options.indexPath + '/public' ) ) {
-    fs.mkdirSync( this.options.indexPath + '/public' );
+      fs.mkdirSync( this.options.indexPath + '/public' );
     }
 
     this.copyStyles();
@@ -501,7 +506,6 @@ Phantomas.prototype.kickOff = function() {
       .then( this.notifyAboutNotDisplayedMetrics )
       // copy all asset files over to
       // wished index path
-      //
       .then( this.copyAssets )
       // yeah we're done :)
       .then( this.showSuccessMessage )
