@@ -47,6 +47,12 @@ grunt.initConfig( {
 
 ### Options
 
+#### options.additionalStylesheet
+Type: `String|Boolean`
+Default value: `false`
+
+If you don't like the phantomas default styling and want to customize it, you can set the path to an additional stylesheet, that will be copied and loaded in the generated `index.html`.
+
 #### options.indexPath
 Type: `String`
 Default value: `./phantomas/`
@@ -54,7 +60,7 @@ Default value: `./phantomas/`
 A string value that represents the relative path to the place where `phantomas` will render your metrics. Inside of this folder an `index.html`, a data folder and an assets folder will be created.
 
 #### options.numberOfRuns
-Type: 'Number'
+Type: `Number`
 Default value: `5`
 
 A numeric value that represents the number of times the `phantomas` executable will be started. The more times it runs the more reliable metrics become.
@@ -243,7 +249,7 @@ grunt.initConfig({
 });
 ```
 
-#### Custom Options
+#### Grunt task options
 In this example, custom options are used to fetch metrics of `http://yoursite.com` and render the visualized metrics at `./yoursite/`.
 
 ```js
@@ -251,9 +257,10 @@ grunt.initConfig( {
   phantomas: {
     yourSite : {
       options : {
-        indexPath    : './yoursite/',
-        url          : 'http://yoursite.com/',
-        numberOfRuns : 10
+        additionalStylesheet : '/Users/foo/bar/custom.css',
+        indexPath            : './yoursite/',
+        url                  : 'http://yoursite.com/',
+        numberOfRuns         : 10
       }
     }
   }
