@@ -57,6 +57,112 @@ exports.phantomas = {
   },
 
 
+  copyScripts : function( test ) {
+    var options     = {
+      indexPath : TEMP_PATH
+    };
+    var done        = function() {};
+    var phantomas   = new Phantomas( grunt, options, done );
+
+    fs.mkdirSync( TEMP_PATH + 'public' );
+
+    phantomas.copyScripts();
+
+    test.strictEqual(
+      fs.existsSync( TEMP_PATH + 'public/scripts/phantomas.min.js' ),
+      true
+    );
+
+    test.strictEqual(
+      fs.existsSync( TEMP_PATH + 'public/scripts/d3.min.js' ),
+      true
+    );
+
+    test.done();
+  },
+
+
+  copyStyles : {
+    withoutAdditionalStylesheet : function( test ) {
+      var options     = {
+        indexPath : TEMP_PATH
+      };
+      var done        = function() {};
+      var phantomas   = new Phantomas( grunt, options, done );
+
+      fs.mkdirSync( TEMP_PATH + 'public' );
+
+      phantomas.copyStyles();
+
+      test.strictEqual(
+        fs.existsSync( TEMP_PATH + 'public/styles/phantomas.css' ),
+        true
+      );
+
+      test.strictEqual(
+        fs.existsSync( TEMP_PATH + 'public/styles/custom.css' ),
+        false
+      );
+
+      test.done();
+    },
+    withAdditionalStylesheet : {
+      stylesheetExists : function( test ) {
+        var options     = {
+          additionalStylesheet : TEMP_PATH + 'foo.css',
+          indexPath            : TEMP_PATH
+        };
+        var done        = function() {};
+        var phantomas   = new Phantomas( grunt, options, done );
+
+        fs.writeFileSync(
+          TEMP_PATH +
+          'foo.css', 'body { color : red !important; }'
+        );
+        fs.mkdirSync( TEMP_PATH + 'public' );
+
+        phantomas.copyStyles();
+
+        test.strictEqual(
+          fs.existsSync( TEMP_PATH + 'public/styles/phantomas.css' ),
+          true
+        );
+
+        test.strictEqual(
+          fs.existsSync( TEMP_PATH + 'public/styles/custom.css' ),
+          true
+        );
+
+        test.done();
+      },
+      stylesheetDoesNotExist : function( test ) {
+        var options     = {
+          additionalStylesheet : TEMP_PATH + 'foo.css',
+          indexPath            : TEMP_PATH
+        };
+        var done        = function() {};
+        var phantomas   = new Phantomas( grunt, options, done );
+
+        fs.mkdirSync( TEMP_PATH + 'public' );
+
+        phantomas.copyStyles();
+
+        test.strictEqual(
+          fs.existsSync( TEMP_PATH + 'public/styles/phantomas.css' ),
+          true
+        );
+
+        test.strictEqual(
+          fs.existsSync( TEMP_PATH + 'public/styles/custom.css' ),
+          false
+        );
+
+        test.done();
+      }
+    }
+  },
+
+
   createDataJson : {
     invalidData : function( test ) {
       var options     = {

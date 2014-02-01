@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title></title>
+    <title>Frontend statistics for <%= url %></title>
     <link rel="stylesheet" href="public/styles/phantomas.css" media="all">
+    <% if ( additionalStylesheet ) { %>
+      <link rel="stylesheet" href="public/styles/custom.css" media="all">
+    <% } %>
   </head>
   <body>
     <header class="p--header">

@@ -16,6 +16,11 @@ var phantomas = require( 'phantomas' );
 var _         = require('lodash');
 var minify    = require( 'html-minifier' ).minify;
 
+
+/**
+ * Path to generated asset files
+ * @type {String}
+ */
 var ASSETS_PATH = path.resolve(
                     __dirname, '../public/'
                   );
@@ -68,7 +73,7 @@ Phantomas.prototype.copyAssets = function() {
 
   return new Promise( function( resolve ) {
     if ( !fs.existsSync( this.options.indexPath + '/public' ) ) {
-    fs.mkdirSync( this.options.indexPath + '/public' );
+      fs.mkdirSync( this.options.indexPath + '/public' );
     }
 
     this.copyStyles();
@@ -83,6 +88,9 @@ Phantomas.prototype.copyAssets = function() {
  * Copy script files and create needed folders
  *
  * - d3.min.js
+ * - phantomas.min.js
+ *
+ * @tested
  */
 Phantomas.prototype.copyScripts = function() {
   if ( !fs.existsSync( this.options.indexPath + '/public/scripts' ) ) {
@@ -119,6 +127,8 @@ Phantomas.prototype.copyScripts = function() {
 
 /**
  * Copy styles file and create needed folders
+ *
+ * @tested
  */
 Phantomas.prototype.copyStyles = function() {
   if ( !fs.existsSync( this.options.indexPath + '/public/styles' ) ) {
@@ -137,6 +147,27 @@ Phantomas.prototype.copyStyles = function() {
   this.grunt.log.ok(
     'Phantomas copied asset to \'' + this.options.indexPath + 'public/styles/phantomas.css\'.'
   );
+
+  if ( this.options.additionalStylesheet ) {
+    if ( fs.existsSync( this.options.additionalStylesheet ) ) {
+      fs.writeFileSync(
+        path.normalize( this.options.indexPath + '/public/styles/custom.css' ),
+        fs.readFileSync( this.options.additionalStylesheet )
+      );
+
+      this.grunt.log.ok(
+        'Phantomas copied custom stylesheet to \'' +
+        this.options.indexPath +
+        'public/styles/custom.css\'.'
+      );
+    } else {
+      this.grunt.log.error(
+        'Your additional stylesheet \'' +
+        this.options.additionalStylesheet +
+        '\' does not exist.'
+      );
+    }
+  }
 };
 
 
@@ -256,10 +287,11 @@ Phantomas.prototype.createIndexHtml = function( results ) {
       this.grunt.template.process(
         this.grunt.file.read( TEMPLATE_FILE ),
         { data : {
-          group   : this.options.group,
-          meta    : this.meta,
-          results : templateResults,
-          url     : this.options.url
+          additionalStylesheet : this.options.additionalStylesheet,
+          group                : this.options.group,
+          meta                 : this.meta,
+          results              : templateResults,
+          url                  : this.options.url
         } }
       )
     );
@@ -474,7 +506,6 @@ Phantomas.prototype.kickOff = function() {
       .then( this.notifyAboutNotDisplayedMetrics )
       // copy all asset files over to
       // wished index path
-      //
       .then( this.copyAssets )
       // yeah we're done :)
       .then( this.showSuccessMessage )

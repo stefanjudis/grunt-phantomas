@@ -15,11 +15,12 @@ module.exports = function( grunt ) {
     function() {
       var done      = this.async();
       var options   = this.options( {
-        indexPath    : './phantomas/',
-        numberOfRuns : 5,
-        options      : {},
-        url          : 'http://gruntjs.com/',
-        group        : {
+        additionStylesheet : false,
+        indexPath          : './phantomas/',
+        numberOfRuns       : 5,
+        options            : {},
+        url                : 'http://gruntjs.com/',
+        group              : {
           'REQUESTS' : [
             'requests',
             'gzipRequests',
