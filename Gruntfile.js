@@ -77,11 +77,12 @@ module.exports = function( grunt ) {
       /* https://github.com/stefanjudis/grunt-phantomas */
       grunt : {
         options : {
-          indexPath : './phantomas/',
-          options   : {
+          // additionalStylesheet : '/Users/stefan/Desktop/custom2.css',
+          indexPath            : './phantomas/',
+          options              : {
             'timeout' : 30
           },
-          url       : 'http://gruntjs.com/'
+          url                  : 'http://gruntjs.com/'
         }
       }
     },
