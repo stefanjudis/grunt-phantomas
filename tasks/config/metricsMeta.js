@@ -1,5 +1,3 @@
-/* global window, document, d3 */
-
 /*
  * grunt-phantomas
  * https://github.com/stefanjudis/grunt-phantomas
@@ -453,10 +451,6 @@ module.exports = {
   domainsWithCookies : {
     reliable    : true,
     description : 'Number of domains with cookies set'
-  },
-  cssDeclarations : {
-    reliable    : true,
-    description : ''
   },
   documentCookiesLength : {
     reliable    : true,
