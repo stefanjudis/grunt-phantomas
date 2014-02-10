@@ -345,7 +345,7 @@ exports.phantomas = {
   },
 
 
-  formResult : function( test) {
+  formResult : function( test ) {
     var options     = {
         url : 'http://test.com'
       };
