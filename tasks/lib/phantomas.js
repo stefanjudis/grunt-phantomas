@@ -368,37 +368,32 @@ Phantomas.prototype.executePhantomas = function() {
 Phantomas.prototype.formResult = function( results ) {
   this.grunt.log.ok( this.options.numberOfRuns + ' Phantomas execution(s) done -> checking results:' );
   return new Promise( function( resolve ) {
-    var entries                = {},
-        foundFullfilledPromise = false,
+    var entries          = {},
+        fulfilledPromise = _.filter( results, function( promise ) {
+          return promise.isFulfilled();
+        } ),
+        fulFilledMetrics = fulfilledPromise[ 0 ].value()[ 0 ].metrics,
         entry,
         metric;
 
-    // prepare entries
-    for ( var i = 0; i < results.length && !foundFullfilledPromise; i++ ) {
-      if ( results[ i ].isFulfilled() ) {
-        // grep the first entries for the json result
-        for ( metric in results[ i ].value()[ 0 ].metrics ) {
-          if (
-            typeof results[ i ].value()[ 0 ].metrics[ metric ] !== 'string' &&
-            typeof results[ i ].value()[ 0 ].metrics[ metric ] !== 'undefined'
-          ) {
-            entries[ metric ] = {
-              values  : [],
-              sum     : 0,
-              min     : 0,
-              max     : 0,
-              median  : undefined,
-              average : undefined
-            };
-          }
-
-          foundFullfilledPromise = true;
-        }
+    _.each( fulFilledMetrics, function( value, key ) {
+      if (
+        typeof value !== 'undefined' &&
+        typeof value !== 'string'
+      ) {
+        entries[ key ] = {
+          values  : [],
+          sum     : 0,
+          min     : 0,
+          max     : 0,
+          median  : undefined,
+          average : undefined
+        };
       }
-    }
+    } );
 
     // process all runs
-    results.forEach( function( promise ) {
+    _.each( results, function( promise ) {
       if ( promise.isFulfilled() ) {
         this.grunt.log.ok( 'Phantomas execution done.' );
 
@@ -418,7 +413,7 @@ Phantomas.prototype.formResult = function( results ) {
           'Phantomas execution not successful -> ' + promise.error()
         );
       }
-    }.bind( this ) );
+    }, this );
 
     /**
      * Avoiding deep nesting for 'calculate stats'
