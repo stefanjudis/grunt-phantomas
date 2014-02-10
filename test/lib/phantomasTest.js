@@ -356,7 +356,7 @@ exports.phantomas = {
         isFulfilled : function() {
           return true;
         },
-        value       : function() {
+        value : function() {
           return [ {
             metrics : {
               metricA       : 10,
@@ -370,7 +370,7 @@ exports.phantomas = {
         isFulfilled : function() {
           return true;
         },
-        value       : function() {
+        value : function() {
           return [ {
             metrics : {
               metricA       : 20,
@@ -384,7 +384,7 @@ exports.phantomas = {
         isFulfilled   : function() {
           return true;
         },
-        value       : function() {
+        value : function() {
           return [ {
             metrics : {
               metricA       : 30,
@@ -392,6 +392,14 @@ exports.phantomas = {
               jQueryVersion : '1.9.1'
             }
           } ];
+        }
+      },
+      {
+        isFulfilled   : function() {
+          return false;
+        },
+        error : function() {
+          return 'TIMEOUUUUUT';
         }
       }
     ];
