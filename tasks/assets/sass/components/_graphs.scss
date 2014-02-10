@@ -202,6 +202,17 @@
   }
 }
 
+.p--graphs--svg {
+  width  : 100%;
+  height : 0;
+
+  padding-top : 60%;
+}
+
+.p--graphs--svg__initialized {
+  padding : 0;
+}
+
 .p--lineChart--area {
   fill: rgba( $c-gray, 0.5 );
 }

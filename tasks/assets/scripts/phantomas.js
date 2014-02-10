@@ -199,7 +199,8 @@
         container   = d3.select( containerEl ),
         svg         = container.select( 'svg' )
                                 .attr( 'width', width )
-                                .attr( 'height', height + margin.top + margin.bottom ),
+                                .attr( 'height', height + margin.top + margin.bottom )
+                                .attr( 'class', 'p--graphs--svg__initialized' ),
 
         x          = d3.time.scale().range( [ 0, width - detailWidth ] ),
         xAxis      = d3.svg.axis().scale( x )
@@ -460,7 +461,7 @@
         metric !== 'timestamp' &&
         document.getElementById( 'graph--' + metric )
       ) {
-        drawLineChart( data, metric, type );
+        setTimeout( drawLineChart.bind( null, data, metric, type ), 250 );
       }
     }
   }

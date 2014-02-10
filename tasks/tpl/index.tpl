@@ -33,7 +33,7 @@
                   <div id="description-<%= metric %>" class="p--graphs--description" hidden><%= ( meta[ metric ] && meta[ metric ].description ) ? meta[ metric ].description : '' %></div>
                   <a class="p--graphs--warningBtn <%= ( meta[ metric ] && !meta[ metric ].reliable ) ? 'active' : '' %>" href="#warning-<%= metric %>">Show warning</a>
                   <div id="warning-<%= metric %>" class="p--graphs--warning" hidden>Unfortunately this metric is not reliable. For more information please check documentation of phantomas.</div>
-                  <svg height="0" width="0"></svg>
+                  <svg class="p--graphs--svg"></svg>
                   <table class="p--table">
                     <thead class="p--table--head">
                       <th class="p--table--column">Date</th>
