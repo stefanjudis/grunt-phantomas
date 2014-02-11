@@ -186,7 +186,7 @@
     // TODO code duplication check how you can avoid that
     var containerEl = document.getElementById( 'graph--' + metric ),
         width       = containerEl.clientWidth,
-        height      = Math.ceil( width * 0.4 ),
+        height      = width * 0.4,
         margin      = {
           top    : 20,
           right  : 10,
