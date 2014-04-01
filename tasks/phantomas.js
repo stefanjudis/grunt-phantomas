@@ -20,6 +20,7 @@ module.exports = function( grunt ) {
         numberOfRuns       : 5,
         options            : {},
         url                : 'http://gruntjs.com/',
+        buildUi            : true,
         group              : {
           'REQUESTS' : [
             'requests',

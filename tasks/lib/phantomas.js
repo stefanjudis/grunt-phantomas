@@ -53,6 +53,7 @@ var Phantomas = function( grunt, options, done ) {
   this.meta      = meta;
   this.options   = options;
   this.phantomas = Promise.promisify( phantomas );
+  this.buildUi   = options.buildUi;
 
   // quit if the phantomas version is too old
   if ( /(0\.12\.0|0\.11\..*|0\.10\..*)/.test( phantomas.version ) ) {
@@ -181,7 +182,6 @@ Phantomas.prototype.copyStyles = function() {
  */
 Phantomas.prototype.createDataJson = function( result ) {
   this.grunt.log.subhead( 'WRITING RESULT JSON FILE.' );
-
   return new Promise( function( resolve, reject ) {
     if (
       typeof result.requests !== 'undefined' &&
@@ -191,10 +191,20 @@ Phantomas.prototype.createDataJson = function( result ) {
       fs.writeFileAsync(
         this.dataPath + ( +new Date() ) + '.json',
         JSON.stringify( result, null, 2 )
-      ).then( resolve );
+      ).then( function(){
+        if(!this.buildUi) {
+            reject( 'Not Building Ui' );
+        }
+        else {
+            resolve();
+        }
+
+
+        }.bind( this ) );
 
       this.grunt.log.ok( 'JSON file written.' );
-    } else {
+    }
+    else {
       reject( 'No run was successful.' );
     }
   }.bind( this ) );
@@ -491,7 +501,7 @@ Phantomas.prototype.kickOff = function() {
       // write new json file with metrics data
       .then( this.createDataJson )
       // read all created json metrics
-      .then( this.readMetricsFiles )
+      .then( this.readMetricsFiles, this.stopPromise )
       // write html file and produce
       // nice graphics
       .then( this.createIndexHtml )
@@ -616,6 +626,13 @@ Phantomas.prototype.readMetricsFiles = function() {
             console.log( e );
           } );
       } );
+  }.bind( this ) );
+};
+
+Phantomas.prototype.stopPromise = function(message) {
+  return new Promise( function( resolve ) {
+    this.grunt.log.ok( message );
+    this.showSuccessMessage();
   }.bind( this ) );
 };
 
