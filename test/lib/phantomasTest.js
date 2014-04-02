@@ -187,7 +187,8 @@ exports.phantomas = {
     },
     validData : function( test ) {
       var options     = {
-        indexPath : TEMP_PATH
+        indexPath : TEMP_PATH,
+        buildUi   : true
       };
       var done        = function() {};
       var phantomas   = new Phantomas( grunt, options, done );
