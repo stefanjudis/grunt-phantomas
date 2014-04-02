@@ -55,6 +55,7 @@ var Phantomas = function( grunt, options, done ) {
   this.phantomas = Promise.promisify( phantomas );
   this.buildUi   = options.buildUi;
 
+
   // quit if the phantomas version is too old
   if ( /(0\.12\.0|0\.11\..*|0\.10\..*)/.test( phantomas.version ) ) {
     this.grunt.log.error( 'YOUR PHANTOMAS VERSION IS OUTDATED.' );
@@ -182,6 +183,7 @@ Phantomas.prototype.copyStyles = function() {
  */
 Phantomas.prototype.createDataJson = function( result ) {
   this.grunt.log.subhead( 'WRITING RESULT JSON FILE.' );
+
   return new Promise( function( resolve, reject ) {
     if (
       typeof result.requests !== 'undefined' &&
@@ -191,20 +193,10 @@ Phantomas.prototype.createDataJson = function( result ) {
       fs.writeFileAsync(
         this.dataPath + ( +new Date() ) + '.json',
         JSON.stringify( result, null, 2 )
-      ).then( function(){
-        if(!this.buildUi) {
-            reject( 'Not Building Ui' );
-        }
-        else {
-            resolve();
-        }
-
-
-        }.bind( this ) );
+      ).then( resolve );
 
       this.grunt.log.ok( 'JSON file written.' );
-    }
-    else {
+    } else {
       reject( 'No run was successful.' );
     }
   }.bind( this ) );
@@ -486,8 +478,7 @@ Phantomas.prototype.formResult = function( results ) {
  */
 Phantomas.prototype.kickOff = function() {
   this.grunt.log.subhead( 'PHANTOMAS EXECUTION(S) STARTED.' );
-
-  this.createIndexDirectory().bind( this )
+  var kickoOff = this.createIndexDirectory().bind( this )
       // create data directory to prevent
       // fileIO errors
       .then( this.createDataDirectory )
@@ -499,9 +490,11 @@ Phantomas.prototype.kickOff = function() {
       // max / min / median / average / ...
       .then( this.formResult )
       // write new json file with metrics data
-      .then( this.createDataJson )
-      // read all created json metrics
-      .then( this.readMetricsFiles, this.stopPromise )
+      .then( this.createDataJson );
+
+
+    if( this.buildUi ){
+      kickoOff.then( this.readMetricsFiles )
       // write html file and produce
       // nice graphics
       .then( this.createIndexHtml )
@@ -514,8 +507,10 @@ Phantomas.prototype.kickOff = function() {
       .then( this.copyAssets )
       // yeah we're done :)
       .then( this.showSuccessMessage )
+    }
+
       // catch general bluebird error
-      .catch( Promise.RejectionError, function ( e ) {
+      kickoOff.catch( Promise.RejectionError, function ( e ) {
           console.error( 'unable to write file, because: ', e.message );
       } )
       // catch unknown error
@@ -626,13 +621,6 @@ Phantomas.prototype.readMetricsFiles = function() {
             console.log( e );
           } );
       } );
-  }.bind( this ) );
-};
-
-Phantomas.prototype.stopPromise = function(message) {
-  return new Promise( function( resolve ) {
-    this.grunt.log.ok( message );
-    this.showSuccessMessage();
   }.bind( this ) );
 };
 
