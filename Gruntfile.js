@@ -80,12 +80,9 @@ module.exports = function( grunt ) {
           // additionalStylesheet : '/Users/stefan/Desktop/custom2.css',
           indexPath            : './phantomas/',
           options              : {
-            'timeout' : 30,
-            'reporter': 'csv'
+            'timeout' : 30
           },
-          url                  : 'http://gruntjs.com/',
-
-
+          url                  : 'http://gruntjs.com/'
         }
       }
     },
