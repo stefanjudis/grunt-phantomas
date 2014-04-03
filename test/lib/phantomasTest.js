@@ -3,6 +3,8 @@
 var fs        = require( 'fs' );
 var grunt     = require( 'grunt' );
 var Phantomas = require( '../../tasks/lib/phantomas' );
+var Promise   = require( 'bluebird' );
+var _         = require('lodash');
 
 var TEMP_PATH = './tmp/';
 
@@ -26,6 +28,88 @@ function deleteFolderRecursive ( path ) {
     fs.rmdirSync( path );
   }
 }
+
+function createStubPromise( test, name, testDone ){
+  return function(){
+    return new Promise( function( resolve, reject ) {
+      resolve();
+      test.ok(true, name + ' was called!');
+      if( testDone ) test.done();
+    });
+  }
+};
+
+
+exports.phantomasInitializing = {
+  setUp: function( done ){
+    // save stubs for reverting after test
+    this.stubs = {
+      createIndexDirectory : Phantomas.prototype.createIndexDirectory,
+      createDataDirectory : Phantomas.prototype.createDataDirectory,
+      executePhantomas : Phantomas.prototype.executePhantomas,
+      formResult : Phantomas.prototype.formResult,
+      createDataJson : Phantomas.prototype.createDataJson,
+      readMetricsFiles : Phantomas.prototype.readMetricsFiles,
+      createIndexHtml : Phantomas.prototype.createIndexHtml,
+      notifyAboutNotDisplayedMetrics : Phantomas.prototype.notifyAboutNotDisplayedMetrics,
+      copyAssets : Phantomas.prototype.copyAssets,
+      showSuccessMessage : Phantomas.prototype.showSuccessMessage
+    };
+
+    done();
+  },
+
+  tearDown: function ( callback ) {
+    // revert stubs to their original value
+    _.each(this.stubs, function(val, key){
+      Phantomas.prototype[key] = val;
+    })
+    callback();
+  },
+
+  kickOffNoUi : function( test ) {
+    test.expect( 5 );
+    var options     = {
+      indexPath : TEMP_PATH,
+      buildUi   : false
+    };
+    var done = function() {};
+    var phantomas = new Phantomas( grunt, options, done );
+
+    // create stubs for Phantomas functions=
+    Phantomas.prototype.createIndexDirectory = createStubPromise( test, 'createIndexDirectory' );
+    Phantomas.prototype.createDataDirectory = createStubPromise( test, 'createDataDirectory' );
+    Phantomas.prototype.executePhantomas = createStubPromise( test, 'executePhantomas' );
+    Phantomas.prototype.formResult = createStubPromise( test, 'formResult' );
+    Phantomas.prototype.createDataJson = createStubPromise( test, 'createDataJson', true );
+
+    phantomas.kickOff();
+  },
+
+  kickOffWithUi : function( test ) {
+    test.expect( 10 );
+    var options     = {
+      indexPath : TEMP_PATH,
+      buildUi   : true
+    };
+    var done = function() {};
+    var phantomas = new Phantomas( grunt, options, done );
+
+    // create stubs for Phantomas functions=
+    Phantomas.prototype.createIndexDirectory = createStubPromise( test, 'createIndexDirectory' );
+    Phantomas.prototype.createDataDirectory = createStubPromise( test, 'createDataDirectory' );
+    Phantomas.prototype.executePhantomas = createStubPromise( test, 'executePhantomas' );
+    Phantomas.prototype.formResult = createStubPromise( test, 'formResult' );
+    Phantomas.prototype.createDataJson = createStubPromise( test, 'createDataJson' );
+
+    Phantomas.prototype.readMetricsFiles = createStubPromise( test, 'readMetricsFiles' );
+    Phantomas.prototype.createIndexHtml = createStubPromise( test, 'createIndexHtml' );
+    Phantomas.prototype.notifyAboutNotDisplayedMetrics = createStubPromise( test, 'notifyAboutNotDisplayedMetrics' );
+    Phantomas.prototype.copyAssets = createStubPromise( test, 'copyAssets' );
+    Phantomas.prototype.showSuccessMessage = createStubPromise( test, 'showSuccessMessage', true );
+    phantomas.kickOff();
+  }
+};
 
 exports.phantomas = {
   setUp : function( done ) {
