@@ -478,7 +478,7 @@ Phantomas.prototype.formResult = function( results ) {
  */
 Phantomas.prototype.kickOff = function() {
   this.grunt.log.subhead( 'PHANTOMAS EXECUTION(S) STARTED.' );
-  var kickoOff = this.createIndexDirectory().bind( this )
+  var kickOff = this.createIndexDirectory().bind( this )
       // create data directory to prevent
       // fileIO errors
       .then( this.createDataDirectory )
@@ -494,7 +494,7 @@ Phantomas.prototype.kickOff = function() {
 
 
     if( this.buildUi ){
-      kickoOff.then( this.readMetricsFiles )
+      kickOff.then( this.readMetricsFiles )
       // write html file and produce
       // nice graphics
       .then( this.createIndexHtml )
@@ -510,7 +510,7 @@ Phantomas.prototype.kickOff = function() {
     }
 
       // catch general bluebird error
-      kickoOff.catch( Promise.RejectionError, function ( e ) {
+      kickOff.catch( Promise.RejectionError, function ( e ) {
           console.error( 'unable to write file, because: ', e.message );
       } )
       // catch unknown error
