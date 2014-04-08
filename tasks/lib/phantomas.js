@@ -505,12 +505,12 @@ Phantomas.prototype.kickOff = function() {
       // copy all asset files over to
       // wished index path
       .then( this.copyAssets )
-      // yeah we're done :)
-      .then( this.showSuccessMessage )
     }
 
+      // yeah we're done :)
+      kickOff.then( this.showSuccessMessage )
       // catch general bluebird error
-      kickOff.catch( Promise.RejectionError, function ( e ) {
+      .catch( Promise.RejectionError, function ( e ) {
           console.error( 'unable to write file, because: ', e.message );
       } )
       // catch unknown error
