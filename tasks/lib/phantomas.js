@@ -544,7 +544,7 @@ Phantomas.prototype.notifyAboutNotDisplayedMetrics = function( results ) {
 
 
 /**
- * Build UI if wished including creating index.html,
+ * Generate UI files if wished including creating index.html,
  * copying assets and so
  *
  * Do nothing if 'this.buildUI' is falsy

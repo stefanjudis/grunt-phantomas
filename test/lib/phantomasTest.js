@@ -13,6 +13,12 @@ var TEMP_PATH = './tmp/';
  * Helper functions
  */
 
+/**
+ * Delete folder recursive
+ * - unfortunately plain node has problems with that
+ *
+ * @param  {String} path path
+ */
 function deleteFolderRecursive ( path ) {
   var files = [];
   if( fs.existsSync(path) ) {
@@ -29,6 +35,18 @@ function deleteFolderRecursive ( path ) {
   }
 }
 
+
+/**
+ * Create a function that
+ * will return a stubbed promise
+ *
+ * @param  {Object}  test     test
+ * @param  {String}  name     function name
+ * @param  {Boolean} testDone should test.done() be called
+ *
+ * @return {Function}         Function that will
+ *                                     return stubbed promise
+ */
 function createStubPromise( test, name, testDone ){
   return function() {
     return new Promise( function( resolve ) {
@@ -44,7 +62,12 @@ function createStubPromise( test, name, testDone ){
 }
 
 
-exports.phantomasInitializing = {
+/**
+ * Test suite for checking promises flow
+ *
+ * @type {Object}
+ */
+exports.phantomasPromisesFlow = {
   setUp: function( done ){
     // save stubs for reverting after test
     this.stubs = {
@@ -106,20 +129,26 @@ exports.phantomasInitializing = {
 
     // create stubs for Phantomas functions
     Phantomas.prototype.createIndexDirectory = createStubPromise( test, 'createIndexDirectory' );
-    Phantomas.prototype.createDataDirectory = createStubPromise( test, 'createDataDirectory' );
-    Phantomas.prototype.executePhantomas = createStubPromise( test, 'executePhantomas' );
-    Phantomas.prototype.formResult = createStubPromise( test, 'formResult' );
-    Phantomas.prototype.createDataJson = createStubPromise( test, 'createDataJson' );
+    Phantomas.prototype.createDataDirectory  = createStubPromise( test, 'createDataDirectory' );
+    Phantomas.prototype.executePhantomas     = createStubPromise( test, 'executePhantomas' );
+    Phantomas.prototype.formResult           = createStubPromise( test, 'formResult' );
+    Phantomas.prototype.createDataJson       = createStubPromise( test, 'createDataJson' );
+    Phantomas.prototype.readMetricsFiles     = createStubPromise( test, 'readMetricsFiles' );
+    Phantomas.prototype.outputUi             = createStubPromise( test, 'outputUi' );
+    Phantomas.prototype.showSuccessMessage   = createStubPromise( test, 'showSuccessMessage', true );
 
-    Phantomas.prototype.readMetricsFiles = createStubPromise( test, 'readMetricsFiles' );
-    Phantomas.prototype.createIndexHtml = createStubPromise( test, 'createIndexHtml' );
-    Phantomas.prototype.notifyAboutNotDisplayedMetrics = createStubPromise( test, 'notifyAboutNotDisplayedMetrics' );
-    Phantomas.prototype.copyAssets = createStubPromise( test, 'copyAssets' );
-    Phantomas.prototype.showSuccessMessage = createStubPromise( test, 'showSuccessMessage', true );
     phantomas.kickOff();
+
+    test.expect( 8 );
   }
 };
 
+
+/**
+ * General unit test suite
+ *
+ * @type {Object}
+ */
 exports.phantomas = {
   setUp : function( done ) {
     // setup here if necessary
