@@ -4,7 +4,7 @@ var fs        = require( 'fs' );
 var grunt     = require( 'grunt' );
 var Phantomas = require( '../../tasks/lib/phantomas' );
 var Promise   = require( 'bluebird' );
-var _         = require('lodash');
+var _         = require( 'lodash' );
 
 var TEMP_PATH = './tmp/';
 
