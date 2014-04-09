@@ -53,6 +53,8 @@ var Phantomas = function( grunt, options, done ) {
   this.meta      = meta;
   this.options   = options;
   this.phantomas = Promise.promisify( phantomas );
+  this.buildUi   = options.buildUi;
+
 
   // quit if the phantomas version is too old
   if ( /(0\.12\.0|0\.11\..*|0\.10\..*)/.test( phantomas.version ) ) {
@@ -476,7 +478,6 @@ Phantomas.prototype.formResult = function( results ) {
  */
 Phantomas.prototype.kickOff = function() {
   this.grunt.log.subhead( 'PHANTOMAS EXECUTION(S) STARTED.' );
-
   this.createIndexDirectory().bind( this )
       // create data directory to prevent
       // fileIO errors
@@ -492,16 +493,7 @@ Phantomas.prototype.kickOff = function() {
       .then( this.createDataJson )
       // read all created json metrics
       .then( this.readMetricsFiles )
-      // write html file and produce
-      // nice graphics
-      .then( this.createIndexHtml )
-      // check displayed options and
-      // inform which one are not displayed
-      // in the result index
-      .then( this.notifyAboutNotDisplayedMetrics )
-      // copy all asset files over to
-      // wished index path
-      .then( this.copyAssets )
+      .then( this.outputUi )
       // yeah we're done :)
       .then( this.showSuccessMessage )
       // catch general bluebird error
@@ -599,7 +591,6 @@ Phantomas.prototype.readMetricsFile = function( file ) {
 Phantomas.prototype.readMetricsFiles = function() {
   return new Promise( function( resolve ) {
     this.grunt.log.subhead( 'CHECKING ALL WRITTEN FILES FOR VALID JSON.' );
-
     fs.readdirAsync( this.dataPath ).bind( this )
       .then( function( files ) {
         files = files.filter( function( file ) {
@@ -617,6 +608,25 @@ Phantomas.prototype.readMetricsFiles = function() {
           } );
       } );
   }.bind( this ) );
+};
+
+Phantomas.prototype.outputUi = function( files ) {
+    if( this.buildUi ){
+        return new Promise( function( resolve ) {
+           this.createIndexHtml( files ).bind( this )
+           .then( this.notifyAboutNotDisplayedMetrics )
+           .then( this.copyAssets )
+           .then( resolve )
+           .catch( function( e ) {
+                console.log( e );
+            } );
+        }.bind( this ) );
+    }
+    else{
+        return new Promise( function( resolve, reject ) {
+            resolve()
+        }.bind( this ) );
+    }
 };
 
 

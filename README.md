@@ -38,7 +38,8 @@ grunt.initConfig( {
       options : {
         indexPath : './phantomas/',
         options   : {},
-        url       : 'http://gruntjs.com/'
+        url       : 'http://gruntjs.com/',
+        buildUi   : true
       }
     }
   }
@@ -76,6 +77,13 @@ Type: `String`
 Default value: `http://gruntjs.com/`
 
 A string value that represents the url of the site, which will be analyzed by `phantomas`.
+
+
+#### options.buildUi
+Type: `Boolean`
+Default value: `true`
+
+An option tu build a visualization interface. If set to false only the JSON data will be outputted.
 
 #### options.group
 Type: `Object`
@@ -288,6 +296,9 @@ grunt.initConfig( {
   }
 } );
 ```
+#### Note:
+Formatters are not supported as options for Phantomas, because they are not implemented in the CommonJS version of Phantomas.
+
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
@@ -297,4 +308,3 @@ Please check release history at [Github](https://github.com/stefanjudis/grunt-ph
 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/stefanjudis/grunt-phantomas/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
