@@ -554,13 +554,13 @@ Phantomas.prototype.notifyAboutNotDisplayedMetrics = function( results ) {
  */
 Phantomas.prototype.outputUi = function( files ) {
     if ( this.buildUi ) {
-      return new Promise( function( resolve ) {
+      return new Promise( function( resolve, reject ) {
          this.createIndexHtml( files ).bind( this )
               .then( this.notifyAboutNotDisplayedMetrics )
               .then( this.copyAssets )
               .then( resolve )
               .catch( function( e ) {
-                console.log( e );
+                reject( e );
               } );
       }.bind( this ) );
     } else {
