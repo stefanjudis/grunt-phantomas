@@ -77,6 +77,7 @@ exports.phantomasPromisesFlow = {
       formResult                     : Phantomas.prototype.formResult,
       createDataJson                 : Phantomas.prototype.createDataJson,
       readMetricsFiles               : Phantomas.prototype.readMetricsFiles,
+      outputUi                       : Phantomas.prototype.outputUi,
       createIndexHtml                : Phantomas.prototype.createIndexHtml,
       notifyAboutNotDisplayedMetrics : Phantomas.prototype.notifyAboutNotDisplayedMetrics,
       copyAssets                     : Phantomas.prototype.copyAssets,
@@ -95,31 +96,50 @@ exports.phantomasPromisesFlow = {
     callback();
   },
 
-  kickOffNoUi : function( test ) {
-    test.expect( 7 );
-    var options     = {
-      indexPath : TEMP_PATH,
-      buildUi   : false
-    };
-    var done = function() {};
-    var phantomas = new Phantomas( grunt, options, done );
+  outputUi : {
+    withUi : function( test ) {
+      var options     = {
+        indexPath : TEMP_PATH,
+        buildUi   : true
+      };
+      var done = function() {};
+      var phantomas = new Phantomas( grunt, options, done );
 
-    // create stubs for Phantomas functions=
-    Phantomas.prototype.createIndexDirectory = createStubPromise( test, 'createIndexDirectory' );
-    Phantomas.prototype.createDataDirectory = createStubPromise( test, 'createDataDirectory' );
-    Phantomas.prototype.executePhantomas = createStubPromise( test, 'executePhantomas' );
-    Phantomas.prototype.formResult = createStubPromise( test, 'formResult' );
-    Phantomas.prototype.createDataJson = createStubPromise( test, 'createDataJson' );
-    Phantomas.prototype.readMetricsFiles = createStubPromise( test, 'readMetricsFiles' );
-    Phantomas.prototype.showSuccessMessage = createStubPromise( test, 'showSuccessMessage', true );
+      // create stubs for Phantomas functions
+      Phantomas.prototype.createIndexHtml                 = createStubPromise( test, 'createIndexHtml' );
+      Phantomas.prototype.notifyAboutNotDisplayedMetrics  = createStubPromise( test, 'notifyAboutNotDisplayedMetrics' );
+      Phantomas.prototype.copyAssets                      = createStubPromise( test, 'copyAssets', true );
 
+      phantomas.outputUi();
 
+      test.expect( 3 );
+    },
+    withoutUi : function( test ) {
+      var options     = {
+        indexPath : TEMP_PATH,
+        buildUi   : false
+      };
+      var done = function() {};
+      var phantomas = new Phantomas( grunt, options, done );
 
-    phantomas.kickOff();
+      // create stubs for Phantomas functions
+      Phantomas.prototype.createIndexHtml                 = createStubPromise( test, 'createIndexHtml' );
+      Phantomas.prototype.notifyAboutNotDisplayedMetrics  = createStubPromise( test, 'notifyAboutNotDisplayedMetrics' );
+      Phantomas.prototype.copyAssets                      = createStubPromise( test, 'copyAssets' );
+
+      // make sure none of the UI building
+      // functions is called
+      phantomas.outputUi()
+                .then( function() {
+                  test.expect( 0 );
+                  test.done();
+                } );
+
+    }
   },
 
-  kickOffWithUi : function( test ) {
-    test.expect( 10 );
+
+  kickOff : function( test ) {
     var options     = {
       indexPath : TEMP_PATH,
       buildUi   : true
