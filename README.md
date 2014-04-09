@@ -83,7 +83,7 @@ A string value that represents the url of the site, which will be analyzed by `p
 Type: `Boolean`
 Default value: `true`
 
-An option tu build a visualization interface. If set to false only the JSON data will be outputted.
+If you want to use `grunt-phantomas` without the pretty UI, this is an option to switch off the visualization interface. If set to false only the JSON data will be outputted at `options.indexPath + '/data/'`.
 
 #### options.group
 Type: `Object`
@@ -296,6 +296,7 @@ grunt.initConfig( {
   }
 } );
 ```
+
 #### Note:
 Formatters are not supported as options for Phantomas, because they are not implemented in the CommonJS version of Phantomas.
 
@@ -303,8 +304,7 @@ Formatters are not supported as options for Phantomas, because they are not impl
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
+To make sure tests are passing and coding style is in a good shape please run `grunt test` before applying changes.
+
 ## Release History
 Please check release history at [Github](https://github.com/stefanjudis/grunt-phantomas/releases). :)
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/stefanjudis/grunt-phantomas/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
