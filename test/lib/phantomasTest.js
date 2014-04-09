@@ -99,7 +99,7 @@ exports.phantomasInitializing = {
     var done = function() {};
     var phantomas = new Phantomas( grunt, options, done );
 
-    // create stubs for Phantomas functions=
+    // create stubs for Phantomas functions
     Phantomas.prototype.createIndexDirectory = createStubPromise( test, 'createIndexDirectory' );
     Phantomas.prototype.createDataDirectory = createStubPromise( test, 'createDataDirectory' );
     Phantomas.prototype.executePhantomas = createStubPromise( test, 'executePhantomas' );

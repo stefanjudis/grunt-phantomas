@@ -13,7 +13,7 @@ var fs        = Promise.promisifyAll( require( 'node-fs' ) );
 var path      = Promise.promisifyAll( require( 'path' ) );
 var meta      = require( '../config/metricsMeta' );
 var phantomas = require( 'phantomas' );
-var _         = require('lodash');
+var _         = require( 'lodash' );
 var minify    = require( 'html-minifier' ).minify;
 
 
@@ -493,6 +493,7 @@ Phantomas.prototype.kickOff = function() {
       .then( this.createDataJson )
       // read all created json metrics
       .then( this.readMetricsFiles )
+      // build UI if requested
       .then( this.outputUi )
       // yeah we're done :)
       .then( this.showSuccessMessage )
@@ -539,6 +540,34 @@ Phantomas.prototype.notifyAboutNotDisplayedMetrics = function( results ) {
 
     resolve();
   }.bind( this ) );
+};
+
+
+/**
+ * Build UI if wished including creating index.html,
+ * copying assets and so
+ *
+ * Do nothing if 'this.buildUI' is falsy
+ *
+ * @param  {Array}   files files
+ * @return {Promise}       Promise
+ */
+Phantomas.prototype.outputUi = function( files ) {
+    if ( this.buildUi ) {
+      return new Promise( function( resolve ) {
+         this.createIndexHtml( files ).bind( this )
+              .then( this.notifyAboutNotDisplayedMetrics )
+              .then( this.copyAssets )
+              .then( resolve )
+              .catch( function( e ) {
+                console.log( e );
+              } );
+      }.bind( this ) );
+    } else {
+      return new Promise( function( resolve, reject ) {
+          resolve()
+      } );
+    }
 };
 
 
@@ -591,6 +620,7 @@ Phantomas.prototype.readMetricsFile = function( file ) {
 Phantomas.prototype.readMetricsFiles = function() {
   return new Promise( function( resolve ) {
     this.grunt.log.subhead( 'CHECKING ALL WRITTEN FILES FOR VALID JSON.' );
+
     fs.readdirAsync( this.dataPath ).bind( this )
       .then( function( files ) {
         files = files.filter( function( file ) {
@@ -608,25 +638,6 @@ Phantomas.prototype.readMetricsFiles = function() {
           } );
       } );
   }.bind( this ) );
-};
-
-Phantomas.prototype.outputUi = function( files ) {
-    if( this.buildUi ){
-        return new Promise( function( resolve ) {
-           this.createIndexHtml( files ).bind( this )
-           .then( this.notifyAboutNotDisplayedMetrics )
-           .then( this.copyAssets )
-           .then( resolve )
-           .catch( function( e ) {
-                console.log( e );
-            } );
-        }.bind( this ) );
-    }
-    else{
-        return new Promise( function( resolve, reject ) {
-            resolve()
-        }.bind( this ) );
-    }
 };
 
 
