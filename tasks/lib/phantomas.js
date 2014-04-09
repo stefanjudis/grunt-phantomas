@@ -564,8 +564,8 @@ Phantomas.prototype.outputUi = function( files ) {
               } );
       }.bind( this ) );
     } else {
-      return new Promise( function( resolve, reject ) {
-          resolve()
+      return new Promise( function( resolve ) {
+        resolve();
       } );
     }
 };

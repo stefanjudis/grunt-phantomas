@@ -30,30 +30,34 @@ function deleteFolderRecursive ( path ) {
 }
 
 function createStubPromise( test, name, testDone ){
-  return function(){
-    return new Promise( function( resolve, reject ) {
+  return function() {
+    return new Promise( function( resolve ) {
       resolve();
+
       test.ok(true, name + ' was called!');
-      if( testDone ) test.done();
-    });
-  }
-};
+
+      if( testDone ) {
+        test.done();
+      }
+    } );
+  };
+}
 
 
 exports.phantomasInitializing = {
   setUp: function( done ){
     // save stubs for reverting after test
     this.stubs = {
-      createIndexDirectory : Phantomas.prototype.createIndexDirectory,
-      createDataDirectory : Phantomas.prototype.createDataDirectory,
-      executePhantomas : Phantomas.prototype.executePhantomas,
-      formResult : Phantomas.prototype.formResult,
-      createDataJson : Phantomas.prototype.createDataJson,
-      readMetricsFiles : Phantomas.prototype.readMetricsFiles,
-      createIndexHtml : Phantomas.prototype.createIndexHtml,
+      createIndexDirectory           : Phantomas.prototype.createIndexDirectory,
+      createDataDirectory            : Phantomas.prototype.createDataDirectory,
+      executePhantomas               : Phantomas.prototype.executePhantomas,
+      formResult                     : Phantomas.prototype.formResult,
+      createDataJson                 : Phantomas.prototype.createDataJson,
+      readMetricsFiles               : Phantomas.prototype.readMetricsFiles,
+      createIndexHtml                : Phantomas.prototype.createIndexHtml,
       notifyAboutNotDisplayedMetrics : Phantomas.prototype.notifyAboutNotDisplayedMetrics,
-      copyAssets : Phantomas.prototype.copyAssets,
-      showSuccessMessage : Phantomas.prototype.showSuccessMessage
+      copyAssets                     : Phantomas.prototype.copyAssets,
+      showSuccessMessage             : Phantomas.prototype.showSuccessMessage
     };
 
     done();
@@ -61,9 +65,10 @@ exports.phantomasInitializing = {
 
   tearDown: function ( callback ) {
     // revert stubs to their original value
-    _.each(this.stubs, function(val, key){
-      Phantomas.prototype[key] = val;
-    })
+    _.each( this.stubs, function( val, key ) {
+      Phantomas.prototype[ key ] = val;
+    } );
+
     callback();
   },
 
