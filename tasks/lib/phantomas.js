@@ -475,6 +475,8 @@ Phantomas.prototype.formResult = function( results ) {
 
 /**
  * General function to start the whole thingy
+ *
+ * @tested
  */
 Phantomas.prototype.kickOff = function() {
   this.grunt.log.subhead( 'PHANTOMAS EXECUTION(S) STARTED.' );
@@ -551,6 +553,8 @@ Phantomas.prototype.notifyAboutNotDisplayedMetrics = function( results ) {
  *
  * @param  {Array}   files files
  * @return {Promise}       Promise
+ *
+ * @tested
  */
 Phantomas.prototype.outputUi = function( files ) {
     if ( this.buildUi ) {
