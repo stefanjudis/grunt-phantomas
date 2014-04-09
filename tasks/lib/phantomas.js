@@ -478,7 +478,7 @@ Phantomas.prototype.formResult = function( results ) {
  */
 Phantomas.prototype.kickOff = function() {
   this.grunt.log.subhead( 'PHANTOMAS EXECUTION(S) STARTED.' );
-  var kickOff = this.createIndexDirectory().bind( this )
+  this.createIndexDirectory().bind( this )
       // create data directory to prevent
       // fileIO errors
       .then( this.createDataDirectory )
@@ -490,25 +490,12 @@ Phantomas.prototype.kickOff = function() {
       // max / min / median / average / ...
       .then( this.formResult )
       // write new json file with metrics data
-      .then( this.createDataJson );
-
-
-    if( this.buildUi ){
-      kickOff.then( this.readMetricsFiles )
-      // write html file and produce
-      // nice graphics
-      .then( this.createIndexHtml )
-      // check displayed options and
-      // inform which one are not displayed
-      // in the result index
-      .then( this.notifyAboutNotDisplayedMetrics )
-      // copy all asset files over to
-      // wished index path
-      .then( this.copyAssets )
-    }
-
+      .then( this.createDataJson )
+      // read all created json metrics
+      .then( this.readMetricsFiles )
+      .then( this.outputUi )
       // yeah we're done :)
-      kickOff.then( this.showSuccessMessage )
+      .then( this.showSuccessMessage )
       // catch general bluebird error
       .catch( Promise.RejectionError, function ( e ) {
           console.error( 'unable to write file, because: ', e.message );
@@ -604,7 +591,6 @@ Phantomas.prototype.readMetricsFile = function( file ) {
 Phantomas.prototype.readMetricsFiles = function() {
   return new Promise( function( resolve ) {
     this.grunt.log.subhead( 'CHECKING ALL WRITTEN FILES FOR VALID JSON.' );
-
     fs.readdirAsync( this.dataPath ).bind( this )
       .then( function( files ) {
         files = files.filter( function( file ) {
@@ -622,6 +608,25 @@ Phantomas.prototype.readMetricsFiles = function() {
           } );
       } );
   }.bind( this ) );
+};
+
+Phantomas.prototype.outputUi = function( files ) {
+    if( this.buildUi ){
+        return new Promise( function( resolve ) {
+           this.createIndexHtml( files ).bind( this )
+           .then( this.notifyAboutNotDisplayedMetrics )
+           .then( this.copyAssets )
+           .then( resolve )
+           .catch( function( e ) {
+                console.log( e );
+            } );
+        }.bind( this ) );
+    }
+    else{
+        return new Promise( function( resolve, reject ) {
+            resolve()
+        }.bind( this ) );
+    }
 };
 
 

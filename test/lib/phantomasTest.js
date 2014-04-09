@@ -68,7 +68,7 @@ exports.phantomasInitializing = {
   },
 
   kickOffNoUi : function( test ) {
-    test.expect( 5 );
+    test.expect( 7 );
     var options     = {
       indexPath : TEMP_PATH,
       buildUi   : false
@@ -81,7 +81,11 @@ exports.phantomasInitializing = {
     Phantomas.prototype.createDataDirectory = createStubPromise( test, 'createDataDirectory' );
     Phantomas.prototype.executePhantomas = createStubPromise( test, 'executePhantomas' );
     Phantomas.prototype.formResult = createStubPromise( test, 'formResult' );
-    Phantomas.prototype.createDataJson = createStubPromise( test, 'createDataJson', true );
+    Phantomas.prototype.createDataJson = createStubPromise( test, 'createDataJson' );
+    Phantomas.prototype.readMetricsFiles = createStubPromise( test, 'readMetricsFiles' );
+    Phantomas.prototype.showSuccessMessage = createStubPromise( test, 'showSuccessMessage', true );
+
+
 
     phantomas.kickOff();
   },
