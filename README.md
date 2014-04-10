@@ -83,7 +83,14 @@ A string value that represents the url of the site, which will be analyzed by `p
 Type: `Boolean`
 Default value: `true`
 
-If you want to use `grunt-phantomas` without the pretty UI, this is an option to switch off the visualization interface. If set to false only the JSON data will be outputted at `options.indexPath + '/data/'`.
+If you want to use `grunt-phantomas` without generating a UI for the data, this is an option to switch off the visualization interface. If set to false only the JSON data will be outputted at `options.indexPath + '/data/'`.
+
+#### options.output
+Type: `String`
+Default value: `json`
+
+Choose to output CSV or JSON. The default is JSON. The buildUi option does not work with the CSV format.
+
 
 #### options.group
 Type: `Object`
