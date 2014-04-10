@@ -177,7 +177,7 @@ Phantomas.prototype.copyStyles = function() {
 /**
  * Create json or csv data
  *
- * @param  {Array}  result phantomas result
+ * @param  {Object}  result phantomas result
  * @return {Promise}        Promise
  *
  * @tested
@@ -187,7 +187,7 @@ Phantomas.prototype.createData = function( result ) {
     typeof result.requests !== 'undefined' &&
     result.requests.values.length
   ) {
-    if(this.options.output === 'csv'){
+    if( this.options.output === 'csv' ){
       return new Promise( function ( resolve, reject ) {
         this.createDataCSV( result ).bind( this )
         .then( resolve )
@@ -717,7 +717,7 @@ Phantomas.prototype.outputUi = function( files ) {
     }
     else{
       return new Promise( function( resolve ) {
-          resolve();
+        resolve();
       }.bind( this ) );
     }
 };
