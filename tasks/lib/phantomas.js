@@ -261,11 +261,9 @@ Phantomas.prototype.createDataCSV = function( result ) {
     ) {
 
       var displayedMetricKeys = _.flatten( _.values( this.options.group ) );
-
       _.each(result, function(value, key, collection){
         collection[key] = collection[key]['average'];
       });
-
       json2csv( { data: result, fields: displayedMetricKeys }, function( e, csv ) {
         if ( e ) {
           reject( e );
@@ -275,7 +273,7 @@ Phantomas.prototype.createDataCSV = function( result ) {
 
       fs.writeFileAsync(
         this.dataPath + ( +new Date() ) + '.csv',
-        JSON.stringify( resultCSV, null, 2 )
+        resultCSV
       ).then( resolve );
 
       this.grunt.log.ok( 'CSV file written.' );
