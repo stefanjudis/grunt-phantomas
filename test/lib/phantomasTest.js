@@ -51,9 +51,7 @@ function createStubPromise( test, name, testDone ){
   return function() {
     return new Promise( function( resolve ) {
       resolve();
-
       test.ok(true, name + ' was called!');
-
       if( testDone ) {
         test.done();
       }
@@ -75,6 +73,7 @@ exports.phantomasPromisesFlow = {
       createDataDirectory            : Phantomas.prototype.createDataDirectory,
       executePhantomas               : Phantomas.prototype.executePhantomas,
       formResult                     : Phantomas.prototype.formResult,
+      createData                     : Phantomas.prototype.createData,
       createDataJson                 : Phantomas.prototype.createDataJson,
       readMetricsFiles               : Phantomas.prototype.readMetricsFiles,
       outputUi                       : Phantomas.prototype.outputUi,
@@ -145,13 +144,27 @@ exports.phantomasPromisesFlow = {
       buildUi   : true
     };
     var done = function() {};
+
+    var results = {
+        requests : {
+          values : [ 1, 2, 3, 4 ]
+        }
+      };
+
+    // stubbing form result here as it needs to use a fake results object
+    Phantomas.prototype.formResult = function(){
+      return new Promise( function( resolve ) {
+        resolve(results);
+        test.ok(true, 'formResult was called!');
+      } );
+    };
+
     var phantomas = new Phantomas( grunt, options, done );
 
     // create stubs for Phantomas functions
     Phantomas.prototype.createIndexDirectory = createStubPromise( test, 'createIndexDirectory' );
     Phantomas.prototype.createDataDirectory  = createStubPromise( test, 'createDataDirectory' );
     Phantomas.prototype.executePhantomas     = createStubPromise( test, 'executePhantomas' );
-    Phantomas.prototype.formResult           = createStubPromise( test, 'formResult' );
     Phantomas.prototype.createDataJson       = createStubPromise( test, 'createDataJson' );
     Phantomas.prototype.readMetricsFiles     = createStubPromise( test, 'readMetricsFiles' );
     Phantomas.prototype.outputUi             = createStubPromise( test, 'outputUi' );
@@ -356,6 +369,57 @@ exports.phantomas = {
 
           deleteFolderRecursive( TEMP_PATH + 'data' );
         } );
+    }
+  },
+
+
+  createDataCSV : {
+    invalidData : function( test ) {
+      var options     = {
+        indexPath : TEMP_PATH
+      };
+      var done        = function() {};
+      var phantomas   = new Phantomas( grunt, options, done );
+      var fileContent = {
+        test : 'test'
+      };
+
+      fs.mkdirSync( TEMP_PATH + 'data' );
+
+      phantomas.createDataCSV( fileContent )
+        .catch( function( e ) {
+          test.strictEqual( e, 'No run was successful.' );
+
+          test.done();
+
+          deleteFolderRecursive( TEMP_PATH + 'data' );
+        } );
+    },
+    validData : function( test ) {
+      var options     = {
+        indexPath : TEMP_PATH,
+        buildUi   : true
+      };
+      var done        = function() {};
+      var phantomas   = new Phantomas( grunt, options, done );
+      var fileContent = {
+        requests : {
+          values : [ 1, 2, 3, 4 ]
+        }
+      };
+
+      fs.mkdirSync( TEMP_PATH + 'data' );
+      test.doesNotThrow(function(){phantomas.createDataCSV( fileContent )
+        .then( function() {
+          var files = fs.readdirSync( 'tmp/data/' );
+          test.strictEqual( files.length, 1 );
+          test.done();
+
+          deleteFolderRecursive( TEMP_PATH + 'data' );
+        } );
+
+
+      });
     }
   },
 

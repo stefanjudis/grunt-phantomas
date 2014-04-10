@@ -15,6 +15,7 @@ var meta      = require( '../config/metricsMeta' );
 var phantomas = require( 'phantomas' );
 var _         = require( 'lodash' );
 var minify    = require( 'html-minifier' ).minify;
+var json2csv  = require( 'json2csv' );
 
 
 /**
@@ -174,6 +175,43 @@ Phantomas.prototype.copyStyles = function() {
 
 
 /**
+ * Create json or csv data
+ *
+ * @param  {Array}  result phantomas result
+ * @return {Promise}        Promise
+ *
+ * @tested
+ */
+Phantomas.prototype.createData = function( result ) {
+  if (
+    typeof result.requests !== 'undefined' &&
+    result.requests.values.length
+  ) {
+    if(this.options.output === 'csv'){
+      return new Promise( function ( resolve, reject ) {
+        this.createDataCSV( result ).bind( this )
+        .then( resolve )
+        .catch( function( e ) {
+          reject( e );
+        } );
+      }.bind( this ) );
+    }
+    else{
+      return new Promise( function( resolve, reject ) {
+        this.createDataJson( result ).bind( this )
+        .then( this.readMetricsFiles )
+        .then( this.outputUi )
+        .then( resolve )
+        .catch( function( e ) {
+          reject( e );
+        } );
+      }.bind( this ) );
+    }
+  }
+};
+
+
+/**
  * Write phantomas result to json file
  *
  * @param  {String}  result phantomas result
@@ -196,6 +234,51 @@ Phantomas.prototype.createDataJson = function( result ) {
       ).then( resolve );
 
       this.grunt.log.ok( 'JSON file written.' );
+    } else {
+      reject( 'No run was successful.' );
+    }
+  }.bind( this ) );
+};
+
+
+/**
+ * Write phantomas result to csv file
+ *
+ * @param  {String}  result phantomas result
+ * @return {Promise}        Promise
+ *
+ * @tested
+ */
+Phantomas.prototype.createDataCSV = function( result ) {
+  this.grunt.log.subhead( 'WRITING RESULT CSV FILE.' );
+
+  var resultCSV = null;
+
+  return new Promise( function( resolve, reject ) {
+    if (
+      typeof result.requests !== 'undefined' &&
+      result.requests.values.length
+    ) {
+
+      var displayedMetricKeys = _.flatten( _.values( this.options.group ) );
+
+      _.each(result, function(value, key, collection){
+        collection[key] = collection[key]['average'];
+      });
+
+      json2csv( { data: result, fields: displayedMetricKeys }, function( e, csv ) {
+        if ( e ) {
+          reject( e );
+        }
+        resultCSV = csv;
+      } );
+
+      fs.writeFileAsync(
+        this.dataPath + ( +new Date() ) + '.csv',
+        JSON.stringify( resultCSV, null, 2 )
+      ).then( resolve );
+
+      this.grunt.log.ok( 'CSV file written.' );
     } else {
       reject( 'No run was successful.' );
     }
@@ -475,8 +558,6 @@ Phantomas.prototype.formResult = function( results ) {
 
 /**
  * General function to start the whole thingy
- *
- * @tested
  */
 Phantomas.prototype.kickOff = function() {
   this.grunt.log.subhead( 'PHANTOMAS EXECUTION(S) STARTED.' );
@@ -491,12 +572,8 @@ Phantomas.prototype.kickOff = function() {
       // format result and calculate
       // max / min / median / average / ...
       .then( this.formResult )
-      // write new json file with metrics data
-      .then( this.createDataJson )
-      // read all created json metrics
-      .then( this.readMetricsFiles )
-      // build UI if requested
-      .then( this.outputUi )
+      // write new file(s) with metrics data
+      .then( this.createData )
       // yeah we're done :)
       .then( this.showSuccessMessage )
       // catch general bluebird error
@@ -542,36 +619,6 @@ Phantomas.prototype.notifyAboutNotDisplayedMetrics = function( results ) {
 
     resolve();
   }.bind( this ) );
-};
-
-
-/**
- * Generate UI files if wished including creating index.html,
- * copying assets and so
- *
- * Do nothing if 'this.buildUI' is falsy
- *
- * @param  {Array}   files files
- * @return {Promise}       Promise
- *
- * @tested
- */
-Phantomas.prototype.outputUi = function( files ) {
-    if ( this.buildUi ) {
-      return new Promise( function( resolve, reject ) {
-         this.createIndexHtml( files ).bind( this )
-              .then( this.notifyAboutNotDisplayedMetrics )
-              .then( this.copyAssets )
-              .then( resolve )
-              .catch( function( e ) {
-                reject( e );
-              } );
-      }.bind( this ) );
-    } else {
-      return new Promise( function( resolve ) {
-        resolve();
-      } );
-    }
 };
 
 
@@ -624,7 +671,6 @@ Phantomas.prototype.readMetricsFile = function( file ) {
 Phantomas.prototype.readMetricsFiles = function() {
   return new Promise( function( resolve ) {
     this.grunt.log.subhead( 'CHECKING ALL WRITTEN FILES FOR VALID JSON.' );
-
     fs.readdirAsync( this.dataPath ).bind( this )
       .then( function( files ) {
         files = files.filter( function( file ) {
@@ -642,6 +688,38 @@ Phantomas.prototype.readMetricsFiles = function() {
           } );
       } );
   }.bind( this ) );
+};
+
+ /**
+ * Generate UI files if wished including creating index.html,
+ * copying assets and so
+ *
+ * Do nothing if 'this.buildUI' is falsy
+ *
+ * @param  {Array}   files files
+ * @return {Promise}       Promise
+ *
+ * @tested
+ */
+Phantomas.prototype.outputUi = function( files ) {
+    if( this.buildUi ){
+      this.grunt.log.subhead( 'BUILDING THE UI TO DISPLAY YOUR DATA.' );
+
+      return new Promise( function( resolve, reject ) {
+         this.createIndexHtml( files ).bind( this )
+         .then( this.notifyAboutNotDisplayedMetrics )
+         .then( this.copyAssets )
+         .then( resolve )
+         .catch( function( e ) {
+              reject( e );
+          } );
+      }.bind( this ) );
+    }
+    else{
+      return new Promise( function( resolve ) {
+          resolve();
+      }.bind( this ) );
+    }
 };
 
 
