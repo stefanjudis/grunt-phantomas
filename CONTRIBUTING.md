@@ -6,9 +6,9 @@ I really care about the coding style in this project and can be really picky to 
 Before you make a pull request please check these points:
 
 ## Editor settings
-- please set your editor to use two spaces
+- please set up your editor to use two spaces
 - remove spaces at line endings or empty lines
-- make sure new files end with one empty line
+- make sure all files end with one empty line
 
 ## Coding style
 
@@ -73,4 +73,8 @@ I know, that a lot of people do not agree with that. Never the less, I really li
 
 #### Please don't forget to check existing unit tests and/or implement new unit tests for new functionality.
 
-#### Make sure your fork is passing at travis. You can check that also locally buy running 'grunt test'.
+Tested functions should include `@tested` param in particular JSDoc block.
+
+#### Make sure your contribution is passing at travis. You can check that also locally buy running 'grunt test'.
+
+`grunt test` will run unit test suite, JSHint and JavaScript Code Style checker. Make sure all of them pass.
