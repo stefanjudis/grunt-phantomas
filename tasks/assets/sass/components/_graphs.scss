@@ -14,6 +14,28 @@
 
 }
 
+.p--graphs--button__expand {
+  float : right;
+
+  height : 2em;
+
+  margin-bottom : 1em;
+
+  background-color : $c-green;
+
+  border : none;
+
+  color : $c-white;
+
+  @include transition(
+    background-color 0.25s ease-in
+  );
+
+  &:hover {
+    background-color : adjust-lightness( $c-green, 10 );
+  }
+}
+
 .p--graphs--description, .p--graphs--experimental, .p--graphs--warning {
   width      : calc( 80% - 5em );
   max-height : 14em;
@@ -49,6 +71,14 @@
 
   cursor : default;
 
+  @include transition(
+    background-color  0.2s ease-in
+  );
+
+  &.active {
+    cursor : pointer;
+  }
+
   &:before {
     position : absolute;
 
@@ -72,10 +102,13 @@
   background-color : rgba( $c-green, 0.1 );
 
   &.active {
-    cursor : pointer;
-
     background-color : $c-green;
+
+    &:hover {
+      background-color : adjust-lightness( $c-green, 10 );
+    }
   }
+
 
   &:before {
     content : '?';
@@ -88,10 +121,13 @@
   background-color : rgba( $c-purple, 0.1 );
 
   &.active {
-    cursor : pointer;
-
     background-color : $c-purple;
+
+    &:hover {
+      background-color : adjust-lightness( $c-purple, 10 );
+    }
   }
+
 
   &:before {
     content : '!';
@@ -104,8 +140,6 @@
   background-color : rgba( $c-white, 0.1 );
 
   &.active {
-    cursor : pointer;
-
     background-color : $c-white;
   }
 
@@ -175,7 +209,8 @@
   width: 100%;
   min-height: 250px;
 
-  display: inline-block;
+  display        : inline-block;
+  vertical-align : top;
 
   border-bottom: 1px solid $c-green;
   box-shadow : 0  1px 0 $c-grayDarker;

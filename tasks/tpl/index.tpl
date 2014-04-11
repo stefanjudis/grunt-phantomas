@@ -34,22 +34,27 @@
                   <a class="p--graphs--warningBtn <%= ( meta[ metric ] && !meta[ metric ].reliable ) ? 'active' : '' %>" href="#warning-<%= metric %>">Show warning</a>
                   <div id="warning-<%= metric %>" class="p--graphs--warning" hidden>Unfortunately this metric is not reliable. For more information please check documentation of phantomas.</div>
                   <svg class="p--graphs--svg"></svg>
-                  <table class="p--table">
-                    <thead class="p--table--head">
-                      <th class="p--table--column">Date</th>
-                      <th class="p--table--column"><%= metric %></th>
-                    </thead>
-                    <tbody class="p--table--body">
-                      <% _.each( results, function( result ) { %>
-                        <% if ( result[ metric ] && result[ metric ].median !== undefined ) { %>
-                          <tr class="p--table--row">
-                              <td class="p--table--column__highlight"><%= ( new Date( result.timestamp ) ).toISOString() %></td>
-                              <td class="p--table--column"><%= result[ metric ].median %></td>
-                          </tr>
-                        <% } %>
-                      <% } ) %>
-                    </tbody>
-                  </table>
+                  <div class="clearfix">
+                    <button class="p--graphs--button__expand js-expand" type="button" data-metric="<%= metric %>">Expand table</button>
+                  </div>
+                  <div id="p--table--container--<%= metric %>" class="p--table--container">
+                    <table class="p--table">
+                      <thead class="p--table--head">
+                        <th class="p--table--column">Date</th>
+                        <th class="p--table--column"><%= metric %></th>
+                      </thead>
+                      <tbody class="p--table--body">
+                        <% _.each( results, function( result ) { %>
+                          <% if ( result[ metric ] && result[ metric ].median !== undefined ) { %>
+                            <tr id="<%= metric + '--row--' + result.timestamp %>" class="p--table--row">
+                                <td class="p--table--column__highlight"><%= ( new Date( result.timestamp ) ).toISOString() %></td>
+                                <td class="p--table--column"><%= result[ metric ].median %></td>
+                            </tr>
+                          <% } %>
+                        <% } ) %>
+                      </tbody>
+                    </table>
+                  </div>
               <% } %>
             <% } );%>
           </ul>

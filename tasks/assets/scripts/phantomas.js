@@ -98,6 +98,12 @@
                       }
                     )
                     .attr(
+                      'data-timestamp',
+                      function( d ) {
+                        return +d.date;
+                      }
+                    )
+                    .attr(
                       'data-max',
                       function( d ) {
                         return d.value.max;
@@ -107,6 +113,12 @@
                       'data-median',
                       function( d ) {
                         return d.value.median;
+                      }
+                    )
+                    .attr(
+                      'data-metric',
+                      function( d ) {
+                        return metric;
                       }
                     )
                     .attr(
@@ -343,12 +355,32 @@
     addEvent( mainContainer, 'mouseover', function( event ) {
       if ( event.target.tagName === 'circle' ) {
         appendDetailBoxForCircle( event.target );
+        highlightTableRow( event.target );
       }
     } );
 
     addEvent( mainContainer, 'mouseout', function( event ) {
       if ( event.target.tagName === 'circle' ) {
         removeDetailBoxForCircle( event.target );
+        unhighlighTableRow( event.target );
+      }
+    } );
+  }
+
+
+  /**
+   * Attach click events on graph list
+   * -> event delegation for the win
+   */
+  function attachClickEvents() {
+    var mainContainer = document.getElementsByTagName( 'main' )[ 0 ];
+
+    addEvent( mainContainer, 'click', function( event ) {
+      if ( event.target.classList.contains( 'js-expand' ) ) {
+        document.getElementById(
+          'p--table--container--' +
+          event.target.attributes.getNamedItem( 'data-metric' ).value
+        ).classList.toggle( 'expanded' );
       }
     } );
   }
@@ -435,8 +467,53 @@
    */
   function attachEventListeners() {
     attachCircleEvents();
+    attachClickEvents();
     attachDescriptionEvents();
     attachMetricChangeEvent();
+  }
+
+
+  /**
+   * Highlight table row if particular
+   * graph bullet if hovered
+   *
+   * @param  {Object} target target
+   */
+  function highlightTableRow( target ) {
+    var row = document.querySelectorAll(
+      '#' + target.attributes.getNamedItem( 'data-metric' ).value +
+      '--row--' +
+      target.attributes.getNamedItem( 'data-timestamp' ).value
+    );
+
+    if ( row.length ) {
+      row[ 0 ].classList.add( 'active' );
+    }
+  }
+
+
+  /**
+   * Unhighlight table row if particular
+   * graph bullet if hovered
+   *
+   * @param  {Object} target target
+   */
+  function unhighlighTableRow( target ) {
+    var metric = target.attributes.getNamedItem( 'data-metric' ).value;
+    var row = document.getElementById(
+      metric +
+      '--row--' +
+      target.attributes.getNamedItem( 'data-timestamp' ).value
+    );
+    var scrollContainer = document.getElementById(
+      'p--table--container--' + metric
+    );
+
+    if ( row && scrollContainer ) {
+      scrollContainer.scrollTop = row.offsetTop;
+
+      row.classList.remove( 'active' );
+    }
   }
 
 
