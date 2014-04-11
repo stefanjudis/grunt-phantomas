@@ -64,6 +64,10 @@ a = {
 }
 ```
 
+#### Please try to stick to line max character number of 80.
+
+I know that it is sometimes unavoidable to go over it. But function arguments and long if-conditions can inlcude line breaks. ;)
+
 #### Functions are sorted alphabetically.
 
 I know, that a lot of people do not agree with that. Never the less, I really like it and it helps me a lot. Please try to stick to it.
