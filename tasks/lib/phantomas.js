@@ -195,8 +195,7 @@ Phantomas.prototype.createData = function( result ) {
           reject( e );
         } );
       }.bind( this ) );
-    }
-    else{
+    } else {
       return new Promise( function( resolve, reject ) {
         this.createDataJson( result ).bind( this )
         .then( this.readMetricsFiles )
@@ -259,12 +258,11 @@ Phantomas.prototype.createDataCSV = function( result ) {
       typeof result.requests !== 'undefined' &&
       result.requests.values.length
     ) {
-
-      var displayedMetricKeys = _.flatten( _.values( this.options.group ) );
+      var displayedMetricKeys = _.keys(result);
       _.each(result, function(value, key, collection){
-        collection[key] = collection[key]['average'];
+        collection[key] = collection[key].average;
       });
-      json2csv( { data: result, fields: displayedMetricKeys }, function( e, csv ) {
+      json2csv( { data : result, fields : displayedMetricKeys }, function( e, csv ) {
         if ( e ) {
           reject( e );
         }
@@ -711,8 +709,7 @@ Phantomas.prototype.outputUi = function( files ) {
               reject( e );
           } );
       }.bind( this ) );
-    }
-    else{
+    } else {
       return new Promise( function( resolve ) {
         resolve();
       }.bind( this ) );
