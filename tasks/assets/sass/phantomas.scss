@@ -8,8 +8,13 @@
 
 @import "compass/css3";
 @import "variables";
+@import "mixins/clearfix";
 @import "components/base";
 @import "components/header";
 @import "components/footer";
 @import "components/graphs";
 @import "components/table";
+
+.clearfix {
+  @include clearfix;
+}

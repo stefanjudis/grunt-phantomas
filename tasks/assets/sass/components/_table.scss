@@ -12,7 +12,7 @@
   color: $t-colorBody;
   font-size: $t-baseFontSize;
 
-  margin: 0 0 2em 0;
+  margin : 0;
 
   border-top: 1px solid $t-colorHighlight;
 }
@@ -27,6 +27,26 @@
   @extend .p--table--column;
 
   color: $t-colorDate;
+
+  @include transition(
+    color     0.1s ease-in
+  );
+}
+
+.p--table--container {
+  max-height : 15em;
+
+  margin: 0 0 2em 0;
+
+  overflow : scroll;
+
+  @include transition(
+    max-height 1s
+  );
+
+  &.expanded {
+    max-height : 500em;
+  }
 }
 
 .p--table--head {
@@ -42,6 +62,20 @@
 
 .p--table--body {
   .p--table--row {
+
+    @include transition(
+      background-color 0.1s ease-in
+    );
+
+
+    &.active {
+      background-color : $t-colorActive !important;
+
+      .p--table--column__highlight {
+        color : $t-colorBody;
+      }
+    }
+
     &:nth-child( 2n + 1) {
       background-color: $t-colorHighlight;
     }

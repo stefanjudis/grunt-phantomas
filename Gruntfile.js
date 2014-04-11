@@ -93,7 +93,7 @@ module.exports = function( grunt ) {
       grunt : {
         options : {
           // additionalStylesheet : '/Users/stefan/Desktop/custom2.css',
-          buildUi              : false,
+          // buildUi              : false,
           indexPath            : './phantomas/',
           options              : {
             'timeout' : 30
