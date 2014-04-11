@@ -21,11 +21,11 @@ var TEMP_PATH = './tmp/';
  */
 function deleteFolderRecursive ( path ) {
   var files = [];
-  if( fs.existsSync(path) ) {
+  if ( fs.existsSync(path) ) {
     files = fs.readdirSync( path );
     files.forEach( function( file ){
       var curPath = path + '/' + file;
-      if( fs.statSync( curPath ).isDirectory() ) {
+      if ( fs.statSync( curPath ).isDirectory() ) {
           deleteFolderRecursive( curPath );
       } else {
           fs.unlinkSync( curPath );
@@ -52,7 +52,7 @@ function createStubPromise( test, name, testDone ){
     return new Promise( function( resolve ) {
       resolve();
       test.ok(true, name + ' was called!');
-      if( testDone ) {
+      if ( testDone ) {
         test.done();
       }
     } );
@@ -66,7 +66,7 @@ function createStubPromise( test, name, testDone ){
  * @type {Object}
  */
 exports.phantomasPromisesFlow = {
-  setUp: function( done ){
+  setUp : function( done ){
     // save stubs for reverting after test
     this.stubs = {
       createIndexDirectory           : Phantomas.prototype.createIndexDirectory,
@@ -86,7 +86,7 @@ exports.phantomasPromisesFlow = {
     done();
   },
 
-  tearDown: function ( callback ) {
+  tearDown : function ( callback ) {
     // revert stubs to their original value
     _.each( this.stubs, function( val, key ) {
       Phantomas.prototype[ key ] = val;
@@ -190,7 +190,7 @@ exports.phantomas = {
     done();
   },
 
-  tearDown: function ( callback ) {
+  tearDown : function ( callback ) {
     deleteFolderRecursive( TEMP_PATH );
 
     callback();

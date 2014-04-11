@@ -22,7 +22,7 @@ module.exports = function( grunt ) {
     compass : {
       /* https://github.com/gruntjs/grunt-contrib-compass */
       dist : {
-        options: {
+        options : {
           sassDir     : 'tasks/assets/sass',
           cssDir      : 'tasks/public/styles',
           environment : 'production'
@@ -58,9 +58,24 @@ module.exports = function( grunt ) {
     },
 
 
-    jshint: {
+    jscs : {
+      /* https://www.npmjs.org/package/grunt-jscs-checker */
+      src     : [
+        'Gruntfile.js',
+        'tasks/assets/**/*.js',
+        '!tasks/assets/scripts/d3.min.js',
+        'tasks/lib/**/*.js',
+        '<%= nodeunit.tests %>',
+      ],
+      options : {
+        config : '.jscs.json'
+      }
+    },
+
+
+    jshint : {
       /* https://github.com/gruntjs/grunt-contrib-jshint */
-      all: [
+      all : [
         'Gruntfile.js',
         'tasks/assets/**/*.js',
         '!tasks/assets/scripts/d3.min.js',
@@ -78,7 +93,7 @@ module.exports = function( grunt ) {
       grunt : {
         options : {
           // additionalStylesheet : '/Users/stefan/Desktop/custom2.css',
-          // buildUi              : false,
+          buildUi              : false,
           indexPath            : './phantomas/',
           options              : {
             'timeout' : 30
@@ -136,6 +151,7 @@ module.exports = function( grunt ) {
   grunt.loadNpmTasks( 'grunt-contrib-clean' );
   grunt.loadNpmTasks( 'grunt-contrib-compass' );
   grunt.loadNpmTasks( 'grunt-contrib-copy' );
+  grunt.loadNpmTasks( 'grunt-jscs-checker' );
   grunt.loadNpmTasks( 'grunt-contrib-jshint' );
   grunt.loadNpmTasks( 'grunt-contrib-nodeunit' );
   grunt.loadNpmTasks( 'grunt-contrib-uglify' );
@@ -143,10 +159,10 @@ module.exports = function( grunt ) {
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask( 'test', [ 'clean', 'nodeunit', 'jshint' ] );
+  grunt.registerTask( 'test', [ 'clean', 'nodeunit', 'jshint', 'jscs' ] );
 
   // By default, lint and run all tests.
-  grunt.registerTask( 'default', [ 'jshint', 'test' ] );
+  grunt.registerTask( 'default', [ 'test' ] );
 
   // Set up development environment
   grunt.registerTask( 'build', [ 'compass', 'uglify', 'phantomas' ] );
