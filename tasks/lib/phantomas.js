@@ -263,11 +263,10 @@ Phantomas.prototype.createIndexDirectory = function() {
 };
 
 /**
- * Write final index.html file and
- * handle all metrics
+ * Write final index.html file and handle all metrics
  *
- * @param  {Array}   files content of all metric files
- * @return {Promise}       Promise
+ * @param  {Array}  results content of all metric files
+ * @return {Promise}        Promise
  *
  * @tested
  */
@@ -362,7 +361,7 @@ Phantomas.prototype.executePhantomas = function() {
  * Format the results of phantomas execution
  * and calculate statistic data
  *
- * @param  {Array} metrics metrics
+ * @param  {Array} results results
  * @return {Object}        formated metrics
  *
  * @tested
@@ -587,7 +586,7 @@ Phantomas.prototype.readMetricsFile = function( file ) {
   return new Promise( function( resolve, reject ) {
     fs.readFileAsync(
       this.dataPath + file,
-      { encoding : 'utf8'}
+      { encoding : 'utf8' }
     ).bind( this )
       .then( function( data ) {
         try {

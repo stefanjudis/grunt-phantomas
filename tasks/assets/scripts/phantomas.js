@@ -48,14 +48,14 @@
     var p      = el.parentNode;
 
     while ( p !== null ) {
-        var o = p;
+      var o = p;
 
-        if ( o.classList.contains( className ) ) {
-          parent = o;
-          break;
-        }
+      if ( o.classList.contains( className ) ) {
+        parent = o;
+        break;
+      }
 
-        p = o.parentNode;
+      p = o.parentNode;
     }
     return parent; // returns an Array []
   }
@@ -454,7 +454,7 @@
 
     type = type || 'median';
 
-    for( var metric in lastMetric ) {
+    for ( var metric in lastMetric ) {
       if (
         lastMetric[ metric ] &&
         typeof lastMetric[ metric ].median === 'number' &&
