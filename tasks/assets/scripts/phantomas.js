@@ -74,7 +74,15 @@
    */
   function drawLineChart( data, metric, type ) {
     // Helper functions on top of 8-)
-    function drawCircle( datum, index ) {
+
+    /**
+     * Draw one particalur circle
+     *
+     * @param  {Object}  datum datum
+     * @param  {Number}  index index in data set
+     * @param  {Boolena} delay draw circle with delay
+     */
+    function drawCircle( datum, index, delay ) {
       circleContainer.datum( datum )
                     .append( 'circle' )
                     .attr( 'class', 'lineChart--circle' )
@@ -117,7 +125,7 @@
                     )
                     .attr(
                       'data-metric',
-                      function( d ) {
+                      function() {
                         return metric;
                       }
                     )
@@ -139,7 +147,7 @@
                           'class',
                           'lineChart--circle lineChart--circle__highlighted'
                         )
-                        .attr( 'r', 4 );
+                        .attr( 'r', 6 );
                     } )
                     .on( 'mouseout', function() {
                       d3.select( this )
@@ -147,22 +155,48 @@
                           'class',
                           'lineChart--circle'
                         )
-                        .attr( 'r', 3 );
+                        .attr( 'r', 4 );
                     } )
 
                     .transition()
-                    .delay( DURATION / 10 * index )
-                    .attr( 'r', 3 );
+                    .delay( function() {
+                      if ( delay === undefined ) {
+                        return DURATION / 10 * index;
+                      }
+
+                      return 0;
+                    } )
+                    .attr( 'r', 4 );
     }
 
-    function drawCircles( data ) {
-      circleContainer = svg.append( 'g' );
+
+    /**
+     * Container function to iterate of given
+     * data and draw a circle for each data set
+     *
+     * @param  {Array}   data  data
+     * @param  {Boolean} delay should circles be drawn with delay
+     */
+    function drawCircles( data, delay ) {
+      if ( !circleContainer ) {
+        circleContainer = svg.append( 'g' );
+      }
+
+      circleContainer.selectAll( 'circle' ).remove();
 
       data.forEach( function( datum, index ) {
-        drawCircle( datum, index );
+        drawCircle( datum, index, delay );
       } );
     }
 
+
+    /**
+     * Helper function to tween between values
+     *
+     * @param  {Number}   b
+     * @param  {Function} callback
+     * @return {Function}
+     */
     function tween( b, callback ) {
       return function( a ) {
         var i = ( function interpolate() {
@@ -182,6 +216,57 @@
         };
       };
     }
+
+
+    /**
+     * Redraw all elements that are effected
+     * by zooming and translating
+     */
+    function redraw() {
+      svg.select( '.lineChart--xAxis' ).call( xAxis )
+                                        .selectAll( 'text' )
+                                        .attr( 'transform', 'rotate(45)' )
+                                        .style( 'text-anchor', 'start' );
+      svg.select( '.lineChart--xAxisTicks' ).call( xAxisTicks );
+      svg.select( '.p--lineChart--area' ).attr( 'd', area );
+      svg.select( '.p--lineChart--areaLine' ).attr( 'd', line );
+
+      drawCircles( data, false );
+    }
+
+
+    /**
+     * Zoom
+     */
+    function zoomed() {
+      redraw();
+
+      // show reset button
+      svg.select( '.p--lineChart--reset' )
+          .attr( 'class', 'p--lineChart--reset active' );
+
+      svg.select( '.p--lineChart--resetText' )
+          .attr( 'class', 'p--lineChart--resetText active' );
+
+    }
+
+
+    /**
+     * Reset zoom
+     */
+    function unZoomed() {
+      zoom.translate( [ 0, 0 ] ).scale( 1 );
+
+      redraw();
+
+      // hide reset button
+      svg.select( '.p--lineChart--reset' )
+          .attr( 'class', 'p--lineChart--reset' );
+
+      svg.select( '.p--lineChart--resetText' )
+          .attr( 'class', 'p--lineChart--resetText' );
+    }
+
     // data manipulation first
     data = data.reduce( function( newData, datum ) {
       if ( datum[ metric ] ) {
@@ -253,7 +338,8 @@
                       };
                     } ),
 
-        circleContainer;
+        circleContainer,
+        zoom;
 
     // Compute the minimum and maximum date, and the maximum price.
     x.domain( [ data[ 0 ].date, data[ data.length - 1 ].date ] );
@@ -293,7 +379,7 @@
         .duration( DURATION )
         .attrTween( 'd', tween( data, area ) );
 
-    // // Add the line path.
+    // Add the line path.
     svg.append( 'path' )
         .datum( startData )
         .attr( 'class', 'p--lineChart--areaLine' )
@@ -305,9 +391,41 @@
         .each( 'end', function() {
           drawCircles( data );
         } );
+
+
+    zoom = d3.behavior.zoom()
+              .x( x )
+              .scaleExtent( [ 1, 50 ] )
+              .on( 'zoom', zoomed );
+
+    // set up zoom pane
+    svg.append( 'rect' )
+        .attr( 'class', 'p--lineChart--pane' )
+        .attr( 'width', width )
+        .attr( 'height', height )
+        .call( zoom );
+
+    // set up reset button
+    svg.append( 'rect' )
+        .attr( 'class', 'p--lineChart--reset' )
+        .attr( 'width', 77 )
+        .attr( 'height', 23 )
+        .attr( 'x', width - 77 )
+        .attr( 'y', 2 )
+        .on( 'click', unZoomed );
+
+    svg.append( 'text' )
+        .attr( 'class', 'p--lineChart--resetText' )
+        .attr( 'x', width - 38 )
+        .attr( 'y', 17 )
+        .text( 'reset' )
+        .on( 'click', unZoomed );
+
   }
 
   function appendDetailBoxForCircle( circle ) {
+    removeDetailBoxForCircle( circle );
+
     var bBox          = circle.getBBox();
     var detailBox     = document.createElement( 'div' );
     var listContainer = getParent( circle, 'p--graphs--graph' );
@@ -341,7 +459,9 @@
 
     var detailBox = listContainer.querySelector( '.p--graphs--detailBox' );
 
-    listContainer.removeChild( detailBox );
+    if ( detailBox ) {
+      listContainer.removeChild( detailBox );
+    }
   }
 
 
@@ -362,7 +482,7 @@
     addEvent( mainContainer, 'mouseout', function( event ) {
       if ( event.target.tagName === 'circle' ) {
         removeDetailBoxForCircle( event.target );
-        unhighlighTableRow( event.target );
+        unhighlightTableRow( event.target );
       }
     } );
   }
@@ -479,7 +599,7 @@
    *
    * @param  {Object} target target
    */
-  function highlightTableRow( target ) {
+  function unhighlightTableRow( target ) {
     var row = document.querySelectorAll(
       '#' + target.attributes.getNamedItem( 'data-metric' ).value +
       '--row--' +
@@ -487,18 +607,18 @@
     );
 
     if ( row.length ) {
-      row[ 0 ].classList.add( 'active' );
+      row[ 0 ].classList.remove( 'active' );
     }
   }
 
 
   /**
    * Unhighlight table row if particular
-   * graph bullet if hovered
+   * graph bullet is left
    *
    * @param  {Object} target target
    */
-  function unhighlighTableRow( target ) {
+  function highlightTableRow( target ) {
     var metric = target.attributes.getNamedItem( 'data-metric' ).value;
     var row = document.getElementById(
       metric +
@@ -512,7 +632,7 @@
     if ( row && scrollContainer ) {
       scrollContainer.scrollTop = row.offsetTop;
 
-      row.classList.remove( 'active' );
+      row.classList.add( 'active' );
     }
   }
 

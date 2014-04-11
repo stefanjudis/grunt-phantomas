@@ -249,7 +249,38 @@
   stroke-width: 2;
 }
 
+.p--lineChart--pane {
+  cursor : move;
+  fill : none;
+  pointer-events : all;
 
+}
+
+.p--lineChart--reset, .p--lineChart--resetText {
+  display : none;
+
+  cursor : pointer;
+
+  &.active {
+    display : block;
+  }
+}
+
+.p--lineChart--reset {
+  fill : rgba( $c-green, 0.8 );
+
+  &:hover {
+    fill : rgba( adjust-lightness( $c-green, 10 ), 0.8 );
+  }
+}
+
+.p--lineChart--resetText {
+  fill : $c-white;
+
+  text-anchor : middle;
+
+  font-size : 0.8em;
+}
 
 // TODO make that fit in conventions
 .lineChart--bubble--label {
