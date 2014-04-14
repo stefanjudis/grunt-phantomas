@@ -553,6 +553,8 @@ Phantomas.prototype.formResult = function( results ) {
 
 /**
  * General function to start the whole thingy
+ *
+ * @tested
  */
 Phantomas.prototype.kickOff = function() {
   this.grunt.log.subhead( 'PHANTOMAS EXECUTION(S) STARTED.' );

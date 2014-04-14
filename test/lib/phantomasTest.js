@@ -75,6 +75,7 @@ exports.phantomasPromisesFlow = {
       formResult                     : Phantomas.prototype.formResult,
       createData                     : Phantomas.prototype.createData,
       createDataJson                 : Phantomas.prototype.createDataJson,
+      createDataCSV                  : Phantomas.prototype.createDataCSV,
       readMetricsFiles               : Phantomas.prototype.readMetricsFiles,
       outputUi                       : Phantomas.prototype.outputUi,
       createIndexHtml                : Phantomas.prototype.createIndexHtml,
@@ -135,6 +136,57 @@ exports.phantomasPromisesFlow = {
                 } );
 
     }
+  },
+
+  createData : {
+    json : function( test ){
+      var done = function() {};
+      var options = {
+        indexPath : TEMP_PATH,
+      };
+
+      var results = {
+        requests : {
+          values : [ 1, 2, 3, 4 ]
+        }
+      };
+
+      var phantomas = new Phantomas( grunt, options, done );
+
+      Phantomas.prototype.createDataJson =        createStubPromise( test, 'createDataJson' );
+      Phantomas.prototype.readMetricsFiles     = createStubPromise( test, 'readMetricsFiles' );
+      Phantomas.prototype.outputUi             = createStubPromise( test, 'outputUi' );
+
+      phantomas.createData(results)
+                .then( function() {
+                  test.expect( 3 );
+                  test.done();
+                } );
+    },
+
+    csv : function( test ){
+      var done = function() {};
+      var options     = {
+        indexPath : TEMP_PATH,
+        output : 'csv'
+      };
+      var results = {
+        requests : {
+          values : [ 1, 2, 3, 4 ]
+        }
+      };
+
+
+      var phantomas = new Phantomas( grunt, options, done );
+
+      Phantomas.prototype.createDataCSV = createStubPromise( test, 'createDataCSV' );
+
+      phantomas.createData(results)
+                .then( function() {
+                  test.expect( 1 );
+                  test.done();
+                } );
+    },
   },
 
 
