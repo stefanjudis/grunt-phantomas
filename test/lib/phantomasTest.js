@@ -153,9 +153,9 @@ exports.phantomasPromisesFlow = {
 
       var phantomas = new Phantomas( grunt, options, done );
 
-      Phantomas.prototype.createDataJson =        createStubPromise( test, 'createDataJson' );
-      Phantomas.prototype.readMetricsFiles     = createStubPromise( test, 'readMetricsFiles' );
-      Phantomas.prototype.outputUi             = createStubPromise( test, 'outputUi' );
+      Phantomas.prototype.createDataJson   = createStubPromise( test, 'createDataJson' );
+      Phantomas.prototype.readMetricsFiles = createStubPromise( test, 'readMetricsFiles' );
+      Phantomas.prototype.outputUi         = createStubPromise( test, 'outputUi' );
 
       phantomas.createData(results)
                 .then( function() {
@@ -461,17 +461,17 @@ exports.phantomas = {
       };
 
       fs.mkdirSync( TEMP_PATH + 'data' );
-      test.doesNotThrow(function(){phantomas.createDataCSV( fileContent )
-        .then( function() {
-          var files = fs.readdirSync( 'tmp/data/' );
-          test.strictEqual( files.length, 1 );
-          test.done();
+      test.doesNotThrow( function(){
+        phantomas.createDataCSV( fileContent )
+          .then( function() {
+            var files = fs.readdirSync( 'tmp/data/' );
 
-          deleteFolderRecursive( TEMP_PATH + 'data' );
-        } );
+            test.strictEqual( files.length, 1 );
+            test.done();
 
-
-      });
+            deleteFolderRecursive( TEMP_PATH + 'data' );
+          } );
+      } );
     }
   },
 

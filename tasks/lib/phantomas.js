@@ -258,16 +258,19 @@ Phantomas.prototype.createDataCSV = function( result ) {
       typeof result.requests !== 'undefined' &&
       result.requests.values.length
     ) {
-      var displayedMetricKeys = _.keys(result);
-      _.each(result, function(value, key, collection){
-        collection[key] = collection[key].average;
+      var displayedMetricKeys = _.keys( result );
+      _.each(result, function( value, key, collection ){
+        collection[ key ] = collection[ key ].average;
       });
-      json2csv( { data : result, fields : displayedMetricKeys }, function( e, csv ) {
-        if ( e ) {
-          reject( e );
+      json2csv(
+        { data : result, fields : displayedMetricKeys },
+        function( e, csv ) {
+          if ( e ) {
+            reject( e );
+          }
+          resultCSV = csv;
         }
-        resultCSV = csv;
-      } );
+      );
 
       fs.writeFileAsync(
         this.dataPath + ( +new Date() ) + '.csv',
