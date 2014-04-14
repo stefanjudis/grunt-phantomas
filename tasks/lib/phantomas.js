@@ -344,6 +344,7 @@ Phantomas.prototype.createIndexDirectory = function() {
   }.bind( this ) );
 };
 
+
 /**
  * Write final index.html file and handle all metrics
  *
@@ -404,7 +405,6 @@ Phantomas.prototype.createIndexHtml = function( results ) {
 };
 
 
-
 /**
  * Exectue phantomas a given number of times
  * ( set in options )
@@ -436,6 +436,46 @@ Phantomas.prototype.executePhantomas = function() {
             console.log( e );
           } );
   }.bind( this ) );
+};
+
+
+/**
+ * General function to start the whole thingy
+ *
+ * @tested
+ */
+Phantomas.prototype.kickOff = function() {
+  this.grunt.log.subhead( 'PHANTOMAS EXECUTION(S) STARTED.' );
+  this.createIndexDirectory().bind( this )
+      // create data directory to prevent
+      // fileIO errors
+      .then( this.createDataDirectory )
+      // execute the phantomas process
+      // multiple runs according to
+      // configuration
+      .then( this.executePhantomas )
+      // format result and calculate
+      // max / min / median / average / ...
+      .then( this.formResult )
+      // write new file(s) with metrics data
+      .then( this.createData )
+      // yeah we're done :)
+      .then( this.showSuccessMessage )
+      // catch general bluebird error
+      .catch( Promise.RejectionError, function ( e ) {
+          console.error( 'unable to write file, because: ', e.message );
+      } )
+      // catch unknown error
+      .catch( function( e ) {
+        this.grunt.log.error( 'SOMETHING WENT WRONG...' );
+        this.grunt.log.error( e );
+
+        if ( e.stack ) {
+          this.grunt.log.error( e.stack );
+        }
+        this.grunt.event.emit( 'phantomasFailure', e );
+      }.bind( this ) )
+      .done();
 };
 
 
@@ -554,45 +594,6 @@ Phantomas.prototype.formResult = function( results ) {
   }.bind( this ) );
 };
 
-/**
- * General function to start the whole thingy
- *
- * @tested
- */
-Phantomas.prototype.kickOff = function() {
-  this.grunt.log.subhead( 'PHANTOMAS EXECUTION(S) STARTED.' );
-  this.createIndexDirectory().bind( this )
-      // create data directory to prevent
-      // fileIO errors
-      .then( this.createDataDirectory )
-      // execute the phantomas process
-      // multiple runs according to
-      // configuration
-      .then( this.executePhantomas )
-      // format result and calculate
-      // max / min / median / average / ...
-      .then( this.formResult )
-      // write new file(s) with metrics data
-      .then( this.createData )
-      // yeah we're done :)
-      .then( this.showSuccessMessage )
-      // catch general bluebird error
-      .catch( Promise.RejectionError, function ( e ) {
-          console.error( 'unable to write file, because: ', e.message );
-      } )
-      // catch unknown error
-      .catch( function( e ) {
-        this.grunt.log.error( 'SOMETHING WENT WRONG...' );
-        this.grunt.log.error( e );
-
-        if ( e.stack ) {
-          this.grunt.log.error( e.stack );
-        }
-        this.grunt.event.emit( 'phantomasFailure', e );
-      }.bind( this ) )
-      .done();
-};
-
 
 /**
  * Notify about not displayed metrics during
@@ -689,6 +690,7 @@ Phantomas.prototype.readMetricsFiles = function() {
       } );
   }.bind( this ) );
 };
+
 
  /**
  * Generate UI files if wished including creating index.html,
