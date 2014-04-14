@@ -54,6 +54,7 @@
     "phantomas": "~1.1.0",
     "node-fs": "~0.1.7",
     "lodash": "~2.4.1",
-    "html-minifier": "~0.5.5"
+    "html-minifier": "~0.5.5",
+    "json2csv": "~2.2.1"
   }
 }
