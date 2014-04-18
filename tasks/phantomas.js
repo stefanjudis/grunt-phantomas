@@ -16,11 +16,12 @@ module.exports = function( grunt ) {
       var done      = this.async();
       var options   = this.options( {
         additionStylesheet : false,
+        buildUi            : true,
         indexPath          : './phantomas/',
         numberOfRuns       : 5,
         options            : {},
+        output             : 'json',
         url                : 'http://gruntjs.com/',
-        buildUi            : true,
         group              : {
           'REQUESTS' : [
             'requests',
