@@ -423,6 +423,12 @@
 
   }
 
+
+  /**
+   * Append a new detail box to circle
+   *
+   * @param  {Object} circle svg circle
+   */
   function appendDetailBoxForCircle( circle ) {
     removeDetailBoxForCircle( circle );
 
@@ -454,6 +460,11 @@
   }
 
 
+  /**
+   * Remove detail box
+   *
+   * @param  {Object} circle svg circle
+   */
   function removeDetailBoxForCircle( circle ) {
     var listContainer = getParent( circle, 'p--graphs--graph' );
 
