@@ -36,7 +36,7 @@
   }
 }
 
-.p--graphs--description, .p--graphs--experimental, .p--graphs--warning {
+.p--graphs--description, .p--graphs--warning {
   width      : calc( 80% - 5em );
   max-height : 14em;
   position : absolute;
@@ -57,7 +57,7 @@
   }
 }
 
-.p--graphs--descriptionBtn, .p--graphs--experimentalBtn, .p--graphs--warningBtn {
+.p--graphs--descriptionBtn, .p--graphs--warningBtn {
   position : absolute;
   top   : 0;
 
@@ -131,22 +131,6 @@
 
   &:before {
     content : '!';
-  }
-}
-
-.p--graphs--experimentalBtn {
-  right : 4em;
-
-  background-color : rgba( $c-white, 0.1 );
-
-  &.active {
-    background-color : $c-white;
-  }
-
-  &:before {
-    content : '❤';
-
-    color : $c-green;
   }
 }
 
