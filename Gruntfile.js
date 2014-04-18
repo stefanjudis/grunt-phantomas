@@ -64,7 +64,7 @@ module.exports = function( grunt ) {
         'Gruntfile.js',
         'tasks/assets/**/*.js',
         '!tasks/assets/scripts/d3.min.js',
-        'tasks/lib/**/*.js',
+        'tasks/lib/phantomas.js',
         '<%= nodeunit.tests %>',
       ],
       options : {
@@ -79,7 +79,7 @@ module.exports = function( grunt ) {
         'Gruntfile.js',
         'tasks/assets/**/*.js',
         '!tasks/assets/scripts/d3.min.js',
-        'tasks/lib/**/*.js',
+        'tasks/lib/**/phantomas.js',
         '<%= nodeunit.tests %>',
       ],
       options : {

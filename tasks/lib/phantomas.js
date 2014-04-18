@@ -68,6 +68,9 @@ var Phantomas = function( grunt, options, done ) {
  * to specified index path
  *
  * - phantomas.css
+ * - phantomas.js
+ *
+ * @tested
  */
 Phantomas.prototype.copyAssets = function() {
   this.grunt.log.subhead( 'PHANTOMAS ASSETS COPYING STARTED.' );

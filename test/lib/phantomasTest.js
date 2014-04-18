@@ -42,19 +42,15 @@ function deleteFolderRecursive ( path ) {
  *
  * @param  {Object}  test     test
  * @param  {String}  name     function name
- * @param  {Boolean} testDone should test.done() be called
  *
  * @return {Function}         Function that will
  *                                     return stubbed promise
  */
-function createStubPromise( test, name, testDone ){
+function createStubPromise( test, name ){
   return function() {
     return new Promise( function( resolve ) {
-      resolve();
       test.ok( true, name + ' was called!' );
-      if ( testDone ) {
-        test.done();
-      }
+      resolve();
     } );
   };
 }
@@ -69,6 +65,8 @@ exports.phantomasPromisesFlow = {
   setUp : function( done ){
     // save stubs for reverting after test
     this.stubs = {
+      copyStyles                     : Phantomas.prototype.copyStyles,
+      copyScripts                    : Phantomas.prototype.copyScripts,
       createIndexDirectory           : Phantomas.prototype.createIndexDirectory,
       createDataDirectory            : Phantomas.prototype.createDataDirectory,
       executePhantomas               : Phantomas.prototype.executePhantomas,
@@ -92,15 +90,75 @@ exports.phantomasPromisesFlow = {
       Phantomas.prototype[ key ] = val;
     } );
 
+    deleteFolderRecursive( TEMP_PATH );
+
     callback();
   },
+
+
+  copyAssets : {
+    publicFolderExists : function( test ) {
+      var options     = {
+        buildUi   : true,
+        indexPath : TEMP_PATH
+      };
+      var done = function() {};
+
+      var phantomas = new Phantomas( grunt, options, done );
+
+      fs.mkdirSync( TEMP_PATH );
+      fs.mkdirSync( TEMP_PATH + '/public' );
+
+      Phantomas.prototype.copyScripts = createStubPromise( test, 'copyScripts' );
+      Phantomas.prototype.copyStyles  = createStubPromise( test, 'copyStyles' );
+
+      phantomas.copyAssets()
+                .then( function() {
+                  test.expect( 2 );
+                  test.done();
+                } );
+    },
+
+    publicFolderDoesNotExist : function( test ) {
+      var options     = {
+        buildUi   : true,
+        indexPath : TEMP_PATH
+      };
+      var done = function() {};
+
+      var phantomas = new Phantomas( grunt, options, done );
+      var mkdirSync = fs.mkdirSync;
+
+      fs.mkdirSync( TEMP_PATH );
+
+      Phantomas.prototype.copyScripts = createStubPromise( test, 'copyScripts' );
+      Phantomas.prototype.copyStyles  = createStubPromise( test, 'copyStyles' );
+
+      fs.mkdirSync = function() {
+        test.ok( true, 'fs.mkdirSync was called!' );
+      };
+
+      phantomas.copyAssets()
+                .then( function() {
+                  test.expect( 3 );
+
+                  fs.mkdirSync = mkdirSync;
+
+                  test.done();
+                } );
+    }
+  },
+
 
   kickOff : function( test ) {
     var options     = {
       buildUi   : true,
       indexPath : TEMP_PATH
     };
-    var done = function() {};
+    var done = function() {
+      test.expect( 6 );
+      test.done();
+    };
 
     var results = {
         requests : {
@@ -124,12 +182,10 @@ exports.phantomasPromisesFlow = {
     Phantomas.prototype.executePhantomas     = createStubPromise( test, 'executePhantomas' );
     Phantomas.prototype.createData           = createStubPromise( test, 'createData' );
     Phantomas.prototype.processData          = createStubPromise( test, 'processData' );
-    Phantomas.prototype.showSuccessMessage   = createStubPromise( test, 'showSuccessMessage', true );
 
     phantomas.kickOff();
-
-    test.expect( 7 );
   },
+
 
   processData : {
     withUI : {
@@ -211,11 +267,14 @@ exports.phantomasPromisesFlow = {
     // create stubs for Phantomas functions
     Phantomas.prototype.createIndexHtml                 = createStubPromise( test, 'createIndexHtml' );
     Phantomas.prototype.notifyAboutNotDisplayedMetrics  = createStubPromise( test, 'notifyAboutNotDisplayedMetrics' );
-    Phantomas.prototype.copyAssets                      = createStubPromise( test, 'copyAssets', true );
+    Phantomas.prototype.copyAssets                      = createStubPromise( test, 'copyAssets' );
 
-    phantomas.outputUi();
+    phantomas.outputUi()
+              .then( function() {
+                test.expect( 3 );
+                test.done();
+              } );
 
-    test.expect( 3 );
   }
 };
 
