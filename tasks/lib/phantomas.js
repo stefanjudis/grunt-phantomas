@@ -11,11 +11,11 @@
 var Promise   = require( 'bluebird' );
 var fs        = Promise.promisifyAll( require( 'node-fs' ) );
 var path      = Promise.promisifyAll( require( 'path' ) );
+var json2csv  = Promise.promisify( require( 'json2csv' ) );
 var meta      = require( '../config/metricsMeta' );
 var phantomas = require( 'phantomas' );
 var _         = require( 'lodash' );
 var minify    = require( 'html-minifier' ).minify;
-var json2csv  = require( 'json2csv' );
 
 
 /**
@@ -187,101 +187,87 @@ Phantomas.prototype.createData = function( result ) {
     typeof result.requests !== 'undefined' &&
     result.requests.values.length
   ) {
-    if( this.options.output === 'csv' ){
-      return new Promise( function ( resolve, reject ) {
-        this.createDataCSV( result ).bind( this )
-        .then( resolve )
-        .catch( function( e ) {
-          reject( e );
-        } );
-      }.bind( this ) );
+    if ( this._createData[ this.options.output ] !== undefined ) {
+      return this._createData[ this.options.output ].bind( this )( result );
     } else {
-      return new Promise( function( resolve, reject ) {
-        this.createDataJson( result ).bind( this )
-        .then( this.readMetricsFiles )
-        .then( this.outputUi )
-        .then( resolve )
-        .catch( function( e ) {
-          reject( e );
-        } );
-      }.bind( this ) );
+      throw new Error(
+        'Your set ouput format is not supported.\n' +
+        'PLEASE CHECK DOCUMENTATION FOR SUPPORTED FORMATS.'
+      );
     }
+  } else {
+    throw new Error( 'No run was successful.' );
   }
 };
 
 
 /**
- * Write phantomas result to json file
+ * Object holding function to generate
+ * several data formats
  *
- * @param  {String}  result phantomas result
- * @return {Promise}        Promise
- *
- * @tested
+ * @type {Object}
  */
-Phantomas.prototype.createDataJson = function( result ) {
-  this.grunt.log.subhead( 'WRITING RESULT JSON FILE.' );
+Phantomas.prototype._createData = {
+  /**
+   * Create CSV with generated data
+   *
+   * @param  {Object} result result
+   * @return {Promise}       Promise
+   *
+   * @tested
+   */
+  csv  : function( result ) {
+    this.grunt.log.subhead( 'WRITING RESULT CSV FILE.' );
 
-  return new Promise( function( resolve, reject ) {
-    if (
-      typeof result.requests !== 'undefined' &&
-      result.requests.values.length
-    ) {
-
-      fs.writeFileAsync(
-        this.dataPath + ( +new Date() ) + '.json',
-        JSON.stringify( result, null, 2 )
-      ).then( resolve );
-
-      this.grunt.log.ok( 'JSON file written.' );
-    } else {
-      reject( 'No run was successful.' );
-    }
-  }.bind( this ) );
-};
-
-
-/**
- * Write phantomas result to csv file
- *
- * @param  {String}  result phantomas result
- * @return {Promise}        Promise
- *
- * @tested
- */
-Phantomas.prototype.createDataCSV = function( result ) {
-  this.grunt.log.subhead( 'WRITING RESULT CSV FILE.' );
-
-  var resultCSV = null;
-
-  return new Promise( function( resolve, reject ) {
-    if (
-      typeof result.requests !== 'undefined' &&
-      result.requests.values.length
-    ) {
+    return new Promise( function( resolve, reject ) {
       var displayedMetricKeys = _.keys( result );
-      _.each(result, function( value, key, collection ){
+
+      _.each( result, function( value, key, collection ){
         collection[ key ] = collection[ key ].average;
-      });
-      json2csv(
-        { data : result, fields : displayedMetricKeys },
-        function( e, csv ) {
-          if ( e ) {
-            reject( e );
-          }
-          resultCSV = csv;
-        }
-      );
+      } );
+
+      json2csv( { data : result, fields : displayedMetricKeys } )
+        .then( function( csv ) {
+          var fileName = this.dataPath + ( +new Date() ) + '.csv';
+
+          fs.writeFileAsync(
+            fileName,
+            csv
+          ).then( resolve );
+
+          this.grunt.log.ok( 'CSV file - ' + fileName  + ' - written.' );
+        }.bind( this ) )
+        .catch( function( e ) {
+          reject( e );
+        } );
+    }.bind( this ) );
+  },
+
+
+  /**
+   * Create JSON with generated data
+   *
+   * @param  {Object} result result
+   * @return {Promise}       Promise
+   *
+   * @tested
+   */
+  json : function( result ) {
+    this.grunt.log.subhead( 'WRITING RESULT JSON FILE.' );
+
+    return new Promise( function( resolve, reject ) {
+      var fileName = this.dataPath + ( +new Date() ) + '.json';
 
       fs.writeFileAsync(
-        this.dataPath + ( +new Date() ) + '.csv',
-        resultCSV
-      ).then( resolve );
+        fileName,
+        JSON.stringify( result, null, 2 )
+      )
+      .then( resolve )
+      .catch( reject );
 
-      this.grunt.log.ok( 'CSV file written.' );
-    } else {
-      reject( 'No run was successful.' );
-    }
-  }.bind( this ) );
+      this.grunt.log.ok( 'JSON file - ' + fileName + ' - written.' );
+    }.bind( this ) );
+  }
 };
 
 
@@ -440,46 +426,6 @@ Phantomas.prototype.executePhantomas = function() {
 
 
 /**
- * General function to start the whole thingy
- *
- * @tested
- */
-Phantomas.prototype.kickOff = function() {
-  this.grunt.log.subhead( 'PHANTOMAS EXECUTION(S) STARTED.' );
-  this.createIndexDirectory().bind( this )
-      // create data directory to prevent
-      // fileIO errors
-      .then( this.createDataDirectory )
-      // execute the phantomas process
-      // multiple runs according to
-      // configuration
-      .then( this.executePhantomas )
-      // format result and calculate
-      // max / min / median / average / ...
-      .then( this.formResult )
-      // write new file(s) with metrics data
-      .then( this.createData )
-      // yeah we're done :)
-      .then( this.showSuccessMessage )
-      // catch general bluebird error
-      .catch( Promise.RejectionError, function ( e ) {
-          console.error( 'unable to write file, because: ', e.message );
-      } )
-      // catch unknown error
-      .catch( function( e ) {
-        this.grunt.log.error( 'SOMETHING WENT WRONG...' );
-        this.grunt.log.error( e );
-
-        if ( e.stack ) {
-          this.grunt.log.error( e.stack );
-        }
-        this.grunt.event.emit( 'phantomasFailure', e );
-      }.bind( this ) )
-      .done();
-};
-
-
-/**
  * Format the results of phantomas execution
  * and calculate statistic data
  *
@@ -596,6 +542,50 @@ Phantomas.prototype.formResult = function( results ) {
 
 
 /**
+ * General function to start the whole thingy
+ *
+ * @tested
+ */
+Phantomas.prototype.kickOff = function() {
+  this.grunt.log.subhead( 'PHANTOMAS EXECUTION(S) STARTED.' );
+
+  this.createIndexDirectory().bind( this )
+      // create data directory to prevent
+      // fileIO errors
+      .then( this.createDataDirectory )
+      // execute the phantomas process
+      // multiple runs according to
+      // configuration
+      .then( this.executePhantomas )
+      // format result and calculate
+      // max / min / median / average / ...
+      .then( this.formResult )
+      // write new file(s) with metrics data
+      .then( this.createData )
+      // process data and generate
+      // ui if wanted
+      .then( this.processData )
+      // yeah we're done!!! :)
+      .then( this.showSuccessMessage )
+      // catch general bluebird error
+      .catch( Promise.RejectionError, function ( e ) {
+          console.error( 'unable to write file, because: ', e.message );
+      } )
+      // catch unknown error
+      .catch( function( e ) {
+        this.grunt.log.error( 'SOMETHING WENT WRONG...' );
+        this.grunt.log.error( e );
+
+        if ( e.stack ) {
+          this.grunt.log.error( e.stack );
+        }
+        this.grunt.event.emit( 'phantomasFailure', e );
+      }.bind( this ) )
+      .done();
+};
+
+
+/**
  * Notify about not displayed metrics during
  * the build process
  *
@@ -619,6 +609,40 @@ Phantomas.prototype.notifyAboutNotDisplayedMetrics = function( results ) {
     );
 
     resolve();
+  }.bind( this ) );
+};
+
+
+/**
+ * Process data and build UI if wished
+ *
+ * @return {Promise} Promise
+ *
+ * @tested
+ */
+Phantomas.prototype.processData = function() {
+  return new Promise( function( resolve, reject ) {
+    if ( this.options.buildUi ) {
+      if ( this.options.output === 'json' ) {
+        // read all generated metric files
+        // and prepare them for ui generation
+        this.readMetricsFiles().bind( this )
+            // generate index.html
+            .then( this.outputUi )
+            // resolve everything to go on
+            .then( resolve );
+      } else {
+        this.grunt.log.error(
+          'Your set ouput format is not compatible with building the UI.'
+        );
+
+        reject(
+          'PLEASE SET OUTPUT to \'json\' if you want to build UI.'
+        );
+      }
+    } else {
+      resolve();
+    }
   }.bind( this ) );
 };
 
@@ -704,23 +728,17 @@ Phantomas.prototype.readMetricsFiles = function() {
  * @tested
  */
 Phantomas.prototype.outputUi = function( files ) {
-    if( this.buildUi ){
-      this.grunt.log.subhead( 'BUILDING THE UI TO DISPLAY YOUR DATA.' );
+  this.grunt.log.subhead( 'BUILDING THE UI TO DISPLAY YOUR DATA.' );
 
-      return new Promise( function( resolve, reject ) {
-         this.createIndexHtml( files ).bind( this )
-         .then( this.notifyAboutNotDisplayedMetrics )
-         .then( this.copyAssets )
-         .then( resolve )
-         .catch( function( e ) {
-              reject( e );
-          } );
-      }.bind( this ) );
-    } else {
-      return new Promise( function( resolve ) {
-        resolve();
-      }.bind( this ) );
-    }
+  return new Promise( function( resolve, reject ) {
+     this.createIndexHtml( files ).bind( this )
+     .then( this.notifyAboutNotDisplayedMetrics )
+     .then( this.copyAssets )
+     .then( resolve )
+     .catch( function( e ) {
+          reject( e );
+      } );
+  }.bind( this ) );
 };
 
 
