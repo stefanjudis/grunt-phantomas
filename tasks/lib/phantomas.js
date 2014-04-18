@@ -359,7 +359,7 @@ Phantomas.prototype.createIndexHtml = function( results ) {
         { data : {
           additionalStylesheet : this.options.additionalStylesheet,
           group                : this.options.group,
-          meta                 : this.meta,
+          meta                 : phantomas.metadata.metrics,
           results              : templateResults,
           url                  : this.options.url
         } }
