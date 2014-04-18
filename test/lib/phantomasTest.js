@@ -679,6 +679,47 @@ exports.phantomas = {
   },
 
 
+  executePhantomas : {
+    withoutErrors : function( test ) {
+      var options     = {};
+      var done        = function() {};
+      var phantomas   = new Phantomas( grunt, options, done );
+
+      // mock phantomas execution
+      phantomas.phantomas = function() {
+        return new Promise( function( resolve ) {
+          setTimeout( function() {
+            resolve();
+          }, 500 );
+        } );
+      };
+
+      phantomas.executePhantomas()
+                .then( function() {
+                  test.done();
+                } );
+    },
+    withErrors : function( test ) {
+      var options     = {};
+      var done        = function() {};
+      var phantomas   = new Phantomas( grunt, options, done );
+
+      // mock phantomas execution
+      phantomas.phantomas = function() {
+        return new Promise( function() {
+          throw new Error( 'Error!' );
+        } );
+      };
+
+      phantomas.executePhantomas()
+                .then( function( results ) {
+                  test.strictEqual( results.length, 0 );
+                  test.done();
+                } );
+    }
+  },
+
+
   formResult : function( test ) {
     var options     = {
         url : 'http://test.com'

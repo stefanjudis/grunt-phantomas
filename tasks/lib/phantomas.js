@@ -398,6 +398,8 @@ Phantomas.prototype.createIndexHtml = function( results ) {
  *
  * @return {Promise} Promise that gets resolved when all
  *                           executions succeeded
+ *
+ * @tested
  */
 Phantomas.prototype.executePhantomas = function() {
   var runs = [];
@@ -592,6 +594,8 @@ Phantomas.prototype.kickOff = function() {
  *
  * @param  {Object} results results
  * @return {Promise}        Promise
+ *
+ * @tested
  */
 Phantomas.prototype.notifyAboutNotDisplayedMetrics = function( results ) {
   return new Promise( function( resolve ) {
