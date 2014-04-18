@@ -395,7 +395,7 @@
 
     zoom = d3.behavior.zoom()
               .x( x )
-              .scaleExtent( [ 1, 50 ] )
+              .scaleExtent( [ 1, 75 ] )
               .on( 'zoom', zoomed );
 
     // set up zoom pane
