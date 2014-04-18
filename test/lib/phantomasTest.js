@@ -2,7 +2,7 @@
 
 var fs        = require( 'fs' );
 var grunt     = require( 'grunt' );
-var Phantomas = require( '../../tasks/lib/phantomas' );
+var Phantomas = require( '../../index' );
 var Promise   = require( 'bluebird' );
 var _         = require( 'lodash' );
 
