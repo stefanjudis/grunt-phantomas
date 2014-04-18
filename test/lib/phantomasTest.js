@@ -762,6 +762,42 @@ exports.phantomas = {
   },
 
 
+  notifyAboutNotDisplayedMetrics : function( test ) {
+    var options     = {
+      indexPath : TEMP_PATH,
+      group     : {
+        foo : [
+          'baz'
+        ]
+      }
+    };
+    var done        = function() {};
+    var phantomas   = new Phantomas( grunt, options, done );
+    var log         = grunt.log.ok;
+    var results     = [
+      {
+        bar   : 'whatever',
+        baz   : 'whatever',
+        boing : 'whatver '
+      }
+    ];
+
+    grunt.log.ok = function( msg ) {
+      test.strictEqual(
+        msg,
+        'You are currently not displaying the following metrics:\nbar, boing'
+      );
+    };
+
+    phantomas.notifyAboutNotDisplayedMetrics( results )
+              .then( function() {
+                grunt.log.ok = log;
+
+                test.done();
+              } );
+  },
+
+
   readMetricsFile : {
     notValidJson : function( test ) {
       var options     = {
