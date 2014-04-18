@@ -1,5 +1,4 @@
 {
-  "disallowDanglingUnderscores": true,
   "disallowEmptyBlocks" : true,
   "disallowKeywordsOnNewLine": ["else"],
   "requireLineFeedAtFileEnd": true,
