@@ -71,7 +71,7 @@ exports.phantomasPromisesFlow = {
       createDataDirectory            : Phantomas.prototype.createDataDirectory,
       executePhantomas               : Phantomas.prototype.executePhantomas,
       formResult                     : Phantomas.prototype.formResult,
-      createData                     : Phantomas.prototype.createData,
+      writeData                      : Phantomas.prototype.writeData,
       processData                    : Phantomas.prototype.processData,
       readMetricsFiles               : Phantomas.prototype.readMetricsFiles,
       outputUi                       : Phantomas.prototype.outputUi,
@@ -180,7 +180,7 @@ exports.phantomasPromisesFlow = {
     Phantomas.prototype.createIndexDirectory = createStubPromise( test, 'createIndexDirectory' );
     Phantomas.prototype.createDataDirectory  = createStubPromise( test, 'createDataDirectory' );
     Phantomas.prototype.executePhantomas     = createStubPromise( test, 'executePhantomas' );
-    Phantomas.prototype.createData           = createStubPromise( test, 'createData' );
+    Phantomas.prototype.writeData            = createStubPromise( test, 'writeData' );
     Phantomas.prototype.processData          = createStubPromise( test, 'processData' );
 
     phantomas.kickOff();
@@ -416,137 +416,6 @@ exports.phantomas = {
 
         test.done();
       }
-    }
-  },
-
-
-  createData : {
-    invalidData : function( test ) {
-      var options   = {
-        indexPath : TEMP_PATH,
-        buildUi   : false
-      };
-      var done = function() {};
-      var phantomas = new Phantomas( grunt, options, done );
-      var result    = {};
-
-      test.throws(
-        function() {
-          phantomas.createData( result );
-        },
-        Error,
-        'No run was successful.'
-      );
-      test.done();
-    },
-    validData : {
-      invalidDataFormat : function( test ) {
-        var options   = {
-          buildUi   : false,
-          indexPath : TEMP_PATH,
-          output    : 'invalidFormat'
-        };
-        var done = function() {};
-        var phantomas = new Phantomas( grunt, options, done );
-        var result    = {
-          requests : {
-            values : [ 1 ]
-          }
-        };
-
-        test.throws(
-          function() {
-            phantomas.createData( result );
-          },
-          Error,
-          'Your set ouput format is not supported.\n' +
-          'PLEASE CHECK DOCUMENTATION FOR SUPPORTED FORMATS.'
-        );
-        test.done();
-      },
-      validDataFormat : function( test ) {
-        var options   = {
-          buildUi   : false,
-          indexPath : TEMP_PATH,
-          output    : 'validFormat'
-        };
-        var done = function() {};
-        var phantomas = new Phantomas( grunt, options, done );
-        var result    = {
-          requests : {
-            values : [ 1 ]
-          }
-        };
-
-        // stub the valid data forma
-        phantomas._createData.validFormat = function() {
-          return new Promise( function() {});
-        };
-
-        var returnedPromise = phantomas.createData( result );
-
-        test.strictEqual( typeof returnedPromise, 'object' );
-        test.strictEqual( returnedPromise instanceof Promise, true );
-        test.done();
-      }
-    }
-  },
-
-
-  _createData : {
-    csv : function( test ) {
-      var options     = {
-        indexPath : TEMP_PATH
-      };
-      var done        = function() {};
-      var phantomas   = new Phantomas( grunt, options, done );
-      var fileContent = {
-        requests : {
-          values : [ 1, 2, 3, 4 ]
-        }
-      };
-
-      fs.mkdirSync( TEMP_PATH + 'data' );
-
-      phantomas._createData.csv.bind( phantomas )( fileContent )
-        .then( function() {
-          var files = fs.readdirSync( 'tmp/data/' );
-
-          test.strictEqual( files.length, 1 );
-          test.done();
-
-          deleteFolderRecursive( TEMP_PATH + 'data' );
-        } );
-    },
-    json : function( test ) {
-      var options     = {
-        indexPath : TEMP_PATH,
-        buildUi   : true
-      };
-      var done        = function() {};
-      var phantomas   = new Phantomas( grunt, options, done );
-      var fileContent = {
-        requests : {
-          values : [ 1, 2, 3, 4 ]
-        }
-      };
-
-      fs.mkdirSync( TEMP_PATH + 'data' );
-
-      phantomas._createData.json.bind( phantomas )( fileContent )
-                .then( function() {
-                  var files = fs.readdirSync( 'tmp/data/' );
-                  test.strictEqual( files.length, 1 );
-
-                  test.strictEqual(
-                    fs.readFileSync( './tmp/data/' + files[ 0 ], 'utf8' ),
-                    JSON.stringify( fileContent, null, 2 )
-                  );
-
-                  test.done();
-
-                  deleteFolderRecursive( TEMP_PATH + 'data' );
-                } );
     }
   },
 
@@ -954,5 +823,133 @@ exports.phantomas = {
     var phantomas       = new Phantomas( grunt, options, done );
 
     phantomas.showSuccessMessage();
+  },
+
+
+  writeData : {
+    invalidData : function( test ) {
+      var options   = {
+        indexPath : TEMP_PATH,
+        buildUi   : false
+      };
+      var done = function() {};
+      var phantomas = new Phantomas( grunt, options, done );
+      var result    = {};
+
+      phantomas.writeData( result )
+                .catch( function( e ) {
+                  test.strictEqual( e, 'No run was successful.' );
+                  test.done();
+                } );
+    },
+    validData : {
+      invalidDataFormat : function( test ) {
+        var options   = {
+          buildUi   : false,
+          indexPath : TEMP_PATH,
+          output    : 'invalidFormat'
+        };
+        var done = function() {};
+        var phantomas = new Phantomas( grunt, options, done );
+        var result    = {
+          requests : {
+            values : [ 1 ]
+          }
+        };
+
+        test.throws(
+          function() {
+            phantomas.writeData( result );
+          },
+          Error,
+          'Your set ouput format is not supported.\n' +
+          'PLEASE CHECK DOCUMENTATION FOR SUPPORTED FORMATS.'
+        );
+        test.done();
+      },
+      validDataFormat : function( test ) {
+        var options   = {
+          buildUi   : false,
+          indexPath : TEMP_PATH,
+          output    : 'validFormat'
+        };
+        var done = function() {};
+        var phantomas = new Phantomas( grunt, options, done );
+        var result    = {
+          requests : {
+            values : [ 1 ]
+          }
+        };
+
+        // stub the valid data forma
+        phantomas._writeData.validFormat = function() {
+          return new Promise( function() {});
+        };
+
+        var returnedPromise = phantomas.writeData( result );
+
+        test.strictEqual( typeof returnedPromise, 'object' );
+        test.strictEqual( returnedPromise instanceof Promise, true );
+        test.done();
+      }
+    }
+  },
+
+
+  _writeData : {
+    csv : function( test ) {
+      var options     = {
+        indexPath : TEMP_PATH
+      };
+      var done        = function() {};
+      var phantomas   = new Phantomas( grunt, options, done );
+      var fileContent = {
+        requests : {
+          values : [ 1, 2, 3, 4 ]
+        }
+      };
+
+      fs.mkdirSync( TEMP_PATH + 'data' );
+
+      phantomas._writeData.csv.bind( phantomas )( fileContent )
+        .then( function() {
+          var files = fs.readdirSync( 'tmp/data/' );
+
+          test.strictEqual( files.length, 1 );
+          test.done();
+
+          deleteFolderRecursive( TEMP_PATH + 'data' );
+        } );
+    },
+    json : function( test ) {
+      var options     = {
+        indexPath : TEMP_PATH,
+        buildUi   : true
+      };
+      var done        = function() {};
+      var phantomas   = new Phantomas( grunt, options, done );
+      var fileContent = {
+        requests : {
+          values : [ 1, 2, 3, 4 ]
+        }
+      };
+
+      fs.mkdirSync( TEMP_PATH + 'data' );
+
+      phantomas._writeData.json.bind( phantomas )( fileContent )
+                .then( function() {
+                  var files = fs.readdirSync( 'tmp/data/' );
+                  test.strictEqual( files.length, 1 );
+
+                  test.strictEqual(
+                    fs.readFileSync( './tmp/data/' + files[ 0 ], 'utf8' ),
+                    JSON.stringify( fileContent, null, 2 )
+                  );
+
+                  test.done();
+
+                  deleteFolderRecursive( TEMP_PATH + 'data' );
+                } );
+    }
   }
 };

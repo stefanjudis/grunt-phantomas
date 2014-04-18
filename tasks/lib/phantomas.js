@@ -176,105 +176,6 @@ Phantomas.prototype.copyStyles = function() {
 
 
 /**
- * Create json or csv data
- *
- * @param  {Object}  result phantomas result
- * @return {Promise}        Promise
- *
- * @tested
- */
-Phantomas.prototype.createData = function( result ) {
-  if (
-    typeof result.requests !== 'undefined' &&
-    result.requests.values.length
-  ) {
-    if ( this._createData[ this.options.output ] !== undefined ) {
-      return this._createData[ this.options.output ].bind( this )( result );
-    } else {
-      throw new Error(
-        'Your set ouput format is not supported.\n' +
-        'PLEASE CHECK DOCUMENTATION FOR SUPPORTED FORMATS.'
-      );
-    }
-  } else {
-    return new Promise( function( resolve, reject ) {
-      reject( 'No run was successful.' );
-    } );
-  }
-};
-
-
-/**
- * Object holding function to generate
- * several data formats
- *
- * @type {Object}
- */
-Phantomas.prototype._createData = {
-  /**
-   * Create CSV with generated data
-   *
-   * @param  {Object} result result
-   * @return {Promise}       Promise
-   *
-   * @tested
-   */
-  csv  : function( result ) {
-    this.grunt.log.subhead( 'WRITING RESULT CSV FILE.' );
-
-    return new Promise( function( resolve, reject ) {
-      var displayedMetricKeys = _.keys( result );
-
-      _.each( result, function( value, key, collection ){
-        collection[ key ] = collection[ key ].average;
-      } );
-
-      json2csv( { data : result, fields : displayedMetricKeys } )
-        .then( function( csv ) {
-          var fileName = this.dataPath + ( +new Date() ) + '.csv';
-
-          fs.writeFileAsync(
-            fileName,
-            csv
-          ).then( resolve );
-
-          this.grunt.log.ok( 'CSV file - ' + fileName  + ' - written.' );
-        }.bind( this ) )
-        .catch( function( e ) {
-          reject( e );
-        } );
-    }.bind( this ) );
-  },
-
-
-  /**
-   * Create JSON with generated data
-   *
-   * @param  {Object} result result
-   * @return {Promise}       Promise
-   *
-   * @tested
-   */
-  json : function( result ) {
-    this.grunt.log.subhead( 'WRITING RESULT JSON FILE.' );
-
-    return new Promise( function( resolve, reject ) {
-      var fileName = this.dataPath + ( +new Date() ) + '.json';
-
-      fs.writeFileAsync(
-        fileName,
-        JSON.stringify( result, null, 2 )
-      )
-      .then( resolve )
-      .catch( reject );
-
-      this.grunt.log.ok( 'JSON file - ' + fileName + ' - written.' );
-    }.bind( this ) );
-  }
-};
-
-
-/**
  * Create data directory in index path
  * if it doesn't exist yet
  *
@@ -395,7 +296,7 @@ Phantomas.prototype.createIndexHtml = function( results ) {
 
 
 /**
- * Exectue phantomas a given number of times
+ * Execute phantomas a given number of times
  * ( set in options )
  *
  * @return {Promise} Promise that gets resolved when all
@@ -408,7 +309,7 @@ Phantomas.prototype.executePhantomas = function() {
 
   return new Promise( function( resolve ) {
     this.grunt.log.verbose.writeln(
-      'Executing phantoms ( ' + this.options.numberOfRuns + ' times ) with following parameters:\n' +
+      'Executing phantomas ( ' + this.options.numberOfRuns + ' times ) with following parameters:\n' +
       JSON.stringify( this.options.options )
     );
 
@@ -566,7 +467,7 @@ Phantomas.prototype.kickOff = function() {
       // max / min / median / average / ...
       .then( this.formResult )
       // write new file(s) with metrics data
-      .then( this.createData )
+      .then( this.writeData )
       // process data and generate
       // ui if wanted
       .then( this.processData )
@@ -761,6 +662,105 @@ Phantomas.prototype.showSuccessMessage = function() {
   this.grunt.log.subhead( 'FINISHED PHANTOMAS.' );
 
   this.done();
+};
+
+
+/**
+ * Create json or csv data
+ *
+ * @param  {Object}  result phantomas result
+ * @return {Promise}        Promise
+ *
+ * @tested
+ */
+Phantomas.prototype.writeData = function( result ) {
+  if (
+    typeof result.requests !== 'undefined' &&
+    result.requests.values.length
+  ) {
+    if ( this._writeData[ this.options.output ] !== undefined ) {
+      return this._writeData[ this.options.output ].bind( this )( result );
+    } else {
+      throw new Error(
+        'Your set ouput format is not supported.\n' +
+        'PLEASE CHECK DOCUMENTATION FOR SUPPORTED FORMATS.'
+      );
+    }
+  } else {
+    return new Promise( function( resolve, reject ) {
+      reject( 'No run was successful.' );
+    } );
+  }
+};
+
+
+/**
+ * Object holding function to generate
+ * several data formats
+ *
+ * @type {Object}
+ */
+Phantomas.prototype._writeData = {
+  /**
+   * Create CSV with generated data
+   *
+   * @param  {Object} result result
+   * @return {Promise}       Promise
+   *
+   * @tested
+   */
+  csv  : function( result ) {
+    this.grunt.log.subhead( 'WRITING RESULT CSV FILE.' );
+
+    return new Promise( function( resolve, reject ) {
+      var displayedMetricKeys = _.keys( result );
+
+      _.each( result, function( value, key, collection ){
+        collection[ key ] = collection[ key ].average;
+      } );
+
+      json2csv( { data : result, fields : displayedMetricKeys } )
+        .then( function( csv ) {
+          var fileName = this.dataPath + ( +new Date() ) + '.csv';
+
+          fs.writeFileAsync(
+            fileName,
+            csv
+          ).then( resolve );
+
+          this.grunt.log.ok( 'CSV file - ' + fileName  + ' - written.' );
+        }.bind( this ) )
+        .catch( function( e ) {
+          reject( e );
+        } );
+    }.bind( this ) );
+  },
+
+
+  /**
+   * Create JSON with generated data
+   *
+   * @param  {Object} result result
+   * @return {Promise}       Promise
+   *
+   * @tested
+   */
+  json : function( result ) {
+    this.grunt.log.subhead( 'WRITING RESULT JSON FILE.' );
+
+    return new Promise( function( resolve, reject ) {
+      var fileName = this.dataPath + ( +new Date() ) + '.json';
+
+      fs.writeFileAsync(
+        fileName,
+        JSON.stringify( result, null, 2 )
+      )
+      .then( resolve )
+      .catch( reject );
+
+      this.grunt.log.ok( 'JSON file - ' + fileName + ' - written.' );
+    }.bind( this ) );
+  }
 };
 
 module.exports = Phantomas;
