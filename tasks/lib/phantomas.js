@@ -197,7 +197,9 @@ Phantomas.prototype.createData = function( result ) {
       );
     }
   } else {
-    throw new Error( 'No run was successful.' );
+    return new Promise( function( resolve, reject ) {
+      reject( 'No run was successful.' );
+    } );
   }
 };
 
@@ -444,7 +446,7 @@ Phantomas.prototype.formResult = function( results ) {
         fulfilledPromise = _.filter( results, function( promise ) {
           return promise.isFulfilled();
         } ),
-        fulFilledMetrics = fulfilledPromise[ 0 ].value()[ 0 ].metrics,
+        fulFilledMetrics = fulfilledPromise.length && fulfilledPromise[ 0 ].value()[ 0 ].metrics,
         entry,
         metric;
 
@@ -577,10 +579,11 @@ Phantomas.prototype.kickOff = function() {
       // catch unknown error
       .catch( function( e ) {
         this.grunt.log.error( 'SOMETHING WENT WRONG...' );
-        this.grunt.log.error( e );
 
         if ( e.stack ) {
           this.grunt.log.error( e.stack );
+        } else {
+          this.grunt.log.error( e );
         }
         this.grunt.event.emit( 'phantomasFailure', e );
       }.bind( this ) )
