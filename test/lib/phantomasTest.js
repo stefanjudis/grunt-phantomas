@@ -150,7 +150,9 @@ exports.phantomasPromisesFlow = {
                   .catch( function( e ) {
                     test.strictEqual(
                       e,
-                      'PLEASE SET OUTPUT to \'json\' if you want to build UI.'
+                      'Please set \'output\' to \'json\' if you want to build UI\n\n' +
+                      '-- or --\n\n' +
+                      'set \'buildUi\' to \'false\' if you want to get only the csv files.'
                     );
                     test.expect( 1 );
                     test.done();
