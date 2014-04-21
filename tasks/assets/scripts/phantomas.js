@@ -269,10 +269,10 @@
 
     // data manipulation first
     data = data.reduce( function( newData, datum ) {
-      if ( datum[ metric ] ) {
+      if ( datum.metrics[ metric ] ) {
         newData.push( {
           date  : new Date( datum.timestamp ),
-          value : datum[ metric ]
+          value : datum.metrics[ metric ]
         } );
       }
 
@@ -662,10 +662,10 @@
 
     type = type || 'median';
 
-    for ( var metric in lastMetric ) {
+    for ( var metric in lastMetric.metrics ) {
       if (
-        lastMetric[ metric ] &&
-        typeof lastMetric[ metric ].median === 'number' &&
+        lastMetric.metrics[ metric ] &&
+        typeof lastMetric.metrics[ metric ].median === 'number' &&
         metric !== 'timestamp' &&
         document.getElementById( 'graph--' + metric )
       ) {

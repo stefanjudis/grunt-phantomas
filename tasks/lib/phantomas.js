@@ -344,6 +344,7 @@ Phantomas.prototype.formResult = function( results ) {
   this.grunt.log.ok( this.options.numberOfRuns + ' Phantomas execution(s) done -> checking results:' );
   return new Promise( function( resolve ) {
     var entries          = {},
+        offenders        = {},
         fulfilledPromise = _.filter( results, function( promise ) {
           return promise.isFulfilled();
         } ),
@@ -370,19 +371,25 @@ Phantomas.prototype.formResult = function( results ) {
     // process all runs
     _.each( results, function( promise ) {
       if ( promise.isFulfilled() ) {
-        this.grunt.log.ok( 'Phantomas execution done.' );
+        this.grunt.log.ok( 'Phantomas execution successful.' );
 
-        var promiseValue = promise.value()[ 0 ].metrics,
+        var promiseValue = promise.value()[ 0 ],
             metric;
 
-        for ( metric in promiseValue ) {
+        for ( metric in promiseValue.metrics ) {
           if (
-            typeof promiseValue[ metric ] !== 'string' &&
+            typeof promiseValue.metrics[ metric ] !== 'string' &&
             typeof entries[ metric ] !== 'undefined'
           ) {
-            entries[ metric ].values.push( promiseValue[ metric ] );
+            entries[ metric ].values.push( promiseValue.metrics[ metric ] );
           }
         }
+
+        offenders = _.reduce( promiseValue.offenders, function( old, value, key ) {
+          old[ key ] = _.uniq( ( old[ key ] || [] ).concat( value ) );
+
+          return old;
+        }, offenders );
       } else {
         this.grunt.log.error(
           'Phantomas execution not successful -> ' + promise.error()
@@ -442,7 +449,10 @@ Phantomas.prototype.formResult = function( results ) {
                       entry.values[ len >> 1 ] ).toFixed( 2 ) );
     }
 
-    resolve( entries );
+    resolve( {
+      metrics   : entries,
+      offenders : offenders
+    } );
   }.bind( this ) );
 };
 
@@ -486,6 +496,7 @@ Phantomas.prototype.kickOff = function() {
         } else {
           this.grunt.log.error( e );
         }
+
         this.grunt.event.emit( 'phantomasFailure', e );
       }.bind( this ) )
       .done();
@@ -505,7 +516,7 @@ Phantomas.prototype.notifyAboutNotDisplayedMetrics = function( results ) {
   return new Promise( function( resolve ) {
     this.grunt.log.subhead( 'CHECKING FOR NOT DISPLAYED METRICS.' );
 
-    var resultKeys          = _.keys( results[ 0 ] );
+    var resultKeys          = _.keys( results[ results.length - 1 ].metrics );
     var displayedMetricKeys = _.flatten( _.values( this.options.group ) );
 
     displayedMetricKeys.push( 'timestamp' );
@@ -589,6 +600,13 @@ Phantomas.prototype.readMetricsFile = function( file ) {
         data.timestamp = +file.replace( /\.json/gi, '' );
 
         this.grunt.log.ok( '\'' + file + '\' looks good!' );
+
+        // provide backwards compability
+        // if no offenders data is present
+        if ( !data.offenders ) {
+          data.offenders = {};
+          data.metrics = JSON.parse( JSON.stringify( data ) );
+        }
 
         resolve( data );
       }.bind( this ) );
@@ -675,8 +693,8 @@ Phantomas.prototype.showSuccessMessage = function() {
  */
 Phantomas.prototype.writeData = function( result ) {
   if (
-    typeof result.requests !== 'undefined' &&
-    result.requests.values.length
+    typeof result.metrics.requests !== 'undefined' &&
+    result.metrics.requests.values.length
   ) {
     if ( this._writeData[ this.options.output ] !== undefined ) {
       return this._writeData[ this.options.output ].bind( this )( result );
@@ -713,13 +731,13 @@ Phantomas.prototype._writeData = {
     this.grunt.log.subhead( 'WRITING RESULT CSV FILE.' );
 
     return new Promise( function( resolve, reject ) {
-      var displayedMetricKeys = _.keys( result );
+      var displayedMetricKeys = _.keys( result.metrics );
 
-      _.each( result, function( value, key, collection ){
+      _.each( result.metrics, function( value, key, collection ){
         collection[ key ] = collection[ key ].average;
       } );
 
-      json2csv( { data : result, fields : displayedMetricKeys } )
+      json2csv( { data : result.metrics, fields : displayedMetricKeys } )
         .then( function( csv ) {
           var fileName = this.dataPath + ( +new Date() ) + '.csv';
 

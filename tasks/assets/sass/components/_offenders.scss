@@ -1,0 +1,67 @@
+.p--offenders {
+  margin : 0;
+
+  @include clearfix();
+
+  dt, dd {
+    float : left;
+
+    clear : left;
+  }
+
+  dt {
+    position : relative;
+
+    margin: 0.75em 0 1em -0.5em;
+    padding: 0.5em;
+
+    font-size   : 1.25em;
+    font-weight : 100;
+    line-height : 1.25em;
+
+    color            : $c-white;
+    background-color : $c-purple;
+
+    @include box-shadow( 0 0.125em 0.125em $c-grayDarker );
+
+    &:before {
+      position : absolute;
+
+      z-index : -1;
+
+      left : 0;
+      top  : 100%;
+
+      margin-top : -0.5em;
+
+      content : '';
+
+      border-top    : solid 0.5em transparent;
+      border-right   : solid 0.5em $c-purple;
+      border-bottom : solid 0.5em transparent;
+    }
+  }
+
+  dd {
+    margin : 0 0 0.25em 1%;
+    line-height : 1.25em;
+
+    font-size : 0.9em;
+
+    width : 98%;
+
+    display : block;
+
+    overflow : auto;
+
+    padding : 0.75em;
+
+    &:nth-child(2n) {
+      background : $c-blueDark;
+    }
+  }
+}
+
+.p--offenders--headline {
+  margin-left : -0.5em;
+}

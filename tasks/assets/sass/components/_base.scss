@@ -58,8 +58,11 @@ body {
 
 main {
   width: $d-baseWidth;
-  margin: 0 auto;
-  padding: 5% 0;
+
+  margin  : 0 auto 1em;
+  padding : 0;
+
+  background : $c-blueDarker;
 }
 
 h1, h2, h3, h4, h5 {
@@ -70,50 +73,86 @@ h1, h2, h3, h4, h5 {
   padding: 0;
 }
 
-h1 {
+h2 {
   position: relative;
 
   margin: 0.5em 0;
-  padding: 0 0 0.5em 0;
+  padding: 1em 0;
   font-size: $f-baseSize * 2;
   font-weight: $f-baseWeight;
 
-  &:before, &:after {
-    content: '';
+  background : $c-blueDark;
 
-    position: absolute;
-    top: calc( 50% - 0.25em );
-
-    width: 20%;
-    height: 1px;
-
-    background-color: $c-green;
+  &:first-child {
+    margin-top : 3em;
   }
 
-  &:before {
-    left: 10%;
+  @media screen and ( min-width: $b-big ) {
+    &:before, &:after {
+      content: '';
+
+      position: absolute;
+      top: calc( 50% - 0.25em );
+
+      width: 15%;
+      height: 1px;
+
+      background-color: $c-green;
+    }
+
+    &:before {
+      left: 10%;
+    }
+
+    &:after {
+      right: 10%;
+    }
   }
-
-  &:after {
-    right: 10%;
-  }
-}
-
-h2 {
-  margin: 0.75em 0;
-  padding: 0.5em 0;
-  font-size: $f-baseSize * 1.5;
-  font-weight: $f-baseWeight;
-
-  line-height: $f-baseSize * 2;
-
-  color: $c-white;
-  background-color: $c-green;
-
-  @include box-shadow( 0 0.125em 0.125em $c-grayDarker );
 }
 
 h3 {
+  position : relative;
+
+  margin: 0.75em -0.5em;
+  padding: 0.5em 0;
+
+  font-size   : $f-baseSize * 1.5;
+  font-weight : $f-baseWeight;
+  line-height : $f-baseSize * 2;
+  color       : $c-white;
+
+  background-color: $c-green;
+
+  @include box-shadow( 0 0.125em 0.125em $c-grayDarker );
+
+  &:before, &:after {
+    position : absolute;
+    z-index  : -1;
+
+    content : '';
+
+    top : 100%;
+
+    border-top    : solid 0.5em transparent;
+    border-bottom : solid 0.5em transparent;
+
+    margin-top : -0.5em;
+  }
+
+  &:before {
+    left : 0;
+
+    border-right   : solid 0.5em $c-green;
+  }
+
+  &:after {
+    right : 0;
+
+    border-left   : solid 0.5em $c-green;
+  }
+}
+
+h4 {
   margin: 0.5em 0;
 
   font-size: $f-baseSize;
