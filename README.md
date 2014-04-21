@@ -1,6 +1,6 @@
 # grunt-phantomas
 
-[![Build Status](http://img.shields.io/travis/stefanjudis/grunt-phantomas.svg?style=flat)](https://travis-ci.org/stefanjudis/grunt-phantomas) [![NPM version](http://img.shields.io/npm/v/grunt-phantomas.svg?style=flat)](npmjs.org/package/grunt-phantomas) [![Dependency Status](http://img.shields.io/gemnasium/stefanjudis/grunt-phantomas.svg?style=flat)](https://gemnasium.com/stefanjudis/grunt-phantomas) [![Coverage Status](http://img.shields.io/coveralls/stefanjudis/grunt-phantomas.svg?style=flat)](https://coveralls.io/r/stefanjudis/grunt-phantomas?branch=master) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+[![Build Status](http://img.shields.io/travis/stefanjudis/grunt-phantomas.svg?style=flat)](https://travis-ci.org/stefanjudis/grunt-phantomas) [![NPM version](http://img.shields.io/npm/v/grunt-phantomas.svg?style=flat)](https://www.npmjs.org/package/grunt-phantomas) [![Dependency Status](http://img.shields.io/gemnasium/stefanjudis/grunt-phantomas.svg?style=flat)](https://gemnasium.com/stefanjudis/grunt-phantomas) [![Coverage Status](http://img.shields.io/coveralls/stefanjudis/grunt-phantomas.svg?style=flat)](https://coveralls.io/r/stefanjudis/grunt-phantomas?branch=master) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 > Grunt plugin for phantomas
 
