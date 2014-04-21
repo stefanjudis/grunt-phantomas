@@ -18,15 +18,15 @@
       </select>
     </header>
     <main>
-      <h1>Stats for <%= url %></h1>
+      <h2>Stats for <%= url %></h2>
       <% for ( var key in group ) { %>
         <% if ( group.hasOwnProperty( key ) ) { %>
-          <h2><%= key %></h2>
+          <h3><%= key %></h3>
           <ul class="p--graphs">
             <% _.each( group[ key ], function( metric ) { %>
-              <% if ( results[ results.length - 1 ][ metric ] ) { %>
+              <% if ( results[ results.length - 1 ].metrics[ metric ] ) { %>
                 <li id="graph--<%= metric %>" class="p--graphs--graph">
-                  <h3><%= metric %></h3>
+                  <h4><%= metric %></h4>
                   <a class="p--graphs--descriptionBtn <%= ( meta[ metric ] && meta[ metric ].desc ) ? 'active' : '' %>" href="#description-<%= metric %>">Show description</a>
                   <div id="description-<%= metric %>" class="p--graphs--description" hidden><%= ( meta[ metric ] && meta[ metric ].desc ) ? meta[ metric ].desc : '' %></div>
                   <a class="p--graphs--warningBtn <%= ( meta[ metric ] && meta[ metric ].unreliable === true ) ? 'active' : '' %>" href="#warning-<%= metric %>">Show warning</a>
@@ -43,10 +43,10 @@
                       </thead>
                       <tbody class="p--table--body">
                         <% _.each( results, function( result ) { %>
-                          <% if ( result[ metric ] && result[ metric ].median !== undefined ) { %>
+                          <% if ( result.metrics[ metric ] && result.metrics[ metric ].median !== undefined ) { %>
                             <tr id="<%= metric + '--row--' + result.timestamp %>" class="p--table--row">
                                 <td class="p--table--column__highlight"><%= ( new Date( result.timestamp ) ).toISOString() %></td>
-                                <td class="p--table--column"><%= result[ metric ].median %></td>
+                                <td class="p--table--column"><%= result.metrics[ metric ].median %></td>
                             </tr>
                           <% } %>
                         <% } ) %>
@@ -58,6 +58,15 @@
           </ul>
         <% } %>
       <% } %>
+      <h2>Last run offenders for <%= url %></h2>
+      <dl class="p--offenders">
+        <% for( var offender in results[ results.length - 1 ].offenders ) { %>
+          <dt><%= offender %></dt>
+          <% _.each( results[ results.length - 1 ].offenders[ offender ], function( value ) { %>
+            <dd class="p--offenders__<%= offender %>"><%= value %>
+          <% } ) %>
+        <% } %>
+      </dl>
     </main>
     <footer class="p--footer">
       Made with &#x2764; and <a href="https://github.com/macbre/phantomas" target="_blank">Phantomas</a>

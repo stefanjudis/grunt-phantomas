@@ -9,12 +9,13 @@
 /**
  * Colors
  */
-$c-blue     : #49a2dc;
-$c-blueDark : #253f50;
+$c-blue       : #49a2dc;
+$c-blueDark   : #253f50;
+$c-blueDarker : adjust-lightness( $c-blueDark, -2 );
 
 $c-purple : #9b8eb4;
 
-$c-green : #45b5b3;
+$c-green     : #45b5b3;
 
 $c-white : #fff;
 $c-black : #000;
@@ -39,7 +40,7 @@ $f-headlineColor : $c-green;
 /**
  * Dimensions stuff ( widths / height )
  */
-$d-baseWidth    : 100%;
+$d-baseWidth    : 98%;
 
 
 /**

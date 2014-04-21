@@ -602,10 +602,13 @@ exports.phantomas = {
         },
         value : function() {
           return [ {
-            metrics : {
+            metrics   : {
               metricA       : 10,
               metricB       : 40,
               jQueryVersion : '1.9.1'
+            },
+            offenders : {
+              foo : 'bar'
             }
           } ];
         }
@@ -616,10 +619,13 @@ exports.phantomas = {
         },
         value : function() {
           return [ {
-            metrics : {
+            metrics   : {
               metricA       : 20,
               metricB       : 50,
               jQueryVersion : '1.9.1'
+            },
+            offenders : {
+              foo : 'baz'
             }
           } ];
         }
@@ -630,10 +636,13 @@ exports.phantomas = {
         },
         value : function() {
           return [ {
-            metrics : {
+            metrics   : {
               metricA       : 30,
               metricB       : 60,
               jQueryVersion : '1.9.1'
+            },
+            offenders : {
+              foo : 'bar'
             }
           } ];
         }
@@ -652,19 +661,25 @@ exports.phantomas = {
       .then( function( result ) {
         test.strictEqual( typeof result, 'object' );
 
-        test.strictEqual( typeof result.metricA, 'object' );
-        test.strictEqual(  result.metricA.sum,     60 );
-        test.strictEqual(  result.metricA.min,     10 );
-        test.strictEqual(  result.metricA.max,     30 );
-        test.strictEqual(  result.metricA.median,  20 );
-        test.strictEqual(  result.metricA.average, 20 );
+        test.strictEqual( typeof result.metrics.metricA, 'object' );
+        test.strictEqual( result.metrics.metricA.sum,     60 );
+        test.strictEqual( result.metrics.metricA.min,     10 );
+        test.strictEqual( result.metrics.metricA.max,     30 );
+        test.strictEqual( result.metrics.metricA.median,  20 );
+        test.strictEqual( result.metrics.metricA.average, 20 );
 
-        test.strictEqual( typeof result.metricB, 'object' );
-        test.strictEqual(  result.metricB.sum,     150 );
-        test.strictEqual(  result.metricB.min,     40 );
-        test.strictEqual(  result.metricB.max,     60 );
-        test.strictEqual(  result.metricB.median,  50 );
-        test.strictEqual(  result.metricB.average, 50 );
+        test.strictEqual( typeof result.metrics.metricB, 'object' );
+        test.strictEqual( result.metrics.metricB.sum,     150 );
+        test.strictEqual( result.metrics.metricB.min,     40 );
+        test.strictEqual( result.metrics.metricB.max,     60 );
+        test.strictEqual( result.metrics.metricB.median,  50 );
+        test.strictEqual( result.metrics.metricB.average, 50 );
+
+        test.strictEqual( typeof result.offenders, 'object' );
+        test.strictEqual( result.offenders.foo instanceof Array, true );
+        test.strictEqual( result.offenders.foo.length, 2 );
+        test.strictEqual( result.offenders.foo[ 0 ], 'bar' );
+        test.strictEqual( result.offenders.foo[ 1 ], 'baz' );
 
         test.strictEqual( typeof result.jQueryVersion, 'undefined' );
         test.done();
@@ -686,9 +701,11 @@ exports.phantomas = {
     var log         = grunt.log.ok;
     var results     = [
       {
-        bar   : 'whatever',
-        baz   : 'whatever',
-        boing : 'whatver '
+        metrics : {
+          bar   : 'whatever',
+          baz   : 'whatever',
+          boing : 'whatver '
+        }
       }
     ];
 
@@ -834,7 +851,9 @@ exports.phantomas = {
       };
       var done = function() {};
       var phantomas = new Phantomas( grunt, options, done );
-      var result    = {};
+      var result    = {
+        metrics : {}
+      };
 
       phantomas.writeData( result )
                 .catch( function( e ) {
@@ -852,8 +871,10 @@ exports.phantomas = {
         var done = function() {};
         var phantomas = new Phantomas( grunt, options, done );
         var result    = {
-          requests : {
-            values : [ 1 ]
+          metrics : {
+            requests : {
+              values : [ 1 ]
+            }
           }
         };
 
@@ -876,8 +897,10 @@ exports.phantomas = {
         var done = function() {};
         var phantomas = new Phantomas( grunt, options, done );
         var result    = {
-          requests : {
-            values : [ 1 ]
+          metrics : {
+            requests : {
+              values : [ 1 ]
+            }
           }
         };
 
@@ -904,8 +927,10 @@ exports.phantomas = {
       var done        = function() {};
       var phantomas   = new Phantomas( grunt, options, done );
       var fileContent = {
-        requests : {
-          values : [ 1, 2, 3, 4 ]
+        metrics : {
+          requests : {
+            values : [ 1, 2, 3, 4 ]
+          }
         }
       };
 
