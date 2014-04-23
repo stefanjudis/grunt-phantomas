@@ -58,6 +58,17 @@
           </ul>
         <% } %>
       <% } %>
+      <h2>Last run film strip for <%= url %></h2>
+      <% if ( images.length ) { %>
+        <ul class="p--filmstrip">
+          <% _.each( images, function( image ) { %>
+            <li><img src="images/<%= timestamp %>/<%= image %>" alt="film strip image of <%= url %>">
+            <div class="p--filmstrip--wrapper">
+              <div class="p--filmstrip--time"><%= image.match( /^screenshot-(\d*)-(\d*)\.png$/ )[ 2 ] + 'ms' %></div>
+            </div>
+          <% } ); %>
+        </ul>
+      <% }%>
       <h2>Last run offenders for <%= url %></h2>
       <dl class="p--offenders">
         <% for( var offender in results[ results.length - 1 ].offenders ) { %>

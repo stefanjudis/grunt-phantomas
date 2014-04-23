@@ -300,15 +300,20 @@ exports.phantomas = {
 
   constructor : function( test ) {
     var options   = {
-      indexPath : TEMP_PATH
+      indexPath : TEMP_PATH,
+      buildUi   : false
     };
     var done      = function() {};
     var phantomas = new Phantomas( grunt, options, done );
 
-    test.strictEqual( phantomas.grunt,    grunt );
-    test.strictEqual( phantomas.options,  options );
-    test.strictEqual( phantomas.done,     done );
-    test.strictEqual( phantomas.dataPath, 'tmp/data/' );
+    test.strictEqual( phantomas.dataPath,  'tmp/data/' );
+    test.strictEqual( phantomas.done,      done );
+    test.strictEqual( phantomas.grunt,     grunt );
+    test.strictEqual( phantomas.imagePath, 'tmp/images/' );
+    test.strictEqual( phantomas.options,   options );
+    test.strictEqual( phantomas.buildUi,   false );
+
+    test.strictEqual( typeof phantomas.timestamp,  'number' );
 
     test.done();
   },
@@ -550,13 +555,35 @@ exports.phantomas = {
 
   executePhantomas : {
     withoutErrors : function( test ) {
-      var options     = {};
+      var options     = {
+        url          : 'http://whatever.com',
+        numberOfRuns : 5,
+        options      : {}
+      };
       var done        = function() {};
       var phantomas   = new Phantomas( grunt, options, done );
 
+      var count             = 0;
+      var filmStripCount    = 0;
+      var filmStripDirCount = 0;
+
       // mock phantomas execution
-      phantomas.phantomas = function() {
+      phantomas.phantomas = function( url, options ) {
+
         return new Promise( function( resolve ) {
+          test.strictEqual( url , 'http://whatever.com' );
+
+          test.strictEqual( typeof options, 'object' );
+
+          count++;
+
+          if ( options[ 'film-strip' ] ) {
+            filmStripCount++;
+          }
+
+          if ( options[ 'film-strip-dir' ] ) {
+            filmStripDirCount++;
+          }
           setTimeout( function() {
             resolve();
           }, 500 );
@@ -565,6 +592,10 @@ exports.phantomas = {
 
       phantomas.executePhantomas()
                 .then( function() {
+                  test.strictEqual( filmStripCount,    1 );
+                  test.strictEqual( filmStripDirCount, 1 );
+                  test.strictEqual( count,             5 );
+
                   test.done();
                 } );
     },
@@ -585,6 +616,51 @@ exports.phantomas = {
                   test.strictEqual( results.length, 0 );
                   test.done();
                 } );
+    }
+  },
+
+
+  getImages : {
+    imagesExist : function( test ) {
+      var options     = {
+        indexPath : TEMP_PATH
+      };
+      var done        = function() {};
+      var phantomas   = new Phantomas( grunt, options, done );
+
+      phantomas.timestamp = 123456;
+
+      fs.mkdirSync( './tmp/images' );
+      fs.mkdirSync( './tmp/images/123456' );
+
+      fs.writeFileSync( './tmp/images/123456/screenshot-1234-22.png',   'foo' );
+      fs.writeFileSync( './tmp/images/123456/screenshot-1234-33.png',   'bar' );
+      fs.writeFileSync( './tmp/images/123456/screenshot-1234-1133.png', 'baz' );
+
+      var images = phantomas.getImages();
+
+      test.strictEqual( images instanceof Array, true );
+
+      test.strictEqual( images.length, 3 );
+
+      test.strictEqual( images[ 0 ], 'screenshot-1234-22.png' );
+      test.strictEqual( images[ 1 ], 'screenshot-1234-33.png' );
+      test.strictEqual( images[ 2 ], 'screenshot-1234-1133.png' );
+
+      test.done();
+    },
+    imagesDoesntExist : function( test ) {
+      var options     = {};
+      var done        = function() {};
+      var phantomas   = new Phantomas( grunt, options, done );
+
+      var images = phantomas.getImages();
+
+      test.strictEqual( images instanceof Array, true );
+
+      test.strictEqual( images.length, 0 );
+
+      test.done();
     }
   },
 
