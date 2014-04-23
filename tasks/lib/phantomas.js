@@ -55,13 +55,6 @@ var Phantomas = function( grunt, options, done ) {
   this.phantomas = Promise.promisify( phantomas );
   this.timestamp = +new Date();
   this.buildUi   = options.buildUi;
-
-
-  // quit if the phantomas version is too old
-  if ( /(0\.12\.0|0\.11\..*|0\.10\..*)/.test( phantomas.version ) ) {
-    this.grunt.log.error( 'YOUR PHANTOMAS VERSION IS OUTDATED.' );
-    this.grunt.fail.fatal( 'PLEASE UPDATE TO AT LEAST 0.12.1.' );
-  }
 };
 
 
