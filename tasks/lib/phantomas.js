@@ -50,8 +50,10 @@ var Phantomas = function( grunt, options, done ) {
   this.dataPath  = path.normalize(  options.indexPath + 'data/' );
   this.done      = done;
   this.grunt     = grunt;
+  this.imagePath = path.normalize( options.indexPath + 'images/' );
   this.options   = options;
   this.phantomas = Promise.promisify( phantomas );
+  this.timestamp = +new Date();
   this.buildUi   = options.buildUi;
 
 
@@ -248,6 +250,7 @@ Phantomas.prototype.createIndexHtml = function( results ) {
     this.grunt.log.subhead( 'PHANTOMAS index.html WRITING STARTED.' );
 
     var templateResults = [];
+    var images          = this.getImages();
 
     // check if all files were valid json
     results.forEach( function( result ) {
@@ -263,8 +266,10 @@ Phantomas.prototype.createIndexHtml = function( results ) {
         { data : {
           additionalStylesheet : this.options.additionalStylesheet,
           group                : this.options.group,
+          images               : images,
           meta                 : phantomas.metadata.metrics,
           results              : templateResults,
+          timestamp            : this.timestamp,
           url                  : this.options.url
         } }
       )
@@ -308,16 +313,26 @@ Phantomas.prototype.executePhantomas = function() {
   var runs = [];
 
   return new Promise( function( resolve ) {
+    var options;
+
     this.grunt.log.verbose.writeln(
       'Executing phantomas ( ' + this.options.numberOfRuns + ' times ) with following parameters:\n' +
       JSON.stringify( this.options.options )
     );
 
     for ( var i = 0; i < this.options.numberOfRuns; ++i ) {
+      options = _.clone( this.options.options );
+
+      // run it only for the first run
+      if ( i === 0 ) {
+        options[ 'film-strip' ]     = true;
+        options[ 'film-strip-dir' ] = this.imagePath + this.timestamp;
+      }
+
       runs.push(
         this.phantomas(
           this.options.url,
-          this.options.options
+          options
         )
       );
     }
@@ -454,6 +469,27 @@ Phantomas.prototype.formResult = function( results ) {
       offenders : offenders
     } );
   }.bind( this ) );
+};
+
+
+/**
+ * Get array of image paths
+ *
+ * @return {Array} Array of image paths
+ */
+Phantomas.prototype.getImages = function() {
+  var files;
+
+  try {
+    files = fs.readdirSync( this.imagePath + '/' + this.timestamp );
+  } catch( e ) {
+    this.grunt.log.error( 'NO IMAGES FOR FILM STRIP VIEW FOUND' );
+    files = [];
+  }
+
+  return _.sortBy( files, _.bind( function( file ) {
+    return +file.match( /^screenshot-(\d*)-(\d*)\.png$/ )[ 2 ];
+  }, this ) );
 };
 
 
@@ -767,7 +803,7 @@ Phantomas.prototype._writeData = {
     this.grunt.log.subhead( 'WRITING RESULT JSON FILE.' );
 
     return new Promise( function( resolve, reject ) {
-      var fileName = this.dataPath + ( +new Date() ) + '.json';
+      var fileName = this.dataPath + this.timestamp + '.json';
 
       fs.writeFileAsync(
         fileName,
@@ -776,7 +812,7 @@ Phantomas.prototype._writeData = {
       .then( resolve )
       .catch( reject );
 
-      this.grunt.log.ok( 'JSON file - ' + fileName + ' - written.' );
+      this.grunt.log.ok( 'JSON file - ' + this.timestamp + ' - written.' );
     }.bind( this ) );
   }
 };

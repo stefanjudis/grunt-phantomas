@@ -1,0 +1,68 @@
+.p--filmstrip {
+  list-style : none;
+
+  margin : 0;
+  padding : 0 1em;
+
+  li {
+    width : 99%;
+
+    position : relative;
+
+    background : $c-white;
+
+    margin  : 0.5%;
+    padding : 0;
+
+    display        : inline-block;
+    vertical-align : top;
+
+    @media screen and ( min-width: $b-medium ) {
+      width : 49%;
+    }
+
+    @media screen and ( min-width: $b-big ) {
+      width : 24%;
+    }
+  }
+
+  img {
+    width : 100%;
+  }
+}
+
+.p--filmstrip--time {
+  position : relative;
+
+  padding : 0.5em;
+
+  color : $c-white;
+  background : $c-green;
+
+  @include box-shadow( 0 0.125em 0.125em $c-grayDarker );
+
+  &:before, &:after {
+    position : absolute;
+    z-index  : -1;
+
+    content : '';
+
+    right : 0;
+    top   : 100%;
+
+    border-top    : solid 0.5em transparent;
+    border-left   : solid 0.5em $c-green;
+    border-bottom : solid 0.5em transparent;
+
+    margin-top : -0.5em;
+  }
+}
+
+.p--filmstrip--wrapper {
+  position : absolute;
+
+  z-index : $z-filmstrip-time;
+
+  top   : 1em;
+  right : -0.5em;
+}
