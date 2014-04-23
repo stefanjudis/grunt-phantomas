@@ -555,13 +555,35 @@ exports.phantomas = {
 
   executePhantomas : {
     withoutErrors : function( test ) {
-      var options     = {};
+      var options     = {
+        url          : 'http://whatever.com',
+        numberOfRuns : 5,
+        options      : {}
+      };
       var done        = function() {};
       var phantomas   = new Phantomas( grunt, options, done );
 
+      var count             = 0;
+      var filmStripCount    = 0;
+      var filmStripDirCount = 0;
+
       // mock phantomas execution
-      phantomas.phantomas = function() {
+      phantomas.phantomas = function( url, options ) {
+
         return new Promise( function( resolve ) {
+          test.strictEqual( url , 'http://whatever.com' );
+
+          test.strictEqual( typeof options, 'object' );
+
+          count++;
+
+          if ( options[ 'film-strip' ] ) {
+            filmStripCount++;
+          }
+
+          if ( options[ 'film-strip-dir' ] ) {
+            filmStripDirCount++;
+          }
           setTimeout( function() {
             resolve();
           }, 500 );
@@ -570,6 +592,10 @@ exports.phantomas = {
 
       phantomas.executePhantomas()
                 .then( function() {
+                  test.strictEqual( filmStripCount,    1 );
+                  test.strictEqual( filmStripDirCount, 1 );
+                  test.strictEqual( count,             5 );
+
                   test.done();
                 } );
     },
