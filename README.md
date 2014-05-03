@@ -21,7 +21,7 @@ grunt.loadNpmTasks('grunt-phantomas');
 
 ## The "phantomas" task
 You're looking for a tool that gives you detailed metrics about your site? Great!!!
-This grunt plugin executes [phantomas](https://github.com/macbre/phantomas) for you and visualizes the returned metrics in a generated `index.html` for you. It will keep track of history, so that you can set it up and check reports after every deployment of your site.
+This grunt plugin executes [phantomas](https://github.com/macbre/phantomas) for you and visualizes the returned metrics in a generated `index.html` for you. It will keep track of history, so that you can set it up and check reports after every deployment of your site. Read [below](#tracking-history-in-ci) to learn how to setup history tracking in different CI systems.
 
 Examples of rendered output:
 - metrics for [http://gruntjs.com](http://gruntjs.com) -> [here](http://stefanjudis.github.io/grunt-phantomas/gruntjs/)
@@ -363,6 +363,10 @@ grunt.initConfig( {
   }
 } );
 ```
+
+### Tracking history in CI
+
+To track history in Travis CI, use the [caching option](http://docs.travis-ci.com/user/caching/#Arbitrary-directories) to cache the `indexPath` folder.
 
 #### Note:
 Formatters are not supported as options for Phantomas, because they are not implemented in the CommonJS version of Phantomas.
