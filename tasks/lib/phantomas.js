@@ -255,7 +255,13 @@ Phantomas.prototype.createIndexHtml = function( results ) {
     this.grunt.file.write(
       this.options.indexPath + 'index.html',
       this.grunt.template.process(
-        this.grunt.file.read( TEMPLATE_FILE ),
+        minify(
+          this.grunt.file.read( TEMPLATE_FILE ),
+          {
+            removeComments     : true,
+            collapseWhitespace : true
+          }
+        ),
         { data : {
           additionalStylesheet : this.options.additionalStylesheet,
           group                : this.options.group,
@@ -270,21 +276,6 @@ Phantomas.prototype.createIndexHtml = function( results ) {
 
     this.grunt.log.ok(
       'Phantomas created new \'index.html\' at \'' + this.options.indexPath + '\'.'
-    );
-
-    this.grunt.file.write(
-      this.options.indexPath + 'index.html',
-      minify(
-        this.grunt.file.read( this.options.indexPath + 'index.html' ),
-        {
-          removeComments     : true,
-          collapseWhitespace : true
-        }
-      )
-    );
-
-    this.grunt.log.ok(
-      'Phantomas made \'index.html\' at \'' + this.options.indexPath + '\' nice and small.'
     );
 
     resolve( templateResults );
