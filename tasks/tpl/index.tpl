@@ -84,7 +84,7 @@
     </footer>
     <script>var results = [
 <%= results.map( function ( result ) {
-  return '/* ' + ( new Date( result.timestamp ) ) + ' | ' + result.timestamp + '.json */\n' + JSON.stringify( result, null, 2 ) ;
+  return '/* ' + ( new Date( result.timestamp ) ) + ' | ' + result.timestamp + '.json */\n' + JSON.stringify( result ) ;
 } ).join( ',\n' ) %>
 ];</script>
     <script src="public/scripts/d3.min.js"></script>
