@@ -364,6 +364,27 @@ grunt.initConfig( {
 } );
 ```
 
+### Troubleshooting
+
+By default, the experimental `film-strip` option is true. If the grunt phantomas command fails, try setting the film strip option to false:
+
+```js
+grunt.initConfig( {
+  phantomas: {
+    yourSite : {
+      options : {
+        indexPath : './yoursite/',
+        options   : {
+          'film-strip'   : false
+        },
+        url       : 'http://yoursite.com'
+      }
+    }
+  }
+} );
+```
+
+
 ### Tracking history in CI
 
 To track history in Travis CI, use the [caching option](http://docs.travis-ci.com/user/caching/#Arbitrary-directories) to cache the `indexPath` folder.

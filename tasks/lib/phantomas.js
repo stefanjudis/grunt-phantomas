@@ -308,7 +308,7 @@ Phantomas.prototype.executePhantomas = function() {
       options = _.clone( this.options.options );
 
       // run it only for the first run
-      if ( i === 0 ) {
+      if ( i === 0 && options[ 'film-strip' ] !== false ) {
         options[ 'film-strip' ]     = true;
         options[ 'film-strip-dir' ] = this.imagePath + this.timestamp;
       }
