@@ -58,8 +58,8 @@
           </ul>
         <% } %>
       <% } %>
-      <h2>Last run film strip for <%= url %></h2>
       <% if ( images.length ) { %>
+        <h2>Last run film strip for <%= url %></h2>
         <ul class="p--filmstrip">
           <% _.each( images, function( image ) { %>
             <li><img src="images/<%= timestamp %>/<%= image %>" alt="film strip image of <%= url %>">
