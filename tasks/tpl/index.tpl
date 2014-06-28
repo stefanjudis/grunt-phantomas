@@ -64,7 +64,7 @@
           <% _.each( images, function( image ) { %>
             <li><img src="images/<%= timestamp %>/<%= image %>" alt="film strip image of <%= url %>">
             <div class="p--filmstrip--wrapper">
-              <div class="p--filmstrip--time"><%= image.match( /^screenshot-(\d*)-(\d*)\.png$/ )[ 2 ] + 'ms' %></div>
+              <div class="p--filmstrip--time"><%= image.match( /^screenshot-\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d-(\d*).png$/ )[ 1 ] + 'ms' %></div>
             </div>
           <% } ); %>
         </ul>

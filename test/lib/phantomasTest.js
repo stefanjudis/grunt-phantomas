@@ -633,9 +633,9 @@ exports.phantomas = {
       fs.mkdirSync( './tmp/images' );
       fs.mkdirSync( './tmp/images/123456' );
 
-      fs.writeFileSync( './tmp/images/123456/screenshot-1234-22.png',   'foo' );
-      fs.writeFileSync( './tmp/images/123456/screenshot-1234-33.png',   'bar' );
-      fs.writeFileSync( './tmp/images/123456/screenshot-1234-1133.png', 'baz' );
+      fs.writeFileSync( './tmp/images/123456/screenshot-2014-06-28T12:40:29-1000.png', 'foo' );
+      fs.writeFileSync( './tmp/images/123456/screenshot-2014-06-28T12:40:29-2000.png', 'bar' );
+      fs.writeFileSync( './tmp/images/123456/screenshot-2014-06-28T12:40:29-3000.png', 'baz' );
 
       var images = phantomas.getImages();
 
@@ -643,9 +643,9 @@ exports.phantomas = {
 
       test.strictEqual( images.length, 3 );
 
-      test.strictEqual( images[ 0 ], 'screenshot-1234-22.png' );
-      test.strictEqual( images[ 1 ], 'screenshot-1234-33.png' );
-      test.strictEqual( images[ 2 ], 'screenshot-1234-1133.png' );
+      test.strictEqual( images[ 0 ], 'screenshot-2014-06-28T12:40:29-1000.png' );
+      test.strictEqual( images[ 1 ], 'screenshot-2014-06-28T12:40:29-2000.png' );
+      test.strictEqual( images[ 2 ], 'screenshot-2014-06-28T12:40:29-3000.png' );
 
       test.done();
     },
