@@ -201,6 +201,10 @@
 
   margin: 0 2.5% 2.5em 2.5%;
 
+  &.failed {
+    box-shadow : 0 0 0 3px $c-red, 0 0 1px 4px $c-grayDarker;
+  }
+
   @media screen and ( min-width: $b-medium ) {
     width: 45%;
     margin: 0 2.5% 2.5em 2.5%;
@@ -225,6 +229,12 @@
 
 .p--lineChart--area {
   fill: rgba( $c-gray, 0.5 );
+}
+
+.p--lineChart--assertion {
+  stroke : $c-red;
+  stroke-width : 2;
+  fill   : none;
 }
 
 .p--lineChart--areaLine {
@@ -290,11 +300,19 @@
   stroke-width : 2;
 
   cursor : pointer;
-}
 
-.lineChart--circle__highlighted {
-  fill   : $c-purple;
-  stroke : $c-white;
+  &.failed {
+    fill   : $c-red;
+
+    &.highlighted {
+      fill : $c-red;
+    }
+  }
+
+  &.highlighted {
+    fill   : $c-purple;
+    stroke : $c-white;
+  }
 }
 
 .lineChart--gradientBackgroundArea--top {

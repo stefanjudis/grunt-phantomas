@@ -47,14 +47,14 @@ var TEMPLATE_FILE = path.resolve(
  * @tested
  */
 var Phantomas = function( grunt, options, done ) {
-  this.dataPath  = path.normalize(  options.indexPath + 'data/' );
-  this.done      = done;
-  this.grunt     = grunt;
-  this.imagePath = path.normalize( options.indexPath + 'images/' );
-  this.options   = options;
-  this.phantomas = Promise.promisify( phantomas );
-  this.timestamp = +new Date();
-  this.buildUi   = options.buildUi;
+  this.dataPath         = path.normalize(  options.indexPath + 'data/' );
+  this.done             = done;
+  this.failedAssertions = [];
+  this.grunt            = grunt;
+  this.imagePath        = path.normalize( options.indexPath + 'images/' );
+  this.options          = options;
+  this.timestamp        = +new Date();
+  this.buildUi          = options.buildUi;
 };
 
 
@@ -242,8 +242,8 @@ Phantomas.prototype.createIndexHtml = function( results ) {
   return new Promise( function( resolve ) {
     this.grunt.log.subhead( 'PHANTOMAS index.html WRITING STARTED.' );
 
-    var templateResults = [];
-    var images          = this.getImages();
+    var templateResults  = [];
+    var images           = this.getImages();
 
     // check if all files were valid json
     results.forEach( function( result ) {
@@ -259,11 +259,15 @@ Phantomas.prototype.createIndexHtml = function( results ) {
           this.grunt.file.read( TEMPLATE_FILE ),
           {
             removeComments     : true,
+            // TODO fix me
+            // https://github.com/stefanjudis/grunt-phantomas/issues/93
             collapseWhitespace : true
           }
         ),
         { data : {
           additionalStylesheet : this.options.additionalStylesheet,
+          assertions           : this.options.assertions,
+          failedAssertions     : this.failedAssertions,
           group                : this.options.group,
           images               : images,
           meta                 : phantomas.metadata.metrics,
@@ -314,7 +318,7 @@ Phantomas.prototype.executePhantomas = function() {
       }
 
       runs.push(
-        this.phantomas(
+        phantomas(
           this.options.url,
           options
         )
@@ -342,12 +346,20 @@ Phantomas.prototype.executePhantomas = function() {
 Phantomas.prototype.formResult = function( results ) {
   this.grunt.log.ok( this.options.numberOfRuns + ' Phantomas execution(s) done -> checking results:' );
   return new Promise( function( resolve ) {
-    var entries          = {},
+    var assertions       = _.reduce( this.options.assertions, function( result, num, key ) {
+          result[ key ] = {
+            value  : num,
+            failed : 0
+          };
+
+          return result;
+        }, {} ),
+        entries          = {},
         offenders        = {},
         fulfilledPromise = _.filter( results, function( promise ) {
           return promise.isFulfilled();
         } ),
-        fulFilledMetrics = fulfilledPromise.length && fulfilledPromise[ 0 ].value()[ 0 ].metrics,
+        fulFilledMetrics = fulfilledPromise.length && fulfilledPromise[ 0 ].value().json.metrics,
         entry,
         metric;
 
@@ -372,19 +384,19 @@ Phantomas.prototype.formResult = function( results ) {
       if ( promise.isFulfilled() ) {
         this.grunt.log.ok( 'Phantomas execution successful.' );
 
-        var promiseValue = promise.value()[ 0 ],
+        var promiseValue = promise.value(),
             metric;
 
-        for ( metric in promiseValue.metrics ) {
+        for ( metric in promiseValue.json.metrics ) {
           if (
-            typeof promiseValue.metrics[ metric ] !== 'string' &&
+            typeof promiseValue.json.metrics[ metric ] !== 'string' &&
             typeof entries[ metric ] !== 'undefined'
           ) {
-            entries[ metric ].values.push( promiseValue.metrics[ metric ] );
+            entries[ metric ].values.push( promiseValue.json.metrics[ metric ] );
           }
         }
 
-        offenders = _.reduce( promiseValue.offenders, function( old, value, key ) {
+        offenders = _.reduce( promiseValue.json.offenders, function( old, value, key ) {
           old[ key ] = _.uniq( ( old[ key ] || [] ).concat( value ) );
 
           return old;
@@ -446,11 +458,23 @@ Phantomas.prototype.formResult = function( results ) {
       entry.median = + ( ( (len % 2 === 0) ?
                       ( ( entry.values[ len >> 1 ] + entry.values[ len >> 1 + 1 ] ) / 2 ) :
                       entry.values[ len >> 1 ] ).toFixed( 2 ) );
+
+      // pushed failed assertion
+      // depending on median
+      // to failedAssertions sum up
+      if (
+        this.options.assertions[ metric ] &&
+        entry.median > this.options.assertions[ metric ] &&
+        _.indexOf( this.failedAssertions, metric ) === -1
+      ) {
+        this.failedAssertions.push( metric );
+      }
     }
 
     resolve( {
-      metrics   : entries,
-      offenders : offenders
+      assertions       : assertions,
+      metrics          : entries,
+      offenders        : offenders
     } );
   }.bind( this ) );
 };
@@ -683,12 +707,12 @@ Phantomas.prototype.outputUi = function( files ) {
 
   return new Promise( function( resolve, reject ) {
      this.createIndexHtml( files ).bind( this )
-     .then( this.notifyAboutNotDisplayedMetrics )
-     .then( this.copyAssets )
-     .then( resolve )
-     .catch( function( e ) {
-          reject( e );
-      } );
+         .then( this.notifyAboutNotDisplayedMetrics )
+         .then( this.copyAssets )
+         .then( resolve )
+         .catch( function( e ) {
+              reject( e );
+          } );
   }.bind( this ) );
 };
 

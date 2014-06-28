@@ -54,6 +54,34 @@ Default value: `false`
 
 If you don't like the phantomas default styling and want to customize it, you can set the path to an additional stylesheet, that will be copied and loaded in the generated `index.html`.
 
+#### options.assertions
+Type: `Object`
+Default Value: `{}`
+
+An object that represents possible assertions for your generated UI. Best way is to run `grunt-phantomas` once and setting these values afterwards for particular metrics. The UI will warn you whenever the `median` value of your defined runs of a specific metric will go over the specified value by highlighting depending graphs and showing warnings on top of the builded UI. Using this option you can easily keep track of getting worse values. Performance budget for the win. :)
+
+Example:
+
+```
+phantomas : {
+  /* https://github.com/stefanjudis/grunt-phantomas */
+  grunt : {
+    options : {
+      assertions : {
+        'assetsWithQueryString' : 3,     // receive warning, when there are more than 3 assets with a query string
+        'bodyHTMLSize'          : 10500, // receive warning, when the bodyHTMLsize is bigger than 10500
+        'jsErrors'              : 0      // receive warning, when JS errors appear
+      }
+      indexPath  : './phantomas/',
+      options    : {
+        'timeout' : 30
+      },
+      url        : 'http://gruntjs.com/'
+    }
+  }
+}
+```
+
 #### options.indexPath
 Type: `String`
 Default value: `./phantomas/`
@@ -70,7 +98,7 @@ A numeric value that represents the number of times the `phantomas` executable w
 Type: `Object`
 Default value: `{}`
 
-An array that represents possible options for `phantomas` executable. For more information please check [the official api documentation](https://github.com/macbre/phantomas/wiki/npm-module) and [list of possible parameters](https://github.com/macbre/phantomas). See usage examples later on.
+An object that represents possible options for `phantomas` executable. For more information please check [the official api documentation](https://github.com/macbre/phantomas/wiki/npm-module) and [list of possible parameters](https://github.com/macbre/phantomas). See usage examples later on.
 
 #### options.url
 Type: `String`
@@ -273,6 +301,22 @@ grunt.initConfig( {
     yourSite : {
       options : {
         additionalStylesheet : '/Users/foo/bar/custom.css',
+        assertions : {
+          'assetsWithQueryString' : 3,
+          'biggestLatency'        : 1400,
+          'bodyHTMLSize'          : 10500,
+          'commentsSize'          : 55,
+          'consoleMessages'       : 0,
+          'hiddenContentSize'     : 65,
+          'jsErrors'              : 0,
+          'gzipRequests'          : 8,
+          'medianResponse'        : 400,
+          'nodesWithInlineCSS'    : 0,
+          'requests'              : 30,
+          'timeToFirstImage'      : 1100,
+          'DOMelementsCount'      : 200,
+          'DOMqueries'            : 10
+        },
         indexPath            : './yoursite/',
         url                  : 'http://yoursite.com/',
         numberOfRuns         : 10
