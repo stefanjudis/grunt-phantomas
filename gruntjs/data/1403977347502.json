@@ -1,0 +1,2012 @@
+{
+  "assertions": {
+    "assetsWithQueryString": {
+      "value": 3,
+      "failed": 0
+    },
+    "biggestLatency": {
+      "value": 1300,
+      "failed": 0
+    },
+    "bodyHTMLSize": {
+      "value": 10500,
+      "failed": 0
+    },
+    "commentsSize": {
+      "value": 55,
+      "failed": 0
+    },
+    "consoleMessages": {
+      "value": 0,
+      "failed": 0
+    },
+    "hiddenContentSize": {
+      "value": 65,
+      "failed": 0
+    },
+    "jsErrors": {
+      "value": 0,
+      "failed": 0
+    },
+    "gzipRequests": {
+      "value": 8,
+      "failed": 0
+    },
+    "medianResponse": {
+      "value": 550,
+      "failed": 0
+    },
+    "nodesWithInlineCSS": {
+      "value": 0,
+      "failed": 0
+    },
+    "requests": {
+      "value": 30,
+      "failed": 0
+    },
+    "DOMelementsCount": {
+      "value": 200,
+      "failed": 0
+    },
+    "DOMqueries": {
+      "value": 10,
+      "failed": 0
+    }
+  },
+  "metrics": {
+    "requests": {
+      "values": [
+        28,
+        28,
+        28,
+        28,
+        28,
+        null
+      ],
+      "sum": 140,
+      "min": 28,
+      "max": 28,
+      "median": 28,
+      "average": 28
+    },
+    "gzipRequests": {
+      "values": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        null
+      ],
+      "sum": 35,
+      "min": 7,
+      "max": 7,
+      "median": 7,
+      "average": 7
+    },
+    "postRequests": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "httpsRequests": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "notFound": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "bodySize": {
+      "values": [
+        197702,
+        199450,
+        213892,
+        220849,
+        253166,
+        null
+      ],
+      "sum": 1085059,
+      "min": 197702,
+      "max": 253166,
+      "median": 213892,
+      "average": 217011.8
+    },
+    "contentLength": {
+      "values": [
+        281527,
+        298505,
+        298508,
+        298511,
+        298711,
+        null
+      ],
+      "sum": 1475762,
+      "min": 281527,
+      "max": 298711,
+      "median": 298508,
+      "average": 295152.4
+    },
+    "httpTrafficCompleted": {
+      "values": [
+        2324,
+        2562,
+        2682,
+        2999,
+        3717,
+        null
+      ],
+      "sum": 14284,
+      "min": 2324,
+      "max": 3717,
+      "median": 2682,
+      "average": 2856.8
+    },
+    "timeToFirstByte": {
+      "values": [
+        397,
+        403,
+        413,
+        422,
+        499,
+        null
+      ],
+      "sum": 2134,
+      "min": 397,
+      "max": 499,
+      "median": 413,
+      "average": 426.8
+    },
+    "timeToLastByte": {
+      "values": [
+        402,
+        407,
+        419,
+        427,
+        505,
+        null
+      ],
+      "sum": 2160,
+      "min": 402,
+      "max": 505,
+      "median": 419,
+      "average": 432
+    },
+    "ajaxRequests": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "htmlCount": {
+      "values": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        null
+      ],
+      "sum": 5,
+      "min": 1,
+      "max": 1,
+      "median": 1,
+      "average": 1
+    },
+    "htmlSize": {
+      "values": [
+        9753,
+        9753,
+        9753,
+        9753,
+        9753,
+        null
+      ],
+      "sum": 48765,
+      "min": 9753,
+      "max": 9753,
+      "median": 9753,
+      "average": 9753
+    },
+    "cssCount": {
+      "values": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        null
+      ],
+      "sum": 10,
+      "min": 2,
+      "max": 2,
+      "median": 2,
+      "average": 2
+    },
+    "cssSize": {
+      "values": [
+        95187,
+        95187,
+        95187,
+        95187,
+        95187,
+        null
+      ],
+      "sum": 475935,
+      "min": 95187,
+      "max": 95187,
+      "median": 95187,
+      "average": 95187
+    },
+    "jsCount": {
+      "values": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        null
+      ],
+      "sum": 20,
+      "min": 4,
+      "max": 4,
+      "median": 4,
+      "average": 4
+    },
+    "jsSize": {
+      "values": [
+        28536,
+        28539,
+        28542,
+        30089,
+        35664,
+        null
+      ],
+      "sum": 151370,
+      "min": 28536,
+      "max": 35664,
+      "median": 28542,
+      "average": 30274
+    },
+    "jsonCount": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "jsonSize": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "imageCount": {
+      "values": [
+        21,
+        21,
+        21,
+        21,
+        21,
+        null
+      ],
+      "sum": 105,
+      "min": 21,
+      "max": 21,
+      "median": 21,
+      "average": 21
+    },
+    "imageSize": {
+      "values": [
+        140923,
+        163682,
+        165029,
+        165029,
+        165029,
+        null
+      ],
+      "sum": 799692,
+      "min": 140923,
+      "max": 165029,
+      "median": 165029,
+      "average": 159938.4
+    },
+    "videoCount": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "videoSize": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "webfontCount": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "webfontSize": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "base64Count": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "base64Size": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "otherCount": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "otherSize": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "cacheHits": {
+      "values": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        null
+      ],
+      "sum": 20,
+      "min": 4,
+      "max": 4,
+      "median": 4,
+      "average": 4
+    },
+    "cacheMisses": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "cachePasses": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "cachingNotSpecified": {
+      "values": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        null
+      ],
+      "sum": 20,
+      "min": 4,
+      "max": 4,
+      "median": 4,
+      "average": 4
+    },
+    "cachingTooShort": {
+      "values": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        null
+      ],
+      "sum": 10,
+      "min": 2,
+      "max": 2,
+      "median": 2,
+      "average": 2
+    },
+    "cachingDisabled": {
+      "values": [
+        20,
+        20,
+        20,
+        20,
+        20,
+        null
+      ],
+      "sum": 100,
+      "min": 20,
+      "max": 20,
+      "median": 20,
+      "average": 20
+    },
+    "oldCachingHeaders": {
+      "values": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        null
+      ],
+      "sum": 25,
+      "min": 5,
+      "max": 5,
+      "median": 5,
+      "average": 5
+    },
+    "consoleMessages": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "cookiesSent": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "cookiesRecv": {
+      "values": [
+        174,
+        174,
+        174,
+        616,
+        619,
+        null
+      ],
+      "sum": 1757,
+      "min": 174,
+      "max": 619,
+      "median": 174,
+      "average": 351.4
+    },
+    "domainsWithCookies": {
+      "values": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        null
+      ],
+      "sum": 5,
+      "min": 1,
+      "max": 1,
+      "median": 1,
+      "average": 1
+    },
+    "documentCookiesLength": {
+      "values": [
+        191,
+        192,
+        192,
+        193,
+        193,
+        null
+      ],
+      "sum": 961,
+      "min": 191,
+      "max": 193,
+      "median": 192,
+      "average": 192.2
+    },
+    "documentCookiesCount": {
+      "values": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        null
+      ],
+      "sum": 20,
+      "min": 4,
+      "max": 4,
+      "median": 4,
+      "average": 4
+    },
+    "domains": {
+      "values": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        null
+      ],
+      "sum": 25,
+      "min": 5,
+      "max": 5,
+      "median": 5,
+      "average": 5
+    },
+    "maxRequestsPerDomain": {
+      "values": [
+        21,
+        21,
+        21,
+        21,
+        21,
+        null
+      ],
+      "sum": 105,
+      "min": 21,
+      "max": 21,
+      "median": 21,
+      "average": 21
+    },
+    "medianRequestsPerDomain": {
+      "values": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        null
+      ],
+      "sum": 10,
+      "min": 2,
+      "max": 2,
+      "median": 2,
+      "average": 2
+    },
+    "commentsSize": {
+      "values": [
+        53,
+        53,
+        53,
+        53,
+        53,
+        null
+      ],
+      "sum": 265,
+      "min": 53,
+      "max": 53,
+      "median": 53,
+      "average": 53
+    },
+    "hiddenContentSize": {
+      "values": [
+        61,
+        61,
+        61,
+        61,
+        61,
+        null
+      ],
+      "sum": 305,
+      "min": 61,
+      "max": 61,
+      "median": 61,
+      "average": 61
+    },
+    "whiteSpacesSize": {
+      "values": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        null
+      ],
+      "sum": 20,
+      "min": 4,
+      "max": 4,
+      "median": 4,
+      "average": 4
+    },
+    "DOMelementsCount": {
+      "values": [
+        190,
+        190,
+        190,
+        190,
+        191,
+        null
+      ],
+      "sum": 951,
+      "min": 190,
+      "max": 191,
+      "median": 190,
+      "average": 190.2
+    },
+    "DOMelementMaxDepth": {
+      "values": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        null
+      ],
+      "sum": 50,
+      "min": 10,
+      "max": 10,
+      "median": 10,
+      "average": 10
+    },
+    "nodesWithInlineCSS": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "DOMmutationsInserts": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "DOMmutationsRemoves": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "DOMmutationsAttributes": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "DOMqueries": {
+      "values": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        null
+      ],
+      "sum": 40,
+      "min": 8,
+      "max": 8,
+      "median": 8,
+      "average": 8
+    },
+    "DOMqueriesById": {
+      "values": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        null
+      ],
+      "sum": 20,
+      "min": 4,
+      "max": 4,
+      "median": 4,
+      "average": 4
+    },
+    "DOMqueriesByClassName": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "DOMqueriesByTagName": {
+      "values": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        null
+      ],
+      "sum": 20,
+      "min": 4,
+      "max": 4,
+      "median": 4,
+      "average": 4
+    },
+    "DOMqueriesByQuerySelectorAll": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "DOMinserts": {
+      "values": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        null
+      ],
+      "sum": 30,
+      "min": 6,
+      "max": 6,
+      "median": 6,
+      "average": 6
+    },
+    "DOMqueriesDuplicated": {
+      "values": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        null
+      ],
+      "sum": 10,
+      "min": 2,
+      "max": 2,
+      "median": 2,
+      "average": 2
+    },
+    "eventsBound": {
+      "values": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        null
+      ],
+      "sum": 5,
+      "min": 1,
+      "max": 1,
+      "median": 1,
+      "average": 1
+    },
+    "globalVariables": {
+      "values": [
+        56,
+        56,
+        56,
+        56,
+        56,
+        null
+      ],
+      "sum": 280,
+      "min": 56,
+      "max": 56,
+      "median": 56,
+      "average": 56
+    },
+    "globalVariablesFalsy": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "headersCount": {
+      "values": [
+        361,
+        362,
+        362,
+        362,
+        362,
+        null
+      ],
+      "sum": 1809,
+      "min": 361,
+      "max": 362,
+      "median": 362,
+      "average": 361.8
+    },
+    "headersSentCount": {
+      "values": [
+        83,
+        83,
+        83,
+        83,
+        83,
+        null
+      ],
+      "sum": 415,
+      "min": 83,
+      "max": 83,
+      "median": 83,
+      "average": 83
+    },
+    "headersRecvCount": {
+      "values": [
+        278,
+        279,
+        279,
+        279,
+        279,
+        null
+      ],
+      "sum": 1394,
+      "min": 278,
+      "max": 279,
+      "median": 279,
+      "average": 278.8
+    },
+    "headersSize": {
+      "values": [
+        11662,
+        11690,
+        11691,
+        12132,
+        12133,
+        null
+      ],
+      "sum": 59308,
+      "min": 11662,
+      "max": 12133,
+      "median": 11691,
+      "average": 11861.6
+    },
+    "headersSentSize": {
+      "values": [
+        2916,
+        2916,
+        2916,
+        2916,
+        2916,
+        null
+      ],
+      "sum": 14580,
+      "min": 2916,
+      "max": 2916,
+      "median": 2916,
+      "average": 2916
+    },
+    "headersRecvSize": {
+      "values": [
+        8746,
+        8774,
+        8775,
+        9216,
+        9217,
+        null
+      ],
+      "sum": 44728,
+      "min": 8746,
+      "max": 9217,
+      "median": 8775,
+      "average": 8945.6
+    },
+    "headersBiggerThanContent": {
+      "values": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        null
+      ],
+      "sum": 10,
+      "min": 2,
+      "max": 2,
+      "median": 2,
+      "average": 2
+    },
+    "documentWriteCalls": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "evalCalls": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "jQueryOnDOMReadyFunctions": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "jQuerySizzleCalls": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "jsErrors": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "localStorageEntries": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "redirects": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "redirectsTime": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "assetsNotGzipped": {
+      "values": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        null
+      ],
+      "sum": 10,
+      "min": 2,
+      "max": 2,
+      "median": 2,
+      "average": 2
+    },
+    "assetsWithQueryString": {
+      "values": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        null
+      ],
+      "sum": 15,
+      "min": 3,
+      "max": 3,
+      "median": 3,
+      "average": 3
+    },
+    "assetsWithCookies": {
+      "values": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        null
+      ],
+      "sum": 10,
+      "min": 2,
+      "max": 2,
+      "median": 2,
+      "average": 2
+    },
+    "smallImages": {
+      "values": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        null
+      ],
+      "sum": 5,
+      "min": 1,
+      "max": 1,
+      "median": 1,
+      "average": 1
+    },
+    "multipleRequests": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "timeToFirstCss": {
+      "values": [
+        388,
+        524,
+        530,
+        540,
+        578,
+        null
+      ],
+      "sum": 2560,
+      "min": 388,
+      "max": 578,
+      "median": 530,
+      "average": 512
+    },
+    "timeToFirstJs": {
+      "values": [
+        549,
+        697,
+        720,
+        727,
+        754,
+        null
+      ],
+      "sum": 3447,
+      "min": 549,
+      "max": 754,
+      "median": 720,
+      "average": 689.4
+    },
+    "timeToFirstImage": {
+      "values": [
+        1094,
+        1095,
+        1096,
+        1096,
+        1200,
+        null
+      ],
+      "sum": 5581,
+      "min": 1094,
+      "max": 1200,
+      "median": 1096,
+      "average": 1116.2
+    },
+    "onDOMReadyTime": {
+      "values": [
+        693,
+        699,
+        714,
+        724,
+        935,
+        null
+      ],
+      "sum": 3765,
+      "min": 693,
+      "max": 935,
+      "median": 714,
+      "average": 753
+    },
+    "onDOMReadyTimeEnd": {
+      "values": [
+        694,
+        700,
+        716,
+        726,
+        940,
+        null
+      ],
+      "sum": 3776,
+      "min": 694,
+      "max": 940,
+      "median": 716,
+      "average": 755.2
+    },
+    "windowOnLoadTime": {
+      "values": [
+        2177,
+        2426,
+        2554,
+        2846,
+        2908,
+        null
+      ],
+      "sum": 12911,
+      "min": 2177,
+      "max": 2908,
+      "median": 2554,
+      "average": 2582.2
+    },
+    "windowOnLoadTimeEnd": {
+      "values": [
+        2178,
+        2427,
+        2558,
+        2847,
+        2913,
+        null
+      ],
+      "sum": 12923,
+      "min": 2178,
+      "max": 2913,
+      "median": 2558,
+      "average": 2584.6
+    },
+    "timeBackend": {
+      "values": [
+        13,
+        13,
+        14,
+        15,
+        16,
+        null
+      ],
+      "sum": 71,
+      "min": 13,
+      "max": 16,
+      "median": 14,
+      "average": 14.2
+    },
+    "timeFrontend": {
+      "values": [
+        84,
+        85,
+        86,
+        87,
+        87,
+        null
+      ],
+      "sum": 429,
+      "min": 84,
+      "max": 87,
+      "median": 86,
+      "average": 85.8
+    },
+    "windowAlerts": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "windowConfirms": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "windowPrompts": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "bodyHTMLSize": {
+      "values": [
+        10440,
+        10441,
+        10441,
+        10441,
+        10540,
+        null
+      ],
+      "sum": 52303,
+      "min": 10440,
+      "max": 10540,
+      "median": 10441,
+      "average": 10460.6
+    },
+    "iframesCount": {
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "sum": 0,
+      "min": 0,
+      "max": 0,
+      "median": 0,
+      "average": 0
+    },
+    "imagesWithoutDimensions": {
+      "values": [
+        16,
+        16,
+        16,
+        16,
+        16,
+        null
+      ],
+      "sum": 80,
+      "min": 16,
+      "max": 16,
+      "median": 16,
+      "average": 16
+    },
+    "smallestResponse": {
+      "values": [
+        35,
+        35,
+        35,
+        35,
+        35,
+        null
+      ],
+      "sum": 175,
+      "min": 35,
+      "max": 35,
+      "median": 35,
+      "average": 35
+    },
+    "biggestResponse": {
+      "values": [
+        94709,
+        94709,
+        94709,
+        94709,
+        94709,
+        null
+      ],
+      "sum": 473545,
+      "min": 94709,
+      "max": 94709,
+      "median": 94709,
+      "average": 94709
+    },
+    "fastestResponse": {
+      "values": [
+        44,
+        49,
+        55,
+        66,
+        69,
+        null
+      ],
+      "sum": 283,
+      "min": 44,
+      "max": 69,
+      "median": 55,
+      "average": 56.6
+    },
+    "slowestResponse": {
+      "values": [
+        1854,
+        2051,
+        2190,
+        2501,
+        2559,
+        null
+      ],
+      "sum": 11155,
+      "min": 1854,
+      "max": 2559,
+      "median": 2190,
+      "average": 2231
+    },
+    "smallestLatency": {
+      "values": [
+        39,
+        44,
+        47,
+        55,
+        66,
+        null
+      ],
+      "sum": 251,
+      "min": 39,
+      "max": 66,
+      "median": 47,
+      "average": 50.2
+    },
+    "biggestLatency": {
+      "values": [
+        1201,
+        1419,
+        1787,
+        2070,
+        2190,
+        null
+      ],
+      "sum": 8667,
+      "min": 1201,
+      "max": 2190,
+      "median": 1787,
+      "average": 1733.4
+    },
+    "medianResponse": {
+      "values": [
+        405,
+        432,
+        445.5,
+        496.5,
+        584.5,
+        null
+      ],
+      "sum": 2363.5,
+      "min": 405,
+      "max": 584.5,
+      "median": 445.5,
+      "average": 472.7
+    },
+    "medianLatency": {
+      "values": [
+        399,
+        430.5,
+        442.5,
+        452.5,
+        584,
+        null
+      ],
+      "sum": 2308.5,
+      "min": 399,
+      "max": 584,
+      "median": 442.5,
+      "average": 461.7
+    }
+  },
+  "offenders": {
+    "gzipRequests": [
+      "http://gruntjs.com/ (gzip: 9.52 kB / uncompressed: 9.52 kB)",
+      "http://gruntjs.com/js/vendor/lib/modernizr.min.js (gzip: 3.69 kB / uncompressed: 3.69 kB)",
+      "http://gruntjs.com/css/main.css (gzip: 92.49 kB / uncompressed: 92.49 kB)",
+      "http://gruntjs.com/img/grunt-logo.svg (gzip: 28.96 kB / uncompressed: 28.96 kB)",
+      "http://gruntjs.com/fonts/icomoon.svg (gzip: 10.14 kB / uncompressed: 10.14 kB)",
+      "http://static.adzerk.net/ados.js (gzip: 21.09 kB / uncompressed: 21.09 kB)",
+      "http://engine.adzerk.net/ados?t=1403977353891&request=%7B%22Placements%22:%5B%7B%22A%22:4433,%22S%22:27854,%22D%22:%22azk48893%22,%22AT%22:1%7D%5D,%22Keywords%22:%22undefined%22,%22Referrer%22:%22%22,%22IsAsync%22:true%7D (gzip: 2.09 kB / uncompressed: 2.09 kB)",
+      "http://engine.adzerk.net/ados?t=1403977352587&request=%7B%22Placements%22:%5B%7B%22A%22:4433,%22S%22:27854,%22D%22:%22azk48893%22,%22AT%22:1%7D%5D,%22Keywords%22:%22undefined%22,%22Referrer%22:%22%22,%22IsAsync%22:true%7D (gzip: 2.18 kB / uncompressed: 2.18 kB)",
+      "http://engine.adzerk.net/ados?t=1403977352650&request=%7B%22Placements%22:%5B%7B%22A%22:4433,%22S%22:27854,%22D%22:%22azk48893%22,%22AT%22:1%7D%5D,%22Keywords%22:%22undefined%22,%22Referrer%22:%22%22,%22IsAsync%22:true%7D (gzip: 2.05 kB / uncompressed: 2.05 kB)",
+      "http://engine.adzerk.net/ados?t=1403977352571&request=%7B%22Placements%22:%5B%7B%22A%22:4433,%22S%22:27854,%22D%22:%22azk48893%22,%22AT%22:1%7D%5D,%22Keywords%22:%22undefined%22,%22Referrer%22:%22%22,%22IsAsync%22:true%7D (gzip: 2.05 kB / uncompressed: 2.05 kB)",
+      "http://engine.adzerk.net/ados?t=1403977352630&request=%7B%22Placements%22:%5B%7B%22A%22:4433,%22S%22:27854,%22D%22:%22azk48893%22,%22AT%22:1%7D%5D,%22Keywords%22:%22undefined%22,%22Referrer%22:%22%22,%22IsAsync%22:true%7D (gzip: 2.06 kB / uncompressed: 2.06 kB)"
+    ],
+    "htmlCount": [
+      "http://gruntjs.com/ (9.52 kB)"
+    ],
+    "cssCount": [
+      "http://fonts.googleapis.com/css?family=Lato:400,700 (0.47 kB)",
+      "http://gruntjs.com/css/main.css (92.49 kB)"
+    ],
+    "jsCount": [
+      "http://gruntjs.com/js/vendor/lib/modernizr.min.js (3.69 kB)",
+      "http://www.google-analytics.com/ga.js (7.96 kB)",
+      "http://static.adzerk.net/ados.js (21.09 kB)",
+      "http://engine.adzerk.net/ados?t=1403977353891&request=%7B%22Placements%22:%5B%7B%22A%22:4433,%22S%22:27854,%22D%22:%22azk48893%22,%22AT%22:1%7D%5D,%22Keywords%22:%22undefined%22,%22Referrer%22:%22%22,%22IsAsync%22:true%7D (2.09 kB)",
+      "http://engine.adzerk.net/ados?t=1403977352587&request=%7B%22Placements%22:%5B%7B%22A%22:4433,%22S%22:27854,%22D%22:%22azk48893%22,%22AT%22:1%7D%5D,%22Keywords%22:%22undefined%22,%22Referrer%22:%22%22,%22IsAsync%22:true%7D (2.18 kB)",
+      "http://www.google-analytics.com/ga.js (2.42 kB)",
+      "http://www.google-analytics.com/ga.js (1.04 kB)",
+      "http://engine.adzerk.net/ados?t=1403977352650&request=%7B%22Placements%22:%5B%7B%22A%22:4433,%22S%22:27854,%22D%22:%22azk48893%22,%22AT%22:1%7D%5D,%22Keywords%22:%22undefined%22,%22Referrer%22:%22%22,%22IsAsync%22:true%7D (2.05 kB)",
+      "http://engine.adzerk.net/ados?t=1403977352571&request=%7B%22Placements%22:%5B%7B%22A%22:4433,%22S%22:27854,%22D%22:%22azk48893%22,%22AT%22:1%7D%5D,%22Keywords%22:%22undefined%22,%22Referrer%22:%22%22,%22IsAsync%22:true%7D (2.05 kB)",
+      "http://engine.adzerk.net/ados?t=1403977352630&request=%7B%22Placements%22:%5B%7B%22A%22:4433,%22S%22:27854,%22D%22:%22azk48893%22,%22AT%22:1%7D%5D,%22Keywords%22:%22undefined%22,%22Referrer%22:%22%22,%22IsAsync%22:true%7D (2.06 kB)"
+    ],
+    "imageCount": [
+      "http://gruntjs.com/img/logo-coffeescript.jpg (3.59 kB)",
+      "http://gruntjs.com/img/grunt-logo.svg (28.96 kB)",
+      "http://gruntjs.com/img/logo-jade.jpg (5.56 kB)",
+      "http://gruntjs.com/img/logo-jshint.jpg (4.52 kB)",
+      "http://gruntjs.com/img/logo-less.jpg (5.66 kB)",
+      "http://gruntjs.com/img/logo-requirejs.jpg (5.24 kB)",
+      "http://gruntjs.com/img/logo-handlebars.jpg (8.43 kB)",
+      "http://gruntjs.com/img/logo-sass.jpg (5.57 kB)",
+      "http://gruntjs.com/img/logo-twitter.jpg (3.60 kB)",
+      "http://gruntjs.com/img/logo-sylus.jpg (5.21 kB)",
+      "http://gruntjs.com/img/logo-jquery.jpg (4.52 kB)",
+      "http://gruntjs.com/img/logo-adobe.jpg (4.61 kB)",
+      "http://gruntjs.com/img/logo-fg.jpg (5.88 kB)",
+      "http://gruntjs.com/img/logo-bitovi.jpg (5.03 kB)",
+      "http://gruntjs.com/fonts/icomoon.svg (10.14 kB)",
+      "http://gruntjs.com/img/logo-bocoup.jpg (10.08 kB)",
+      "http://gruntjs.com/img/logo-modernizr.jpg (6.73 kB)",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=1007384660&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=2560x2048&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=1539762817&utmr=-&utmp=%2F&utmht=1403977353883&utmac=UA-34623937-1&utmcc=__utma%3D221136078.824423552.1403977354.1403977354.1403977354.1%3B%2B__utmz%3D221136078.1403977354.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ (0.03 kB)",
+      "http://gruntjs.com/img/logo-saucelabs.jpg (8.23 kB)",
+      "http://static.adzerk.net/Advertisers/ea529209f3cf4623b79a2ad0d3a04a7c.png (6.00 kB)",
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjAwNjksImF0IjoxLCJjbSI6MjgxMDEsImNoIjo2OTkyLCJjciI6MTQ5NTE5LCJkaSI6ImE0YmRkYjUwNjA1YzQ1Yjc4ZTJiM2EzN2UyNDIwNzAwIiwiZG0iOjEsImZjIjoyMDMxMDcsImZsIjo0Njk3NywibnciOjQ0MzMsInBjIjowLCJwciI6MTYyOTEsInJ0IjoxLCJzdCI6Mjc4NTQsInRyIjp0cnVlLCJ1ayI6InVlMS1hZGJjMDViYzdlNjU0NTE0OTczZDBiNjdiMmI1MGNkOSIsInRzIjoxNDAzOTc3NTAxMjUwfQ&s=uVNuU3aYFD906-v3leIHR8rxorQ (0.04 kB)",
+      "http://static.adzerk.net/Advertisers/327c84a8e1a64e36b74beeba7ec8a08b.jpg (28.22 kB)",
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjAwNjksImF0IjoxLCJjbSI6MjgxMDEsImNoIjo2OTkyLCJjciI6Njk4MDgsImRpIjoiZjM1MjRmYzlkNTU0NDY3YmI1ODk5YjhlODVkMmFjYTAiLCJkbSI6MSwiZmMiOjk3Nzk3LCJmbCI6NDY5NzcsIm53Ijo0NDMzLCJwYyI6MCwicHIiOjE2MjkxLCJydCI6MSwic3QiOjI3ODU0LCJ0ciI6dHJ1ZSwidWsiOiJ1ZTEtMjk4OWRkNzNlNzJjNGZlNjhiYWYyODAzNmI0ZTc1MmMiLCJ0cyI6MTQwMzk3NzIxMjM4NH0&s=cnnmlrWAGTGFDYcvx60T7O77Qlo (0.04 kB)",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=2079840867&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=921078659&utmr=-&utmp=%2F&utmht=1403977353855&utmac=UA-34623937-1&utmcc=__utma%3D221136078.2061414355.1403977354.1403977354.1403977354.1%3B%2B__utmz%3D221136078.1403977354.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ (0.03 kB)",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=1728903274&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=77424010&utmr=-&utmp=%2F&utmht=1403977353130&utmac=UA-34623937-1&utmcc=__utma%3D221136078.1578226995.1403977353.1403977353.1403977353.1%3B%2B__utmz%3D221136078.1403977353.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ (0.03 kB)",
+      "http://static.adzerk.net/Advertisers/a315a7f3eb014d5f917e6aa646abf030.jpg (29.54 kB)",
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjA3ODIsImF0IjoxLCJjbSI6MjkxNDIsImNoIjo2OTkyLCJjciI6NzAwMjQsImRpIjoiNjE4MDJlZjRiY2U2NGVjODlmZjM1ZTI2NWU1MTE5NmYiLCJkbSI6MSwiZmMiOjk4MTk0LCJmbCI6NDg3OTEsIm53Ijo0NDMzLCJwYyI6MCwicHIiOjE2MjkxLCJydCI6MSwic3QiOjI3ODU0LCJ1ayI6InVlMS0yYTAyOGVkYjA2Mjc0ZTIwYWE3NTc4YzlkNTU1MWE3OSIsInRzIjoxNDAzOTc3NDY1MTU2fQ&s=ZB2C2QoL8vIcQ3saSGSH9BrZuv8 (0.04 kB)",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=999905520&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=2063074781&utmr=-&utmp=%2F&utmht=1403977353097&utmac=UA-34623937-1&utmcc=__utma%3D221136078.613782193.1403977353.1403977353.1403977353.1%3B%2B__utmz%3D221136078.1403977353.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ (0.03 kB)",
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjA3ODIsImF0IjoxLCJjbSI6MjkxNDIsImNoIjo2OTkyLCJjciI6NzAwMjQsImRpIjoiYWE5NmFlMDVmNTQyNDQyYmFmNjg5ZjE5OTJkMDkzNzAiLCJkbSI6MSwiZmMiOjk4MTk0LCJmbCI6NDg3OTEsIm53Ijo0NDMzLCJwYyI6MCwicHIiOjE2MjkxLCJydCI6MSwic3QiOjI3ODU0LCJ1ayI6InVlMS03MjVhMWNiYWQ4MDQ0Yzc5OTVjYjU2YzM1MWY0ZDkyZCIsInRzIjoxNDAzOTc3NDk0MjQ4fQ&s=g0GK9pz6-6JuiVIozY-UnxvxDDw (0.04 kB)",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=1232816433&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=1422000168&utmr=-&utmp=%2F&utmht=1403977353011&utmac=UA-34623937-1&utmcc=__utma%3D221136078.45396662.1403977353.1403977353.1403977353.1%3B%2B__utmz%3D221136078.1403977353.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ (0.03 kB)",
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjA3ODIsImF0IjoxLCJjbSI6MjkxNDIsImNoIjo2OTkyLCJjciI6NzAwMjQsImRpIjoiZjU2NTUxOWYwYzM5NDFhNGJkNzY3NTY2YTNhNGQ2NTgiLCJkbSI6MSwiZmMiOjk4MTk0LCJmbCI6NDg3OTEsIm53Ijo0NDMzLCJwYyI6MCwicHIiOjE2MjkxLCJydCI6MSwic3QiOjI3ODU0LCJ1ayI6InVlMS1jYjYyNjU4NTA3ODI0NDk1YTZlYTVlZTZhYzRhODBhYyIsInRzIjoxNDAzOTc3NDUzMzg2fQ&s=sVr51g6nD6dXXA-DBqN2UzfOntk (0.04 kB)"
+    ],
+    "cacheHits": [
+      "http://www.google-analytics.com/ga.js",
+      "http://static.adzerk.net/ados.js",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=1007384660&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=2560x2048&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=1539762817&utmr=-&utmp=%2F&utmht=1403977353883&utmac=UA-34623937-1&utmcc=__utma%3D221136078.824423552.1403977354.1403977354.1403977354.1%3B%2B__utmz%3D221136078.1403977354.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~",
+      "http://static.adzerk.net/Advertisers/ea529209f3cf4623b79a2ad0d3a04a7c.png",
+      "http://static.adzerk.net/Advertisers/327c84a8e1a64e36b74beeba7ec8a08b.jpg",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=2079840867&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=921078659&utmr=-&utmp=%2F&utmht=1403977353855&utmac=UA-34623937-1&utmcc=__utma%3D221136078.2061414355.1403977354.1403977354.1403977354.1%3B%2B__utmz%3D221136078.1403977354.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=1728903274&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=77424010&utmr=-&utmp=%2F&utmht=1403977353130&utmac=UA-34623937-1&utmcc=__utma%3D221136078.1578226995.1403977353.1403977353.1403977353.1%3B%2B__utmz%3D221136078.1403977353.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~",
+      "http://static.adzerk.net/Advertisers/a315a7f3eb014d5f917e6aa646abf030.jpg",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=999905520&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=2063074781&utmr=-&utmp=%2F&utmht=1403977353097&utmac=UA-34623937-1&utmcc=__utma%3D221136078.613782193.1403977353.1403977353.1403977353.1%3B%2B__utmz%3D221136078.1403977353.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=1232816433&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=1422000168&utmr=-&utmp=%2F&utmht=1403977353011&utmac=UA-34623937-1&utmcc=__utma%3D221136078.45396662.1403977353.1403977353.1403977353.1%3B%2B__utmz%3D221136078.1403977353.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~"
+    ],
+    "cachingNotSpecified": [
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=1007384660&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=2560x2048&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=1539762817&utmr=-&utmp=%2F&utmht=1403977353883&utmac=UA-34623937-1&utmcc=__utma%3D221136078.824423552.1403977354.1403977354.1403977354.1%3B%2B__utmz%3D221136078.1403977354.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~",
+      "http://engine.adzerk.net/ados?t=1403977353891&request=%7B%22Placements%22:%5B%7B%22A%22:4433,%22S%22:27854,%22D%22:%22azk48893%22,%22AT%22:1%7D%5D,%22Keywords%22:%22undefined%22,%22Referrer%22:%22%22,%22IsAsync%22:true%7D",
+      "http://static.adzerk.net/Advertisers/ea529209f3cf4623b79a2ad0d3a04a7c.png",
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjAwNjksImF0IjoxLCJjbSI6MjgxMDEsImNoIjo2OTkyLCJjciI6MTQ5NTE5LCJkaSI6ImE0YmRkYjUwNjA1YzQ1Yjc4ZTJiM2EzN2UyNDIwNzAwIiwiZG0iOjEsImZjIjoyMDMxMDcsImZsIjo0Njk3NywibnciOjQ0MzMsInBjIjowLCJwciI6MTYyOTEsInJ0IjoxLCJzdCI6Mjc4NTQsInRyIjp0cnVlLCJ1ayI6InVlMS1hZGJjMDViYzdlNjU0NTE0OTczZDBiNjdiMmI1MGNkOSIsInRzIjoxNDAzOTc3NTAxMjUwfQ&s=uVNuU3aYFD906-v3leIHR8rxorQ",
+      "http://engine.adzerk.net/ados?t=1403977352587&request=%7B%22Placements%22:%5B%7B%22A%22:4433,%22S%22:27854,%22D%22:%22azk48893%22,%22AT%22:1%7D%5D,%22Keywords%22:%22undefined%22,%22Referrer%22:%22%22,%22IsAsync%22:true%7D",
+      "http://static.adzerk.net/Advertisers/327c84a8e1a64e36b74beeba7ec8a08b.jpg",
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjAwNjksImF0IjoxLCJjbSI6MjgxMDEsImNoIjo2OTkyLCJjciI6Njk4MDgsImRpIjoiZjM1MjRmYzlkNTU0NDY3YmI1ODk5YjhlODVkMmFjYTAiLCJkbSI6MSwiZmMiOjk3Nzk3LCJmbCI6NDY5NzcsIm53Ijo0NDMzLCJwYyI6MCwicHIiOjE2MjkxLCJydCI6MSwic3QiOjI3ODU0LCJ0ciI6dHJ1ZSwidWsiOiJ1ZTEtMjk4OWRkNzNlNzJjNGZlNjhiYWYyODAzNmI0ZTc1MmMiLCJ0cyI6MTQwMzk3NzIxMjM4NH0&s=cnnmlrWAGTGFDYcvx60T7O77Qlo",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=2079840867&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=921078659&utmr=-&utmp=%2F&utmht=1403977353855&utmac=UA-34623937-1&utmcc=__utma%3D221136078.2061414355.1403977354.1403977354.1403977354.1%3B%2B__utmz%3D221136078.1403977354.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=1728903274&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=77424010&utmr=-&utmp=%2F&utmht=1403977353130&utmac=UA-34623937-1&utmcc=__utma%3D221136078.1578226995.1403977353.1403977353.1403977353.1%3B%2B__utmz%3D221136078.1403977353.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~",
+      "http://engine.adzerk.net/ados?t=1403977352650&request=%7B%22Placements%22:%5B%7B%22A%22:4433,%22S%22:27854,%22D%22:%22azk48893%22,%22AT%22:1%7D%5D,%22Keywords%22:%22undefined%22,%22Referrer%22:%22%22,%22IsAsync%22:true%7D",
+      "http://static.adzerk.net/Advertisers/a315a7f3eb014d5f917e6aa646abf030.jpg",
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjA3ODIsImF0IjoxLCJjbSI6MjkxNDIsImNoIjo2OTkyLCJjciI6NzAwMjQsImRpIjoiNjE4MDJlZjRiY2U2NGVjODlmZjM1ZTI2NWU1MTE5NmYiLCJkbSI6MSwiZmMiOjk4MTk0LCJmbCI6NDg3OTEsIm53Ijo0NDMzLCJwYyI6MCwicHIiOjE2MjkxLCJydCI6MSwic3QiOjI3ODU0LCJ1ayI6InVlMS0yYTAyOGVkYjA2Mjc0ZTIwYWE3NTc4YzlkNTU1MWE3OSIsInRzIjoxNDAzOTc3NDY1MTU2fQ&s=ZB2C2QoL8vIcQ3saSGSH9BrZuv8",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=999905520&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=2063074781&utmr=-&utmp=%2F&utmht=1403977353097&utmac=UA-34623937-1&utmcc=__utma%3D221136078.613782193.1403977353.1403977353.1403977353.1%3B%2B__utmz%3D221136078.1403977353.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~",
+      "http://engine.adzerk.net/ados?t=1403977352571&request=%7B%22Placements%22:%5B%7B%22A%22:4433,%22S%22:27854,%22D%22:%22azk48893%22,%22AT%22:1%7D%5D,%22Keywords%22:%22undefined%22,%22Referrer%22:%22%22,%22IsAsync%22:true%7D",
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjA3ODIsImF0IjoxLCJjbSI6MjkxNDIsImNoIjo2OTkyLCJjciI6NzAwMjQsImRpIjoiYWE5NmFlMDVmNTQyNDQyYmFmNjg5ZjE5OTJkMDkzNzAiLCJkbSI6MSwiZmMiOjk4MTk0LCJmbCI6NDg3OTEsIm53Ijo0NDMzLCJwYyI6MCwicHIiOjE2MjkxLCJydCI6MSwic3QiOjI3ODU0LCJ1ayI6InVlMS03MjVhMWNiYWQ4MDQ0Yzc5OTVjYjU2YzM1MWY0ZDkyZCIsInRzIjoxNDAzOTc3NDk0MjQ4fQ&s=g0GK9pz6-6JuiVIozY-UnxvxDDw",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=1232816433&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=1422000168&utmr=-&utmp=%2F&utmht=1403977353011&utmac=UA-34623937-1&utmcc=__utma%3D221136078.45396662.1403977353.1403977353.1403977353.1%3B%2B__utmz%3D221136078.1403977353.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~",
+      "http://engine.adzerk.net/ados?t=1403977352630&request=%7B%22Placements%22:%5B%7B%22A%22:4433,%22S%22:27854,%22D%22:%22azk48893%22,%22AT%22:1%7D%5D,%22Keywords%22:%22undefined%22,%22Referrer%22:%22%22,%22IsAsync%22:true%7D",
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjA3ODIsImF0IjoxLCJjbSI6MjkxNDIsImNoIjo2OTkyLCJjciI6NzAwMjQsImRpIjoiZjU2NTUxOWYwYzM5NDFhNGJkNzY3NTY2YTNhNGQ2NTgiLCJkbSI6MSwiZmMiOjk4MTk0LCJmbCI6NDg3OTEsIm53Ijo0NDMzLCJwYyI6MCwicHIiOjE2MjkxLCJydCI6MSwic3QiOjI3ODU0LCJ1ayI6InVlMS1jYjYyNjU4NTA3ODI0NDk1YTZlYTVlZTZhYzRhODBhYyIsInRzIjoxNDAzOTc3NDUzMzg2fQ&s=sVr51g6nD6dXXA-DBqN2UzfOntk"
+    ],
+    "cachingTooShort": [
+      "http://fonts.googleapis.com/css?family=Lato:400,700 cached for 86400 s",
+      "http://www.google-analytics.com/ga.js cached for 43200 s"
+    ],
+    "cachingDisabled": [
+      "http://gruntjs.com/js/vendor/lib/modernizr.min.js",
+      "http://gruntjs.com/css/main.css",
+      "http://gruntjs.com/img/logo-coffeescript.jpg",
+      "http://gruntjs.com/img/grunt-logo.svg",
+      "http://gruntjs.com/img/logo-jade.jpg",
+      "http://gruntjs.com/img/logo-jshint.jpg",
+      "http://gruntjs.com/img/logo-less.jpg",
+      "http://gruntjs.com/img/logo-requirejs.jpg",
+      "http://gruntjs.com/img/logo-handlebars.jpg",
+      "http://gruntjs.com/img/logo-sass.jpg",
+      "http://gruntjs.com/img/logo-twitter.jpg",
+      "http://gruntjs.com/img/logo-sylus.jpg",
+      "http://gruntjs.com/img/logo-jquery.jpg",
+      "http://gruntjs.com/img/logo-adobe.jpg",
+      "http://gruntjs.com/img/logo-fg.jpg",
+      "http://gruntjs.com/img/logo-bitovi.jpg",
+      "http://gruntjs.com/fonts/icomoon.svg",
+      "http://gruntjs.com/img/logo-bocoup.jpg",
+      "http://gruntjs.com/img/logo-modernizr.jpg",
+      "http://gruntjs.com/img/logo-saucelabs.jpg"
+    ],
+    "oldCachingHeaders": [
+      "http://fonts.googleapis.com/css?family=Lato:400,700 - Expires: Sat, 28 Jun 2014 17:42:30 GMT",
+      "http://www.google-analytics.com/ga.js - Expires: Sun, 29 Jun 2014 00:21:10 GMT",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=1007384660&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=2560x2048&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=1539762817&utmr=-&utmp=%2F&utmht=1403977353883&utmac=UA-34623937-1&utmcc=__utma%3D221136078.824423552.1403977354.1403977354.1403977354.1%3B%2B__utmz%3D221136078.1403977354.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ - Pragma: no-cache",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=1007384660&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=2560x2048&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=1539762817&utmr=-&utmp=%2F&utmht=1403977353883&utmac=UA-34623937-1&utmcc=__utma%3D221136078.824423552.1403977354.1403977354.1403977354.1%3B%2B__utmz%3D221136078.1403977354.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ - Expires: Wed, 19 Apr 2000 11:43:00 GMT",
+      "http://static.adzerk.net/Advertisers/ea529209f3cf4623b79a2ad0d3a04a7c.png - Expires: Fri, 28 Jun 2024 16:48:40 GMT",
+      "http://static.adzerk.net/Advertisers/327c84a8e1a64e36b74beeba7ec8a08b.jpg - Expires: Thu, 20 Jul 2023 10:52:37 GMT",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=2079840867&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=921078659&utmr=-&utmp=%2F&utmht=1403977353855&utmac=UA-34623937-1&utmcc=__utma%3D221136078.2061414355.1403977354.1403977354.1403977354.1%3B%2B__utmz%3D221136078.1403977354.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ - Pragma: no-cache",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=2079840867&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=921078659&utmr=-&utmp=%2F&utmht=1403977353855&utmac=UA-34623937-1&utmcc=__utma%3D221136078.2061414355.1403977354.1403977354.1403977354.1%3B%2B__utmz%3D221136078.1403977354.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ - Expires: Wed, 19 Apr 2000 11:43:00 GMT",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=1728903274&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=77424010&utmr=-&utmp=%2F&utmht=1403977353130&utmac=UA-34623937-1&utmcc=__utma%3D221136078.1578226995.1403977353.1403977353.1403977353.1%3B%2B__utmz%3D221136078.1403977353.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ - Pragma: no-cache",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=1728903274&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=77424010&utmr=-&utmp=%2F&utmht=1403977353130&utmac=UA-34623937-1&utmcc=__utma%3D221136078.1578226995.1403977353.1403977353.1403977353.1%3B%2B__utmz%3D221136078.1403977353.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ - Expires: Wed, 19 Apr 2000 11:43:00 GMT",
+      "http://static.adzerk.net/Advertisers/a315a7f3eb014d5f917e6aa646abf030.jpg - Expires: Sat, 12 Aug 2023 23:25:05 GMT",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=999905520&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=2063074781&utmr=-&utmp=%2F&utmht=1403977353097&utmac=UA-34623937-1&utmcc=__utma%3D221136078.613782193.1403977353.1403977353.1403977353.1%3B%2B__utmz%3D221136078.1403977353.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ - Pragma: no-cache",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=999905520&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=2063074781&utmr=-&utmp=%2F&utmht=1403977353097&utmac=UA-34623937-1&utmcc=__utma%3D221136078.613782193.1403977353.1403977353.1403977353.1%3B%2B__utmz%3D221136078.1403977353.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ - Expires: Wed, 19 Apr 2000 11:43:00 GMT",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=1232816433&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=1422000168&utmr=-&utmp=%2F&utmht=1403977353011&utmac=UA-34623937-1&utmcc=__utma%3D221136078.45396662.1403977353.1403977353.1403977353.1%3B%2B__utmz%3D221136078.1403977353.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ - Pragma: no-cache",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=1232816433&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=1422000168&utmr=-&utmp=%2F&utmht=1403977353011&utmac=UA-34623937-1&utmcc=__utma%3D221136078.45396662.1403977353.1403977353.1403977353.1%3B%2B__utmz%3D221136078.1403977353.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ - Expires: Wed, 19 Apr 2000 11:43:00 GMT"
+    ],
+    "domainsWithCookies": [
+      "engine.adzerk.net: 3 cookie(s)",
+      "engine.adzerk.net: 2 cookie(s)"
+    ],
+    "domains": [
+      "gruntjs.com: 21 request(s)",
+      "www.google-analytics.com: 2 request(s)",
+      "static.adzerk.net: 2 request(s)",
+      "engine.adzerk.net: 2 request(s)",
+      "fonts.googleapis.com: 1 request(s)"
+    ],
+    "DOMqueriesDuplicated": [
+      "id \"#azk48893\": 4 queries",
+      "tag name \"script\": 3 queries"
+    ],
+    "eventsBound": [
+      "\"message\" bound to \"window\""
+    ],
+    "globalVariables": [
+      "p",
+      "azk48893_html_command_82783",
+      "azk48893_html_22865",
+      "_gaq",
+      "azk48893_css_79497",
+      "z",
+      "ados",
+      "azk48893_pixel_85491",
+      "d",
+      "s",
+      "azk48893_pixel_command_62758",
+      "html5",
+      "Modernizr",
+      "_gat",
+      "gaGlobal",
+      "adosRun",
+      "cssLoad",
+      "cssLinkLoad",
+      "azHtmlLoad",
+      "azScriptSRCLoad",
+      "azScriptExtensionLoad",
+      "azRegisterExtension",
+      "azInitExtension",
+      "ados_async_load",
+      "azScriptInlineLoad",
+      "azLoad",
+      "zshow",
+      "ados_addInlinePlacement",
+      "ados_add_placement",
+      "ados_addPlacement",
+      "ados_loadDiv",
+      "ados_setKeywords",
+      "ados_setKeywordCookie",
+      "ados_setNoTrack",
+      "ados_setDomain",
+      "ados_setWriteResults",
+      "ados_log",
+      "ados_addPlacementObject",
+      "ados_refresh",
+      "ados_loadResults",
+      "ados_load",
+      "ados_loadInline",
+      "ados_loadPassback",
+      "ados_passback_next",
+      "ados_findPassback",
+      "ados_passback",
+      "ados_execPassback",
+      "ados_timeoutExpired",
+      "ados_frameLoaded",
+      "ados_passbackFilled",
+      "ados_passbackWritePixel",
+      "ados_writePixel",
+      "ados_loadFIframe",
+      "ados_passback_receiveMessage",
+      "zItems",
+      "adosResults",
+      "azk48893_html_command_85437",
+      "azk48893_css_44792",
+      "azk48893_html_24879",
+      "azk48893_pixel_command_11038",
+      "azk48893_pixel_43222",
+      "azk48893_pixel_command_10962",
+      "azk48893_pixel_36071",
+      "azk48893_css_71425",
+      "azk48893_html_17898",
+      "azk48893_html_command_32158",
+      "azk48893_pixel_55510",
+      "azk48893_html_command_88685",
+      "azk48893_html_91392",
+      "azk48893_css_27612",
+      "azk48893_pixel_command_46777",
+      "azk48893_pixel_91813",
+      "azk48893_html_67878",
+      "azk48893_html_command_54920",
+      "azk48893_pixel_command_34713",
+      "azk48893_css_62292"
+    ],
+    "headersBiggerThanContent": [
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=1007384660&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=2560x2048&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=1539762817&utmr=-&utmp=%2F&utmht=1403977353883&utmac=UA-34623937-1&utmcc=__utma%3D221136078.824423552.1403977354.1403977354.1403977354.1%3B%2B__utmz%3D221136078.1403977354.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ (body: 0.03 kB / headers: 0.34 kB)",
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjAwNjksImF0IjoxLCJjbSI6MjgxMDEsImNoIjo2OTkyLCJjciI6MTQ5NTE5LCJkaSI6ImE0YmRkYjUwNjA1YzQ1Yjc4ZTJiM2EzN2UyNDIwNzAwIiwiZG0iOjEsImZjIjoyMDMxMDcsImZsIjo0Njk3NywibnciOjQ0MzMsInBjIjowLCJwciI6MTYyOTEsInJ0IjoxLCJzdCI6Mjc4NTQsInRyIjp0cnVlLCJ1ayI6InVlMS1hZGJjMDViYzdlNjU0NTE0OTczZDBiNjdiMmI1MGNkOSIsInRzIjoxNDAzOTc3NTAxMjUwfQ&s=uVNuU3aYFD906-v3leIHR8rxorQ (body: 0.04 kB / headers: 0.89 kB)",
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjAwNjksImF0IjoxLCJjbSI6MjgxMDEsImNoIjo2OTkyLCJjciI6Njk4MDgsImRpIjoiZjM1MjRmYzlkNTU0NDY3YmI1ODk5YjhlODVkMmFjYTAiLCJkbSI6MSwiZmMiOjk3Nzk3LCJmbCI6NDY5NzcsIm53Ijo0NDMzLCJwYyI6MCwicHIiOjE2MjkxLCJydCI6MSwic3QiOjI3ODU0LCJ0ciI6dHJ1ZSwidWsiOiJ1ZTEtMjk4OWRkNzNlNzJjNGZlNjhiYWYyODAzNmI0ZTc1MmMiLCJ0cyI6MTQwMzk3NzIxMjM4NH0&s=cnnmlrWAGTGFDYcvx60T7O77Qlo (body: 0.04 kB / headers: 0.88 kB)",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=2079840867&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=921078659&utmr=-&utmp=%2F&utmht=1403977353855&utmac=UA-34623937-1&utmcc=__utma%3D221136078.2061414355.1403977354.1403977354.1403977354.1%3B%2B__utmz%3D221136078.1403977354.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ (body: 0.03 kB / headers: 0.34 kB)",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=1728903274&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=77424010&utmr=-&utmp=%2F&utmht=1403977353130&utmac=UA-34623937-1&utmcc=__utma%3D221136078.1578226995.1403977353.1403977353.1403977353.1%3B%2B__utmz%3D221136078.1403977353.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ (body: 0.03 kB / headers: 0.34 kB)",
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjA3ODIsImF0IjoxLCJjbSI6MjkxNDIsImNoIjo2OTkyLCJjciI6NzAwMjQsImRpIjoiNjE4MDJlZjRiY2U2NGVjODlmZjM1ZTI2NWU1MTE5NmYiLCJkbSI6MSwiZmMiOjk4MTk0LCJmbCI6NDg3OTEsIm53Ijo0NDMzLCJwYyI6MCwicHIiOjE2MjkxLCJydCI6MSwic3QiOjI3ODU0LCJ1ayI6InVlMS0yYTAyOGVkYjA2Mjc0ZTIwYWE3NTc4YzlkNTU1MWE3OSIsInRzIjoxNDAzOTc3NDY1MTU2fQ&s=ZB2C2QoL8vIcQ3saSGSH9BrZuv8 (body: 0.04 kB / headers: 0.45 kB)",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=999905520&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=2063074781&utmr=-&utmp=%2F&utmht=1403977353097&utmac=UA-34623937-1&utmcc=__utma%3D221136078.613782193.1403977353.1403977353.1403977353.1%3B%2B__utmz%3D221136078.1403977353.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ (body: 0.03 kB / headers: 0.34 kB)",
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjA3ODIsImF0IjoxLCJjbSI6MjkxNDIsImNoIjo2OTkyLCJjciI6NzAwMjQsImRpIjoiYWE5NmFlMDVmNTQyNDQyYmFmNjg5ZjE5OTJkMDkzNzAiLCJkbSI6MSwiZmMiOjk4MTk0LCJmbCI6NDg3OTEsIm53Ijo0NDMzLCJwYyI6MCwicHIiOjE2MjkxLCJydCI6MSwic3QiOjI3ODU0LCJ1ayI6InVlMS03MjVhMWNiYWQ4MDQ0Yzc5OTVjYjU2YzM1MWY0ZDkyZCIsInRzIjoxNDAzOTc3NDk0MjQ4fQ&s=g0GK9pz6-6JuiVIozY-UnxvxDDw (body: 0.04 kB / headers: 0.45 kB)",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=1232816433&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=1422000168&utmr=-&utmp=%2F&utmht=1403977353011&utmac=UA-34623937-1&utmcc=__utma%3D221136078.45396662.1403977353.1403977353.1403977353.1%3B%2B__utmz%3D221136078.1403977353.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ (body: 0.03 kB / headers: 0.34 kB)",
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjA3ODIsImF0IjoxLCJjbSI6MjkxNDIsImNoIjo2OTkyLCJjciI6NzAwMjQsImRpIjoiZjU2NTUxOWYwYzM5NDFhNGJkNzY3NTY2YTNhNGQ2NTgiLCJkbSI6MSwiZmMiOjk4MTk0LCJmbCI6NDg3OTEsIm53Ijo0NDMzLCJwYyI6MCwicHIiOjE2MjkxLCJydCI6MSwic3QiOjI3ODU0LCJ1ayI6InVlMS1jYjYyNjU4NTA3ODI0NDk1YTZlYTVlZTZhYzRhODBhYyIsInRzIjoxNDAzOTc3NDUzMzg2fQ&s=sVr51g6nD6dXXA-DBqN2UzfOntk (body: 0.04 kB / headers: 0.45 kB)"
+    ],
+    "assetsNotGzipped": [
+      "http://fonts.googleapis.com/css?family=Lato:400,700 (CSS)",
+      "http://www.google-analytics.com/ga.js (JS)"
+    ],
+    "assetsWithQueryString": [
+      "http://fonts.googleapis.com/css?family=Lato:400,700 (CSS)",
+      "http://engine.adzerk.net/ados?t=1403977353891&request=%7B%22Placements%22:%5B%7B%22A%22:4433,%22S%22:27854,%22D%22:%22azk48893%22,%22AT%22:1%7D%5D,%22Keywords%22:%22undefined%22,%22Referrer%22:%22%22,%22IsAsync%22:true%7D (JS)",
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjAwNjksImF0IjoxLCJjbSI6MjgxMDEsImNoIjo2OTkyLCJjciI6MTQ5NTE5LCJkaSI6ImE0YmRkYjUwNjA1YzQ1Yjc4ZTJiM2EzN2UyNDIwNzAwIiwiZG0iOjEsImZjIjoyMDMxMDcsImZsIjo0Njk3NywibnciOjQ0MzMsInBjIjowLCJwciI6MTYyOTEsInJ0IjoxLCJzdCI6Mjc4NTQsInRyIjp0cnVlLCJ1ayI6InVlMS1hZGJjMDViYzdlNjU0NTE0OTczZDBiNjdiMmI1MGNkOSIsInRzIjoxNDAzOTc3NTAxMjUwfQ&s=uVNuU3aYFD906-v3leIHR8rxorQ (IMAGE)",
+      "http://engine.adzerk.net/ados?t=1403977352587&request=%7B%22Placements%22:%5B%7B%22A%22:4433,%22S%22:27854,%22D%22:%22azk48893%22,%22AT%22:1%7D%5D,%22Keywords%22:%22undefined%22,%22Referrer%22:%22%22,%22IsAsync%22:true%7D (JS)",
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjAwNjksImF0IjoxLCJjbSI6MjgxMDEsImNoIjo2OTkyLCJjciI6Njk4MDgsImRpIjoiZjM1MjRmYzlkNTU0NDY3YmI1ODk5YjhlODVkMmFjYTAiLCJkbSI6MSwiZmMiOjk3Nzk3LCJmbCI6NDY5NzcsIm53Ijo0NDMzLCJwYyI6MCwicHIiOjE2MjkxLCJydCI6MSwic3QiOjI3ODU0LCJ0ciI6dHJ1ZSwidWsiOiJ1ZTEtMjk4OWRkNzNlNzJjNGZlNjhiYWYyODAzNmI0ZTc1MmMiLCJ0cyI6MTQwMzk3NzIxMjM4NH0&s=cnnmlrWAGTGFDYcvx60T7O77Qlo (IMAGE)",
+      "http://engine.adzerk.net/ados?t=1403977352650&request=%7B%22Placements%22:%5B%7B%22A%22:4433,%22S%22:27854,%22D%22:%22azk48893%22,%22AT%22:1%7D%5D,%22Keywords%22:%22undefined%22,%22Referrer%22:%22%22,%22IsAsync%22:true%7D (JS)",
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjA3ODIsImF0IjoxLCJjbSI6MjkxNDIsImNoIjo2OTkyLCJjciI6NzAwMjQsImRpIjoiNjE4MDJlZjRiY2U2NGVjODlmZjM1ZTI2NWU1MTE5NmYiLCJkbSI6MSwiZmMiOjk4MTk0LCJmbCI6NDg3OTEsIm53Ijo0NDMzLCJwYyI6MCwicHIiOjE2MjkxLCJydCI6MSwic3QiOjI3ODU0LCJ1ayI6InVlMS0yYTAyOGVkYjA2Mjc0ZTIwYWE3NTc4YzlkNTU1MWE3OSIsInRzIjoxNDAzOTc3NDY1MTU2fQ&s=ZB2C2QoL8vIcQ3saSGSH9BrZuv8 (IMAGE)",
+      "http://engine.adzerk.net/ados?t=1403977352571&request=%7B%22Placements%22:%5B%7B%22A%22:4433,%22S%22:27854,%22D%22:%22azk48893%22,%22AT%22:1%7D%5D,%22Keywords%22:%22undefined%22,%22Referrer%22:%22%22,%22IsAsync%22:true%7D (JS)",
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjA3ODIsImF0IjoxLCJjbSI6MjkxNDIsImNoIjo2OTkyLCJjciI6NzAwMjQsImRpIjoiYWE5NmFlMDVmNTQyNDQyYmFmNjg5ZjE5OTJkMDkzNzAiLCJkbSI6MSwiZmMiOjk4MTk0LCJmbCI6NDg3OTEsIm53Ijo0NDMzLCJwYyI6MCwicHIiOjE2MjkxLCJydCI6MSwic3QiOjI3ODU0LCJ1ayI6InVlMS03MjVhMWNiYWQ4MDQ0Yzc5OTVjYjU2YzM1MWY0ZDkyZCIsInRzIjoxNDAzOTc3NDk0MjQ4fQ&s=g0GK9pz6-6JuiVIozY-UnxvxDDw (IMAGE)",
+      "http://engine.adzerk.net/ados?t=1403977352630&request=%7B%22Placements%22:%5B%7B%22A%22:4433,%22S%22:27854,%22D%22:%22azk48893%22,%22AT%22:1%7D%5D,%22Keywords%22:%22undefined%22,%22Referrer%22:%22%22,%22IsAsync%22:true%7D (JS)",
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjA3ODIsImF0IjoxLCJjbSI6MjkxNDIsImNoIjo2OTkyLCJjciI6NzAwMjQsImRpIjoiZjU2NTUxOWYwYzM5NDFhNGJkNzY3NTY2YTNhNGQ2NTgiLCJkbSI6MSwiZmMiOjk4MTk0LCJmbCI6NDg3OTEsIm53Ijo0NDMzLCJwYyI6MCwicHIiOjE2MjkxLCJydCI6MSwic3QiOjI3ODU0LCJ1ayI6InVlMS1jYjYyNjU4NTA3ODI0NDk1YTZlYTVlZTZhYzRhODBhYyIsInRzIjoxNDAzOTc3NDUzMzg2fQ&s=sVr51g6nD6dXXA-DBqN2UzfOntk (IMAGE)"
+    ],
+    "assetsWithCookies": [
+      "http://engine.adzerk.net/ados?t=1403977353891&request=%7B%22Placements%22:%5B%7B%22A%22:4433,%22S%22:27854,%22D%22:%22azk48893%22,%22AT%22:1%7D%5D,%22Keywords%22:%22undefined%22,%22Referrer%22:%22%22,%22IsAsync%22:true%7D (JS)",
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjAwNjksImF0IjoxLCJjbSI6MjgxMDEsImNoIjo2OTkyLCJjciI6MTQ5NTE5LCJkaSI6ImE0YmRkYjUwNjA1YzQ1Yjc4ZTJiM2EzN2UyNDIwNzAwIiwiZG0iOjEsImZjIjoyMDMxMDcsImZsIjo0Njk3NywibnciOjQ0MzMsInBjIjowLCJwciI6MTYyOTEsInJ0IjoxLCJzdCI6Mjc4NTQsInRyIjp0cnVlLCJ1ayI6InVlMS1hZGJjMDViYzdlNjU0NTE0OTczZDBiNjdiMmI1MGNkOSIsInRzIjoxNDAzOTc3NTAxMjUwfQ&s=uVNuU3aYFD906-v3leIHR8rxorQ (IMAGE)",
+      "http://engine.adzerk.net/ados?t=1403977352587&request=%7B%22Placements%22:%5B%7B%22A%22:4433,%22S%22:27854,%22D%22:%22azk48893%22,%22AT%22:1%7D%5D,%22Keywords%22:%22undefined%22,%22Referrer%22:%22%22,%22IsAsync%22:true%7D (JS)",
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjAwNjksImF0IjoxLCJjbSI6MjgxMDEsImNoIjo2OTkyLCJjciI6Njk4MDgsImRpIjoiZjM1MjRmYzlkNTU0NDY3YmI1ODk5YjhlODVkMmFjYTAiLCJkbSI6MSwiZmMiOjk3Nzk3LCJmbCI6NDY5NzcsIm53Ijo0NDMzLCJwYyI6MCwicHIiOjE2MjkxLCJydCI6MSwic3QiOjI3ODU0LCJ0ciI6dHJ1ZSwidWsiOiJ1ZTEtMjk4OWRkNzNlNzJjNGZlNjhiYWYyODAzNmI0ZTc1MmMiLCJ0cyI6MTQwMzk3NzIxMjM4NH0&s=cnnmlrWAGTGFDYcvx60T7O77Qlo (IMAGE)",
+      "http://engine.adzerk.net/ados?t=1403977352650&request=%7B%22Placements%22:%5B%7B%22A%22:4433,%22S%22:27854,%22D%22:%22azk48893%22,%22AT%22:1%7D%5D,%22Keywords%22:%22undefined%22,%22Referrer%22:%22%22,%22IsAsync%22:true%7D (JS)",
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjA3ODIsImF0IjoxLCJjbSI6MjkxNDIsImNoIjo2OTkyLCJjciI6NzAwMjQsImRpIjoiNjE4MDJlZjRiY2U2NGVjODlmZjM1ZTI2NWU1MTE5NmYiLCJkbSI6MSwiZmMiOjk4MTk0LCJmbCI6NDg3OTEsIm53Ijo0NDMzLCJwYyI6MCwicHIiOjE2MjkxLCJydCI6MSwic3QiOjI3ODU0LCJ1ayI6InVlMS0yYTAyOGVkYjA2Mjc0ZTIwYWE3NTc4YzlkNTU1MWE3OSIsInRzIjoxNDAzOTc3NDY1MTU2fQ&s=ZB2C2QoL8vIcQ3saSGSH9BrZuv8 (IMAGE)",
+      "http://engine.adzerk.net/ados?t=1403977352571&request=%7B%22Placements%22:%5B%7B%22A%22:4433,%22S%22:27854,%22D%22:%22azk48893%22,%22AT%22:1%7D%5D,%22Keywords%22:%22undefined%22,%22Referrer%22:%22%22,%22IsAsync%22:true%7D (JS)",
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjA3ODIsImF0IjoxLCJjbSI6MjkxNDIsImNoIjo2OTkyLCJjciI6NzAwMjQsImRpIjoiYWE5NmFlMDVmNTQyNDQyYmFmNjg5ZjE5OTJkMDkzNzAiLCJkbSI6MSwiZmMiOjk4MTk0LCJmbCI6NDg3OTEsIm53Ijo0NDMzLCJwYyI6MCwicHIiOjE2MjkxLCJydCI6MSwic3QiOjI3ODU0LCJ1ayI6InVlMS03MjVhMWNiYWQ4MDQ0Yzc5OTVjYjU2YzM1MWY0ZDkyZCIsInRzIjoxNDAzOTc3NDk0MjQ4fQ&s=g0GK9pz6-6JuiVIozY-UnxvxDDw (IMAGE)",
+      "http://engine.adzerk.net/ados?t=1403977352630&request=%7B%22Placements%22:%5B%7B%22A%22:4433,%22S%22:27854,%22D%22:%22azk48893%22,%22AT%22:1%7D%5D,%22Keywords%22:%22undefined%22,%22Referrer%22:%22%22,%22IsAsync%22:true%7D (JS)",
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjA3ODIsImF0IjoxLCJjbSI6MjkxNDIsImNoIjo2OTkyLCJjciI6NzAwMjQsImRpIjoiZjU2NTUxOWYwYzM5NDFhNGJkNzY3NTY2YTNhNGQ2NTgiLCJkbSI6MSwiZmMiOjk4MTk0LCJmbCI6NDg3OTEsIm53Ijo0NDMzLCJwYyI6MCwicHIiOjE2MjkxLCJydCI6MSwic3QiOjI3ODU0LCJ1ayI6InVlMS1jYjYyNjU4NTA3ODI0NDk1YTZlYTVlZTZhYzRhODBhYyIsInRzIjoxNDAzOTc3NDUzMzg2fQ&s=sVr51g6nD6dXXA-DBqN2UzfOntk (IMAGE)"
+    ],
+    "smallImages": [
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjAwNjksImF0IjoxLCJjbSI6MjgxMDEsImNoIjo2OTkyLCJjciI6MTQ5NTE5LCJkaSI6ImE0YmRkYjUwNjA1YzQ1Yjc4ZTJiM2EzN2UyNDIwNzAwIiwiZG0iOjEsImZjIjoyMDMxMDcsImZsIjo0Njk3NywibnciOjQ0MzMsInBjIjowLCJwciI6MTYyOTEsInJ0IjoxLCJzdCI6Mjc4NTQsInRyIjp0cnVlLCJ1ayI6InVlMS1hZGJjMDViYzdlNjU0NTE0OTczZDBiNjdiMmI1MGNkOSIsInRzIjoxNDAzOTc3NTAxMjUwfQ&s=uVNuU3aYFD906-v3leIHR8rxorQ (0.04 kB)",
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjAwNjksImF0IjoxLCJjbSI6MjgxMDEsImNoIjo2OTkyLCJjciI6Njk4MDgsImRpIjoiZjM1MjRmYzlkNTU0NDY3YmI1ODk5YjhlODVkMmFjYTAiLCJkbSI6MSwiZmMiOjk3Nzk3LCJmbCI6NDY5NzcsIm53Ijo0NDMzLCJwYyI6MCwicHIiOjE2MjkxLCJydCI6MSwic3QiOjI3ODU0LCJ0ciI6dHJ1ZSwidWsiOiJ1ZTEtMjk4OWRkNzNlNzJjNGZlNjhiYWYyODAzNmI0ZTc1MmMiLCJ0cyI6MTQwMzk3NzIxMjM4NH0&s=cnnmlrWAGTGFDYcvx60T7O77Qlo (0.04 kB)",
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjA3ODIsImF0IjoxLCJjbSI6MjkxNDIsImNoIjo2OTkyLCJjciI6NzAwMjQsImRpIjoiNjE4MDJlZjRiY2U2NGVjODlmZjM1ZTI2NWU1MTE5NmYiLCJkbSI6MSwiZmMiOjk4MTk0LCJmbCI6NDg3OTEsIm53Ijo0NDMzLCJwYyI6MCwicHIiOjE2MjkxLCJydCI6MSwic3QiOjI3ODU0LCJ1ayI6InVlMS0yYTAyOGVkYjA2Mjc0ZTIwYWE3NTc4YzlkNTU1MWE3OSIsInRzIjoxNDAzOTc3NDY1MTU2fQ&s=ZB2C2QoL8vIcQ3saSGSH9BrZuv8 (0.04 kB)",
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjA3ODIsImF0IjoxLCJjbSI6MjkxNDIsImNoIjo2OTkyLCJjciI6NzAwMjQsImRpIjoiYWE5NmFlMDVmNTQyNDQyYmFmNjg5ZjE5OTJkMDkzNzAiLCJkbSI6MSwiZmMiOjk4MTk0LCJmbCI6NDg3OTEsIm53Ijo0NDMzLCJwYyI6MCwicHIiOjE2MjkxLCJydCI6MSwic3QiOjI3ODU0LCJ1ayI6InVlMS03MjVhMWNiYWQ4MDQ0Yzc5OTVjYjU2YzM1MWY0ZDkyZCIsInRzIjoxNDAzOTc3NDk0MjQ4fQ&s=g0GK9pz6-6JuiVIozY-UnxvxDDw (0.04 kB)",
+      "http://engine.adzerk.net/i.gif?e=eyJhdiI6MjA3ODIsImF0IjoxLCJjbSI6MjkxNDIsImNoIjo2OTkyLCJjciI6NzAwMjQsImRpIjoiZjU2NTUxOWYwYzM5NDFhNGJkNzY3NTY2YTNhNGQ2NTgiLCJkbSI6MSwiZmMiOjk4MTk0LCJmbCI6NDg3OTEsIm53Ijo0NDMzLCJwYyI6MCwicHIiOjE2MjkxLCJydCI6MSwic3QiOjI3ODU0LCJ1ayI6InVlMS1jYjYyNjU4NTA3ODI0NDk1YTZlYTVlZTZhYzRhODBhYyIsInRzIjoxNDAzOTc3NDUzMzg2fQ&s=sVr51g6nD6dXXA-DBqN2UzfOntk (0.04 kB)"
+    ],
+    "timeToFirstCss": [
+      "http://fonts.googleapis.com/css?family=Lato:400,700 received in 388 ms",
+      "http://fonts.googleapis.com/css?family=Lato:400,700 received in 578 ms",
+      "http://fonts.googleapis.com/css?family=Lato:400,700 received in 530 ms",
+      "http://fonts.googleapis.com/css?family=Lato:400,700 received in 524 ms",
+      "http://fonts.googleapis.com/css?family=Lato:400,700 received in 540 ms"
+    ],
+    "timeToFirstJs": [
+      "http://gruntjs.com/js/vendor/lib/modernizr.min.js received in 549 ms",
+      "http://gruntjs.com/js/vendor/lib/modernizr.min.js received in 720 ms",
+      "http://gruntjs.com/js/vendor/lib/modernizr.min.js received in 697 ms",
+      "http://gruntjs.com/js/vendor/lib/modernizr.min.js received in 754 ms",
+      "http://gruntjs.com/js/vendor/lib/modernizr.min.js received in 727 ms"
+    ],
+    "timeToFirstImage": [
+      "http://gruntjs.com/img/logo-coffeescript.jpg received in 1200 ms",
+      "http://gruntjs.com/img/grunt-logo.svg received in 1094 ms",
+      "http://gruntjs.com/img/logo-coffeescript.jpg received in 1096 ms",
+      "http://gruntjs.com/img/logo-coffeescript.jpg received in 1095 ms"
+    ],
+    "imagesWithoutDimensions": [
+      "body > div.content > div.container > div.row-fluid > div.span9.page > div.hero-unit > div.technology > div[2] > a.technology > span.logo > img[0]",
+      "body > div.content > div.container > div.row-fluid > div.span9.page > div.hero-unit > div.who-uses-grunt > div[2] > a.technology > span.logo > img[0]",
+      "body > div.content > div.container > div.row-fluid >div.span9.page > div.hero-unit > div.who-uses-grunt > div[2] > a.technology > span.logo > img[0]"
+    ],
+    "smallestResponse": [
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=1007384660&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=2560x2048&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=1539762817&utmr=-&utmp=%2F&utmht=1403977353883&utmac=UA-34623937-1&utmcc=__utma%3D221136078.824423552.1403977354.1403977354.1403977354.1%3B%2B__utmz%3D221136078.1403977354.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ (0.03 kB)",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=2079840867&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=921078659&utmr=-&utmp=%2F&utmht=1403977353855&utmac=UA-34623937-1&utmcc=__utma%3D221136078.2061414355.1403977354.1403977354.1403977354.1%3B%2B__utmz%3D221136078.1403977354.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ (0.03 kB)",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=1728903274&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=77424010&utmr=-&utmp=%2F&utmht=1403977353130&utmac=UA-34623937-1&utmcc=__utma%3D221136078.1578226995.1403977353.1403977353.1403977353.1%3B%2B__utmz%3D221136078.1403977353.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ (0.03 kB)",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=999905520&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=2063074781&utmr=-&utmp=%2F&utmht=1403977353097&utmac=UA-34623937-1&utmcc=__utma%3D221136078.613782193.1403977353.1403977353.1403977353.1%3B%2B__utmz%3D221136078.1403977353.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ (0.03 kB)",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=1232816433&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=1422000168&utmr=-&utmp=%2F&utmht=1403977353011&utmac=UA-34623937-1&utmcc=__utma%3D221136078.45396662.1403977353.1403977353.1403977353.1%3B%2B__utmz%3D221136078.1403977353.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ (0.03 kB)"
+    ],
+    "biggestResponse": [
+      "http://gruntjs.com/css/main.css (92.49 kB)"
+    ],
+    "fastestResponse": [
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=1007384660&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=2560x2048&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=1539762817&utmr=-&utmp=%2F&utmht=1403977353883&utmac=UA-34623937-1&utmcc=__utma%3D221136078.824423552.1403977354.1403977354.1403977354.1%3B%2B__utmz%3D221136078.1403977354.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ (44 ms)",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=2079840867&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=921078659&utmr=-&utmp=%2F&utmht=1403977353855&utmac=UA-34623937-1&utmcc=__utma%3D221136078.2061414355.1403977354.1403977354.1403977354.1%3B%2B__utmz%3D221136078.1403977354.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ (49 ms)",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=1728903274&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=77424010&utmr=-&utmp=%2F&utmht=1403977353130&utmac=UA-34623937-1&utmcc=__utma%3D221136078.1578226995.1403977353.1403977353.1403977353.1%3B%2B__utmz%3D221136078.1403977353.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ (55 ms)",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=999905520&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=2063074781&utmr=-&utmp=%2F&utmht=1403977353097&utmac=UA-34623937-1&utmcc=__utma%3D221136078.613782193.1403977353.1403977353.1403977353.1%3B%2B__utmz%3D221136078.1403977353.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ (69 ms)",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=1232816433&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=1422000168&utmr=-&utmp=%2F&utmht=1403977353011&utmac=UA-34623937-1&utmcc=__utma%3D221136078.45396662.1403977353.1403977353.1403977353.1%3B%2B__utmz%3D221136078.1403977353.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ (66 ms)"
+    ],
+    "slowestResponse": [
+      "http://gruntjs.com/img/logo-saucelabs.jpg (2559 ms)",
+      "http://gruntjs.com/img/logo-saucelabs.jpg (2051 ms)",
+      "http://gruntjs.com/fonts/icomoon.svg (2190 ms)",
+      "http://gruntjs.com/img/logo-fg.jpg (2501 ms)",
+      "http://gruntjs.com/img/logo-bitovi.jpg (1854 ms)"
+    ],
+    "smallestLatency": [
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=1007384660&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=2560x2048&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=1539762817&utmr=-&utmp=%2F&utmht=1403977353883&utmac=UA-34623937-1&utmcc=__utma%3D221136078.824423552.1403977354.1403977354.1403977354.1%3B%2B__utmz%3D221136078.1403977354.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ (44 ms)",
+      "http://static.adzerk.net/Advertisers/327c84a8e1a64e36b74beeba7ec8a08b.jpg (39 ms)",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=1728903274&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=77424010&utmr=-&utmp=%2F&utmht=1403977353130&utmac=UA-34623937-1&utmcc=__utma%3D221136078.1578226995.1403977353.1403977353.1403977353.1%3B%2B__utmz%3D221136078.1403977353.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ (55 ms)",
+      "http://static.adzerk.net/Advertisers/a315a7f3eb014d5f917e6aa646abf030.jpg (47 ms)",
+      "http://www.google-analytics.com/__utm.gif?utmwv=5.5.3&utms=1&utmn=1232816433&utmhn=gruntjs.com&utmcs=UTF-8&utmsr=2560x1080&utmvp=1280x1024&utmsc=32-bit&utmul=de-de&utmje=0&utmfl=-&utmdt=Grunt%3A%20The%20JavaScript%20Task%20Runner&utmhid=1422000168&utmr=-&utmp=%2F&utmht=1403977353011&utmac=UA-34623937-1&utmcc=__utma%3D221136078.45396662.1403977353.1403977353.1403977353.1%3B%2B__utmz%3D221136078.1403977353.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmu=q~ (66 ms)"
+    ],
+    "biggestLatency": [
+      "http://gruntjs.com/img/logo-saucelabs.jpg (1419 ms)",
+      "http://gruntjs.com/fonts/icomoon.svg (1787 ms)",
+      "http://gruntjs.com/fonts/icomoon.svg (2190 ms)",
+      "http://gruntjs.com/fonts/icomoon.svg (2070 ms)",
+      "http://gruntjs.com/img/logo-saucelabs.jpg (1201 ms)"
+    ]
+  }
+}
