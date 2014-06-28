@@ -472,7 +472,9 @@ Phantomas.prototype.getImages = function() {
   }
 
   return _.sortBy( files, _.bind( function( file ) {
-    return +file.match( /^screenshot-(\d*)-(\d*)\.png$/ )[ 2 ];
+    return +file.match(
+      /^screenshot-\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d-(\d*).png$/
+    )[ 1 ];
   }, this ) );
 };
 
