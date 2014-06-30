@@ -71,6 +71,7 @@
    *
    * @param {Array}  data      data
    * @param {String} metric    metric
+   * @param {String} type      median|max|min|...
    */
   function drawLineChart( data, metric, type ) {
     // Helper functions on top of 8-)
@@ -85,7 +86,11 @@
     function drawCircle( datum, index, delay ) {
       circleContainer.datum( datum )
                     .append( 'circle' )
-                    .attr( 'class', 'lineChart--circle' )
+                    .attr( 'class', function( d ) {
+                      return ( assertionValue && d.value[ type ] > assertionValue ) ?
+                        'lineChart--circle failed' :
+                        'lineChart--circle';
+                    } )
                     .attr( 'r', 0 )
                     .attr(
                       'cx',
@@ -145,7 +150,11 @@
                       d3.select( this )
                         .attr(
                           'class',
-                          'lineChart--circle lineChart--circle__highlighted'
+                          function( d ) {
+                            return ( assertionValue && d.value[ type ] > assertionValue ) ?
+                                'lineChart--circle highlighted failed' :
+                                'lineChart--circle highlighted';
+                            }
                         )
                         .attr( 'r', 6 );
                     } )
@@ -153,7 +162,11 @@
                       d3.select( this )
                         .attr(
                           'class',
-                          'lineChart--circle'
+                          function( d ) {
+                            return ( assertionValue && d.value[ type ] > assertionValue ) ?
+                                'lineChart--circle failed' :
+                                'lineChart--circle';
+                          }
                         )
                         .attr( 'r', 4 );
                     } )
@@ -267,7 +280,17 @@
           .attr( 'class', 'p--lineChart--resetText' );
     }
 
+    // get the assertion value
+    // out of this huge set of data
+    var assertionValue = null;
+
+    if ( data[ data.length - 1 ].assertions[ metric ] ) {
+      assertionValue = data[ data.length - 1 ].assertions[ metric ].value;
+    }
+
     // data manipulation first
+    // remove all the stuff that
+    // is not needed for this chart
     data = data.reduce( function( newData, datum ) {
       if ( datum.metrics[ metric ] ) {
         newData.push( {
@@ -278,7 +301,6 @@
 
       return newData;
     }, [] );
-
 
     // TODO code duplication check how you can avoid that
     var containerEl = document.getElementById( 'graph--' + metric ),
@@ -349,8 +371,9 @@
       d3.max( data, function( d ) { return d.value ? d.value[ type ] : 0; } ) + 700
     ] );
 
+    // clean up time... :)
     if ( !svg.empty() ) {
-      svg.selectAll( 'g, path' ).remove();
+      svg.selectAll( 'g, path, line' ).remove();
     }
 
     svg.append( 'g' )
@@ -369,6 +392,15 @@
     svg.append( 'g' )
       .attr( 'class', 'lineChart--yAxisTicks' )
       .call( yAxisTicks );
+
+    if ( assertionValue !== null ) {
+      svg.append( 'line' )
+         .attr( 'x1', 0 )
+         .attr( 'y1', y( assertionValue ) )
+         .attr( 'x2', width )
+         .attr( 'y2', y( assertionValue ) )
+         .attr( 'class', 'p--lineChart--assertion' );
+    }
 
     // Add the area path.
     svg.append( 'path' )
@@ -504,14 +536,37 @@
    * -> event delegation for the win
    */
   function attachClickEvents() {
-    var mainContainer = document.getElementsByTagName( 'main' )[ 0 ];
+    var body         = document.querySelector( 'body' );
+    var headerHeight = document.getElementsByTagName( 'header' )[ 0 ]
+                                .getBoundingClientRect().height;
 
-    addEvent( mainContainer, 'click', function( event ) {
+    addEvent( body, 'click', function( event ) {
       if ( event.target.classList.contains( 'js-expand' ) ) {
         document.getElementById(
           'p--table--container--' +
           event.target.attributes.getNamedItem( 'data-metric' ).value
         ).classList.toggle( 'expanded' );
+      }
+
+      if ( event.target.classList.contains( 'js-scroll' ) ) {
+        event.preventDefault();
+
+        var yPosition = 0;
+        var element = document.getElementById(
+            event.target.href.split( '#' )[ 1 ]
+        );
+
+        if ( element.offsetParent ) {
+              do {
+                  yPosition += element.offsetTop;
+              } while ( element = element.offsetParent );
+        }
+
+        // console.log( document.getElementById( event.target.href.split( '#' )[ 1 ] ).offsetTop );
+        window.scrollTo(
+          0,
+          yPosition - headerHeight - 20
+        );
       }
     } );
   }
@@ -581,6 +636,24 @@
 
 
   /**
+   * Attach mouse hover events on body
+   * -> event delegation for the win
+   */
+  function attachHeaderEvents() {
+    var body      = document.querySelector( 'body' );
+    var container = document.getElementById( 'p--header--notification' );
+
+
+
+    addEvent( body, 'mouseover', function( event ) {
+      if ( event.target.classList.contains( 'js-warning' ) ) {
+        container.innerHTML = event.target.innerHTML;
+      }
+    } );
+  }
+
+
+  /**
    * Attach event to select box to rerender
    * graphs depending on chosen tyoe
    */
@@ -600,6 +673,7 @@
     attachCircleEvents();
     attachClickEvents();
     attachDescriptionEvents();
+    attachHeaderEvents();
     attachMetricChangeEvent();
   }
 

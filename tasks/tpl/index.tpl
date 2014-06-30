@@ -9,13 +9,21 @@
   </head>
   <body>
     <header class="p--header">
-      <span class="p--header--span">Frontend stats for <a class="fancy" href="<%= url %>" data-url="<%= url %>" target="_blank"><%= url %></a></span>
       <select id="p--switcher" class="p--switcher">
         <option value="average">Average</option>
         <option value="min">Min</option>
         <option value="median" selected="selected">Median</option>
         <option value="max">Max</option>
       </select>
+      <% if( failedAssertions.length ) { %>
+        <ul class="p--header--warnings">
+          <% _.each( failedAssertions, function( assertion ) { %>
+            <li><a href="#graph--<%= assertion %>" class="js-scroll js-warning">Assertion for <strong><%= assertion %></strong> failed in last run.</a>
+          <% } );%>
+        </ul>
+        <div id="p--header--notification" class="p--header--notification">WARNING! Failed assertions.</div>
+      <% } %>
+      <span class="p--header--span">Frontend stats for <a class="fancy" href="<%= url %>" data-url="<%= url %>" target="_blank"><%= url %></a></span>
     </header>
     <main>
       <h2>Stats for <%= url %></h2>
@@ -25,7 +33,7 @@
           <ul class="p--graphs">
             <% _.each( group[ key ], function( metric ) { %>
               <% if ( results[ results.length - 1 ].metrics[ metric ] ) { %>
-                <li id="graph--<%= metric %>" class="p--graphs--graph">
+                <li id="graph--<%= metric %>" class="p--graphs--graph <%= ( _.indexOf( failedAssertions, metric ) !== -1 ) ? 'failed' : '' %>">
                   <h4><%= metric %></h4>
                   <a class="p--graphs--descriptionBtn <%= ( meta[ metric ] && meta[ metric ].desc ) ? 'active' : '' %>" href="#description-<%= metric %>">Show description</a>
                   <div id="description-<%= metric %>" class="p--graphs--description" hidden><%= ( meta[ metric ] && meta[ metric ].desc ) ? meta[ metric ].desc : '' %></div>
@@ -39,7 +47,7 @@
                     <table class="p--table">
                       <thead class="p--table--head">
                         <th class="p--table--column">Date</th>
-                        <th class="p--table--column"><%= metric %> - <%= ( meta[ metric ] && meta[ metric ].unit ) ? meta[ metric ].unit : '' %></th>
+                        <th class="p--table--column"><strong><%= metric %></strong> - <%= ( meta[ metric ] && meta[ metric ].unit ) ? meta[ metric ].unit : '' %></th>
                       </thead>
                       <tbody class="p--table--body">
                         <% _.each( results, function( result ) { %>

@@ -16,6 +16,7 @@ module.exports = function( grunt ) {
       var done      = this.async();
       var options   = this.options( {
         additionStylesheet : false,
+        assertions         : {},
         buildUi            : true,
         indexPath          : './phantomas/',
         numberOfRuns       : 5,
