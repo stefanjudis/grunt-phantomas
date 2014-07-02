@@ -36,7 +36,7 @@
   background : $c-red;
 
   height      : 2em;
-  line-height : 2em;
+  line-height : 2;
 
   margin  : 0;
   padding : 0 1em;
@@ -51,7 +51,7 @@
 .p--header--warnings {
   list-style : none;
 
-  margin  : 0 1em 0 0.25em;
+  margin  : 0 0.25em;
   padding : 0;
 
   &, & li {
@@ -85,7 +85,7 @@
         bottom : 0;
         right  : 0;
 
-        line-height : 1.3333em;
+        line-height : 1.5;
         text-align  : center;
         font-size   : 1.5em;
 
@@ -96,9 +96,9 @@
 }
 
 
-.p--switcher {
+[class*="p--switcher"] {
   float: right;
 
-  margin: 0;
+  margin : 0;
   padding: 0;
 }
