@@ -658,7 +658,7 @@
    * graphs depending on chosen tyoe
    */
   function attachMetricChangeEvent() {
-    var switcher = document.getElementById( 'p--switcher' );
+    var switcher = document.getElementById( 'p--switcher--metrics' );
 
     addEvent( switcher, 'change', function( event ) {
       drawLineCharts( window.results, event.target.value );

@@ -9,7 +9,7 @@
   </head>
   <body>
     <header class="p--header">
-      <select id="p--switcher" class="p--switcher">
+      <select id="p--switcher--metrics" class="p--switcher--metrics">
         <option value="average">Average</option>
         <option value="min">Min</option>
         <option value="median" selected="selected">Median</option>
@@ -35,14 +35,12 @@
               <% if ( results[ results.length - 1 ].metrics[ metric ] ) { %>
                 <li id="graph--<%= metric %>" class="p--graphs--graph <%= ( _.indexOf( failedAssertions, metric ) !== -1 ) ? 'failed' : '' %>">
                   <h4><%= metric %></h4>
+                  <button class="p--graphs--button__expand js-expand" type="button" data-metric="<%= metric %>">Expand table</button>
                   <a class="p--graphs--descriptionBtn <%= ( meta[ metric ] && meta[ metric ].desc ) ? 'active' : '' %>" href="#description-<%= metric %>">Show description</a>
                   <div id="description-<%= metric %>" class="p--graphs--description" hidden><%= ( meta[ metric ] && meta[ metric ].desc ) ? meta[ metric ].desc : '' %></div>
                   <a class="p--graphs--warningBtn <%= ( meta[ metric ] && meta[ metric ].unreliable === true ) ? 'active' : '' %>" href="#warning-<%= metric %>">Show warning</a>
                   <div id="warning-<%= metric %>" class="p--graphs--warning" hidden>Unfortunately this metric is not reliable. For more information please check documentation of phantomas.</div>
                   <svg class="p--graphs--svg"></svg>
-                  <div class="clearfix">
-                    <button class="p--graphs--button__expand js-expand" type="button" data-metric="<%= metric %>">Expand table</button>
-                  </div>
                   <div id="p--table--container--<%= metric %>" class="p--table--container">
                     <table class="p--table">
                       <thead class="p--table--head">
