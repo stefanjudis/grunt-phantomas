@@ -348,8 +348,7 @@ Phantomas.prototype.formResult = function( results ) {
   return new Promise( function( resolve ) {
     var assertions       = _.reduce( this.options.assertions, function( result, num, key ) {
           result[ key ] = {
-            value  : num,
-            failed : 0
+            value  : num
           };
 
           return result;
