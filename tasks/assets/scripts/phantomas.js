@@ -539,6 +539,8 @@
     var body         = document.querySelector( 'body' );
     var headerHeight = document.getElementsByTagName( 'header' )[ 0 ]
                                 .getBoundingClientRect().height;
+    var overlay = document.getElementById( 'p--modal__overlay' );
+    var modalShown = false;
 
     addEvent( body, 'click', function( event ) {
       if ( event.target.classList.contains( 'js-expand' ) ) {
@@ -546,6 +548,24 @@
           'p--table--container--' +
           event.target.attributes.getNamedItem( 'data-metric' ).value
         ).classList.toggle( 'expanded' );
+      }
+
+      if ( event.target.classList.contains( 'js-offenders' ) ) {
+        modalShown = true;
+        overlay.style.display = 'block';
+        overlay.style.opacity = 0.5;
+
+        document.getElementById(
+          'offender--' +
+          event.target.attributes.getNamedItem( 'data-metric' ).value
+        ).classList.toggle( 'in-modal' );
+
+      }
+
+      if ( event.target === overlay ) {
+        overlay.style.opacity = 0;
+        overlay.style.display = 'none';
+        document.querySelector( '.in-modal' ).classList.toggle( 'in-modal');
       }
 
       if ( event.target.classList.contains( 'js-scroll' ) ) {

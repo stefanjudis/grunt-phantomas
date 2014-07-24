@@ -14,7 +14,7 @@
 
 }
 
-.p--graphs--button__expand {
+.p--graphs--button__expand, .p--graphs--button__offenders {
   position : absolute;
 
   height : 2em;
@@ -37,6 +37,10 @@
   &:hover {
     background-color : adjust-lightness( $c-green, 10 );
   }
+}
+
+.p--graphs--button__offenders {
+  left : 4.2em;
 }
 
 .p--graphs--description, .p--graphs--warning {

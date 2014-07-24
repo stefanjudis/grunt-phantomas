@@ -35,7 +35,10 @@
               <% if ( results[ results.length - 1 ].metrics[ metric ] ) { %>
                 <li id="graph--<%= metric %>" class="p--graphs--graph <%= ( _.indexOf( failedAssertions, metric ) !== -1 ) ? 'failed' : '' %>">
                   <h4><%= metric %></h4>
-                  <button class="p--graphs--button__expand js-expand" type="button" data-metric="<%= metric %>">Expand table</button>
+                  <button class="p--graphs--button__expand js-expand" type="button" data-metric="<%= metric %>">Table</button>
+                  <% if ( results[ results.length - 1 ].offenders[ metric ] ) { %>
+                    <button class="p--graphs--button__offenders js-offenders" type="button" data-metric="<%= metric %>">Details</button>
+                  <% } %>
                   <a class="p--graphs--descriptionBtn <%= ( meta[ metric ] && meta[ metric ].desc ) ? 'active' : '' %>" href="#description-<%= metric %>">Show description</a>
                   <div id="description-<%= metric %>" class="p--graphs--description" hidden><%= ( meta[ metric ] && meta[ metric ].desc ) ? meta[ metric ].desc : '' %></div>
                   <a class="p--graphs--warningBtn <%= ( meta[ metric ] && meta[ metric ].unreliable === true ) ? 'active' : '' %>" href="#warning-<%= metric %>">Show warning</a>
@@ -75,15 +78,20 @@
           <% } ); %>
         </ul>
       <% }%>
-      <h2>Last run offenders for <%= url %></h2>
+      <h2 class="p--offenders__header">Last run offenders for <%= url %></h2>
       <dl class="p--offenders">
         <% for( var offender in results[ results.length - 1 ].offenders ) { %>
-          <dt><%= offender %></dt>
-          <% _.each( results[ results.length - 1 ].offenders[ offender ], function( value ) { %>
-            <dd class="p--offenders__<%= offender %>"><%= value %>
-          <% } ) %>
+          <div class="p--offenders__container" id="offender--<%= offender %>">
+            <dt><%= offender %></dt>
+            <div class="p--offenders__terms">
+              <% _.each( results[ results.length - 1 ].offenders[ offender ], function( value ) { %>
+                <dd class="p--offenders__<%= offender %>"><%= value %>
+              <% } ) %>
+            </div>
+          </div>
         <% } %>
       </dl>
+      <div id="p--modal__overlay"></div>
     </main>
     <footer class="p--footer">
       Made with &#x2764; and <a href="https://github.com/macbre/phantomas" target="_blank">Phantomas</a>
