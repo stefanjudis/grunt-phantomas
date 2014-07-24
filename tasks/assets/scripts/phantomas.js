@@ -539,8 +539,8 @@
     var body         = document.querySelector( 'body' );
     var headerHeight = document.getElementsByTagName( 'header' )[ 0 ]
                                 .getBoundingClientRect().height;
-    var overlay = document.getElementById( 'p--modal__overlay' );
-    var modalShown = false;
+    var overlay      = document.getElementById( 'p--modal__overlay' );
+    var modalShown   = false;
 
     addEvent( body, 'click', function( event ) {
       if ( event.target.classList.contains( 'js-expand' ) ) {
