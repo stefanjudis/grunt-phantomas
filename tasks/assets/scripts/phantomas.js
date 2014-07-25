@@ -481,7 +481,6 @@
       }
 
       if ( event.target.classList.contains( 'js-offenders' ) ) {
-        modalShown = true;
         overlay.style.display     = 'block';
         overlay.style.opacity     = 0.5;
         closeButton.style.display = 'block';
