@@ -92,6 +92,7 @@
         <% } %>
       </dl>
       <div id="p--modal__overlay"></div>
+      <button id="p--modal__close">Close</button>
     </main>
     <footer class="p--footer">
       Made with &#x2764; and <a href="https://github.com/macbre/phantomas" target="_blank">Phantomas</a>

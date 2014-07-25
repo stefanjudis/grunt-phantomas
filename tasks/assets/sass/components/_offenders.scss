@@ -74,7 +74,7 @@
 
   z-index : 100;
 
-  background : #000;
+  background : $c-black;
 
   display: none;
 }
@@ -111,4 +111,36 @@
 .p--offenders__terms {
   overflow-y : auto;
   max-height : 65vh;
+}
+
+#p--modal__close {
+  position : fixed;
+  right    : 6.4em;
+  top      : 3.8em;
+  z-index : 12000;
+
+  display : none;
+
+  color      : $c-white;
+  border     : none;
+  background : none;
+
+  content : " ";
+  width   : 0;
+  height  : 0;
+  margin  : 0;
+  padding : 0;
+
+  border-style : solid;
+  border-width : 0 6em 6em 0;
+  border-color : transparent $c-green transparent transparent;
+
+  &::after {
+    content   : '×';
+    position  : absolute;
+    top       : 1em;
+    left      : 2.8em;
+    font-size : 1.25em;
+  }
+
 }

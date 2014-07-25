@@ -470,7 +470,7 @@
     var headerHeight = document.getElementsByTagName( 'header' )[ 0 ]
                                 .getBoundingClientRect().height;
     var overlay      = document.getElementById( 'p--modal__overlay' );
-    var modalShown   = false;
+    var closeButton  = document.getElementById( 'p--modal__close' );
 
     addEvent( body, 'click', function( event ) {
       if ( event.target.classList.contains( 'js-expand' ) ) {
@@ -482,8 +482,9 @@
 
       if ( event.target.classList.contains( 'js-offenders' ) ) {
         modalShown = true;
-        overlay.style.display = 'block';
-        overlay.style.opacity = 0.5;
+        overlay.style.display     = 'block';
+        overlay.style.opacity     = 0.5;
+        closeButton.style.display = 'block';
 
         document.getElementById(
           'offender--' +
@@ -492,9 +493,10 @@
 
       }
 
-      if ( event.target === overlay ) {
-        overlay.style.opacity = 0;
-        overlay.style.display = 'none';
+      if ( event.target === overlay || event.target === closeButton) {
+        overlay.style.opacity     = 0;
+        overlay.style.display     = 'none';
+        closeButton.style.display = 'none';
         document.querySelector( '.in-modal' ).classList.toggle( 'in-modal');
       }
 
