@@ -3,12 +3,6 @@
 
   @include clearfix();
 
-  dt, dd {
-    float : left;
-
-    clear : left;
-  }
-
   dt {
     position : relative;
 
@@ -21,6 +15,8 @@
 
     color            : $c-white;
     background-color : $c-purple;
+
+    display: inline-block;
 
     @include box-shadow( 0 0.125em 0.125em $c-grayDarker );
 
@@ -57,11 +53,94 @@
     padding : 0.75em;
 
     &:nth-child(2n) {
-      background : $c-blueDark;
+      background : $c-blueDarker;
     }
   }
 }
 
 .p--offenders--headline {
   margin-left : -0.5em;
+}
+
+#p--modal__overlay {
+  opacity : 0;
+
+  position : fixed;
+
+  top    : 0;
+  bottom : 0;
+  left   : 0;
+  right  : 0;
+
+  z-index : 100;
+
+  background : $c-black;
+
+  display: none;
+}
+
+.p--offenders__header {
+  display : none;
+}
+
+.p--offenders__container {
+  display : none;
+
+  opacity    : 0;
+  transition : opacity 1s linear;
+
+  &.in-modal {
+    display : block;
+    opacity : 1;
+
+    position : fixed;
+
+    left  : 5em;
+    right : 5em;
+    top   : 3em;
+
+    max-height     : 80vh;
+    padding-bottom : 2em;
+
+    z-index: 11000;
+
+    background : $c-blueDark;
+  }
+}
+
+.p--offenders__terms {
+  overflow-y : auto;
+  max-height : 65vh;
+}
+
+#p--modal__close {
+  position : fixed;
+  right    : 6.4em;
+  top      : 3.8em;
+  z-index : 12000;
+
+  display : none;
+
+  color      : $c-white;
+  border     : none;
+  background : none;
+
+  content : " ";
+  width   : 0;
+  height  : 0;
+  margin  : 0;
+  padding : 0;
+
+  border-style : solid;
+  border-width : 0 6em 6em 0;
+  border-color : transparent $c-green transparent transparent;
+
+  &::after {
+    content   : '×';
+    position  : absolute;
+    top       : 1em;
+    left      : 2.8em;
+    font-size : 1.25em;
+  }
+
 }
