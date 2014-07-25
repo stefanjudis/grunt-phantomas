@@ -60,11 +60,6 @@
     return parent; // returns an Array []
   }
 
-  /**
-   * Config stuff
-   * @type {Number}
-   */
-  var DURATION = 1500;
 
   /**
    * draw the fancy line chart
@@ -80,10 +75,8 @@
      * Draw one particalur circle
      *
      * @param  {Object}  datum datum
-     * @param  {Number}  index index in data set
-     * @param  {Boolena} delay draw circle with delay
      */
-    function drawCircle( datum, index, delay ) {
+    function drawCircle( datum ) {
       circleContainer.datum( datum )
                     .append( 'circle' )
                     .attr( 'class', function( d ) {
@@ -91,7 +84,7 @@
                         'lineChart--circle failed' :
                         'lineChart--circle';
                     } )
-                    .attr( 'r', 0 )
+                    .attr( 'r', 4 )
                     .attr(
                       'cx',
                       function( d ) {
@@ -169,17 +162,7 @@
                           }
                         )
                         .attr( 'r', 4 );
-                    } )
-
-                    .transition()
-                    .delay( function() {
-                      if ( delay === undefined ) {
-                        return DURATION / 10 * index;
-                      }
-
-                      return 0;
-                    } )
-                    .attr( 'r', 4 );
+                    } );
     }
 
 
@@ -188,46 +171,15 @@
      * data and draw a circle for each data set
      *
      * @param  {Array}   data  data
-     * @param  {Boolean} delay should circles be drawn with delay
      */
-    function drawCircles( data, delay ) {
+    function drawCircles( data ) {
       if ( !circleContainer ) {
         circleContainer = svg.append( 'g' );
       }
 
       circleContainer.selectAll( 'circle' ).remove();
 
-      data.forEach( function( datum, index ) {
-        drawCircle( datum, index, delay );
-      } );
-    }
-
-
-    /**
-     * Helper function to tween between values
-     *
-     * @param  {Number}   b
-     * @param  {Function} callback
-     * @return {Function}
-     */
-    function tween( b, callback ) {
-      return function( a ) {
-        var i = ( function interpolate() {
-          return function( t ) {
-            return a.map( function( datum, index ) {
-              var returnObject = datum;
-
-              returnObject.value[ type ] = b[ index ].value[ type ] * t;
-
-              return returnObject;
-            } );
-          };
-        } )();
-
-        return function( t ) {
-          return callback( i ( t ) );
-        };
-      };
+      data.forEach( drawCircle );
     }
 
 
@@ -244,7 +196,7 @@
       svg.select( '.p--lineChart--area' ).attr( 'd', area );
       svg.select( '.p--lineChart--areaLine' ).attr( 'd', line );
 
-      drawCircles( data, false );
+      drawCircles( data );
     }
 
 
@@ -347,19 +299,6 @@
                   .x( function( d ) { return x( d.date ) + detailWidth / 2; } )
                   .y( function( d ) { return y( d.value[ type ] ); } ),
 
-        startData = data.map( function( datum ) {
-                      return {
-                        date  : datum.date,
-                        value : {
-                          average : 0,
-                          min     : 0,
-                          median  : 0,
-                          max     : 0,
-                          sum     : 0
-                        }
-                      };
-                    } ),
-
         circleContainer,
         zoom;
 
@@ -404,26 +343,17 @@
 
     // Add the area path.
     svg.append( 'path' )
-        .datum( startData )
+        .datum( data )
         .attr( 'class', 'p--lineChart--area' )
-        .attr( 'd', area )
-        .transition()
-        .duration( DURATION )
-        .attrTween( 'd', tween( data, area ) );
+        .attr( 'd', area );
 
     // Add the line path.
     svg.append( 'path' )
-        .datum( startData )
+        .datum( data )
         .attr( 'class', 'p--lineChart--areaLine' )
-        .attr( 'd', line )
-        .transition()
-        .duration( DURATION )
-        .delay( DURATION / 2 )
-        .attrTween( 'd', tween( data, line ) )
-        .each( 'end', function() {
-          drawCircles( data );
-        } );
+        .attr( 'd', line );
 
+    drawCircles( data );
 
     zoom = d3.behavior.zoom()
               .x( x )
