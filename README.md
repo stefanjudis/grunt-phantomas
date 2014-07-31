@@ -430,11 +430,16 @@ grunt.initConfig( {
 
 
 ### Tracking history in CI
-
 To track history in Travis CI, use the [caching option](http://docs.travis-ci.com/user/caching/#Arbitrary-directories) to cache the `indexPath` folder.
 
 #### Note:
 Formatters are not supported as options for Phantomas, because they are not implemented in the CommonJS version of Phantomas.
+
+
+## Donating
+Support this project and others by [stefanjudis](https://www.gittip.com/stefanjudis/) via [gittip](https://www.gittip.com/stefanjudis/).
+
+[![Support via Gittip](https://rawgithub.com/twolfson/gittip-badge/0.2.0/dist/gittip.png)](https://www.gittip.com/stefanjudis/)
 
 
 ## Contributing
