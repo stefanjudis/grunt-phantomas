@@ -54,7 +54,7 @@
     "phantomjs"
   ],
   "dependencies": {
-    "bluebird": "~2.1.3",
+    "bluebird": "~2.2.2",
     "phantomas": "~1.4.0",
     "node-fs": "~0.1.7",
     "lodash": "~2.4.1",
