@@ -125,22 +125,42 @@
   border     : none;
   background : none;
 
-  content : " ";
-  width   : 0;
+  width   : 6em;
   height  : 0;
   margin  : 0;
-  padding : 0;
+  padding : 6em 0 0 0;
 
-  border-style : solid;
-  border-width : 0 6em 6em 0;
-  border-color : transparent $c-green transparent transparent;
+  overflow : hidden;
 
-  &::after {
+
+  &:hover, &:focus {
+    border-color : transparent adjust-lightness( $c-green, 10 ) transparent transparent
+  }
+
+  &:active {
+    &:before {
+      border-color : transparent adjust-lightness( $c-green, -10 ) transparent transparent;
+    }
+  }
+
+  &:before {
+    position : absolute;
+
+    top  : 0;
+    left : 0;
+
+    content : '';
+
+    border-style : solid;
+    border-width : 0 6em 6em 0;
+    border-color : transparent $c-green transparent transparent;
+  }
+
+  &:after {
     content   : '×';
     position  : absolute;
     top       : 1em;
     left      : 2.8em;
     font-size : 1.25em;
   }
-
 }
