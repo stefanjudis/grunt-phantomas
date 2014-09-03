@@ -18,9 +18,9 @@
   position : absolute;
 
   height : 2em;
+  width  : 5.5em;
 
   top  : 0.25em;
-  left : 0;
 
   margin : 0 0 1em 0;
 
@@ -28,7 +28,8 @@
 
   border : none;
 
-  color : $c-white;
+  color      : $c-white;
+  text-align : center;
 
   @include transition(
     background-color 0.25s ease-in
@@ -39,8 +40,12 @@
   }
 }
 
+.p--graphs--button__expand {
+  left : 0;
+}
+
 .p--graphs--button__offenders {
-  left : 4.2em;
+  left : 6em;
 }
 
 .p--graphs--description, .p--graphs--warning {
