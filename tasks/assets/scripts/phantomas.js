@@ -353,8 +353,7 @@
         .attr( 'class', 'p--lineChart--areaLine' )
         .attr( 'd', line );
 
-    drawCircles( data );
-
+    // configure zoom
     zoom = d3.behavior.zoom()
               .x( x )
               .scaleExtent( [ 1, 100 ] )
@@ -366,6 +365,8 @@
         .attr( 'width', width )
         .attr( 'height', height )
         .call( zoom );
+
+    drawCircles( data );
 
     // set up reset button
     svg.append( 'rect' )
