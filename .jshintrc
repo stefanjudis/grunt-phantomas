@@ -14,5 +14,6 @@
   "unused": true,
   "trailing": true,
   "maxparams": 3,
-  "maxdepth": 3
+  "maxdepth": 3,
+  "predef": [ "-Promise" ]
 }
