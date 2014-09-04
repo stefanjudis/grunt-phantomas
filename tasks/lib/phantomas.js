@@ -588,7 +588,7 @@ Phantomas.prototype.notifyAboutNotDisplayedMetrics = function( results ) {
 Phantomas.prototype.processData = function() {
   return new Promise( function( resolve, reject ) {
     if ( this.options.buildUi ) {
-      if ( this.options.output === 'json' ) {
+      if ( _.indexOf( this.options.output, 'json' ) !== -1 ) {
         // read all generated metric files
         // and prepare them for ui generation
         this.readMetricsFiles().bind( this )
@@ -670,6 +670,7 @@ Phantomas.prototype.readMetricsFile = function( file ) {
 Phantomas.prototype.readMetricsFiles = function() {
   return new Promise( function( resolve ) {
     this.grunt.log.subhead( 'CHECKING ALL WRITTEN FILES FOR VALID JSON.' );
+
     fs.readdirAsync( this.dataPath ).bind( this )
       .then( function( files ) {
         files = files.filter( function( file ) {
@@ -737,23 +738,42 @@ Phantomas.prototype.showSuccessMessage = function() {
  * @tested
  */
 Phantomas.prototype.writeData = function( result ) {
-  if (
-    typeof result.metrics.requests !== 'undefined' &&
-    result.metrics.requests.values.length
-  ) {
-    if ( this._writeData[ this.options.output ] !== undefined ) {
-      return this._writeData[ this.options.output ].bind( this )( result );
+  this.grunt.log.subhead( 'WRITING RESULT FILES.' );
+
+  var runs = [];
+
+  return new Promise( function( resolve, reject ) {
+    if (
+      typeof result.metrics.requests !== 'undefined' &&
+      result.metrics.requests.values.length
+    ) {
+      // keep backwards compatibility
+      // to not break existant configurations
+      if ( typeof this.options.output === 'string' ) {
+        this.options.output = [ this.options.output ];
+      }
+
+      // iterate of output formats
+      // and write data
+      _.each( this.options.output, function( format ) {
+        if ( this._writeData[ format ] !== undefined ) {
+          runs.push(
+            this._writeData[ format ].bind( this )( result )
+          );
+        } else {
+          reject(
+            'Your set ouput format \'' + format + '\' is not supported.\n' +
+            'PLEASE CHECK DOCUMENTATION FOR SUPPORTED FORMATS.'
+          );
+        }
+      }, this );
+
+      Promise.settle( runs )
+          .then( resolve );
     } else {
-      throw new Error(
-        'Your set ouput format is not supported.\n' +
-        'PLEASE CHECK DOCUMENTATION FOR SUPPORTED FORMATS.'
-      );
-    }
-  } else {
-    return new Promise( function( resolve, reject ) {
       reject( 'No run was successful.' );
-    } );
-  }
+    }
+  }.bind( this ) );
 };
 
 
@@ -773,18 +793,17 @@ Phantomas.prototype._writeData = {
    * @tested
    */
   csv  : function( result ) {
-    this.grunt.log.subhead( 'WRITING RESULT CSV FILE.' );
-
     return new Promise( function( resolve, reject ) {
       var displayedMetricKeys = _.keys( result.metrics );
+      var metrics             = {};
 
-      _.each( result.metrics, function( value, key, collection ){
-        collection[ key ] = collection[ key ].average;
+      _.each( result.metrics, function( value, key ){
+        metrics[ key ] = result.metrics[ key ].average;
       } );
 
       json2csv( { data : result.metrics, fields : displayedMetricKeys } )
         .then( function( csv ) {
-          var fileName = this.dataPath + ( +new Date() ) + '.csv';
+          var fileName = this.dataPath + this.timestamp + '.csv';
 
           fs.writeFileAsync(
             fileName,
@@ -809,8 +828,6 @@ Phantomas.prototype._writeData = {
    * @tested
    */
   json : function( result ) {
-    this.grunt.log.subhead( 'WRITING RESULT JSON FILE.' );
-
     return new Promise( function( resolve, reject ) {
       var fileName = this.dataPath + this.timestamp + '.json';
 
@@ -821,7 +838,7 @@ Phantomas.prototype._writeData = {
       .then( resolve )
       .catch( reject );
 
-      this.grunt.log.ok( 'JSON file - ' + this.timestamp + ' - written.' );
+      this.grunt.log.ok( 'JSON file - ' + fileName + ' - written.' );
     }.bind( this ) );
   }
 };

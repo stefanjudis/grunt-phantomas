@@ -194,7 +194,7 @@ exports.phantomasPromisesFlow = {
         var options     = {
           indexPath : TEMP_PATH,
           buildUi   : true,
-          output    : 'whatever'
+          output    : [ 'whatever' ]
         };
         var done = function() {};
         var phantomas = new Phantomas( grunt, options, done );
@@ -219,7 +219,7 @@ exports.phantomasPromisesFlow = {
         var options     = {
           indexPath : TEMP_PATH,
           buildUi   : true,
-          output    : 'json'
+          output    : [ 'json' ]
         };
         var done = function() {};
         var phantomas = new Phantomas( grunt, options, done );
@@ -938,21 +938,21 @@ exports.phantomas = {
           }
         };
 
-        test.throws(
-          function() {
-            phantomas.writeData( result );
-          },
-          Error,
-          'Your set ouput format is not supported.\n' +
-          'PLEASE CHECK DOCUMENTATION FOR SUPPORTED FORMATS.'
-        );
-        test.done();
+        phantomas.writeData( result )
+                  .catch( function( e ) {
+                    test.strictEqual(
+                      'Your set ouput format \'invalidFormat\' is not supported.\n' +
+                      'PLEASE CHECK DOCUMENTATION FOR SUPPORTED FORMATS.', e
+                    );
+
+                    test.done();
+                  } );
       },
       validDataFormat : function( test ) {
         var options   = {
           buildUi   : false,
           indexPath : TEMP_PATH,
-          output    : 'validFormat'
+          output    : [ 'validFormat' ]
         };
         var done = function() {};
         var phantomas = new Phantomas( grunt, options, done );
@@ -966,14 +966,15 @@ exports.phantomas = {
 
         // stub the valid data forma
         phantomas._writeData.validFormat = function() {
-          return new Promise( function() {});
+          return new Promise( function( resolve ) { resolve( 'foo' ); } );
         };
 
-        var returnedPromise = phantomas.writeData( result );
-
-        test.strictEqual( typeof returnedPromise, 'object' );
-        test.strictEqual( returnedPromise instanceof Promise, true );
-        test.done();
+        phantomas.writeData( result )
+                  .then( function( data ) {
+                    test.strictEqual( data.length, 1 );
+                    test.strictEqual( data[ 0 ].value(), 'foo' );
+                    test.done();
+                  } );
       }
     }
   },
