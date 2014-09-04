@@ -82,7 +82,7 @@
       <dl class="p--offenders">
         <% for( var offender in results[ results.length - 1 ].offenders ) { %>
           <div class="p--offenders__container" id="offender--<%= offender %>">
-            <dt><%= offender %></dt>
+            <dt><strong><%= offender %></strong> in last execution</dt>
             <div class="p--offenders__terms">
               <% _.each( results[ results.length - 1 ].offenders[ offender ], function( value ) { %>
                 <dd class="p--offenders__<%= offender %>"><%= value %>

@@ -281,7 +281,7 @@
                                   .ticks( 16 )
                                   .tickSize( -height )
                                   .tickFormat( '' ),
-        y          = d3.scale.linear().range( [ height, 0 ] ),
+        y          = d3.scale.linear().range( [ height, margin.top ] ),
         yAxisTicks = d3.svg.axis().scale( y )
                                   .ticks( 12 )
                                   .tickSize( width )
@@ -307,7 +307,7 @@
     // hacky hacky hacky :(
     y.domain( [
       0,
-      d3.max( data, function( d ) { return d.value ? d.value[ type ] : 0; } ) + 700
+      d3.max( data, function( d ) { return d.value ? d.value[ type ] : 0; } )
     ] );
 
     // clean up time... :)
@@ -497,7 +497,7 @@
         overlay.style.opacity     = 0;
         overlay.style.display     = 'none';
         closeButton.style.display = 'none';
-        document.querySelector( '.in-modal' ).classList.toggle( 'in-modal');
+        document.querySelector( '.in-modal' ).classList.toggle( 'in-modal' );
       }
 
       if ( event.target.classList.contains( 'js-scroll' ) ) {
@@ -509,9 +509,9 @@
         );
 
         if ( element.offsetParent ) {
-              do {
-                  yPosition += element.offsetTop;
-              } while ( element = element.offsetParent );
+          do {
+              yPosition += element.offsetTop;
+          } while ( element = element.offsetParent );
         }
 
         // console.log( document.getElementById( event.target.href.split( '#' )[ 1 ] ).offsetTop );
