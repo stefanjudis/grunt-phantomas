@@ -260,12 +260,10 @@
         height      = width * 0.4,
         margin      = {
           top    : 20,
-          right  : 10,
           bottom : 60,
-          left   : 10
         },
 
-        detailWidth  = 98,
+        detailWidth  = 108,
 
         container   = d3.select( containerEl ),
         svg         = container.select( 'svg' )
@@ -299,6 +297,7 @@
                   .x( function( d ) { return x( d.date ) + detailWidth / 2; } )
                   .y( function( d ) { return y( d.value[ type ] ); } ),
 
+        assertionGroup,
         circleContainer,
         zoom;
 
@@ -307,7 +306,15 @@
     // hacky hacky hacky :(
     y.domain( [
       0,
-      d3.max( data, function( d ) { return d.value ? d.value[ type ] : 0; } )
+      d3.max( data, function( d ) {
+        if ( d.value ) {
+          return ( d.value[ type ] > assertionValue ) ?
+                  d.value[ type ] :
+                  assertionValue;
+        } else {
+          return 0;
+        }
+      } )
     ] );
 
     // clean up time... :)
@@ -332,13 +339,29 @@
       .attr( 'class', 'lineChart--yAxisTicks' )
       .call( yAxisTicks );
 
+    // add assertion graphics
     if ( assertionValue !== null ) {
-      svg.append( 'line' )
-         .attr( 'x1', 0 )
-         .attr( 'y1', y( assertionValue ) )
-         .attr( 'x2', width )
-         .attr( 'y2', y( assertionValue ) )
-         .attr( 'class', 'p--lineChart--assertion' );
+      assertionGroup = svg.append( 'g' )
+                          .attr( 'transform', 'translate( 0,' + y( assertionValue ) + ')' )
+                          .attr( 'class', 'p--lineChart--assertion' );
+
+      assertionGroup.append( 'line' )
+                     .attr( 'x1', 0 )
+                     .attr( 'y1', 0 )
+                     .attr( 'x2', width )
+                     .attr( 'y2', 0 )
+                     .attr( 'class', 'p--lineChart--assertion' );
+
+      assertionGroup.append( 'rect' )
+                    .attr( 'width', 50 )
+                    .attr( 'height', 20 )
+                    .attr( 'x', 0 )
+                    .attr( 'y', - 10 );
+
+      assertionGroup.append( 'text' )
+                    .attr( 'x', 25 )
+                    .attr( 'y', 4 )
+                    .text( assertionValue );
     }
 
     // Add the area path.
@@ -352,6 +375,7 @@
         .datum( data )
         .attr( 'class', 'p--lineChart--areaLine' )
         .attr( 'd', line );
+
 
     // configure zoom
     zoom = d3.behavior.zoom()

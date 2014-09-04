@@ -244,9 +244,23 @@
 }
 
 .p--lineChart--assertion {
-  stroke : $c-red;
-  stroke-width : 2;
-  fill   : none;
+  > line {
+    stroke : rgba( $c-red, 0.85 );
+    stroke-width : 2;
+    fill   : none;
+  }
+
+  > rect {
+    fill : $c-red, 0.85 );
+    stroke : none;
+  }
+
+  > text {
+    stroke : $c-white;
+    text-anchor : middle;
+
+    font-size : 0.75em;
+  }
 }
 
 .p--lineChart--areaLine {
