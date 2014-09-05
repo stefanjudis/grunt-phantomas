@@ -266,10 +266,10 @@
         detailWidth  = 115,
 
         container   = d3.select( containerEl ),
-        svg         = container.select( 'svg' )
+        svg         = container.select( '.p--graphs--svg' )
                                 .attr( 'width', width )
                                 .attr( 'height', height + margin.top + margin.bottom )
-                                .attr( 'class', 'p--graphs--svg__initialized' ),
+                                .attr( 'class', 'p--graphs--svg is-initialized' ),
 
         x          = d3.time.scale().range( [ 0, width - detailWidth ] ),
         xAxis      = d3.svg.axis().scale( x )
@@ -297,6 +297,8 @@
                   .x( function( d ) { return x( d.date ) + detailWidth / 2; } )
                   .y( function( d ) { return y( d.value[ type ] ); } ),
 
+        loader = container.select( '.p--graphs--loading' ),
+
         assertionGroup,
         circleContainer,
         zoom;
@@ -317,9 +319,12 @@
       } )
     ] );
 
+    // hide loading spinner
+    loader.attr( 'class', 'p--graphs--loading' );
+
     // clean up time... :)
     if ( !svg.empty() ) {
-      svg.selectAll( 'g, path, line' ).remove();
+      svg.selectAll( 'g, path, rect, text, line' ).remove();
     }
 
     svg.append( 'g' )
@@ -709,6 +714,11 @@
    */
   function drawLineCharts( data, type ) {
     var lastMetric = data[ data.length - 1 ];
+    var loaders    = document.querySelectorAll( '.p--graphs--loading' );
+
+    for ( var i = 0; i < loaders.length; ++i ) {
+      loaders[ i ].classList.add( 'is-active' );
+    }
 
     type = type || 'median';
 

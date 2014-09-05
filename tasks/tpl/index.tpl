@@ -34,6 +34,9 @@
             <% _.each( group[ key ], function( metric ) { %>
               <% if ( results[ results.length - 1 ].metrics[ metric ] ) { %>
                 <li id="graph--<%= metric %>" class="p--graphs--graph <%= ( _.indexOf( failedAssertions, metric ) !== -1 ) ? 'failed' : '' %>">
+                  <div class="p--graphs--loading is-active">
+                    <div class="spinner"></div>
+                  </div>
                   <h4><%= metric %></h4>
                   <button class="p--graphs--button__expand js-expand" type="button" data-metric="<%= metric %>">Table</button>
                   <% if ( results[ results.length - 1 ].offenders[ metric ] ) { %>
