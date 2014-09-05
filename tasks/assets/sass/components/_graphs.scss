@@ -228,16 +228,55 @@
   }
 }
 
+.p--graphs--loading {
+  display : none;
+
+  position : absolute;
+  z-index : $z-loading;
+
+  top    : 0;
+  right  : 0;
+  bottom : 0;
+  left   : 0;
+
+  background : rgba( $c-black, 0.25 );
+
+  .spinner {
+    position : absolute;
+
+    top  : 40%;
+    left : 50%;
+
+    margin-left : -2em;
+
+    height   : 4em;
+    width    : 4em;
+
+    border : 0.5em solid $c-green;
+    border-top: 0.5em solid adjust-lightness( $c-green, 20 );
+
+    border-radius : 100%;
+
+    @include animation( rotator 2s infinite linear );
+  }
+
+  &.is-active {
+    display : block;
+  }
+}
+
 .p--graphs--svg {
   width  : 100%;
   height : 0;
 
   padding-top : calc( 40% + 80px );
+
+  &.is-initialized {
+    height : auto;
+    padding : 0;
+  }
 }
 
-.p--graphs--svg__initialized {
-  padding : 0;
-}
 
 .p--lineChart--area {
   fill: rgba( $c-gray, 0.5 );
