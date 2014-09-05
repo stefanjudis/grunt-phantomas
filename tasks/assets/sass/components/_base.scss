@@ -86,28 +86,6 @@ h2 {
   &:first-child {
     margin-top : 3em;
   }
-
-  @media screen and ( min-width: $b-big ) {
-    &:before, &:after {
-      content: '';
-
-      position: absolute;
-      top: calc( 50% - 0.25em );
-
-      width: 15%;
-      height: 1px;
-
-      background-color: $c-green;
-    }
-
-    &:before {
-      left: 10%;
-    }
-
-    &:after {
-      right: 10%;
-    }
-  }
 }
 
 h3 {
