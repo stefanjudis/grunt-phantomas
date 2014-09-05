@@ -263,7 +263,7 @@
           bottom : 60,
         },
 
-        detailWidth  = 108,
+        detailWidth  = 115,
 
         container   = d3.select( containerEl ),
         svg         = container.select( 'svg' )

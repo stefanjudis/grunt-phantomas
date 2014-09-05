@@ -115,10 +115,10 @@ Default value: `true`
 If you want to use `grunt-phantomas` without generating a UI for the data, this is an option to switch off the visualization interface. If set to false only defined data format will be outputted at `options.indexPath + '/data/'`.
 
 #### options.output
-Type: `String`
-Default value: `json`
+Type: `Array`
+Default value: `[ 'json', 'csv' ]`
 
-Choose to output CSV or JSON files. The default is JSON. The buildUi option does not work with the CSV format. *You have to set `buildUi` to `false`, if you want to write CSV files only*.
+Choose to output CSV or JSON files. The default is JSON and CSV. The buildUi option does not work if `json` is not included in `options.output`. *You have to set `buildUi` to `false`, if you want to write CSV files only*.
 
 
 #### options.group

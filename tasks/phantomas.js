@@ -21,7 +21,7 @@ module.exports = function( grunt ) {
         indexPath          : './phantomas/',
         numberOfRuns       : 5,
         options            : {},
-        output             : 'json',
+        output             : [ 'json', 'csv' ],
         url                : 'http://gruntjs.com/',
         group              : {
           'REQUESTS' : [
