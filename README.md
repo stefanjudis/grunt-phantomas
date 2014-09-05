@@ -25,6 +25,7 @@ This grunt plugin executes [phantomas](https://github.com/macbre/phantomas) for 
 
 Examples of rendered output:
 - metrics for [http://gruntjs.com](http://gruntjs.com) -> [here](http://stefanjudis.github.io/grunt-phantomas/gruntjs/)
+- metric for example site including custom metrics -> [here](http://stefanjudis.github.io/phantomas-custom-metrics-tryout/)
 
 *I'm still at early stage, but I think you can already work with it.* ;)
 
