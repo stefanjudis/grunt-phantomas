@@ -303,7 +303,7 @@
         circleContainer,
         zoom;
 
-    // Compute the minimum and maximum date, and the maximum price.
+    // Compute the minimum and maximum date
     x.domain( [ data[ 0 ].date, data[ data.length - 1 ].date ] );
     // hacky hacky hacky :(
     y.domain( [
