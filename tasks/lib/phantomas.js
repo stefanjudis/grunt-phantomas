@@ -462,7 +462,7 @@ Phantomas.prototype.formResult = function( results ) {
       // depending on median
       // to failedAssertions sum up
       if (
-        this.options.assertions[ metric ] &&
+        typeof this.options.assertions[ metric ] === 'number' &&
         entry.median > this.options.assertions[ metric ] &&
         _.indexOf( this.failedAssertions, metric ) === -1
       ) {
