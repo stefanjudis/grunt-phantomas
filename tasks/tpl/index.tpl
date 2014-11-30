@@ -15,6 +15,12 @@
         <option value="median" selected="selected">Median</option>
         <option value="max">Max</option>
       </select>
+      <select id="p--switcher--lastRuns" class="p--switcher--lastRuns">
+        <option value="10" selected="selected">10 last runs</option>
+        <option value="25">25 last runs</option>
+        <option value="50">50 last runs</option>
+        <option value="100">100 last runs</option>
+      </select>
       <% if( failedAssertions.length ) { %>
         <ul class="p--header--warnings">
           <% _.each( failedAssertions, function( assertion ) { %>

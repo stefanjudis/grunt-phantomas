@@ -13,7 +13,7 @@
   "quotmark": "single",
   "unused": true,
   "trailing": true,
-  "maxparams": 3,
+  "maxparams": 4,
   "maxdepth": 3,
   "predef": [ "-Promise" ]
 }

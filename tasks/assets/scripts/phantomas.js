@@ -64,11 +64,12 @@
   /**
    * draw the fancy line chart
    *
-   * @param {Array}  data      data
-   * @param {String} metric    metric
-   * @param {String} type      median|max|min|...
+   * @param {Array}            data      data
+   * @param {String}           metric    metric
+   * @param {String}           type      median|max|min|...
+   * @param {Number|undefined} lastRuns  number of last displayed runs
    */
-  function drawLineChart( data, metric, type ) {
+  function drawLineChart( data, metric, type, lastRuns ) {
     // Helper functions on top of 8-)
 
     /**
@@ -333,8 +334,10 @@
         circleContainer,
         zoom;
 
-    // Compute the minimum and maximum date
-    x.domain( [ data[ 0 ].date, data[ data.length - 1 ].date ] );
+    // Compute x-positions for the minimum and maximum date
+    lastRuns = lastRuns || 10;
+    var startIndex = ( data.length >= lastRuns ) ? data.length - lastRuns : 0;
+    x.domain( [ data[ startIndex ].date, data[ data.length - 1 ].date ] );
     // hacky hacky hacky :(
     y.domain( [
       0,
@@ -434,7 +437,7 @@
     // configure zoom
     zoom = d3.behavior.zoom()
               .x( x )
-              .scaleExtent( [ 1, 100 ] )
+              .scaleExtent( [ 0, 100 ] )
               .on( 'zoom', zoomed );
 
     // set up zoom pane
@@ -687,11 +690,28 @@
    * Attach event to select box to rerender
    * graphs depending on chosen tyoe
    */
-  function attachMetricChangeEvent() {
-    var switcher = document.getElementById( 'p--switcher--metrics' );
+  function attachLastRunsChangeEvent() {
+    var switcher      = document.getElementById( 'p--switcher--lastRuns' );
 
     addEvent( switcher, 'change', function( event ) {
-      drawLineCharts( window.results, event.target.value );
+      var currentMetric = document.getElementById( 'p--switcher--metrics' ).value;
+
+      drawLineCharts( window.results, currentMetric, +event.target.value );
+    } );
+  }
+
+
+  /**
+   * Attach event to select box to rerender
+   * graphs depending on chosen tyoe
+   */
+  function attachMetricChangeEvent() {
+    var switcher        = document.getElementById( 'p--switcher--metrics' );
+
+    addEvent( switcher, 'change', function( event ) {
+      var currentLastRuns = +document.getElementById( 'p--switcher--lastRuns' ).value;
+
+      drawLineCharts( window.results, event.target.value, currentLastRuns );
     } );
   }
 
@@ -705,6 +725,7 @@
     attachDescriptionEvents();
     attachHeaderEvents();
     attachMetricChangeEvent();
+    attachLastRunsChangeEvent();
   }
 
 
@@ -758,10 +779,11 @@
    * Check all metrics if numeric values are
    * included and initialize all graphs for it
    *
-   * @param  {Array}            data data
-   * @param  {String|undefined} type type of displayed data
+   * @param  {Array}            data     data
+   * @param  {String|undefined} type     type of displayed data
+   * @parem  {Number|undefined} lastRuns number of last displayed runs
    */
-  function drawLineCharts( data, type ) {
+  function drawLineCharts( data, type, lastRuns ) {
     var lastMetric = data[ data.length - 1 ];
     var loaders    = document.querySelectorAll( '.p--graphs--loading' );
 
@@ -778,7 +800,7 @@
         metric !== 'timestamp' &&
         document.getElementById( 'graph--' + metric )
       ) {
-        setTimeout( drawLineChart.bind( null, data, metric, type ), 250 );
+        setTimeout( drawLineChart.bind( null, data, metric, type, lastRuns ), 250 );
       }
     }
   }
