@@ -52,7 +52,7 @@ var Phantomas = function( grunt, options, done ) {
   this.failedAssertions = [];
   this.grunt            = grunt;
   this.imagePath        = path.normalize( options.indexPath + 'images/' );
-  this.options          = options;
+  this.options          = this.normalizeOptions( options );
   this.timestamp        = +new Date();
   this.buildUi          = options.buildUi;
 };
@@ -346,13 +346,7 @@ Phantomas.prototype.executePhantomas = function() {
 Phantomas.prototype.formResult = function( results ) {
   this.grunt.log.ok( this.options.numberOfRuns + ' Phantomas execution(s) done -> checking results:' );
   return new Promise( function( resolve ) {
-    var assertions       = _.reduce( this.options.assertions, function( result, num, key ) {
-          result[ key ] = {
-            value  : num
-          };
-
-          return result;
-        }, {} ),
+    var assertions       = this.options.assertions,
         entries          = {},
         offenders        = {},
         fulfilledPromise = _.filter( results, function( promise ) {
@@ -462,11 +456,27 @@ Phantomas.prototype.formResult = function( results ) {
       // depending on median
       // to failedAssertions sum up
       if (
-        typeof this.options.assertions[ metric ] === 'number' &&
-        entry.median > this.options.assertions[ metric ] &&
-        _.indexOf( this.failedAssertions, metric ) === -1
+        typeof this.options.assertions[ metric ] !== 'undefined' &&
+        _.indexOf( this.failedAssertions, metric ) === -1 &&
+        (
+          this.options.assertions[ metric ].type === '>' ||
+          this.options.assertions[ metric ].type === '<'
+        ) &&
+        typeof this.options.assertions[ metric ].value === 'number'
       ) {
-        this.failedAssertions.push( metric );
+        if (
+          this.options.assertions[ metric ].type === '>' &&
+          entry.median > this.options.assertions[ metric ].value
+        ) {
+          this.failedAssertions.push( metric );
+        }
+
+        if (
+          this.options.assertions[ metric ].type === '<' &&
+          entry.median < this.options.assertions[ metric ].value
+        ) {
+          this.failedAssertions.push( metric );
+        }
       }
     }
 
@@ -545,6 +555,31 @@ Phantomas.prototype.kickOff = function() {
         this.grunt.event.emit( 'phantomasFailure', e );
       }.bind( this ) )
       .done();
+};
+
+
+/**
+ * Normalize the handed in options object
+ * to deal with legacy configs and different
+ * allowed option settings
+ *
+ * @param  {Object} options options
+ * @return {Object}         normalized options
+ *
+ * @tested
+ */
+Phantomas.prototype.normalizeOptions = function( options ) {
+
+  options.assertions = _.mapValues( options.assertions, function( assertion ) {
+    return ( typeof assertion === 'number' ) ?
+    {
+      type  : '>',
+      value : assertion
+    } :
+    assertion;
+  } );
+
+  return options;
 };
 
 

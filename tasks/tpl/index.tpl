@@ -26,7 +26,7 @@
       <span class="p--header--span">Frontend stats for <a class="fancy" href="<%= url %>" data-url="<%= url %>" target="_blank"><%= url %></a></span>
     </header>
     <main>
-      <h2>Stats for <%= url %></h2>
+      <h2>Stats for <span><%= url %></span></h2>
       <% for ( var key in group ) { %>
         <% if ( group.hasOwnProperty( key ) ) { %>
           <h3><%= key %></h3>
