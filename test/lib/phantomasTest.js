@@ -632,8 +632,22 @@ exports.phantomas = {
     var options     = {
         url        : 'http://test.com',
         assertions : {
-          metricA : 19,
-          metricB : 49
+          metricA : {
+            type  : '>',
+            value : 19
+          },
+          metricB : {
+            type  : '>',
+            value : 49
+          },
+          metricC : {
+            type  : '<',
+            value : 19
+          },
+          metricD : {
+            type  : '<',
+            value : 49
+          },
         }
       };
     var done        = function() {};
@@ -649,6 +663,8 @@ exports.phantomas = {
               metrics   : {
                 metricA       : 10,
                 metricB       : 40,
+                metricC       : 10,
+                metricD       : 40,
                 jQueryVersion : '1.9.1'
               },
               offenders : {
@@ -668,6 +684,8 @@ exports.phantomas = {
               metrics   : {
                 metricA       : 20,
                 metricB       : 50,
+                metricC       : 20,
+                metricD       : 50,
                 jQueryVersion : '1.9.1'
               },
               offenders : {
@@ -687,6 +705,8 @@ exports.phantomas = {
               metrics   : {
                 metricA       : 30,
                 metricB       : 60,
+                metricC       : 14,
+                metricD       : 40,
                 jQueryVersion : '1.9.1'
               },
               offenders : {
@@ -724,6 +744,20 @@ exports.phantomas = {
         test.strictEqual( result.metrics.metricB.median,  50 );
         test.strictEqual( result.metrics.metricB.average, 50 );
 
+        test.strictEqual( typeof result.metrics.metricC, 'object' );
+        test.strictEqual( result.metrics.metricC.sum,     44 );
+        test.strictEqual( result.metrics.metricC.min,     10 );
+        test.strictEqual( result.metrics.metricC.max,     20 );
+        test.strictEqual( result.metrics.metricC.median,  14 );
+        test.strictEqual( result.metrics.metricC.average, 14.67 );
+
+        test.strictEqual( typeof result.metrics.metricD, 'object' );
+        test.strictEqual( result.metrics.metricD.sum,     130 );
+        test.strictEqual( result.metrics.metricD.min,     40 );
+        test.strictEqual( result.metrics.metricD.max,     50 );
+        test.strictEqual( result.metrics.metricD.median,  40 );
+        test.strictEqual( result.metrics.metricD.average, 43.33 );
+
         test.strictEqual( typeof result.offenders, 'object' );
         test.strictEqual( result.offenders.foo instanceof Array, true );
         test.strictEqual( result.offenders.foo.length, 2 );
@@ -732,7 +766,7 @@ exports.phantomas = {
 
         test.strictEqual( typeof result.jQueryVersion, 'undefined' );
 
-        test.strictEqual( phantomas.failedAssertions.length, 2 );
+        test.strictEqual( phantomas.failedAssertions.length, 4 );
         test.notStrictEqual(
           _.indexOf( phantomas.failedAssertions, 'metricA' ),
           -1
@@ -741,9 +775,53 @@ exports.phantomas = {
           _.indexOf( phantomas.failedAssertions, 'metricB' ),
           -1
         );
+        test.notStrictEqual(
+          _.indexOf( phantomas.failedAssertions, 'metricC' ),
+          -1
+        );
+        test.notStrictEqual(
+          _.indexOf( phantomas.failedAssertions, 'metricD' ),
+          -1
+        );
 
         test.done();
       } );
+  },
+
+
+  normalizeOptions : function( test ) {
+    var options = {
+      foo        : 'jojojo',
+      assertions : {
+        foo : 4,
+        bar : {
+          type  : '>',
+          value : 12
+        },
+        baz : {
+          type  : '<',
+          value : 14
+        }
+      }
+    };
+
+    var done      = function() {};
+    var phantomas = new Phantomas( grunt, {}, done );
+
+    var normalizedOptions = phantomas.normalizeOptions( options );
+
+    test.strictEqual( normalizedOptions.foo, 'jojojo' );
+    test.strictEqual( typeof normalizedOptions.assertions.foo, 'object' );
+    test.strictEqual( normalizedOptions.assertions.foo.type, '>' );
+    test.strictEqual( normalizedOptions.assertions.foo.value, 4 );
+    test.strictEqual( typeof normalizedOptions.assertions.bar, 'object' );
+    test.strictEqual( normalizedOptions.assertions.bar.type, '>' );
+    test.strictEqual( normalizedOptions.assertions.bar.value, 12 );
+    test.strictEqual( typeof normalizedOptions.assertions.baz, 'object' );
+    test.strictEqual( normalizedOptions.assertions.baz.type, '<' );
+    test.strictEqual( normalizedOptions.assertions.baz.value, 14 );
+
+    test.done();
   },
 
 

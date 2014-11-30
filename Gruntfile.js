@@ -100,7 +100,10 @@ module.exports = function( grunt ) {
             'consoleMessages'       : 0,
             'hiddenContentSize'     : 65,
             'jsErrors'              : 0,
-            'gzipRequests'          : 8,
+            'gzipRequests'          : {
+              'type'  : '<',
+              'value' : 8
+            },
             'medianResponse'        : 400,
             'nodesWithInlineCSS'    : 0,
             'requests'              : 30,

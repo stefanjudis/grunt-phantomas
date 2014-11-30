@@ -59,7 +59,7 @@ If you don't like the phantomas default styling and want to customize it, you ca
 Type: `Object`
 Default Value: `{}`
 
-An object that represents possible assertions for your generated UI. Best way is to run `grunt-phantomas` once and setting these values afterwards for particular metrics. The UI will warn you whenever the `median` value of your defined runs of a specific metric will go over the specified value by highlighting depending graphs and showing warnings on top of the builded UI. Using this option you can easily keep track of getting worse values. Performance budget for the win. :)
+An object that represents possible assertions for your generated UI. Best way is to run `grunt-phantomas` once and setting these values afterwards for particular metrics. The UI will warn you whenever the `median` value of your defined runs of a specific metric will go over the specified value by highlighting depending graphs and showing warnings on top of the built UI. Using this option you can easily keep track of getting worse values. Performance budget for the win. :)
 
 Example:
 
@@ -69,9 +69,13 @@ phantomas : {
   grunt : {
     options : {
       assertions : {
-        'assetsWithQueryString' : 3,     // receive warning, when there are more than 3 assets with a query string
-        'bodyHTMLSize'          : 10500, // receive warning, when the bodyHTMLsize is bigger than 10500
-        'jsErrors'              : 0      // receive warning, when JS errors appear
+        assetsWithQueryString : 3,     // receive warning, when there are more than 3 assets with a query string
+        bodyHTMLSize          : 10500, // receive warning, when the bodyHTMLsize is bigger than 10500
+        jsErrors              : 0,     // receive warning, when more than 0 JS errors appear
+        gzipRequests          : {      // receive warning, when less compressed assets are loaded then 10 ( might be useful for checking server configurations )
+          type  : '<',
+          value : 10
+        }
       }
       indexPath  : './phantomas/',
       options    : {

@@ -80,9 +80,19 @@
       circleContainer.datum( datum )
                     .append( 'circle' )
                     .attr( 'class', function( d ) {
-                      return ( assertionValue && d.value[ type ] > assertionValue ) ?
-                        'lineChart--circle failed' :
-                        'lineChart--circle';
+                      if ( assertionValue ) {
+                        if ( assertionValue.type === '>' ) {
+                          return ( d.value[ type ] > assertionValue.value ) ?
+                            'lineChart--circle failed' :
+                            'lineChart--circle';
+                        } else {
+                          return ( d.value[ type ] < assertionValue.value ) ?
+                            'lineChart--circle failed' :
+                            'lineChart--circle';
+                        }
+                      }
+
+                      return 'lineChart--circle';
                     } )
                     .attr( 'r', 4 )
                     .attr(
@@ -144,9 +154,19 @@
                         .attr(
                           'class',
                           function( d ) {
-                            return ( assertionValue && d.value[ type ] > assertionValue ) ?
-                                'lineChart--circle highlighted failed' :
-                                'lineChart--circle highlighted';
+                            if ( assertionValue ) {
+                              if ( assertionValue.type === '>' ) {
+                                return ( assertionValue && d.value[ type ] > assertionValue.value ) ?
+                                    'lineChart--circle highlighted failed' :
+                                    'lineChart--circle highlighted';
+                              } else {
+                                return ( assertionValue && d.value[ type ] < assertionValue.value ) ?
+                                    'lineChart--circle highlighted failed' :
+                                    'lineChart--circle highlighted';
+                              }
+                            }
+
+                            return 'lineChart--circle highlighted';
                             }
                         )
                         .attr( 'r', 6 );
@@ -156,9 +176,19 @@
                         .attr(
                           'class',
                           function( d ) {
-                            return ( assertionValue && d.value[ type ] > assertionValue ) ?
-                                'lineChart--circle failed' :
-                                'lineChart--circle';
+                            if ( assertionValue ) {
+                              if ( assertionValue.type === '>' ) {
+                                return ( d.value[ type ] > assertionValue.value ) ?
+                                    'lineChart--circle failed' :
+                                    'lineChart--circle';
+                              } else {
+                                return ( d.value[ type ] < assertionValue.value ) ?
+                                    'lineChart--circle failed' :
+                                    'lineChart--circle';
+                              }
+                            }
+
+                            return 'lineChart--circle';
                           }
                         )
                         .attr( 'r', 4 );
@@ -237,7 +267,7 @@
     var assertionValue = null;
 
     if ( data[ data.length - 1 ].assertions[ metric ] ) {
-      assertionValue = data[ data.length - 1 ].assertions[ metric ].value;
+      assertionValue = data[ data.length - 1 ].assertions[ metric ];
     }
 
     // data manipulation first
@@ -310,9 +340,9 @@
       0,
       d3.max( data, function( d ) {
         if ( d.value ) {
-          return ( d.value[ type ] > assertionValue ) ?
+          return ( !assertionValue || d.value[ type ] > assertionValue.value ) ?
                   d.value[ type ] :
-                  assertionValue;
+                  assertionValue.value;
         } else {
           return 0;
         }
@@ -347,8 +377,26 @@
     // add assertion graphics
     if ( assertionValue !== null ) {
       assertionGroup = svg.append( 'g' )
-                          .attr( 'transform', 'translate( 0,' + y( assertionValue ) + ')' )
+                          .attr( 'transform', 'translate( 0,' + y( assertionValue.value ) + ')' )
                           .attr( 'class', 'p--lineChart--assertion' );
+
+      if ( assertionValue.type === '>' ) {
+        assertionGroup.append( 'rect' )
+                      .attr( 'class', 'p--lineChart--assertionBox' )
+                      .attr( 'x', 0 )
+                      .attr( 'y', -y( assertionValue.value ) )
+                      .attr( 'width', width )
+                      .attr( 'height', y( assertionValue.value ) )
+                      .attr( 'fill', 'rgba( 255, 0, 0, 0.5 )' );
+      } else {
+        assertionGroup.append( 'rect' )
+                      .attr( 'class', 'p--lineChart--assertionBox' )
+                      .attr( 'x', 0 )
+                      .attr( 'y', 0 )
+                      .attr( 'width', width )
+                      .attr( 'height', height - y( assertionValue.value ) )
+                      .attr( 'fill', 'rgba( 255, 0, 0, 0.5 )' );
+      }
 
       assertionGroup.append( 'line' )
                      .attr( 'x1', 0 )
@@ -358,6 +406,7 @@
                      .attr( 'class', 'p--lineChart--assertion' );
 
       assertionGroup.append( 'rect' )
+                    .attr( 'class', 'p--lineChart--assertionTextBg' )
                     .attr( 'width', 50 )
                     .attr( 'height', 20 )
                     .attr( 'x', 0 )
@@ -366,7 +415,7 @@
       assertionGroup.append( 'text' )
                     .attr( 'x', 25 )
                     .attr( 'y', 4 )
-                    .text( assertionValue );
+                    .text( assertionValue.type + ' ' + assertionValue.value );
     }
 
     // Add the area path.

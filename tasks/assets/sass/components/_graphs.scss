@@ -289,17 +289,21 @@
     fill   : none;
   }
 
-  > rect {
-    fill : $c-red;
-    stroke : none;
-  }
-
   > text {
     stroke : $c-white;
     text-anchor : middle;
 
     font-size : 0.75em;
   }
+}
+
+.p--lineChart--assertionBox {
+  fill : rgba( 255, 0, 0, 0.2 );
+}
+
+.p--lineChart--assertionTextBg {
+  fill : $c-red;
+  stroke : none;
 }
 
 .p--lineChart--areaLine {
