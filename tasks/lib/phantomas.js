@@ -673,7 +673,7 @@ Phantomas.prototype.readMetricsFile = function( file ) {
             'Sorry - ' + this.dataPath + file + ' is malformed'
           );
 
-          reject( e );
+          return reject( e );
         }
         // set internal timestamp to work with it
         // on frontend side later on
@@ -710,7 +710,14 @@ Phantomas.prototype.readMetricsFiles = function() {
       .then( function( files ) {
         files = files.filter( function( file ) {
           return file.match( /\.json/gi );
-        } );
+        } ).sort();
+
+        if (
+          typeof this.options.limitIncludedRuns === 'number' &&
+          this.options.limitIncludedRuns
+        ) {
+          files = files.slice( files.length - this.options.limitIncludedRuns );
+        }
 
         files = files.map( function( file ) {
             return this.readMetricsFile( file );
@@ -721,7 +728,7 @@ Phantomas.prototype.readMetricsFiles = function() {
           .catch( function( e ) {
             console.log( e );
           } );
-      } );
+      }.bind( this ) );
   }.bind( this ) );
 };
 

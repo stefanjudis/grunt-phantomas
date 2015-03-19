@@ -928,14 +928,16 @@ exports.phantomas = {
 
       phantomas.readMetricsFiles()
         .then( function( results ) {
-          test.strictEqual( results.length,         2 );
+          test.strictEqual( results.length, 2 );
+
           test.strictEqual( results[ 0 ].isFulfilled(), true );
           test.strictEqual( typeof results[ 0 ].value(), 'object' );
-          test.strictEqual( results[ 0 ].value().test,      'test1' );
+          test.strictEqual( results[ 0 ].value().test, 'test1' );
           test.strictEqual( results[ 0 ].value().timestamp, 123456 );
+
           test.strictEqual( results[ 1 ].isFulfilled(), true );
-          test.strictEqual( typeof results[ 1 ].value(),    'object' );
-          test.strictEqual( results[ 1 ].value().test,      'test2' );
+          test.strictEqual( typeof results[ 1 ].value(), 'object' );
+          test.strictEqual( results[ 1 ].value().test, 'test2' );
           test.strictEqual( results[ 1 ].value().timestamp, 234567 );
 
           test.done();
@@ -957,15 +959,106 @@ exports.phantomas = {
 
       phantomas.readMetricsFiles()
         .then( function( results ) {
-          test.strictEqual( results.length,         2 );
+          test.strictEqual( results.length, 2 );
+
           test.strictEqual( results[ 0 ].isFulfilled(), true );
           test.strictEqual( typeof results[ 0 ].value(), 'object' );
-          test.strictEqual( results[ 0 ].value().test,      'test1' );
+          test.strictEqual( results[ 0 ].value().test, 'test1' );
           test.strictEqual( results[ 0 ].value().timestamp, 123456 );
+
           test.strictEqual( results[ 1 ].isFulfilled(), false );
 
           test.done();
         } );
+    },
+    includedRuns : {
+      setToThree : function( test ) {
+        var options      = {
+          indexPath    : TEMP_PATH,
+          limitIncludedRuns : 3
+        };
+        var done         = function() {};
+        var phantomas    = new Phantomas( grunt, options, done );
+        var fileContent1 = '{ "test": "test1" }';
+        var fileContent2 = '{ "test": "test2" }';
+        var fileContent3 = '{ "test": "test3" }';
+        var fileContent4 = '{ "test": "test4" }';
+
+        fs.mkdirSync( './tmp/data' );
+
+        fs.writeFileSync( './tmp/data/123456.json', fileContent1 );
+        fs.writeFileSync( './tmp/data/234567.json', fileContent2 );
+        fs.writeFileSync( './tmp/data/345678.json', fileContent3 );
+        fs.writeFileSync( './tmp/data/456789.json', fileContent4 );
+
+        phantomas.readMetricsFiles()
+          .then( function( results ) {
+            test.strictEqual( results.length, 3 );
+
+            test.strictEqual( results[ 0 ].isFulfilled(), true );
+            test.strictEqual( typeof results[ 0 ].value(), 'object' );
+            test.strictEqual( results[ 0 ].value().test, 'test2' );
+            test.strictEqual( results[ 0 ].value().timestamp, 234567 );
+
+            test.strictEqual( results[ 1 ].isFulfilled(), true );
+            test.strictEqual( typeof results[ 1 ].value(), 'object' );
+            test.strictEqual( results[ 1 ].value().test, 'test3' );
+            test.strictEqual( results[ 1 ].value().timestamp, 345678 );
+
+            test.strictEqual( results[ 2 ].isFulfilled(), true );
+            test.strictEqual( typeof results[ 2 ].value(), 'object' );
+            test.strictEqual( results[ 2 ].value().test, 'test4' );
+            test.strictEqual( results[ 2 ].value().timestamp, 456789 );
+
+            test.done();
+          } );
+      },
+      setToFalse : function( test ) {
+        var options      = {
+          indexPath         : TEMP_PATH,
+          limitIncludedRuns : false
+        };
+        var done         = function() {};
+        var phantomas    = new Phantomas( grunt, options, done );
+        var fileContent1 = '{ "test": "test1" }';
+        var fileContent2 = '{ "test": "test2" }';
+        var fileContent3 = '{ "test": "test3" }';
+        var fileContent4 = '{ "test": "test4" }';
+
+        fs.mkdirSync( './tmp/data' );
+
+        fs.writeFileSync( './tmp/data/123456.json', fileContent1 );
+        fs.writeFileSync( './tmp/data/234567.json', fileContent2 );
+        fs.writeFileSync( './tmp/data/345678.json', fileContent3 );
+        fs.writeFileSync( './tmp/data/456789.json', fileContent4 );
+
+        phantomas.readMetricsFiles()
+          .then( function( results ) {
+            test.strictEqual( results.length, 4 );
+
+            test.strictEqual( results[ 0 ].isFulfilled(), true );
+            test.strictEqual( typeof results[ 0 ].value(), 'object' );
+            test.strictEqual( results[ 0 ].value().test, 'test1' );
+            test.strictEqual( results[ 0 ].value().timestamp, 123456 );
+
+            test.strictEqual( results[ 1 ].isFulfilled(), true );
+            test.strictEqual( typeof results[ 1 ].value(), 'object' );
+            test.strictEqual( results[ 1 ].value().test, 'test2' );
+            test.strictEqual( results[ 1 ].value().timestamp, 234567 );
+
+            test.strictEqual( results[ 2 ].isFulfilled(), true );
+            test.strictEqual( typeof results[ 2 ].value(), 'object' );
+            test.strictEqual( results[ 2 ].value().test, 'test3' );
+            test.strictEqual( results[ 2 ].value().timestamp, 345678 );
+
+            test.strictEqual( results[ 3 ].isFulfilled(), true );
+            test.strictEqual( typeof results[ 3 ].value(), 'object' );
+            test.strictEqual( results[ 3 ].value().test, 'test4' );
+            test.strictEqual( results[ 3 ].value().timestamp, 456789 );
+
+            test.done();
+          } );
+      }
     }
   },
 
