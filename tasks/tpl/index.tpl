@@ -104,7 +104,8 @@
       <button id="p--modal__close">Close</button>
     </main>
     <footer class="p--footer">
-      Made with &#x2764; and <a href="https://github.com/macbre/phantomas" target="_blank">Phantomas</a>
+      <p>v<%= version %></p>
+      <p>Made with &#x2764; and <a href="https://github.com/macbre/phantomas" target="_blank">Phantomas</a></p>
     </footer>
     <script>var results = [
 <%= results.map( function ( result ) {

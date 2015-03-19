@@ -55,6 +55,7 @@ var Phantomas = function( grunt, options, done ) {
   this.options          = this.normalizeOptions( options );
   this.timestamp        = +new Date();
   this.buildUi          = options.buildUi;
+  this.version          = require( '../../package.json' ).version;
 };
 
 
@@ -273,7 +274,8 @@ Phantomas.prototype.createIndexHtml = function( results ) {
           meta                 : phantomas.metadata.metrics,
           results              : templateResults,
           timestamp            : this.timestamp,
-          url                  : this.options.url
+          url                  : this.options.url,
+          version              : this.version
         } }
       )
     );
