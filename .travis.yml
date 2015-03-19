@@ -7,7 +7,7 @@ branches:
     - master
 
 before_script:
-  - npm install -g grunt-cli
+  - npm install grunt-cli
 
 after_script:
   - npm run coveralls
