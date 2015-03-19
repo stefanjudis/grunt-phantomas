@@ -99,6 +99,15 @@ Default value: `./phantomas/`
 
 A string value that represents the relative path to the place where `phantomas` will render your metrics. Inside of this folder an `index.html`, a data folder and an assets folder will be created.
 
+#### options.limitIncludedRuns
+
+Type: `Number|false`
+Default value: `30`
+
+A numeric value that sets a limit for the included runs inside of the built UI. In case you run `grunt-phantomas` on a hourly/daily basis the generated UI might become slow, because of the big amout of data. Solve this by setting the limit to a lower value.
+
+In case you are fine with all runs included in the UI set it to `false`.
+
 #### options.numberOfRuns
 Type: `Number`
 Default value: `5`
