@@ -87,6 +87,12 @@ phantomas : {
 }
 ```
 
+#### options.buildUi
+Type: `Boolean`
+Default value: `true`
+
+If you want to use `grunt-phantomas` without generating a UI for the data, this is an option to switch off the visualization interface. If set to false only defined data format will be outputted at `options.indexPath + '/data/'`.
+
 #### options.indexPath
 Type: `String`
 Default value: `./phantomas/`
@@ -104,19 +110,6 @@ Type: `Object`
 Default value: `{}`
 
 An object that represents possible options for `phantomas` executable. For more information please check [the official api documentation](https://github.com/macbre/phantomas/wiki/npm-module) and [list of possible parameters](https://github.com/macbre/phantomas). See usage examples later on.
-
-#### options.url
-Type: `String`
-Default value: `http://gruntjs.com/`
-
-A string value that represents the url of the site, which will be analyzed by `phantomas`.
-
-
-#### options.buildUi
-Type: `Boolean`
-Default value: `true`
-
-If you want to use `grunt-phantomas` without generating a UI for the data, this is an option to switch off the visualization interface. If set to false only defined data format will be outputted at `options.indexPath + '/data/'`.
 
 #### options.output
 Type: `Array`
@@ -283,6 +276,11 @@ CHECKING FOR NOT DISPLAYED METRICS.
 >> requests, gzipRequests, postRequests, httpsRequests, notFound, timeToFirstByte, timeToLastByte, bodySize, contentLength, ajaxRequests, htmlCount, htmlSize, cssCount, cssSize, jsCount, jsSize, jsonCount, jsonSize, imageCount, imageSize, webfontCount, webfontSize, base64Count, base64Size, otherCount, otherSize, cacheHits, cacheMisses, cachePasses, cachingNotSpecified, cachingTooShort, cachingDisabled, consoleMessages, domains, maxRequestsPerDomain, medianRequestsPerDomain, DOMqueries, DOMqueriesById, DOMqueriesByClassName, DOMqueriesByTagName, DOMqueriesByQuerySelectorAll, DOMinserts, DOMqueriesDuplicated, eventsBound, headersCount, headersSentCount, headersRecvCount, headersSize, headersSentSize, headersRecvSize, documentWriteCalls, evalCalls, jQueryOnDOMReadyFunctions, jQuerySizzleCalls, jsErrors, redirects, redirectsTime, assetsNotGzipped, assetsWithQueryString, smallImages, multipleRequests, timeToFirstCss, timeToFirstJs, timeToFirstImage, onDOMReadyTime, onDOMReadyTimeEnd, windowOnLoadTime, windowOnLoadTimeEnd, timeBackend, timeFrontend, httpTrafficCompleted, windowAlerts, windowConfirms, windowPrompts, cookiesRecv, domainsWithCookies, documentCookiesLength, documentCookiesCount, bodyHTMLSize, iframesCount, imagesWithoutDimensions, commentsSize, hiddenContentSize, whiteSpacesSize, DOMelementsCount, DOMelementMaxDepth, nodesWithInlineCSS, globalVariables, localStorageEntries, smallestResponse, biggestResponse, fastestResponse, slowestResponse, smallestLatency, biggestLatency, medianResponse, medianLatency
 ```
 
+#### options.url
+Type: `String`
+Default value: `http://gruntjs.com/`
+
+A string value that represents the url of the site, which will be analyzed by `phantomas`.
 
 ### Usage Examples
 
