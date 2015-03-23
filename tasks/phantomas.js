@@ -18,6 +18,7 @@ module.exports = function( grunt ) {
         additionStylesheet : false,
         assertions         : {},
         buildUi            : true,
+        limitIncludedRuns  : 30,
         indexPath          : './phantomas/',
         numberOfRuns       : 5,
         options            : {},
