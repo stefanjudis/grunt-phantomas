@@ -76,7 +76,7 @@ phantomas : {
           type  : '<',
           value : 10
         }
-      }
+      },
       indexPath  : './phantomas/',
       options    : {
         'timeout' : 30
