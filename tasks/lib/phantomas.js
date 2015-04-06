@@ -300,10 +300,23 @@ Phantomas.prototype.createIndexHtml = function( results ) {
  * @tested
  */
 Phantomas.prototype.executePhantomas = function() {
-  var runs = [];
+  var responses = [],
+  queue,
+  gatherResponses = function( response ) {
+    responses.push( response );
+    return responses;
+  };
+
 
   return new Promise( function( resolve ) {
-    var options;
+    var options,
+      url = this.options.url,
+      runPhantomas = function() {
+          return phantomas(
+            url,
+            options
+          ).then( gatherResponses );
+    };
 
     this.grunt.log.verbose.writeln(
       'Executing phantomas ( ' + this.options.numberOfRuns + ' times ) with following parameters:\n' +
@@ -319,16 +332,13 @@ Phantomas.prototype.executePhantomas = function() {
         options[ 'film-strip-dir' ] = this.imagePath + this.timestamp;
       }
 
-      runs.push(
-        phantomas(
-          this.options.url,
-          options
-        )
-      );
+      if ( i === 0 ) {
+        queue = runPhantomas();
+      } else {
+        queue = queue.then( runPhantomas );
+      }
     }
-
-    Promise.settle( runs )
-          .then( resolve )
+    queue.then( resolve )
           .catch( function( e ) {
             console.log( e );
           } );
