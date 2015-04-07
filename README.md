@@ -76,7 +76,7 @@ phantomas : {
           type  : '<',
           value : 10
         }
-      }
+      },
       indexPath  : './phantomas/',
       options    : {
         'timeout' : 30
@@ -87,11 +87,26 @@ phantomas : {
 }
 ```
 
+#### options.buildUi
+Type: `Boolean`
+Default value: `true`
+
+If you want to use `grunt-phantomas` without generating a UI for the data, this is an option to switch off the visualization interface. If set to false only defined data format will be outputted at `options.indexPath + '/data/'`.
+
 #### options.indexPath
 Type: `String`
 Default value: `./phantomas/`
 
 A string value that represents the relative path to the place where `phantomas` will render your metrics. Inside of this folder an `index.html`, a data folder and an assets folder will be created.
+
+#### options.limitIncludedRuns
+
+Type: `Number|false`
+Default value: `30`
+
+A numeric value that sets a limit for the included runs inside of the built UI. In case you run `grunt-phantomas` on a hourly/daily basis the generated UI might become slow, because of the big amout of data. Solve this by setting the limit to a lower value.
+
+In case you are fine with all runs included in the UI set it to `false`.
 
 #### options.numberOfRuns
 Type: `Number`
@@ -104,19 +119,6 @@ Type: `Object`
 Default value: `{}`
 
 An object that represents possible options for `phantomas` executable. For more information please check [the official api documentation](https://github.com/macbre/phantomas/wiki/npm-module) and [list of possible parameters](https://github.com/macbre/phantomas). See usage examples later on.
-
-#### options.url
-Type: `String`
-Default value: `http://gruntjs.com/`
-
-A string value that represents the url of the site, which will be analyzed by `phantomas`.
-
-
-#### options.buildUi
-Type: `Boolean`
-Default value: `true`
-
-If you want to use `grunt-phantomas` without generating a UI for the data, this is an option to switch off the visualization interface. If set to false only defined data format will be outputted at `options.indexPath + '/data/'`.
 
 #### options.output
 Type: `Array`
@@ -283,6 +285,11 @@ CHECKING FOR NOT DISPLAYED METRICS.
 >> requests, gzipRequests, postRequests, httpsRequests, notFound, timeToFirstByte, timeToLastByte, bodySize, contentLength, ajaxRequests, htmlCount, htmlSize, cssCount, cssSize, jsCount, jsSize, jsonCount, jsonSize, imageCount, imageSize, webfontCount, webfontSize, base64Count, base64Size, otherCount, otherSize, cacheHits, cacheMisses, cachePasses, cachingNotSpecified, cachingTooShort, cachingDisabled, consoleMessages, domains, maxRequestsPerDomain, medianRequestsPerDomain, DOMqueries, DOMqueriesById, DOMqueriesByClassName, DOMqueriesByTagName, DOMqueriesByQuerySelectorAll, DOMinserts, DOMqueriesDuplicated, eventsBound, headersCount, headersSentCount, headersRecvCount, headersSize, headersSentSize, headersRecvSize, documentWriteCalls, evalCalls, jQueryOnDOMReadyFunctions, jQuerySizzleCalls, jsErrors, redirects, redirectsTime, assetsNotGzipped, assetsWithQueryString, smallImages, multipleRequests, timeToFirstCss, timeToFirstJs, timeToFirstImage, onDOMReadyTime, onDOMReadyTimeEnd, windowOnLoadTime, windowOnLoadTimeEnd, timeBackend, timeFrontend, httpTrafficCompleted, windowAlerts, windowConfirms, windowPrompts, cookiesRecv, domainsWithCookies, documentCookiesLength, documentCookiesCount, bodyHTMLSize, iframesCount, imagesWithoutDimensions, commentsSize, hiddenContentSize, whiteSpacesSize, DOMelementsCount, DOMelementMaxDepth, nodesWithInlineCSS, globalVariables, localStorageEntries, smallestResponse, biggestResponse, fastestResponse, slowestResponse, smallestLatency, biggestLatency, medianResponse, medianLatency
 ```
 
+#### options.url
+Type: `String`
+Default value: `http://gruntjs.com/`
+
+A string value that represents the url of the site, which will be analyzed by `phantomas`.
 
 ### Usage Examples
 
