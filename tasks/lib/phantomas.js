@@ -326,14 +326,14 @@ Phantomas.prototype.executePhantomas = function() {
         options[ 'film-strip-dir' ] = this.imagePath + this.timestamp;
       }
 
-      runs.push(callPhantomas(this.options.url, options));
+      runs.push( callPhantomas( this.options.url, options ) );
     }
 
-    Promise.reduce( runs, function(total, run, index) {
-      runs[index] = run();
-      return runs[index];
+    Promise.reduce( runs, function( total, run, index ) {
+      runs[ index ] = run();
+      return runs[ index ];
     }, []).then(function() {
-      Promise.settle(runs).then(resolve);
+      Promise.settle( runs ).then( resolve );
     });
   }.bind( this ) );
 };
