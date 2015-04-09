@@ -303,9 +303,9 @@ Phantomas.prototype.executePhantomas = function() {
   var runs = [],
   callPhantomas = function( url, options ) {
     return function() {
-      return new Promise(function(resolve) {
-        return phantomas( url, options ).then(resolve);
-      });
+      return new Promise( function( resolve, reject ) {
+        return phantomas( url, options ).then( resolve, reject );
+      } );
     };
   };
 
@@ -329,12 +329,15 @@ Phantomas.prototype.executePhantomas = function() {
       runs.push( callPhantomas( this.options.url, options ) );
     }
 
-    Promise.reduce( runs, function( total, run, index ) {
-      runs[ index ] = run();
-      return runs[ index ];
-    }, []).then(function() {
+    Promise.each( runs,
+      function( run, index ) {
+        runs[ index ] = run();
+        return runs[ index ].reflect();
+    } ).then( function() {
       Promise.settle( runs ).then( resolve );
-    });
+    } ).catch( function( e ) {
+      console.log(e);
+    } );
   }.bind( this ) );
 };
 
