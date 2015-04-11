@@ -300,7 +300,14 @@ Phantomas.prototype.createIndexHtml = function( results ) {
  * @tested
  */
 Phantomas.prototype.executePhantomas = function() {
-  var runs = [];
+  var runs = [],
+  callPhantomas = function( url, options ) {
+    return function() {
+      return new Promise( function( resolve, reject ) {
+        return phantomas( url, options ).then( resolve, reject );
+      } );
+    };
+  };
 
   return new Promise( function( resolve ) {
     var options;
@@ -319,19 +326,18 @@ Phantomas.prototype.executePhantomas = function() {
         options[ 'film-strip-dir' ] = this.imagePath + this.timestamp;
       }
 
-      runs.push(
-        phantomas(
-          this.options.url,
-          options
-        )
-      );
+      runs.push( callPhantomas( this.options.url, options ) );
     }
 
-    Promise.settle( runs )
-          .then( resolve )
-          .catch( function( e ) {
-            console.log( e );
-          } );
+    Promise.each( runs,
+      function( run, index ) {
+        runs[ index ] = run();
+        return runs[ index ].reflect();
+    } ).then( function() {
+      Promise.settle( runs ).then( resolve );
+    } ).catch( function( e ) {
+      console.log(e);
+    } );
   }.bind( this ) );
 };
 
