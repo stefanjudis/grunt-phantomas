@@ -562,7 +562,7 @@ exports.phantomas = {
 
   executePhantomas : function( test ) {
     var options     = {
-      url          : 'http://whatever.com',
+      url          : 'http://example.com/',
       numberOfRuns : 5,
       options      : {},
       indexPath    : './tmp/',
@@ -879,10 +879,6 @@ exports.phantomas = {
       phantomas.readMetricsFile( '123456.json' )
         .catch( Error, function( error ) {
           test.strictEqual( typeof error, 'object' );
-          test.strictEqual(
-            error.toString(),
-            'SyntaxError: Unexpected token e'
-          );
 
           test.done();
         } );

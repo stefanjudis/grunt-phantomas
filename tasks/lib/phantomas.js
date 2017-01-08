@@ -381,7 +381,7 @@ Phantomas.prototype.formResult = function( results ) {
     } );
 
     // process all runs
-    _.each( results, function( promise ) {
+    results.forEach( function( promise ) {
       if ( promise.isFulfilled() ) {
         this.grunt.log.ok( 'Phantomas execution successful.' );
 
@@ -805,7 +805,7 @@ Phantomas.prototype.writeData = function( result ) {
 
       // iterate of output formats
       // and write data
-      _.each( this.options.output, function( format ) {
+      this.options.output.forEach( function( format ) {
         if ( this._writeData[ format ] !== undefined ) {
           runs.push(
             this._writeData[ format ].bind( this )( result )
