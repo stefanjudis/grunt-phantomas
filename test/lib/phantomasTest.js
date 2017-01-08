@@ -654,74 +654,39 @@ exports.phantomas = {
     var phantomas   = new Phantomas( grunt, options, done );
     var metrics     = [
       {
-        isFulfilled : function() {
-          return true;
+        metrics   : {
+          metricA       : 10,
+          metricB       : 40,
+          metricC       : 10,
+          metricD       : 40,
+          jQueryVersion : '1.9.1'
         },
-        value : function() {
-          return {
-            json : {
-              metrics   : {
-                metricA       : 10,
-                metricB       : 40,
-                metricC       : 10,
-                metricD       : 40,
-                jQueryVersion : '1.9.1'
-              },
-              offenders : {
-                foo : 'bar'
-              }
-            }
-          };
+        offenders : {
+          foo : 'bar'
         }
       },
       {
-        isFulfilled : function() {
-          return true;
+        metrics   : {
+          metricA       : 20,
+          metricB       : 50,
+          metricC       : 20,
+          metricD       : 50,
+          jQueryVersion : '1.9.1'
         },
-        value : function() {
-          return {
-            json : {
-              metrics   : {
-                metricA       : 20,
-                metricB       : 50,
-                metricC       : 20,
-                metricD       : 50,
-                jQueryVersion : '1.9.1'
-              },
-              offenders : {
-                foo : 'baz'
-              }
-            }
-          };
+        offenders : {
+          foo : 'baz'
         }
       },
       {
-        isFulfilled   : function() {
-          return true;
+        metrics   : {
+          metricA       : 30,
+          metricB       : 60,
+          metricC       : 14,
+          metricD       : 40,
+          jQueryVersion : '1.9.1'
         },
-        value : function() {
-          return {
-            json : {
-              metrics   : {
-                metricA       : 30,
-                metricB       : 60,
-                metricC       : 14,
-                metricD       : 40,
-                jQueryVersion : '1.9.1'
-              },
-              offenders : {
-                foo : 'bar'
-              }
-            }
-          };
-        }
-      },
-      {
-        isFulfilled   : function() {
-          return false;
-        },
-        error : function() {
-          return 'TIMEOUUUUUT';
+        offenders : {
+          foo : 'bar'
         }
       }
     ];

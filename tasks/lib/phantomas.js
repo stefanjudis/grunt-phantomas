@@ -302,14 +302,12 @@ Phantomas.prototype.createIndexHtml = function( results ) {
 Phantomas.prototype.executePhantomas = function() {
   var runs = [],
   callPhantomas = function( url, options ) {
-    return function() {
-      return new Promise( function( resolve, reject ) {
-        return phantomas( url, options ).then( resolve, reject );
-      } );
-    };
+    return new Promise( function( resolve, reject ) {
+      return phantomas( url, options ).then( resolve, reject );
+    } );
   };
 
-  return new Promise( function( resolve ) {
+  return new Promise( function( resolve, reject ) {
     var options;
 
     this.grunt.log.verbose.writeln(
@@ -329,15 +327,35 @@ Phantomas.prototype.executePhantomas = function() {
       runs.push( callPhantomas( this.options.url, options ) );
     }
 
-    Promise.each( runs,
-      function( run, index ) {
-        runs[ index ] = run();
-        return runs[ index ].reflect();
-    } ).then( function() {
-      Promise.settle( runs ).then( resolve );
-    } ).catch( function( e ) {
-      console.log(e);
-    } );
+    Promise
+      .all( runs.map( function( run ) {
+        return run.reflect();
+      } ) )
+      .then( function( runs ) {
+        return runs.reduce( function( result, run ) {
+          if ( run.isFulfilled() ) {
+            this.grunt.log.ok( 'Phantomas execution successful.' );
+            result.push( run.value().json );
+          } else {
+            var reason = run.reason();
+
+            if ( reason.json && reason.json.metrics ) {
+              this.grunt.log.error(
+                'Phantomas execution failed with ' + reason.code + ' but returned metrics.'
+              );
+              result.push( reason.json );
+            } else {
+              this.grunt.log.error(
+                'Phantomas execution failed with ' + reason.code
+              );
+            }
+          }
+
+          return result;
+        }.bind( this ), [] );
+      }.bind( this ) )
+      .then( resolve )
+      .catch( reject );
   }.bind( this ) );
 };
 
@@ -357,10 +375,7 @@ Phantomas.prototype.formResult = function( results ) {
     var assertions       = this.options.assertions,
         entries          = {},
         offenders        = {},
-        fulfilledPromise = _.filter( results, function( promise ) {
-          return promise.isFulfilled();
-        } ),
-        fulFilledMetrics = fulfilledPromise.length && fulfilledPromise[ 0 ].value().json.metrics,
+        fulFilledMetrics = results[ 0 ].metrics,
         entry,
         metric;
 
@@ -381,32 +396,24 @@ Phantomas.prototype.formResult = function( results ) {
     } );
 
     // process all runs
-    results.forEach( function( promise ) {
-      if ( promise.isFulfilled() ) {
-        this.grunt.log.ok( 'Phantomas execution successful.' );
+    results.forEach( function( run ) {
 
-        var promiseValue = promise.value(),
-            metric;
+      var metric;
 
-        for ( metric in promiseValue.json.metrics ) {
-          if (
-            typeof promiseValue.json.metrics[ metric ] !== 'string' &&
-            typeof entries[ metric ] !== 'undefined'
-          ) {
-            entries[ metric ].values.push( promiseValue.json.metrics[ metric ] );
-          }
+      for ( metric in run.metrics ) {
+        if (
+          typeof run.metrics[ metric ] !== 'string' &&
+          typeof entries[ metric ] !== 'undefined'
+        ) {
+          entries[ metric ].values.push( run.metrics[ metric ] );
         }
-
-        offenders = _.reduce( promiseValue.json.offenders, function( old, value, key ) {
-          old[ key ] = _.uniq( ( old[ key ] || [] ).concat( value ) );
-
-          return old;
-        }, offenders );
-      } else {
-        this.grunt.log.error(
-          'Phantomas execution not successful -> ' + promise.error()
-        );
       }
+
+      offenders = _.reduce( run.offenders, function( old, value, key ) {
+        old[ key ] = _.uniq( ( old[ key ] || [] ).concat( value ) );
+
+        return old;
+      }, offenders );
     }, this );
 
     /**
