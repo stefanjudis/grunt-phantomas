@@ -4,6 +4,8 @@
 
 > Grunt plugin for phantomas
 
+[![Maintainers Wanted](https://img.shields.io/badge/maintainers-wanted-red.svg)](https://github.com/pickhardt/maintainers-wanted)
+
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
 
